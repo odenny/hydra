@@ -1,11 +1,13 @@
 package com.jd.bdp.hydra;
 
+import java.io.Serializable;
+
 /**
-  * User: yfliuyu
+ * User: yfliuyu
  * Date: 13-3-18
  * Time: 下午3:36
  */
-public class Endpoint {
+public class Endpoint implements Serializable {
     private String ip;
     private Integer port;
     private String serviceName;
@@ -32,5 +34,14 @@ public class Endpoint {
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    @Override
+    public String toString() {
+        return "Endpoint{" +
+                "ip='" + ip + '\'' +
+                ", port=" + port +
+                ", serviceName='" + serviceName + '\'' +
+                '}';
     }
 }

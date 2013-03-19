@@ -1,12 +1,13 @@
 package com.jd.bdp.hydra;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Date: 13-3-18
  * Time: 下午3:29
  */
-public class Span {
+public class Span implements Serializable {
     private Long traceId;
     private Long id;
     private Long parentId; //optional
@@ -60,5 +61,17 @@ public class Span {
 
     public void setBinaryAnnotations(List<BinaryAnnotation> binaryAnnotations) {
         this.binaryAnnotations = binaryAnnotations;
+    }
+
+    @Override
+    public String toString() {
+        return "Span{" +
+                "traceId=" + traceId +
+                ", id=" + id +
+                ", parentId=" + parentId +
+                ", spanName='" + spanName + '\'' +
+                ", annotations=" + annotations +
+                ", binaryAnnotations=" + binaryAnnotations +
+                '}';
     }
 }

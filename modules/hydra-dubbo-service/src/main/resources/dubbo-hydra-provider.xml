@@ -21,9 +21,9 @@
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-    <dubbo:application name="consumer-xiangkui1"/>
 
+    <dubbo:application name="provider-xiangkui1"/>
     <dubbo:registry protocol="zookeeper" address="192.168.227.48:2181"/>
-    <dubbo:reference id="hydraService" interface="com.jd.bdp.hydra.dubbeMonitor.HydraService"/>
-
+    <bean id="hydraService" class="com.jd.bdp.hydra.dubbomonitor.provider.iml.HydraServiceImpl"/>
+    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.HydraService" ref="hydraService"/>
 </beans>

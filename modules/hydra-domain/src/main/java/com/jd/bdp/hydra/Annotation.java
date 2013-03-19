@@ -1,11 +1,13 @@
 package com.jd.bdp.hydra;
 
+import java.io.Serializable;
+
 /**
-  * User: yfliuyu
+ * User: yfliuyu
  * Date: 13-3-18
  * Time: 下午3:36
  */
-public class Annotation {
+public class Annotation implements Serializable {
     public final String CLIENT_SEND = "cs";
     public final String CLIENT_RECEIVE = "cr";
     public final String SERVER_SEND = "ss";
@@ -45,5 +47,19 @@ public class Annotation {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    @Override
+    public String toString() {
+        return "Annotation{" +
+                "CLIENT_SEND='" + CLIENT_SEND + '\'' +
+                ", CLIENT_RECEIVE='" + CLIENT_RECEIVE + '\'' +
+                ", SERVER_SEND='" + SERVER_SEND + '\'' +
+                ", SERVER_RECEIVE='" + SERVER_RECEIVE + '\'' +
+                ", timestamp=" + timestamp +
+                ", value='" + value + '\'' +
+                ", host=" + host +
+                ", duration=" + duration +
+                '}';
     }
 }

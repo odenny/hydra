@@ -72,12 +72,17 @@
         <module>modules/hydra-web</module>
         <module>modules/hydra-agent</module>
         <module>modules/hydra-domain</module>
-        <module>modules/hydra-domain</module>
+        <module>modules/hydra-dubbo-service</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <junit.version>3.8.1</junit.version>
+        <org.springframework-version>3.1.2.RELEASE</org.springframework-version>
+        <servlet.version>2.5</servlet.version>
+        <jackson.version>1.9.10</jackson.version>
+        <fastjson.version>1.1.28</fastjson.version>
     </properties>
 
 

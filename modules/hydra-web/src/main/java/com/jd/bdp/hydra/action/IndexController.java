@@ -21,4 +21,9 @@ public class IndexController {
     public String query() {
         return "query";
     }
+
+    @RequestMapping("/trace.html")
+    public String trace() {
+        return "trace";
+    }
 }

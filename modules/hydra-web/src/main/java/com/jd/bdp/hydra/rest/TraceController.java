@@ -28,6 +28,7 @@ public class TraceController {
 
         JSONObject root = new JSONObject();
         root.put("spanId", "span0001");
+        root.put("spanName", "getSpan1");
 
         JSONArray rootAnnArray = new JSONArray();
         JSONObject rootAnn1 = new JSONObject();
@@ -35,7 +36,7 @@ public class TraceController {
         rootAnnArray.add(rootAnn1);
 
         JSONObject rootAnn2 = new JSONObject();
-        rootAnn2.put("serverSend", "1363910400512");
+        rootAnn2.put("serverSend", "1363910400582");
         rootAnnArray.add(rootAnn2);
 
         JSONObject rootAnn3 = new JSONObject();
@@ -55,10 +56,11 @@ public class TraceController {
 
         JSONObject spanA = new JSONObject();
         spanA.put("spanId", "span0002");
+        spanA.put("spanName", "getSpanA");
 
         JSONArray spanAAnnArray = new JSONArray();
         JSONObject spanAAnn1 = new JSONObject();
-        spanAAnn1.put("clientSend", "1363910400180");
+        spanAAnn1.put("clientSend", "1363910400150");
         spanAAnnArray.add(spanAAnn1);
 
         JSONObject spanAAnn2 = new JSONObject();
@@ -66,7 +68,7 @@ public class TraceController {
         spanAAnnArray.add(spanAAnn2);
 
         JSONObject spanAAnn3 = new JSONObject();
-        spanAAnn3.put("senverReceive", "1363910400195");
+        spanAAnn3.put("senverReceive", "1363910400155");
         spanAAnnArray.add(spanAAnn3);
 
         JSONObject spanAAnn4 = new JSONObject();
@@ -85,6 +87,7 @@ public class TraceController {
 
         JSONObject spanB = new JSONObject();
         spanB.put("spanId", "span0003");
+        spanB.put("spanName", "getSpanB");
 
         JSONArray spanBAnnArray = new JSONArray();
         JSONObject spanBAnn1 = new JSONObject();
@@ -92,7 +95,7 @@ public class TraceController {
         spanBAnnArray.add(spanBAnn1);
 
         JSONObject spanBAnn2 = new JSONObject();
-        spanBAnn2.put("serverSend", "1363910400478");
+        spanBAnn2.put("serverSend", "1363910400560");
         spanBAnnArray.add(spanBAnn2);
 
         JSONObject spanBAnn3 = new JSONObject();
@@ -100,7 +103,7 @@ public class TraceController {
         spanBAnnArray.add(spanBAnn3);
 
         JSONObject spanBAnn4 = new JSONObject();
-        spanBAnn4.put("clientReceive", "1363910400500");
+        spanBAnn4.put("clientReceive", "1363910400570");
         spanBAnnArray.add(spanBAnn4);
 
         spanB.put("annotations", spanBAnnArray);
@@ -145,7 +148,7 @@ public class TraceController {
         spanC2AnnArray.add(spanC2Ann1);
 
         JSONObject spanC2Ann2 = new JSONObject();
-        spanC2Ann2.put("serverSend", "1363910400460");
+        spanC2Ann2.put("serverSend", "1363910400525");
         spanC2AnnArray.add(spanC2Ann2);
 
         JSONObject spanC2Ann3 = new JSONObject();
@@ -153,7 +156,7 @@ public class TraceController {
         spanC2AnnArray.add(spanC2Ann3);
 
         JSONObject spanC2Ann4 = new JSONObject();
-        spanC2Ann4.put("clientReceive", "1363910400470");
+        spanC2Ann4.put("clientReceive", "1363910400545");
         spanC2AnnArray.add(spanC2Ann4);
 
         spanC2.put("annotations", spanC2AnnArray);

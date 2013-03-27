@@ -5,10 +5,6 @@
     <title></title>
     <style type="text/css">
 
-        text {
-            font: 10px sans-serif;
-        }
-
         rect.background {
             fill: white;
         }
@@ -24,8 +20,27 @@
 
         .viewDiv{
             border:1px solid red;
-            display: inline-table;
-            height: 600;
+            display: inline-block;
+            height:auto;
+        }
+
+        .node rect {
+            cursor: pointer;
+            fill: #fff;
+            fill-opacity: .5;
+            stroke: #3182bd;
+            stroke-width: 1.5px;
+        }
+
+        .node text {
+            font: 10px sans-serif;
+            pointer-events: none;
+        }
+
+        path.link {
+            fill: none;
+            stroke: #9ecae1;
+            stroke-width: 1.5px;
         }
 
     </style>

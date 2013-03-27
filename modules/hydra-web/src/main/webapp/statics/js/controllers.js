@@ -9,7 +9,7 @@ function QueryCtrl($scope, serviceQuery) {
 }
 //QueryCtrl.$inject = [$scope, queryService];
 
-function TraceCtrl($scope, Trace, createView, createSpanAndDetail){
+function TraceCtrl($scope, Trace, createView, createSpanAndDetail, createTree, createTreeDetail){
     //跟踪的js-model
 
     var trace = Trace.get({traceId:12},function(){//这个方法可以对model进行重新组装
@@ -95,8 +95,12 @@ function TraceCtrl($scope, Trace, createView, createSpanAndDetail){
         }
     };
 
-    createView(trace);
-    createSpanAndDetail(trace);
+    createView(trace);//生成时序图的svg
+    createSpanAndDetail(trace);//生成时序图的具体细节
+
+    createTree(trace);//生成树的svg
+    createTreeDetail(trace);//生成树的具体结构
+
     $scope.trace = trace;
 }
 

@@ -135,9 +135,7 @@ angular.module('hydra.services', ['ngResource'])
 
                 bar.append("rect")
                     .attr("width", function (time) {
-                        var v = view.x(time.duration);
-                        console.log(v)
-                        return v;
+                        return view.x(time.duration);
                     })
                     .attr("height", view.y);
 
@@ -154,5 +152,154 @@ angular.module('hydra.services', ['ngResource'])
                 };
             }
 
+        }
+    })
+    .factory('createTree', function(){
+        return function(trace){
+            var view = {};
+            var margin = {top: 20, right: 20, bottom: 20, left: 5};
+            $('#treeDiv').append('<div style="margin-top:'+margin.top+'"></div>')
+            view.w = $('#treeDiv').width();
+            view.h = 600 - margin.top;
+            view.i = 0;
+            view.barHeight = 20*1.1;
+            view.barWidth = view.w * .8;
+            view.duration = 400;
+            view.root;
+
+            view.tree = d3.layout.tree().size([view.h, 100]);
+
+            view.diagonal = d3.svg.diagonal()
+                .projection(function(d) { return [d.y, d.x]; });
+
+            view.vis = d3.select("#treeDiv div").append("svg:svg")
+                .attr("width", view.w)
+                .attr("height", view.h)
+                .append("svg:g")
+                .attr("transform", "translate(20,15)");
+            trace.treeView = view
+        };
+    })
+    .factory('createTreeDetail', function(){
+        return function(trace){
+            var view = trace.treeView;
+            var root = trace.rootSpan;
+            root.x0 = 0;
+            root.y0 = 0;
+
+            update(root);
+
+
+            function update(source) {
+
+                // Compute the flattened node list. TODO use d3.layout.hierarchy.
+                var nodes = view.tree.nodes(root);
+
+                // Compute the "layout".
+                nodes.forEach(function(n, i) {
+                    n.x = i * view.barHeight;
+                });
+
+                // Update the nodes…
+                var node = view.vis.selectAll("g.node")
+                    .data(nodes, function(d) { return d.id || (d.id = ++view.i); });
+
+                var nodeEnter = node.enter().append("svg:g")
+                    .attr("class", "node")
+                    .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+                    .style("opacity", 1e-6);
+
+                // Enter any new nodes at the parent's previous position.
+                nodeEnter.append("svg:rect")
+                    .attr("y", -view.barHeight / 2)
+                    .attr("height", view.barHeight)
+                    .attr("width", function(d){
+//                    var num = 0;
+//                    while(d.parent){
+//                        num ++;
+//                        d = d.parent;
+//                    }
+//                    return 100 - num * 25;
+                        return 200;
+                    })
+                    .style("fill", color)
+                    .on("click", click);
+
+                nodeEnter.append("svg:text")
+                    .attr("dy", 3.5)
+                    .attr("dx", 5.5)
+                    .text(function(d) { return d.spanName; });
+
+                // Transition nodes to their new position.
+                nodeEnter.transition()
+                    .duration(view.duration)
+                    .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+                    .style("opacity", 1);
+
+                node.transition()
+                    .duration(view.duration)
+                    .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+                    .style("opacity", 1)
+                    .select("rect")
+                    .style("fill", color);
+
+                // Transition exiting nodes to the parent's new position.
+                node.exit().transition()
+                    .duration(view.duration)
+                    .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+                    .style("opacity", 1e-6)
+                    .remove();
+
+                // Update the links…
+                var link = view.vis.selectAll("path.link")
+                    .data(view.tree.links(nodes), function(d) { return d.target.id; });
+
+                // Enter any new links at the parent's previous position.
+                link.enter().insert("svg:path", "g")
+                    .attr("class", "link")
+                    .attr("d", function(d) {
+                        var o = {x: source.x0, y: source.y0};
+                        return view.diagonal({source: o, target: o});
+                    })
+                    .transition()
+                    .duration(view.duration)
+                    .attr("d", view.diagonal);
+
+                // Transition links to their new position.
+                link.transition()
+                    .duration(view.duration)
+                    .attr("d", view.diagonal);
+
+                // Transition exiting nodes to the parent's new position.
+                link.exit().transition()
+                    .duration(view.duration)
+                    .attr("d", function(d) {
+                        var o = {x: source.x, y: source.y};
+                        return view.diagonal({source: o, target: o});
+                    })
+                    .remove();
+
+                // Stash the old positions for transition.
+                nodes.forEach(function(d) {
+                    d.x0 = d.x;
+                    d.y0 = d.y;
+                });
+            }
+
+            // Toggle children on click.
+            function click(d) {
+                if (d.children) {
+                    d._children = d.children;
+                    d.children = null;
+                } else {
+                    d.children = d._children;
+                    d._children = null;
+                }
+                update(d);
+            }
+
+            function color(d) {
+                return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
+            }
         }
     })

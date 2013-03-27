@@ -25,6 +25,7 @@
         .viewDiv{
             border:1px solid red;
             display: inline-table;
+            height: 600;
         }
 
     </style>

@@ -174,4 +174,13 @@ public class TraceController {
     }
 
 
+    public static void main(String[] args){
+        String s = "";
+        for (int i = 0; i < 3; i++) {
+            s += "1";
+        }
+
+        System.out.println(Long.parseLong(s, 2));
+        System.out.println(Long.MAX_VALUE);
+    }
 }

@@ -17,7 +17,7 @@ angular.module('hydra.services', ['ngResource'])
     .factory('createView', function () {
         return function (trace) {
             var view = {};
-            var margin = {top: 20, right: 20, bottom: 20, left: 5};
+            var margin = {top: 20, right: 40, bottom: 20, left: 5};
             view.width = $('#sequenceDiv').width() - margin.right - margin.left;
             view.height = 600 - margin.top - margin.bottom;
 
@@ -56,6 +56,10 @@ angular.module('hydra.services', ['ngResource'])
                 .attr("class", "y axis")
                 .append("line")
                 .attr("y1", "100%");
+            view.svg.append("svg:text")
+                .attr("dy", 5)
+                .attr("dx", view.width + 2)
+                .text("ms");
             trace.view = view;
         };
     })
@@ -72,8 +76,6 @@ angular.module('hydra.services', ['ngResource'])
                 .attr("transform", stack(0))
                 .style("opacity", 1)
                 .style('fill', '#F0FFF0');
-
-            enter.select("text").style("fill-opacity", 1e-6);
 
 
             // Update the x-axis.
@@ -122,22 +124,18 @@ angular.module('hydra.services', ['ngResource'])
                     .style("cursor", function (d) {
                         return "pointer";
                     })
-
-
-                bar.append("text")
-                    .attr("x", -6)
-                    .attr("y", view.y / 2)
-                    .attr("dy", ".35em")
-                    .attr("text-anchor", "end")
-                    .text(function (d) {
-                        return d.spanName;
+                    .attr('span', function (time) {
+                        return time.spanId;
+                    })
+                    .attr('viewindex', function (time) {
+                        return time.viewIndex;
                     });
 
                 bar.append("rect")
                     .attr("width", function (time) {
                         return view.x(time.duration);
                     })
-                    .attr("height", view.y);
+                    .attr("height", view.y)
 
                 return bar;
             }
@@ -154,15 +152,15 @@ angular.module('hydra.services', ['ngResource'])
 
         }
     })
-    .factory('createTree', function(){
-        return function(trace){
+    .factory('createTree', function () {
+        return function (trace) {
             var view = {};
             var margin = {top: 20, right: 20, bottom: 20, left: 5};
-            $('#treeDiv').append('<div style="margin-top:'+margin.top+'"></div>')
+            $('#treeDiv').append('<div style="margin-top:' + margin.top + '"></div>')
             view.w = $('#treeDiv').width();
             view.h = 600 - margin.top;
             view.i = 0;
-            view.barHeight = 20*1.1;
+            view.barHeight = 20 * 1.1;
             view.barWidth = view.w * .8;
             view.duration = 400;
             view.root;
@@ -170,7 +168,9 @@ angular.module('hydra.services', ['ngResource'])
             view.tree = d3.layout.tree().size([view.h, 100]);
 
             view.diagonal = d3.svg.diagonal()
-                .projection(function(d) { return [d.y, d.x]; });
+                .projection(function (d) {
+                    return [d.y, d.x];
+                });
 
             view.vis = d3.select("#treeDiv div").append("svg:svg")
                 .attr("width", view.w)
@@ -180,8 +180,8 @@ angular.module('hydra.services', ['ngResource'])
             trace.treeView = view
         };
     })
-    .factory('createTreeDetail', function(){
-        return function(trace){
+    .factory('createTreeDetail', function (foldChildrenSequence, unfoldChildrenSequence) {
+        return function (trace) {
             var view = trace.treeView;
             var root = trace.rootSpan;
             root.x0 = 0;
@@ -196,30 +196,28 @@ angular.module('hydra.services', ['ngResource'])
                 var nodes = view.tree.nodes(root);
 
                 // Compute the "layout".
-                nodes.forEach(function(n, i) {
+                nodes.forEach(function (n, i) {
                     n.x = i * view.barHeight;
                 });
 
                 // Update the nodes…
                 var node = view.vis.selectAll("g.node")
-                    .data(nodes, function(d) { return d.id || (d.id = ++view.i); });
+                    .data(nodes, function (d) {
+                        return d.id || (d.id = ++view.i);
+                    });
 
                 var nodeEnter = node.enter().append("svg:g")
                     .attr("class", "node")
-                    .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+                    .attr("transform", function (d) {
+                        return "translate(" + source.y0 + "," + source.x0 + ")";
+                    })
                     .style("opacity", 1e-6);
 
                 // Enter any new nodes at the parent's previous position.
                 nodeEnter.append("svg:rect")
                     .attr("y", -view.barHeight / 2)
                     .attr("height", view.barHeight)
-                    .attr("width", function(d){
-//                    var num = 0;
-//                    while(d.parent){
-//                        num ++;
-//                        d = d.parent;
-//                    }
-//                    return 100 - num * 25;
+                    .attr("width", function (d) {
                         return 200;
                     })
                     .style("fill", color)
@@ -228,17 +226,23 @@ angular.module('hydra.services', ['ngResource'])
                 nodeEnter.append("svg:text")
                     .attr("dy", 3.5)
                     .attr("dx", 5.5)
-                    .text(function(d) { return d.spanName; });
+                    .text(function (d) {
+                        return d.spanName;
+                    });
 
                 // Transition nodes to their new position.
                 nodeEnter.transition()
                     .duration(view.duration)
-                    .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+                    .attr("transform", function (d) {
+                        return "translate(" + d.y + "," + d.x + ")";
+                    })
                     .style("opacity", 1);
 
                 node.transition()
                     .duration(view.duration)
-                    .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+                    .attr("transform", function (d) {
+                        return "translate(" + d.y + "," + d.x + ")";
+                    })
                     .style("opacity", 1)
                     .select("rect")
                     .style("fill", color);
@@ -246,18 +250,22 @@ angular.module('hydra.services', ['ngResource'])
                 // Transition exiting nodes to the parent's new position.
                 node.exit().transition()
                     .duration(view.duration)
-                    .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+                    .attr("transform", function (d) {
+                        return "translate(" + source.y + "," + source.x + ")";
+                    })
                     .style("opacity", 1e-6)
                     .remove();
 
                 // Update the links…
                 var link = view.vis.selectAll("path.link")
-                    .data(view.tree.links(nodes), function(d) { return d.target.id; });
+                    .data(view.tree.links(nodes), function (d) {
+                        return d.target.id;
+                    });
 
                 // Enter any new links at the parent's previous position.
                 link.enter().insert("svg:path", "g")
                     .attr("class", "link")
-                    .attr("d", function(d) {
+                    .attr("d", function (d) {
                         var o = {x: source.x0, y: source.y0};
                         return view.diagonal({source: o, target: o});
                     })
@@ -273,14 +281,14 @@ angular.module('hydra.services', ['ngResource'])
                 // Transition exiting nodes to the parent's new position.
                 link.exit().transition()
                     .duration(view.duration)
-                    .attr("d", function(d) {
+                    .attr("d", function (d) {
                         var o = {x: source.x, y: source.y};
                         return view.diagonal({source: o, target: o});
                     })
                     .remove();
 
                 // Stash the old positions for transition.
-                nodes.forEach(function(d) {
+                nodes.forEach(function (d) {
                     d.x0 = d.x;
                     d.y0 = d.y;
                 });
@@ -288,12 +296,18 @@ angular.module('hydra.services', ['ngResource'])
 
             // Toggle children on click.
             function click(d) {
-                if (d.children) {
+                if (d.children) {//如果有子span,收起
+                    if (d.children) {
+                        foldChildrenSequence(d, trace.view);
+                    }
                     d._children = d.children;
                     d.children = null;
-                } else {
+                } else {//如果有子span，展开
                     d.children = d._children;
                     d._children = null;
+                    if (d.children) {
+                        unfoldChildrenSequence(d, trace.view);
+                    }
                 }
                 update(d);
             }
@@ -302,4 +316,115 @@ angular.module('hydra.services', ['ngResource'])
                 return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
             }
         }
+    })
+    .factory('getMyTrace', function () {
+        return function (trace) {
+            var span = trace.rootSpan;
+            var spanIndex = {index: 0}
+            getMySpan(span, spanIndex);
+
+
+            function getMySpan(span, spanIndex) {
+                var anMap = {};
+                for (var i in span.annotations) {
+                    if (span.annotations[i]['cs']) {
+                        anMap['cs'] = span.annotations[i]['cs'];
+                        continue;
+                    }
+                    if (span.annotations[i]['ss']) {
+                        anMap['ss'] = span.annotations[i]['ss'];
+                        continue;
+                    }
+                    if (span.annotations[i]['sr']) {
+                        anMap['sr'] = span.annotations[i]['sr'];
+                        continue;
+                    }
+                    if (span.annotations[i]['cr']) {
+                        anMap['cr'] = span.annotations[i]['cr'];
+                        continue;
+                    }
+                }
+                span.durationClient = parseInt(anMap['cr']) - parseInt(anMap['cs']);
+                span.durationServer = parseInt(anMap['ss']) - parseInt(anMap['sr']);
+                span.used = {
+                    spanId: span.spanId,
+                    start: anMap['cs'],
+                    duration: span.durationServer,
+                    viewIndex: spanIndex.index,
+                    type: 'used'
+                }
+                span.wasted = {
+                    spanId: span.spanId,
+                    start: parseInt(anMap['cs']) + parseInt(span.durationServer),
+                    duration: parseInt(span.durationClient) - parseInt(span.durationServer),
+                    viewIndex: spanIndex.index,
+                    type: 'wasted'
+                }
+                spanIndex.index++;
+
+                for (var i in span.children) {
+                    getMySpan(span.children[i], spanIndex);
+                }
+            }
+        }
+    })
+    .factory('foldChildrenSequence', function () {
+        return function (span, view) {
+            hideChildrenSpan(span);
+            updateTheOthers(span);
+
+            function hideChildrenSpan(span) {
+                for (var i in span.children) {
+                    d3.selectAll('g[span="' + span.children[i].spanId + '"]')
+                        .style("opacity", 0)
+                    hideChildrenSpan(span.children[i]);
+                }
+            }
+
+
+            function updateTheOthers(span) {
+                var index = span.used.viewIndex;
+                d3.selectAll('#sequenceDiv g').each(function () {
+                    var g = d3.select(this);
+                    if (g.attr('viewindex') > index) {
+                        var transform = g.attr('transform');
+                        var y = transform.substring(transform.indexOf(',') + 1, transform.length - 1);
+                        transform = transform.substring(0, transform.indexOf(',') + 1) + (parseInt(y) - view.y * 1.2) + ')';
+
+                        g.transition()
+                            .duration(view.duration)
+                            .attr("transform", transform);
+                    }
+                });
+            }
+        }
+    })
+    .factory('unfoldChildrenSequence', function () {
+        return function (span, view) {
+            updateTheOthers(span);
+            showChildrenSpan(span);
+
+            function showChildrenSpan(span) {
+                for (var i in span.children) {
+                    d3.selectAll('g[span="' + span.children[i].spanId + '"]').style("opacity", 1)
+                    showChildrenSpan(span.children[i]);
+                }
+            }
+
+            function updateTheOthers(span) {
+                var index = span.used.viewIndex;
+                d3.selectAll('#sequenceDiv g').each(function () {
+                    var g = d3.select(this);
+                    if (g.attr('viewindex') > index) {
+                        var transform = g.attr('transform');
+                        var y = transform.substring(transform.indexOf(',') + 1, transform.length - 1);
+                        transform = transform.substring(0, transform.indexOf(',') + 1) + (parseInt(y) + view.y * 1.2) + ')';
+
+                        g.transition()
+                            .duration(view.duration)
+                            .attr("transform", transform);
+                    }
+                });
+            }
+        };
     })

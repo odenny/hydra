@@ -3,6 +3,7 @@
 <html>
 <head>
     <title></title>
+    <link href="/statics/lib/qTip2-2.0.1/dist/jquery.qtip.css" rel="stylesheet" type="text/css"/>
     <style type="text/css">
 
         rect.background {
@@ -18,10 +19,9 @@
             stroke: #000;
         }
 
-        .viewDiv{
-            border:1px solid red;
+        .viewDiv {
             display: inline-block;
-            height:auto;
+            height: auto;
         }
 
         .node rect {
@@ -29,7 +29,7 @@
             fill: #fff;
             fill-opacity: .5;
             stroke: #3182bd;
-            stroke-width: 1.5px;
+            stroke-width: 1px;
         }
 
         .node text {
@@ -49,6 +49,5 @@
 <div>
     <div id="treeDiv" class="viewDiv" style="width:25%;"></div>
     <div id="sequenceDiv" class="viewDiv" style="width:74%;"></div>
-</div>
 </body>
 </html>

@@ -28,6 +28,10 @@ angular.module('hydra.services', ['ngResource'])
 
             view.duration = 750;
             view.delay = 25;
+            view.color = {};
+            view.color.used = '#1AC8AF';
+            view.color.wasted = '#C3ECF2';
+
 
             view.hierarchy = d3.layout.partition()
                 .value(function (d) {
@@ -52,10 +56,7 @@ angular.module('hydra.services', ['ngResource'])
             view.svg.append("g")
                 .attr("class", "x axis");
 
-            view.svg.append("g")
-                .attr("class", "y axis")
-                .append("line")
-                .attr("y1", "100%");
+
             view.svg.append("svg:text")
                 .attr("dy", 5)
                 .attr("dx", view.width + 2)
@@ -63,8 +64,8 @@ angular.module('hydra.services', ['ngResource'])
             trace.view = view;
         };
     })
-    .factory('createSpanAndDetail', function () {
-        return function (trace) {
+    .factory('createSpanAndDetail', function (createSpanTip) {
+        return function (trace, spanMap) {
 
             var rootSpan = trace.rootSpan;
             var view = trace.view;
@@ -72,7 +73,7 @@ angular.module('hydra.services', ['ngResource'])
 
             view.x.domain([0, rootSpan.durationClient]).nice();
 
-            var enter = bar(rootSpan)
+            var enter = bar(rootSpan, spanMap)
                 .attr("transform", stack(0))
                 .style("opacity", 1)
                 .style('fill', '#F0FFF0');
@@ -91,20 +92,20 @@ angular.module('hydra.services', ['ngResource'])
                     return 'translate(' + view.x(time.start - rootSpan.used.start) + ',' + view.y * time.viewIndex * 1.2 + ')';
                 })
                 .style('fill', function (time) {
-                    if (time.type == 'used') {//used
-                        return '#00FF7F';
-                    } else {//wasted
-                        return 'steelblue';
-                    }
+                    return view.color[time.type];
                 });
 
             //生成每一个span
             function bar(rootSpan) {
                 var spans = [rootSpan.used, rootSpan.wasted];
 
+                var maxIndex = 0;
                 function pushChildren(span) {
                     if (span.children) {
                         for (var i in span.children) {
+                            if (span.children[i].used.viewIndex > maxIndex){
+                                maxIndex = span.children[i].used.viewIndex;
+                            }
                             spans.push(span.children[i].used);
                             spans.push(span.children[i].wasted);
                             pushChildren(span.children[i]);
@@ -129,13 +130,32 @@ angular.module('hydra.services', ['ngResource'])
                     })
                     .attr('viewindex', function (time) {
                         return time.viewIndex;
+                    })
+                    .attr('timetype', function(time){
+                        return time.type;
                     });
+
 
                 bar.append("rect")
                     .attr("width", function (time) {
                         return view.x(time.duration);
                     })
                     .attr("height", view.y)
+                    .on('mouseover', function(){
+                        d3.select(this).attr('stroke', '#F3B1A5').attr('stroke-width', '3px');
+                    })
+                    .on('mouseout', function(){
+                        d3.select(this).attr('stroke-width', '0px');
+                    });
+
+                console.log(maxIndex)
+                view.svg.append("g")
+                    .attr("class", "y axis")
+                    .attr('id', 'yaxis')
+                    .append("line")
+                .attr("y1", (maxIndex+1) * view.y * 1.2);
+
+                createSpanTip(spanMap, view);//tip
 
                 return bar;
             }
@@ -160,8 +180,8 @@ angular.module('hydra.services', ['ngResource'])
             view.w = $('#treeDiv').width();
             view.h = 600 - margin.top;
             view.i = 0;
-            view.barHeight = 20 * 1.1;
-            view.barWidth = view.w * .8;
+            view.barHeight = 20 * 1.2;
+            view.barWidth = view.w * 0.5;
             view.duration = 400;
             view.root;
 
@@ -198,6 +218,7 @@ angular.module('hydra.services', ['ngResource'])
                 // Compute the "layout".
                 nodes.forEach(function (n, i) {
                     n.x = i * view.barHeight;
+                    n.y = n.y * 0.5;
                 });
 
                 // Update the nodes…
@@ -217,9 +238,7 @@ angular.module('hydra.services', ['ngResource'])
                 nodeEnter.append("svg:rect")
                     .attr("y", -view.barHeight / 2)
                     .attr("height", view.barHeight)
-                    .attr("width", function (d) {
-                        return 200;
-                    })
+                    .attr("width", view.barWidth)
                     .style("fill", color)
                     .on("click", click);
 
@@ -313,7 +332,7 @@ angular.module('hydra.services', ['ngResource'])
             }
 
             function color(d) {
-                return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
+                return d._children ? "#23C9B5" : d.children ? "#A4EFE8" : "#EBCCB0";
             }
         }
     })
@@ -427,4 +446,55 @@ angular.module('hydra.services', ['ngResource'])
                 });
             }
         };
+    })
+    .factory('createSpanTip', function(){
+        return function(spanMap, view){
+            $('#sequenceDiv g[span]').each(function(){
+                var spanId = $(this).attr('span');
+                var spanModel = spanMap[spanId];
+
+                var isUsed = $(this).attr('timetype')=='used'?true:false;
+                $(this).qtip({
+                    style:{
+                        classes:'alert alert-block',
+                        width:150
+                    },
+                    position:{
+                        viewport: $(window)
+                    },
+                    hide:{
+                        delay:500,
+                        fixed:true
+                    },
+                    content:function(){
+                        var html = '<div><table class="table table-condensed" style="width:150;font-family:Tahoma;">';
+
+                        html += '<tr><td>服务名:</td><td>'+spanModel.spanName+'</td></tr>';
+                        if (isUsed){
+                            html += '<tr><td style="text-align:center;"><span class="label label-success">调用时长</span></td>';
+                        }else {
+                            html += '<tr><td style="text-align:center;"><span class="label label-info">网络消耗</span></td>';
+                        }
+                        html += '<td>'+(isUsed?spanModel.used.duration:spanModel.wasted.duration)+'ms</td></tr>';
+                        html += '</table></div>';
+                        return html;
+                    }()
+                });
+            })
+        };
+    })
+    .factory('getSpanMap', function(){
+        return function(trace){
+            var spanMap = {};
+            spanMap[trace.rootSpan.spanId] = trace.rootSpan;
+            setAllSpanIn(trace.rootSpan);
+
+            function setAllSpanIn(span){
+                for(var i in span.children){
+                    spanMap[span.children[i].spanId] = span.children[i];
+                    setAllSpanIn(span.children[i]);
+                }
+            }
+            return spanMap;
+        }
     })

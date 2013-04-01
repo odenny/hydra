@@ -4,18 +4,37 @@
 
 //用来操作多条件查询和grid展现的Ctrl
 function QueryCtrl($scope, serviceQuery) {
-    $scope.serviceArray = serviceQuery.getAllService();
-//    $scope.queryResult = serviceQuery.getAllTrace();
+//    $scope.serviceArray =
+    $('#startTime').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        pickerReferer:'input'
+    });
+    $('#serviceName').typeahead({
+        source:function(){
+            return serviceQuery.getAllService(function(array){
+                console.log(array)
+            });
+        }
+    });
+
 }
 //QueryCtrl.$inject = [$scope, queryService];
 
-function TraceCtrl($scope, Trace, getMyTrace, createView, createSpanAndDetail, createTree, createTreeDetail){
+function TraceCtrl($scope, Trace, getMyTrace, createView, createSpanAndDetail, createTree, createTreeDetail, getSpanMap){
     //跟踪的js-model
 
     var trace = Trace.get({traceId:12},function(t){
         getMyTrace(t);
+        var spanMap = getSpanMap(t);
+
         createView(t);//生成时序图的svg
-        createSpanAndDetail(t);//生成时序图的具体细节
+        createSpanAndDetail(t, spanMap);//生成时序图的具体细节
 
         createTree(t);//生成树的svg
         createTreeDetail(t);//生成树的具体结构

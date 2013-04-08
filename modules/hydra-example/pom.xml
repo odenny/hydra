@@ -9,9 +9,8 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>HYDRA DOMAIN</name>
 
-    <artifactId>hydra-domain</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>hydra-example</artifactId>
+
 
 </project>

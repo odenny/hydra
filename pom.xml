@@ -71,8 +71,6 @@
     <modules>
         <module>modules/hydra-web</module>
         <module>modules/hydra-agent</module>
-        <module>modules/hydra-domain</module>
-        <module>modules/hydra-dubbo-service</module>
     </modules>
 
     <properties>

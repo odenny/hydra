@@ -71,6 +71,7 @@
     <modules>
         <module>modules/hydra-web</module>
         <module>modules/hydra-agent</module>
+        <module>modules/hydra-example</module>
     </modules>
 
     <properties>

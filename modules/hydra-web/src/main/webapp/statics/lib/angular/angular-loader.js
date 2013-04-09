@@ -7,7 +7,7 @@
 (
 
 /**
- * @ngdoc interface
+ * @ngdoc inter
  * @name angular.Module
  * @description
  *

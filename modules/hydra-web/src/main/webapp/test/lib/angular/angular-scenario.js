@@ -2900,7 +2900,7 @@ var rformElems = /^(?:textarea|input|select)$/i,
 	};
 
 /*
- * Helper functions for managing events -- not part of the public interface.
+ * Helper functions for managing events -- not part of the public inter.
  * Props to Dean Edwards' addEvent library for many of the ideas.
  */
 jQuery.event = {
@@ -3496,7 +3496,7 @@ jQuery.event = {
 };
 
 // Some plugins are using, but it's undocumented/deprecated and will be removed.
-// The 1.7 special event interface should provide all the hooks needed now.
+// The 1.7 special event inter should provide all the hooks needed now.
 jQuery.event.handle = jQuery.event.dispatch;
 
 jQuery.removeEvent = document.removeEventListener ?
@@ -10423,7 +10423,7 @@ function assertArgFn(arg, name, acceptArrayAnnotation) {
 }
 
 /**
- * @ngdoc interface
+ * @ngdoc inter
  * @name angular.Module
  * @description
  *
@@ -12361,7 +12361,7 @@ function $AnchorScrollProvider() {
  * @param {object} window The global window object.
  * @param {object} document jQuery wrapped document.
  * @param {function()} XHR XMLHttpRequest constructor.
- * @param {object} $log console.log or an object with the same interface.
+ * @param {object} $log console.log or an object with the same inter.
  * @param {object} $sniffer $sniffer service
  */
 function Browser(window, document, $log, $sniffer) {
@@ -15978,7 +15978,7 @@ function $ParseProvider() {
  * A promise/deferred implementation inspired by [Kris Kowal's Q](https://github.com/kriskowal/q).
  *
  * [The CommonJS Promise proposal](http://wiki.commonjs.org/wiki/Promises) describes a promise as an
- * interface for interacting with an object that represents the result of an action that is
+ * inter for interacting with an object that represents the result of an action that is
  * performed asynchronously, and may or may not be finished at any given point in time.
  *
  * From the perspective of dealing with error handling, deferred and promise APIs are to

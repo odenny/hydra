@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="provider-xiangkui1"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.227.48:2181"/>
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20889" />
+    <bean id="hydraService" class="com.jd.bdp.hydra.dubbomonitor.provider.impl.HydraServiceImpl"/>
+    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.HydraService"  ref="hydraService">
+    </dubbo:service>
+</beans>

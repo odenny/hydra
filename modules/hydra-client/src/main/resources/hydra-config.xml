@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="config" class="com.jd.bdp.hydra.agent.support.Configuration">
+        <property name="delayTime" value="50"></property>
+        <property name="flushSize" value="10"></property>
+        <property name="queueSize" value="1024"></property>
+    </bean>
+    <!--负责元数据的注入-->
+    <bean id="configer" class="com.jd.bdp.hydra.dubbo.HydraConfiger">
+        <property name="config" ref="config"></property>
+    </bean>
+
+</beans>

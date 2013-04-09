@@ -11,9 +11,16 @@ import com.jd.bdp.service.inter.support.Service;
  */
 public class ServiceA extends AbstractService implements InterfaceA{
 
-    public void startWork(){
-        //A->B
-
+    @Override
+    public Object function(Object... objects) {
+        String myVoice=new String("Hello,Im ServiceA,you can call me SA");
+        String returnVoice=myVoice.toString();
+        if(downService!=null){
+            Object result=downService.function(objects,myVoice);
+            returnVoice=returnVoice+"-><-"+result.toString();
+        }
+        returnVoice="("+returnVoice+")";
+        return returnVoice;
     }
 
 }

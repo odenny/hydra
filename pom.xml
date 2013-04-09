@@ -70,7 +70,7 @@
     <!-- Modules -->
     <modules>
         <module>modules/hydra-web</module>
-        <module>modules/hydra-agent</module>
+        <module>modules/hydra-example</module>
     </modules>
 
     <properties>
@@ -92,11 +92,6 @@
             <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-web</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.jd.bdp</groupId>
-                <artifactId>hydra-agent</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

@@ -9,8 +9,8 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
  * Date: 13-4-1
  * Time: 下午1:27
  */
-public class MockTestImpl extends AbstractDependencyInjectionSpringContextTests {
-    private Service rootService;
+public class MockTest extends AbstractDependencyInjectionSpringContextTests {
+    private Trigger trigger;
     @Override
     protected String[] getConfigLocations() {
         String[] location = {"/dubbo-service-context.xml"};
@@ -18,17 +18,14 @@ public class MockTestImpl extends AbstractDependencyInjectionSpringContextTests 
     }
     @Test
     public void testTriggerService() throws Exception {
-        Object result=rootService.function();
-        System.out.println("调用结束，获得调用结果:"+result);
+        trigger.startWork();
     }
 
     //getter and setter
-
-    public Service getRootService() {
-        return rootService;
+    public Trigger getTrigger() {
+        return trigger;
     }
-
-    public void setRootService(Service rootService) {
-        this.rootService = rootService;
+    public void setTrigger(Trigger trigger) {
+        this.trigger = trigger;
     }
 }

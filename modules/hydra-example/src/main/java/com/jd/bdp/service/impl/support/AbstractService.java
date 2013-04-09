@@ -10,7 +10,7 @@ import com.jd.bdp.service.inter.support.Service;
 public abstract class AbstractService implements Service {
     private String name;
     private String appName;
-    private Service downService;//下游服务
+    protected Service downService;//下游服务
 
 
     /**

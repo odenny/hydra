@@ -12,6 +12,6 @@ import com.jd.bdp.service.inter.InterfaceC;
 public class ServiceC extends AbstractService implements InterfaceC {
     @Override
     public Object function(Object... objects) {
-        return "hello,Im ServiceC";
+        return "wa~ it seems all body come here";
     }
 }

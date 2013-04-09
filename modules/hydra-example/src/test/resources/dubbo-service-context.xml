@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--服务暴露-开机-->
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceA" ref="serviceA">
+    </dubbo:service>
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceB" ref="serviceB">
+    </dubbo:service>
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceC" ref="serviceC">
+    </dubbo:service>
+
+    <!--服务引用-->
+    <dubbo:reference id="referenceA" interface="com.jd.bdp.service.inter.InterfaceA" check="false">
+    </dubbo:reference>
+    <dubbo:reference id="referenceB" interface="com.jd.bdp.service.inter.InterfaceB" check="false">
+    </dubbo:reference>
+    <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false">
+    </dubbo:reference>
+
+    <!--Root调用服务-->
+
+
+    <!--服务关联关系-->
+    <bean id="serviceA" class="com.jd.bdp.service.impl.ServiceA">
+        <property name="downService" ref="referenceB"></property>
+    </bean>
+
+    <bean id="serviceB" class="com.jd.bdp.service.impl.ServiceB">
+        <property name="downService" ref="referenceC"></property>
+    </bean>
+
+    <bean id="serviceC" class="com.jd.bdp.service.impl.ServiceC">
+    </bean>
+
+
+
+
+
+</beans>

@@ -7,6 +7,7 @@
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
+    <!--<dubbo:application name="hydra-example2"></dubbo:application>-->
     <!--服务关联关系-->
     <bean id="serviceA" class="com.jd.bdp.service.impl.ServiceA">
         <property name="downService" ref="referenceB"></property>

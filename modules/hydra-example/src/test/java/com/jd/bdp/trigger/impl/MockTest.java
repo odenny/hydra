@@ -1,6 +1,5 @@
 package com.jd.bdp.trigger.impl;
 
-import com.jd.bdp.service.inter.support.Service;
 import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 

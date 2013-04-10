@@ -26,8 +26,6 @@ import com.jd.bdp.hydra.agent.support.TracerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.InetSocketAddress;
-
 /**
  *
  */
@@ -61,9 +59,8 @@ public class HydraFilter implements Filter {
             }
             endpoint = tracer.newEndPoint();
             endpoint.setServiceName(tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface()));
-            InetSocketAddress inetAddress = context.getLocalAddress();
-            endpoint.setIp(inetAddress.getAddress().toString());
-            endpoint.setPort(inetAddress.getPort());
+            endpoint.setIp(context.getLocalAddressString());
+            endpoint.setPort(context.getLocalPort());
             invokerBefore(invocation, span, endpoint, start);
             RpcInvocation invocation1 = (RpcInvocation)invocation;
             setAttachment(span,invocation1);

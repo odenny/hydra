@@ -24,20 +24,18 @@ import com.jd.bdp.service.inter.support.Service;
  * Time: 下午3:25
  */
 public class Trigger {
-    Service rootService;
+
     public void startWork(int num){
         for(int i=0;i<num;i++){
-            Object result=rootService.function();
+            Object result=rootService.functionA();
             System.out.println("result:"+result);
         }
 
     }
     //getter and setter
-    public Service getRootService() {
-        return rootService;
-    }
+    private InterfaceA rootService;
 
-    public void setRootService(Service rootService) {
+    public void setRootService(InterfaceA rootService) {
         this.rootService = rootService;
     }
 }

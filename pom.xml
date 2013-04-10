@@ -80,7 +80,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <junit.version>3.8.1</junit.version>
+        <junit.version>4.9</junit.version>
         <springframework-version>3.1.2.RELEASE</springframework-version>
         <servlet.version>2.5</servlet.version>
         <jackson.version>1.9.10</jackson.version>

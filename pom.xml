@@ -81,12 +81,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <junit.version>3.8.1</junit.version>
-        <org.springframework-version>3.1.2.RELEASE</org.springframework-version>
+        <springframework-version>3.1.2.RELEASE</springframework-version>
         <servlet.version>2.5</servlet.version>
         <jackson.version>1.9.10</jackson.version>
         <fastjson.version>1.1.28</fastjson.version>
         <jsp-api.version>2.1</jsp-api.version>
         <jstl-api.version>1.2</jstl-api.version>
+        <dubbo.version>2.4.8-SNAPSHOT</dubbo.version>
+        <logback-classic.version>1.0.7</logback-classic.version>
+        <validation-api.version>1.0.0.GA</validation-api.version>
+        <metamorphosis.version>1.4.3</metamorphosis.version>
+        <disruptor.version>2.10.3</disruptor.version>
+        <glowworm.version>1.0-SNAPSHOT</glowworm.version>
+        <slf4j-api.version>1.6.4</slf4j-api.version>
+        <hessian.version>3.2.2</hessian.version>
+        <zkclient.version>0.1</zkclient.version>
+        <mybatis.version>3.0.6</mybatis.version>
+        <mybatis-spring>1.0.0</mybatis-spring>
+        <mysql-connector-java.version>5.1.22</mysql-connector-java.version>
     </properties>
 
 
@@ -98,8 +110,33 @@
                 <artifactId>hydra-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-collector</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-example</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-interface</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-manager</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-            <!-- others -->
+            <!-- test -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -109,37 +146,42 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>${org.springframework-version}</version>
+                <version>${springframework-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
-                <version>${org.springframework-version}</version>
+                <version>${springframework-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${org.springframework-version}</version>
+                <version>${springframework-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aop</artifactId>
-                <version>${org.springframework-version}</version>
+                <version>${springframework-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-expression</artifactId>
-                <version>${org.springframework-version}</version>
+                <version>${springframework-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
-                <version>${org.springframework-version}</version>
+                <version>${springframework-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
-                <version>${org.springframework-version}</version>
+                <version>${springframework-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${springframework-version}</version>
             </dependency>
             <!-- servlet-->
             <dependency>
@@ -197,6 +239,79 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <!-- dubbo -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+            <!-- log -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+            <!-- metamorphosis -->
+            <dependency>
+                <groupId>com.taobao.metamorphosis</groupId>
+                <artifactId>metamorphosis-client</artifactId>
+                <version>${metamorphosis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.taobao.metamorphosis</groupId>
+                <artifactId>metamorphosis-tools</artifactId>
+                <version>${metamorphosis.version}</version>
+            </dependency>
+            <!-- disruptor -->
+            <dependency>
+                <groupId>com.googlecode.disruptor</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
+            </dependency>
+            <!-- serialize -->
+            <dependency>
+                <groupId>com.jd.dd</groupId>
+                <artifactId>glowworm</artifactId>
+                <version>${glowworm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.caucho</groupId>
+                <artifactId>hessian</artifactId>
+                <version>${hessian.version}</version>
+            </dependency>
+            <!-- zookeeper -->
+            <dependency>
+                <groupId>com.github.sgroschupf</groupId>
+                <artifactId>zkclient</artifactId>
+                <version>${zkclient.version}</version>
+            </dependency>
+            <!-- db -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+            <!-- others -->
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

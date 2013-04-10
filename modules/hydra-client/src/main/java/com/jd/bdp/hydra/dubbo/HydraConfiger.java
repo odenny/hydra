@@ -1,7 +1,9 @@
 package com.jd.bdp.hydra.dubbo;
 
+import com.alibaba.dubbo.common.utils.ConfigUtils;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ServiceConfig;
+import com.alibaba.dubbo.registry.Registry;
 import com.jd.bdp.hydra.agent.support.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,16 +25,22 @@ public class HydraConfiger implements ApplicationContextAware {
     Configuration config;
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        Map<String, ApplicationConfig> appConfigMap = BeanFactoryUtils.beansOfTypeIncludingAncestors(applicationContext, ApplicationConfig.class, false, false);
-        Map<String, ServiceConfig> servicesConfigMap = BeanFactoryUtils.beansOfTypeIncludingAncestors(applicationContext, ServiceConfig.class, false, false);
+        Map<String, ApplicationConfig> appConfigMap = BeanFactoryUtils.
+                beansOfTypeIncludingAncestors(applicationContext, ApplicationConfig.class, false, false);
+        Map<String, ServiceConfig> servicesConfigMap = BeanFactoryUtils.
+                beansOfTypeIncludingAncestors(applicationContext, ServiceConfig.class, false, false);
         //获取全局唯一的App配置
-        String appName="defaultApp";
+        String appName="";
         if (appConfigMap != null && 1==appConfigMap.size()) {
             for (ApplicationConfig config : appConfigMap.values()) {
                 appName=config.getName();
             }
         }else {
-            logger.error("Duplicate or no application configs to join up the hydra system,will user default application config");
+            logger.warn("Duplicate or no application configs to join up the hydra system,will user default application config");
+            //尝试从环境变量中获取 appName
+            if(null==(appName=ConfigUtils.getProperty("dubbo.application.name"))){
+                appName="";
+            }
         }
         this.config.setApplicationName(appName);
         //获取所有Service配置

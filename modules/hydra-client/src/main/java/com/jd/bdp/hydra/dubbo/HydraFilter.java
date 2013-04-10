@@ -54,7 +54,7 @@ public class HydraFilter implements Filter {
                 traceId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.TID));
                 parentId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.PID));
                 spanId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.SID));
-                boolean isSample = TracerUtils.getAttachmentBoolean(invocation.getAttachment(TracerUtils.SAMPLE));
+                boolean isSample = (traceId != null);
                 span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample);
             }
             endpoint = tracer.newEndPoint();

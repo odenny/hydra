@@ -6,10 +6,10 @@ package com.jd.bdp.service.inter;
  * Time: 下午1:24
  */
 
-import com.jd.bdp.service.inter.support.Service;
-
 /**
  * 某个Dubbo服务
  */
-public interface InterfaceB extends Service {
+public interface InterfaceB {
+
+    Object functionB(Object... objects);
 }

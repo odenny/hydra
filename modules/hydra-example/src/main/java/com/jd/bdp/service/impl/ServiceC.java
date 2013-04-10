@@ -9,9 +9,12 @@ import com.jd.bdp.service.inter.InterfaceC;
  * Date: 13-4-8
  * Time: 下午2:34
  */
-public class ServiceC extends AbstractService implements InterfaceC {
+public class ServiceC implements InterfaceC {
+
     @Override
-    public Object function(Object... objects) {
+    public Object functionC(Object... objects) {
         return "wa~ it seems all body come here";
     }
 }
+
+

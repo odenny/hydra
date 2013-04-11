@@ -30,6 +30,7 @@ import java.util.Map;
 public class LeaderManagerService implements LeaderService{
     @Override
     public Map<String, String> registerClient(String name, List<String> services) {
+        System.out.println("收到注册请求");
         Map<String, String> map = new HashMap<String, String>();
         map.put("seed", "1000");
         return map;

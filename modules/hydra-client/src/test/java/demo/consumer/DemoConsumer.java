@@ -26,7 +26,10 @@ public class DemoConsumer {
 
         try {
 
-            ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"dubbo-demo-consumer.xml"});
+            ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
+                    "dubbo-demo-consumer.xml",
+                    "/hydra-config.xml"
+            });
             context.start();
             DemoService service = (DemoService) context.getBean("demoService"); // 获取远程服务代理
 

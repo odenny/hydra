@@ -8,6 +8,7 @@
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!--LeaderService-开机-->
+    <dubbo:protocol name="dubbo" port="20990" />
     <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leadService">
     </dubbo:service>
     <bean id="leadService" class="com.jd.bdp.registry.manager.LeaderManagerService"></bean>

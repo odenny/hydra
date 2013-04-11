@@ -18,6 +18,7 @@ package com.jd.bdp.registry.client;
 
 import com.jd.bdp.hydra.dubbomonitor.LeaderService;
 
+import javax.validation.constraints.AssertTrue;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,9 +31,9 @@ import java.util.Map;
 public class LeaderClientService implements LeaderService{
     @Override
     public Map<String, String> registerClient(String name, List<String> services) {
+        System.out.println("开始注册~") ;
         Map<String, String> map = new HashMap<String, String>();
         map.put("seed", "1000");
-        System.out.println("开始注册~") ;
         return map;
     }
 }

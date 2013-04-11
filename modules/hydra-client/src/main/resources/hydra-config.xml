@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <bean id="config" class="com.jd.bdp.hydra.agent.support.Configuration">
         <property name="delayTime" value="50"></property>
@@ -12,5 +16,12 @@
     <bean id="configer" class="com.jd.bdp.hydra.dubbo.HydraConfiger">
         <property name="config" ref="config"></property>
     </bean>
+    <!--leadService-->
+    <dubbo:reference id="leaderService" interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" check="false">
+    </dubbo:reference>
+    <!--hydraService-->
+    <dubbo:reference id="hydraService" interface="com.jd.bdp.hydra.dubbomonitor.HydraService" check="false">
+    </dubbo:reference>
+
 
 </beans>

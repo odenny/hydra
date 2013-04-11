@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 @Activate(group = {Constants.PROVIDER, Constants.CONSUMER})
 public class HydraFilter implements Filter {
 
+    private HydraFilter configer;
     private static Logger logger= LoggerFactory.getLogger(HydraFilter.class);
 
     private Tracer tracer = Tracer.getTracer();
@@ -114,5 +115,15 @@ public class HydraFilter implements Filter {
             }
             tracer.setParentSpan(span);
         }
+    }
+
+    //setter and getter
+
+    public HydraFilter getConfiger() {
+        return configer;
+    }
+
+    public void setConfiger(HydraFilter configer) {
+        this.configer = configer;
     }
 }

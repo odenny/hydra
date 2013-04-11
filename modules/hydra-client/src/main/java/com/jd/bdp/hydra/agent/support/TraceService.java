@@ -1,12 +1,13 @@
 package com.jd.bdp.hydra.agent.support;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
+
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.agent.CollectorService;
 import com.jd.bdp.hydra.agent.RegisterService;
 import com.jd.bdp.hydra.dubbomonitor.HydraService;
 import com.jd.bdp.hydra.dubbomonitor.LeaderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,11 @@ public class TraceService implements RegisterService, CollectorService {
     @Override
     public boolean registerService(String name, List<String> services) {
         logger.info(name+" "+services);
-        this.registerInfo = leaderService.registerClient(name, services);
+        try {
+            this.registerInfo = leaderService.registerClient(name, services);
+        }   catch (Exception e){
+             logger.warn("client cannot regist into the hydra system,will not to trace ..");
+        }
         if (registerInfo != null) {
             isRegister = true;
         }

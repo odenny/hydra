@@ -32,6 +32,9 @@ public class TestLeaderService implements LeaderService{
     public Map<String, String> registerClient(String name, List<String> services) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("seed", "1000");
+        map.put("com.jd.bdp.service.inter.InterfaceA", "1");
+        map.put("com.jd.bdp.service.inter.InterfaceB", "2");
+        map.put("com.jd.bdp.service.inter.InterfaceC", "3");
         return map;
     }
 }

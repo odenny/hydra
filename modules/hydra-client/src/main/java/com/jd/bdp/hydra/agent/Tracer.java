@@ -53,6 +53,7 @@ public class Tracer {
         span.setParentId(pid);
         span.setSpanName(spanname);
         span.setSample(isSample);
+        span.setTraceId(traceId);
         return span;
     }
 

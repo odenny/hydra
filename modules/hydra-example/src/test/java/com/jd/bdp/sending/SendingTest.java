@@ -52,34 +52,34 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
         LeaderService leaderService = new TestLeaderService();
         HydraService hydraService = new TestHydraService();
         Tracer.setConfiguration(c, leaderService, hydraService);
-        trigger.startWork(4);
+        trigger.startWork(1);
         List<Span> results = ((TestHydraService) hydraService).getResults();
         System.out.println(results.size());
     }
 
-    //发起1000次PRC，最终SPAN个数符合业务系统跟踪所计算出来的理论值
-    @Test
-    public void testSendSpanSum10000() {
-        Configuration c = new Configuration();
-        c.setApplicationName("bigbully");
-        c.setQueueSize(500);
-        LeaderService leaderService = new TestLeaderService();
-        HydraService hydraService = new TestHydraService();
-        Tracer.setConfiguration(c, leaderService, hydraService);
-        trigger.startWork(1000);
-        List<Span> results = ((TestHydraService) hydraService).getResults();
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        for (Span span : results) {
-            if (map.containsKey(span.getSpanName())){
-                int n = map.get(span.getSpanName());
-                map.put(span.getSpanName(), ++n);
-            }else {
-                map.put(span.getSpanName(), 1);
-            }
-        }
-        assertEquals(map.get("functionA").intValue(), 2000);
-        assertEquals(map.get("functionB").intValue(), 1000);
-    }
+//    //发起1000次PRC，最终SPAN个数符合业务系统跟踪所计算出来的理论值
+//    @Test
+//    public void testSendSpanSum10000() {
+//        Configuration c = new Configuration();
+//        c.setApplicationName("bigbully");
+//        c.setQueueSize(500);
+//        LeaderService leaderService = new TestLeaderService();
+//        HydraService hydraService = new TestHydraService();
+//        Tracer.setConfiguration(c, leaderService, hydraService);
+//        trigger.startWork(1000);
+//        List<Span> results = ((TestHydraService) hydraService).getResults();
+//        Map<String, Integer> map = new HashMap<String, Integer>();
+//        for (Span span : results) {
+//            if (map.containsKey(span.getSpanName())){
+//                int n = map.get(span.getSpanName());
+//                map.put(span.getSpanName(), ++n);
+//            }else {
+//                map.put(span.getSpanName(), 1);
+//            }
+//        }
+//        assertEquals(map.get("functionA").intValue(), 2000);
+//        assertEquals(map.get("functionB").intValue(), 1000);
+//    }
 
     private Trigger trigger;
 

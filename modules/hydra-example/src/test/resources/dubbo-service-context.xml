@@ -29,11 +29,11 @@
     </dubbo:service>
 
     <!--服务引用-->
-    <dubbo:reference id="referenceA" interface="com.jd.bdp.service.inter.InterfaceA" check="false">
+    <dubbo:reference id="referenceA" interface="com.jd.bdp.service.inter.InterfaceA" check="false" retries="0" timeout="1000000">
     </dubbo:reference>
-    <dubbo:reference id="referenceB" interface="com.jd.bdp.service.inter.InterfaceB" check="false">
+    <dubbo:reference id="referenceB" interface="com.jd.bdp.service.inter.InterfaceB" check="false" retries="0" timeout="1000000">
     </dubbo:reference>
-    <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false">
+    <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false" retries="0" timeout="1000000">
     </dubbo:reference>
 
     <!--Root调用服务(直接拿到A服务)-->

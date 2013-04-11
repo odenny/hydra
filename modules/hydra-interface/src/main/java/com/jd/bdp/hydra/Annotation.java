@@ -61,11 +61,7 @@ public class Annotation implements Serializable {
     @Override
     public String toString() {
         return "Annotation{" +
-                "CLIENT_SEND='" + CLIENT_SEND + '\'' +
-                ", CLIENT_RECEIVE='" + CLIENT_RECEIVE + '\'' +
-                ", SERVER_SEND='" + SERVER_SEND + '\'' +
-                ", SERVER_RECEIVE='" + SERVER_RECEIVE + '\'' +
-                ", timestamp=" + timestamp +
+                "timestamp=" + timestamp +
                 ", value='" + value + '\'' +
                 ", host=" + host +
                 ", duration=" + duration +

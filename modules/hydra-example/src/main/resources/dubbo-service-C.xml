@@ -10,6 +10,6 @@
     </bean>
     <!--服务暴露-开机-->
     <dubbo:protocol name="dubbo" port="20992" />
-    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceC" ref="serviceC">
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceC" ref="serviceC" timeout="10000000">
     </dubbo:service>
 </beans>

@@ -38,7 +38,9 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"/dubbo-service-A.xml"};
+        String[] location = {"/dubbo-service-context.xml",
+                "/hydra-config.xml"
+        };
         return location;
     }
 
@@ -46,12 +48,6 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
     //发起4次RPC，验证所发送的Span数据是否符合Hydra业务规则
     @Test
     public void testSendSpanSum4() {
-        Configuration c = new Configuration();
-        c.setApplicationName("bigbully");
-        c.setQueueSize(500);
-        LeaderService leaderService = new TestLeaderService();
-        HydraService hydraService = new TestHydraService();
-        Tracer.setConfiguration(c, leaderService, hydraService);
         trigger.startWork(1);
         List<Span> results = ((TestHydraService) hydraService).getResults();
         System.out.println(results.size());
@@ -82,8 +78,13 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
 //    }
 
     private Trigger trigger;
+    private HydraService hydraService;
 
     public void setTrigger(Trigger trigger) {
         this.trigger = trigger;
+    }
+
+    public void setHydraService(HydraService hydraService) {
+        this.hydraService = hydraService;
     }
 }

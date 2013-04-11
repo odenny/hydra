@@ -16,7 +16,7 @@
     <dubbo:service interface="com.jd.bdp.service.inter.InterfaceA" ref="serviceA">
     </dubbo:service>
     <!--服务引用-->
-    <dubbo:reference id="referenceB" interface="com.jd.bdp.service.inter.InterfaceB" check="false">
+    <dubbo:reference id="referenceB" interface="com.jd.bdp.service.inter.InterfaceB" check="false" timeout="10000000">
     </dubbo:reference>
 
 </beans>

@@ -14,7 +14,7 @@
     <dubbo:protocol name="dubbo" port="20991" />
     <dubbo:service interface="com.jd.bdp.service.inter.InterfaceB" ref="serviceB">
     </dubbo:service>
-    <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false">
+    <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false" timeout="10000000">
     </dubbo:reference>
 
 </beans>

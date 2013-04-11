@@ -45,9 +45,11 @@ public class HydraFilter implements Filter {
         try {
 
             if (context.isConsumerSide()) {
-                span = tracer.getParentSpan();
-                if (span == null) {
+                Span span1 = tracer.getParentSpan();
+                if (span1 == null) {
                     span = tracer.newSpan(context.getMethodName());
+                }else{
+                    span = tracer.genSpan(span1.getTraceId(),span1.getId(),tracer.genSpanId(),context.getMethodName(),span1.isSample());
                 }
             } else if (context.isProviderSide()) {
                 Long traceId, parentId, spanId;

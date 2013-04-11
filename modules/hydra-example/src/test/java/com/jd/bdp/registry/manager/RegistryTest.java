@@ -14,7 +14,7 @@ public class RegistryTest extends AbstractDependencyInjectionSpringContextTests 
     @Override
     protected String[] getConfigLocations() {
         String[] location = {
-                "/dubbo-service-context.xml",//业务系统
+                "/dubbo-service-A.xml",//业务系统
                 "/hydra-config.xml",//hydra配置
                 "/registry/manager/registry.xml"//注册中心
         };

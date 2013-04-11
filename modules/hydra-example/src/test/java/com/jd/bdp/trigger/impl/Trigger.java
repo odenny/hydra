@@ -18,12 +18,24 @@ package com.jd.bdp.trigger.impl;
 
 import com.jd.bdp.service.inter.InterfaceA;
 import com.jd.bdp.service.inter.support.Service;
+import org.apache.log4j.lf5.viewer.categoryexplorer.TreeModelAdapter;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * User: xiangkui
  * Date: 13-4-9
  * Time: 下午3:25
  */
-public class Trigger {
+public class Trigger implements InitializingBean{
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        Thread.sleep(100);//服务预热
+    }
 
     public void startWork(int num){
         for(int i=0;i<num;i++){

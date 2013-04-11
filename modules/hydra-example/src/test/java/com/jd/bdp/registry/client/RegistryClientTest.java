@@ -15,7 +15,7 @@ public class RegistryClientTest extends AbstractDependencyInjectionSpringContext
     @Override
     protected String[] getConfigLocations() {
         String[] location = {
-                "/dubbo-service-context.xml",//业务系统
+                "/dubbo-service-A.xml",//业务系统
         };
         return location;
     }

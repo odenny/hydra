@@ -37,7 +37,7 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"/dubbo-service-context.xml"};
+        String[] location = {"/dubbo-service-A.xml"};
         return location;
     }
 

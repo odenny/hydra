@@ -6,11 +6,10 @@
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-    <!--服务引用-->
-    <dubbo:reference id="referenceA" interface="com.jd.bdp.service.inter.InterfaceA" check="false">
-    </dubbo:reference>
-    <!--Root调用服务(直接拿到A服务)-->
-    <bean id="trigger" class="com.jd.bdp.trigger.impl.Trigger">
-        <property name="rootService" ref="referenceA"></property>
+    <bean id="serviceC" class="com.jd.bdp.service.impl.ServiceC">
     </bean>
+    <!--服务暴露-开机-->
+    <dubbo:protocol name="dubbo" port="20992" />
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceC" ref="serviceC">
+    </dubbo:service>
 </beans>

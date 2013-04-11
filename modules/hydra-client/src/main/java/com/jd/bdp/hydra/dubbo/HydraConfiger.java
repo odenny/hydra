@@ -4,7 +4,10 @@ import com.alibaba.dubbo.common.utils.ConfigUtils;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ServiceConfig;
 import com.alibaba.dubbo.registry.Registry;
+import com.jd.bdp.hydra.agent.Tracer;
 import com.jd.bdp.hydra.agent.support.Configuration;
+import com.jd.bdp.hydra.dubbomonitor.HydraService;
+import com.jd.bdp.hydra.dubbomonitor.LeaderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -23,6 +26,8 @@ import java.util.Map;
 public class HydraConfiger implements ApplicationContextAware {
     private static final Logger logger = LoggerFactory.getLogger(HydraConfiger.class);
     Configuration config;
+    HydraService hydraService;
+    LeaderService leaderService;
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         Map<String, ApplicationConfig> appConfigMap = BeanFactoryUtils.
@@ -53,6 +58,7 @@ public class HydraConfiger implements ApplicationContextAware {
             logger.error("No Service configs to join up the hydra system,will user default config");
         }
         this.config.setServices(serviceNames);
+        Tracer.setConfiguration(config,leaderService,hydraService);
     }
     //getter and setter
     public void setConfig(Configuration config) {
@@ -61,5 +67,21 @@ public class HydraConfiger implements ApplicationContextAware {
 
     public Configuration getConfig() {
         return config;
+    }
+
+    public HydraService getHydraService() {
+        return hydraService;
+    }
+
+    public void setHydraService(HydraService hydraService) {
+        this.hydraService = hydraService;
+    }
+
+    public LeaderService getLeaderService() {
+        return leaderService;
+    }
+
+    public void setLeaderService(LeaderService leaderService) {
+        this.leaderService = leaderService;
     }
 }

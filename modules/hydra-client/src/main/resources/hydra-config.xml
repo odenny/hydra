@@ -26,6 +26,12 @@
          <property name="hydraService" ref="hydraService"></property>
         <property name="leaderService" ref="leaderService"></property>
     </bean>
+    <bean id="transfer" class="com.jd.bdp.hydra.agent.support.DefaultSyncTransfer">
+        <constructor-arg ref="config"/>
+        <property name="traceService" ref="traceService"/>
+    </bean>
+    <bean id="tracer" class="com.jd.bdp.hydra.agent.Tracer" factory-method="getTracer">
+    </bean>
 
 
 </beans>

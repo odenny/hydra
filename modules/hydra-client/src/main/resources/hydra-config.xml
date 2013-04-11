@@ -22,6 +22,10 @@
     <!--hydraService-->
     <dubbo:reference id="hydraService" interface="com.jd.bdp.hydra.dubbomonitor.HydraService" check="false">
     </dubbo:reference>
+    <bean id="traceService" class="com.jd.bdp.hydra.agent.support.TraceService" autowire="autodetect">
+         <property name="hydraService" ref="hydraService"></property>
+        <property name="leaderService" ref="leaderService"></property>
+    </bean>
 
 
 </beans>

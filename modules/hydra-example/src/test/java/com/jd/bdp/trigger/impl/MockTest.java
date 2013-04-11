@@ -96,15 +96,12 @@ public class MockTest extends AbstractDependencyInjectionSpringContextTests {
     public Trigger getTrigger() {
         return trigger;
     }
-
     public void setTrigger(Trigger trigger) {
         this.trigger = trigger;
     }
-
     public HydraConfiger getConfiger() {
         return configer;
     }
-
     public void setConfiger(HydraConfiger configer) {
         this.configer = configer;
     }

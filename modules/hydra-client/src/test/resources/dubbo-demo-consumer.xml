@@ -13,7 +13,4 @@
         <dubbo:parameter key="traceEnable" value="true"/>
         <dubbo:parameter key="traceRate" value="0.1"/>
     </dubbo:reference>
-    <!--hydra服务配置-->
-    <dubbo:reference id="hydraService" interface="com.jd.bdp.hydra.dubbomonitor.HydraService">
-    </dubbo:reference>
 </beans>

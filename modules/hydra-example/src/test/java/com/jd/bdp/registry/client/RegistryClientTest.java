@@ -1,13 +1,9 @@
 package com.jd.bdp.registry.client;
 
-import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.agent.Tracer;
-import com.jd.bdp.hydra.agent.support.Configuration;
 import com.jd.bdp.trigger.impl.Trigger;
 import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
-
-import java.util.List;
 
 /**
  * User: xiangkui
@@ -28,7 +24,7 @@ public class RegistryClientTest extends AbstractDependencyInjectionSpringContext
     //发起4次RPC，验证所发送的Span数据是否符合Hydra业务规则
     @Test
     public void testRegistry(){
-        TestLeaderService leaderService = new TestLeaderService();
+        LeaderClientService leaderService = new LeaderClientService();
         Tracer.setConfiguration(null, leaderService, null);
         trigger.startWork(4);
     }

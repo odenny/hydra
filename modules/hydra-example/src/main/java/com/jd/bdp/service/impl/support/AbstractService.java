@@ -11,8 +11,6 @@ public abstract class AbstractService implements Service {
     private String name;
     private String appName;
     protected Service downService;//下游服务
-
-
     /**
      * 开启服务
      */

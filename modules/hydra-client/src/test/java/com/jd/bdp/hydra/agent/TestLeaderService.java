@@ -19,6 +19,6 @@ public class TestLeaderService implements LeaderService{
         hash.put("testMethodA","0");
         hash.put("testMethodB","1");
         hash.put("testMethodC","2");
-        return hash;
+        return null;
     }
 }

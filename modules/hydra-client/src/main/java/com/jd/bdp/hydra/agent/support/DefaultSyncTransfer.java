@@ -66,7 +66,9 @@ public class DefaultSyncTransfer implements SyncTransfer {
                             generateTraceId = new GenerateTraceId(traceService.getSeed());
                             isReady = true;
                         }else{
-                            this.wait(60000);
+                            synchronized (this) {
+                                this.wait(100);
+                            }
                         }
                     } else {
                         while (true) {

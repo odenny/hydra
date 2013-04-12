@@ -42,4 +42,5 @@ public class ServiceServiceImpl implements ServiceService {
     public void setAppMapper(AppMapper appMapper) {
         this.appMapper = appMapper;
     }
+
 }

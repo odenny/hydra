@@ -19,6 +19,11 @@
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-client</artifactId>
         </dependency>
+        <!--测试hydra-manager-->
+        <dependency>
+            <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-manager</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>

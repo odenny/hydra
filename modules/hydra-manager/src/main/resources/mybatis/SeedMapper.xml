@@ -38,6 +38,8 @@
     <!--版本2的种子逻辑-->
     <!--获取数据库中的唯一种子数-->
     <select id="findTheSeed" resultType="SeedEntity">
-           SELECT *  FROM TB_DATA_SEED
+           SELECT * FROM TB_DATA_SEED WHERE ID=(
+                   SELECT MAX(ID) FROM TB_DATA_SEED
+           )
     </select>
 </mapper>

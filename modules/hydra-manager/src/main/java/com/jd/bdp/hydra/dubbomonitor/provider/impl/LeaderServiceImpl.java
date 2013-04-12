@@ -35,11 +35,11 @@ public class LeaderServiceImpl implements LeaderService {
         this.serviceService = serviceService;
     }
 
-    public void setAppService(AppService appService) {
-        this.appService = appService;
-    }
-
     public void setSeedService(SeedService seedService) {
         this.seedService = seedService;
+    }
+
+    public void setAppService(AppService appService) {
+        this.appService = appService;
     }
 }

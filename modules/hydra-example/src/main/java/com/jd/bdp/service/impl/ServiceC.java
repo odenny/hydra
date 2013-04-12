@@ -1,7 +1,6 @@
 package com.jd.bdp.service.impl;
 
 
-import com.jd.bdp.service.impl.support.AbstractService;
 import com.jd.bdp.service.inter.InterfaceC;
 
 /**

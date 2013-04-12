@@ -16,6 +16,7 @@
 
 package com.jd.bdp.sending;
 
+import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.agent.Tracer;
 import com.jd.bdp.hydra.agent.support.Configuration;
@@ -50,37 +51,122 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
     //发起4次RPC，验证所发送的Span数据是否符合Hydra业务规则
     @Test
     public void testSendSpanSum4() throws InterruptedException {
+        int sum = 4;
         collectSpanService.clear();
-        trigger.startWork(1);
-        Thread.sleep(1000);
+        trigger.startWork(sum);
+        Thread.sleep(80 * sum);
         List<Span> list = collectSpanService.getAllSpan();
-        System.out.println(list.size());
         collectSpanService.clear();
+
+        Map<String, List<Span>> map = new HashMap<String, List<Span>>();
+        for(Span span : list){
+            assertNotNull(span.getTraceId());
+            assertNotNull(span.getId());
+            String spanName= span.getSpanName();
+            if (map.containsKey(spanName)){
+                List<Span> l = map.get(spanName);
+                l.add(span);
+                map.put(spanName, l);
+            }else {
+                List<Span> l = new ArrayList<Span>();
+                l.add(span);
+                map.put(spanName, l);
+            }
+        }
+        assertMap(map, sum);
     }
 
-//    //发起1000次PRC，最终SPAN个数符合业务系统跟踪所计算出来的理论值
-//    @Test
-//    public void testSendSpanSum10000() {
-//        Configuration c = new Configuration();
-//        c.setApplicationName("bigbully");
-//        c.setQueueSize(500);
-//        LeaderService leaderService = new TestLeaderService();
-//        HydraService hydraService = new TestHydraService();
-//        Tracer.setConfiguration(c, leaderService, hydraService);
-//        trigger.startWork(1000);
-//        List<Span> results = ((TestHydraService) hydraService).getResults();
-//        Map<String, Integer> map = new HashMap<String, Integer>();
-//        for (Span span : results) {
-//            if (map.containsKey(span.getSpanName())){
-//                int n = map.get(span.getSpanName());
-//                map.put(span.getSpanName(), ++n);
-//            }else {
-//                map.put(span.getSpanName(), 1);
-//            }
-//        }
-//        assertEquals(map.get("functionA").intValue(), 2000);
-//        assertEquals(map.get("functionB").intValue(), 1000);
-//    }
+    private void assertMap(Map<String, List<Span>> map, int sum) {
+        Map<String, Integer> annMapA = new HashMap<String, Integer>();
+        Map<String, Integer> annMapB = new HashMap<String, Integer>();
+        Map<String, Integer> annMapC = new HashMap<String, Integer>();
+        for(Map.Entry<String, List<Span>> entry : map.entrySet()){
+            String key = entry.getKey();
+            if (key.equals("functionA")){
+                assertEquals(sum*2, entry.getValue().size());
+                List<Span> listA = entry.getValue();
+                for(Span spanA : listA){
+                    assertNull(spanA.getParentId());
+                    for (int i = 0; i < spanA.getAnnotations().size(); i++) {
+                        Annotation ann = spanA.getAnnotations().get(i);
+                        if (annMapA.containsKey(ann.getValue())){
+                            annMapA.put(ann.getValue(), annMapA.get(ann.getValue()) + 1);
+                        }else {
+                            annMapA.put(ann.getValue(), 1);
+                        }
+                    }
+                }
+            }else if (key.equals("functionB")){
+                assertEquals(sum*2, entry.getValue().size());
+                List<Span> listB = entry.getValue();
+                for(Span spanB : listB){
+                    assertNotNull(spanB.getParentId());
+                    for (int i = 0; i < spanB.getAnnotations().size(); i++) {
+                        Annotation ann = spanB.getAnnotations().get(i);
+                        if (annMapB.containsKey(ann.getValue())){
+                            annMapB.put(ann.getValue(), annMapB.get(ann.getValue()) + 1);
+                        }else {
+                            annMapB.put(ann.getValue(), 1);
+                        }
+                    }
+                }
+            }else if (key.equals("functionC")){
+                assertEquals(sum, entry.getValue().size());
+                List<Span> listC = entry.getValue();
+                for(Span spanC : listC){
+                    assertNotNull(spanC.getParentId());
+                    for (int i = 0; i < spanC.getAnnotations().size(); i++) {
+                        Annotation ann = spanC.getAnnotations().get(i);
+                        if (annMapC.containsKey(ann.getValue())){
+                            annMapC.put(ann.getValue(), annMapC.get(ann.getValue()) + 1);
+                        }else {
+                            annMapC.put(ann.getValue(), 1);
+                        }
+                    }
+                }
+            }
+        }
+        assertEquals(sum, annMapA.get("cr").intValue());
+        assertEquals(sum, annMapA.get("cs").intValue());
+        assertEquals(sum, annMapA.get("sr").intValue());
+        assertEquals(sum, annMapA.get("ss").intValue());
+        assertEquals(sum, annMapB.get("cr").intValue());
+        assertEquals(sum, annMapB.get("cs").intValue());
+        assertEquals(sum, annMapB.get("sr").intValue());
+        assertEquals(sum, annMapB.get("ss").intValue());
+        assertEquals(sum/2, annMapC.get("cr").intValue());
+        assertEquals(sum/2, annMapC.get("cs").intValue());
+        assertEquals(sum/2, annMapC.get("sr").intValue());
+        assertEquals(sum/2, annMapC.get("ss").intValue());
+    }
+
+//    发起1000次PRC，最终SPAN个数符合业务系统跟踪所计算出来的理论值
+    @Test
+    public void testSendSpanSum1000() throws InterruptedException {
+        int sum = 1000;
+        collectSpanService.clear();
+        trigger.startWork(sum);
+        Thread.sleep(80 * sum);
+        List<Span> list = collectSpanService.getAllSpan();
+        collectSpanService.clear();
+
+        Map<String, List<Span>> map = new HashMap<String, List<Span>>();
+        for(Span span : list){
+            assertNotNull(span.getTraceId());
+            assertNotNull(span.getId());
+            String spanName= span.getSpanName();
+            if (map.containsKey(spanName)){
+                List<Span> l = map.get(spanName);
+                l.add(span);
+                map.put(spanName, l);
+            }else {
+                List<Span> l = new ArrayList<Span>();
+                l.add(span);
+                map.put(spanName, l);
+            }
+        }
+        assertMap(map, sum);
+    }
 
     private Trigger trigger;
     private TestCollectSpanService collectSpanService;

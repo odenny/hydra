@@ -49,7 +49,6 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
 
 
     //发起4次RPC，验证所发送的Span数据是否符合Hydra业务规则
-    @Test
     public void testSendSpanSum4() throws InterruptedException {
         int sum = 4;
         collectSpanService.clear();
@@ -141,7 +140,6 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
     }
 
 //    发起1000次PRC，最终SPAN个数符合业务系统跟踪所计算出来的理论值
-    @Test
     public void testSendSpanSum1000() throws InterruptedException {
         int sum = 1000;
         collectSpanService.clear();

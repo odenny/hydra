@@ -25,6 +25,7 @@ import com.jd.bdp.trigger.impl.Trigger;
 import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,8 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
     @Override
     protected String[] getConfigLocations() {
         String[] location = {"/dubbo-service-context.xml",
-                "/hydra-config.xml"
+                "/hydra-config.xml",
+                "/sending/test-sending.xml"
         };
         return location;
     }
@@ -47,10 +49,13 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
 
     //发起4次RPC，验证所发送的Span数据是否符合Hydra业务规则
     @Test
-    public void testSendSpanSum4() {
+    public void testSendSpanSum4() throws InterruptedException {
+        collectSpanService.clear();
         trigger.startWork(1);
-        List<Span> results = ((TestHydraService) hydraService).getResults();
-        System.out.println(results.size());
+        Thread.sleep(1000);
+        List<Span> list = collectSpanService.getAllSpan();
+        System.out.println(list.size());
+        collectSpanService.clear();
     }
 
 //    //发起1000次PRC，最终SPAN个数符合业务系统跟踪所计算出来的理论值
@@ -78,13 +83,13 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
 //    }
 
     private Trigger trigger;
-    private HydraService hydraService;
+    private TestCollectSpanService collectSpanService;
 
     public void setTrigger(Trigger trigger) {
         this.trigger = trigger;
     }
 
-    public void setHydraService(HydraService hydraService) {
-        this.hydraService = hydraService;
+    public void setCollectSpanService(TestCollectSpanService collectSpanService) {
+        this.collectSpanService = collectSpanService;
     }
 }

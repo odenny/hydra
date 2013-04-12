@@ -13,7 +13,7 @@ import com.jd.bdp.service.inter.support.Service;
  */
 public class ServiceB implements InterfaceB {
 
-    static int mySwitch = 1;
+//    static int mySwitch = 1;
 
     /*服务调用*/
     @Override
@@ -22,11 +22,11 @@ public class ServiceB implements InterfaceB {
         String returnVoice = myVoice.toString();
         if (downService != null) {
             Object result = null;
-            if (mySwitch > 0) {
+//            if (mySwitch > 0) {
                 result = downService.functionC(objects);
                 returnVoice = returnVoice + "-><-" + result.toString();
-            }
-            mySwitch = -mySwitch;
+//            }
+//            mySwitch = -mySwitch;
         }
         returnVoice = "(" + returnVoice + ")";
         return returnVoice;

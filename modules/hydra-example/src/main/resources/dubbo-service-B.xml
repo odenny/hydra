@@ -12,9 +12,9 @@
         <property name="downService" ref="referenceC"></property>
     </bean>
     <dubbo:protocol name="dubbo" port="20991" />
-    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceB" ref="serviceB">
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceB" ref="serviceB" timeout="10000000">
     </dubbo:service>
-    <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false" timeout="10000000">
+    <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false">
     </dubbo:reference>
 
 </beans>

@@ -41,10 +41,10 @@ public class HydraFilter implements Filter {
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         long start = System.currentTimeMillis();
         RpcContext context = RpcContext.getContext();
+        boolean isConsumerSide = context.isConsumerSide();
         Span span = null;
         Endpoint endpoint = null;
         try {
-
             if (context.isConsumerSide()) {
                 Span span1 = tracer.getParentSpan();
                 if (span1 == null) {
@@ -79,7 +79,7 @@ public class HydraFilter implements Filter {
         } finally {
             if (span != null) {
                 long end = System.currentTimeMillis();
-                invokerAfter(invocation, endpoint, span, end);
+                invokerAfter(invocation, endpoint, span, end,isConsumerSide);
             }
         }
     }
@@ -93,11 +93,10 @@ public class HydraFilter implements Filter {
         }
     }
 
-    private void invokerAfter(Invocation invocation, Endpoint endpoint, Span span, long end) {
-        RpcContext context = RpcContext.getContext();
-        if (context.isConsumerSide() && span.isSample()) {
+    private void invokerAfter(Invocation invocation, Endpoint endpoint, Span span, long end,boolean isConsumerSide) {
+        if (isConsumerSide && span.isSample()) {
             tracer.clientReceiveRecord(span, endpoint, end);
-        } else if (context.isProviderSide()) {
+        } else {
             if (span.isSample()) {
                 tracer.serverSendRecord(span, endpoint, end);
             }

@@ -17,26 +17,36 @@
 package com.jd.bdp.sending;
 
 import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.dubbomonitor.HydraService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * User: biandi
- * Date: 13-4-10
- * Time: 下午4:24
+ * Date: 13-4-12
+ * Time: 上午10:04
  */
-public class TestHydraService implements HydraService {
+public class TestCollectSpanServiceImpl implements TestCollectSpanService{
+
     @Override
-    public synchronized boolean push(List<Span> span) {
-        collectSpanService.setSpans(span);
-        return true;
+    public synchronized void setSpans(List<Span> list) {
+        System.out.println("++++++++++++++++");
+        System.out.println(list.size());
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+        result.addAll(list);
     }
 
-    private TestCollectSpanService collectSpanService;
-
-    public void setCollectSpanService(TestCollectSpanService collectSpanService) {
-        this.collectSpanService = collectSpanService;
+    @Override
+    public List<Span> getAllSpan() {
+        return result;
     }
+
+    @Override
+    public void clear() {
+        result.clear();
+    }
+
+    private List<Span> result = new ArrayList<Span>();
 }

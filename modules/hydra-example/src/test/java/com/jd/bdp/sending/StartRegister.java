@@ -23,10 +23,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Date: 13-4-11
  * Time: 下午5:32
  */
-public class StartMockService {
+public class StartRegister {
 
     public static void main(String[] args) throws Exception {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"/sending/registry.xml"});
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"/sending/register.xml"});
         context.start();
         Thread.sleep(999999999);
     }

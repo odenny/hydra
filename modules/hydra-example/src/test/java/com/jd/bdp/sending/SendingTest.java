@@ -139,7 +139,8 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
         assertEquals(sum/2, annMapC.get("ss").intValue());
     }
 
-//    发起1000次PRC，最终SPAN个数符合业务系统跟踪所计算出来的理论值
+    //发起1000次PRC，最终SPAN个数符合业务系统跟踪所计算出来的理论值
+    //进行这个测试时需要把动态采样率关掉，保证每一条都采样
     public void testSendSpanSum1000() throws InterruptedException {
         int sum = 1000;
         collectSpanService.clear();
@@ -164,6 +165,13 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
             }
         }
         assertMap(map, sum);
+    }
+
+    //发起10000次PRC,不做数据校验，只模拟当leaderService和hydraService阻塞或停止或重启的情况是否符合预期
+    public void testSendSpanSum10000() throws InterruptedException {
+        int sum = 10000;
+        collectSpanService.clear();
+        trigger.startWorkWithSleep(sum);
     }
 
     private Trigger trigger;

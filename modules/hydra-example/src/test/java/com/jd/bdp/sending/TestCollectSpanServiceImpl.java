@@ -30,11 +30,11 @@ public class TestCollectSpanServiceImpl implements TestCollectSpanService{
 
     @Override
     public synchronized void setSpans(List<Span> list) {
-        System.out.println("++++++++++++++++");
-        System.out.println(list.size());
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
         result.addAll(list);
     }
 

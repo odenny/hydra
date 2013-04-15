@@ -28,16 +28,4 @@
     <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leadService" filter="-hydra" timeout="10000000">
     </dubbo:service>
     <bean id="leadService" class="com.jd.bdp.sending.TestLeaderService"></bean>
-
-    <!-- HydraService发作诉讼 -->
-    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.HydraService" ref="hydraService" filter="-hydra" timeout="10000000">
-    </dubbo:service>
-    <bean id="hydraService" class="com.jd.bdp.sending.TestHydraService">
-        <property name="collectSpanService" ref="collectSpanService"></property>
-    </bean>
-
-    <!-- 用于测试 -->
-    <bean id="collectSpanService" class="com.jd.bdp.sending.TestCollectSpanServiceImpl" />
-    <dubbo:service interface="com.jd.bdp.sending.TestCollectSpanService" ref="collectSpanService" filter="-hydra" timeout="10000000">
-    </dubbo:service>
 </beans>

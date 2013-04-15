@@ -33,7 +33,12 @@ public class TraceService implements RegisterService, CollectorService {
 
     @Override
     public void sendSpan(List<Span> spanList) {
-        hydraService.push(spanList);
+        //fixme try-catch性能影响？
+        try {
+            hydraService.push(spanList);
+        }   catch (Exception e){
+            logger.warn("跟踪数据推送失败~");
+        }
     }
 
     @Override

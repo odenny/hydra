@@ -1,16 +1,17 @@
-package com.jd.bdp.startUp;
+package com.jd.bdp.registry.manager.simulation;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * User: xiangkui
- * Date: 13-4-11
- * Time: 下午2:57
+ * Date: 13-4-12
+ * Time: 上午10:32
  */
-public class StartB {
+public class StartRegistry {
+
     public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
-                "/dubbo-service-B.xml",
+                "/registry/manager/registry.xml"
         });
         context.start();
         Thread.sleep(999999999);

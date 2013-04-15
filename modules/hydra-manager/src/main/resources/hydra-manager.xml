@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <dubbo:application name="hydra-manager"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.227.49:2181"/>
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20889" />
+    <bean id="leaderService" class="com.jd.bdp.hydra.dubbomonitor.provider.impl.LeaderServiceImpl">
+        <property name="appService" ref="appService"/>
+        <property name="seedService" ref="seedService"/>
+        <property name="serviceService" ref="serviceService"/>
+    </bean>
+    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService"  ref="leaderService" filter="-hydra">
+    </dubbo:service>
+
+    <!--数据库层-->
+    <context:property-placeholder location="classpath:mybatis/mysql.properties"/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+    </bean>
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="appMapper" class="com.jd.bdp.hydra.dubbomonitor.persistent.dao.impl.AppMapperImpl">
+        <property name="sqlSession" ref="sqlSessionTemplate"/>
+    </bean>
+    <bean id="serviceMapper" class="com.jd.bdp.hydra.dubbomonitor.persistent.dao.impl.ServiceMapperImpl">
+        <property name="sqlSession" ref="sqlSessionTemplate"/>
+    </bean>
+    <bean id="seedParaMapper" class="com.jd.bdp.hydra.dubbomonitor.persistent.dao.impl.SeedMapperImpl">
+        <property name="sqlSession" ref="sqlSessionTemplate"/>
+    </bean>
+
+    <bean id="appService" class="com.jd.bdp.hydra.dubbomonitor.persistent.service.impl.AppServiceImpl">
+        <property name="appMapper" ref="appMapper"/>
+    </bean>
+    <bean id="serviceService" class="com.jd.bdp.hydra.dubbomonitor.persistent.service.impl.ServiceServiceImpl">
+        <property name="serviceMapper" ref="serviceMapper"/>
+        <property name="appMapper" ref="appMapper"/>
+    </bean>
+    <bean id="seedService" class="com.jd.bdp.hydra.dubbomonitor.persistent.service.impl.SeedServiceImpl">
+        <property name="seedMapper" ref="seedParaMapper"/>
+    </bean>
+</beans>

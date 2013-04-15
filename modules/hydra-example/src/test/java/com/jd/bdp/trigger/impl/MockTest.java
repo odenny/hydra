@@ -45,8 +45,7 @@ public class MockTest extends AbstractDependencyInjectionSpringContextTests {
         return location;
     }
 
-    @Test
-    public void testConfiger() throws Exception {
+    public void TtestConfiger() throws Exception {
         //1：获取 Hydra感知的配置信息
         Configuration envData=configer.getConfig();
         String appEnvName=envData.getApplicationName();

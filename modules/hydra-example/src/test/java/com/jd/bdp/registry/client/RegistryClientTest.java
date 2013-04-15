@@ -1,6 +1,7 @@
 package com.jd.bdp.registry.client;
 
 import com.jd.bdp.hydra.agent.Tracer;
+import com.jd.bdp.registry.client.support.LeaderClientService;
 import com.jd.bdp.trigger.impl.Trigger;
 import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
@@ -15,7 +16,9 @@ public class RegistryClientTest extends AbstractDependencyInjectionSpringContext
     @Override
     protected String[] getConfigLocations() {
         String[] location = {
-                "/dubbo-service-A.xml",//业务系统
+                "/dubbo-service-context.xml",//业务系统
+                "/hydra-config.xml",
+                "/registry/client/registry.xml" //客户端注册对象
         };
         return location;
     }
@@ -31,7 +34,12 @@ public class RegistryClientTest extends AbstractDependencyInjectionSpringContext
 
     private Trigger trigger;
 
+    //getter and setter
     public void setTrigger(Trigger trigger) {
         this.trigger = trigger;
+    }
+
+    public Trigger getTrigger() {
+        return trigger;
     }
 }

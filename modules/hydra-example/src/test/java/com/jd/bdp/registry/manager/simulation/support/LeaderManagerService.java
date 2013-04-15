@@ -14,24 +14,27 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.registry.client;
+package com.jd.bdp.registry.manager.simulation.support;
 
 import com.jd.bdp.hydra.dubbomonitor.LeaderService;
 
-import javax.validation.constraints.AssertTrue;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * User: biandi
- * Date: 13-4-10
- * Time: 下午4:12
+ * User: 项奎
+ * Date: 13-4-12
+ * Time: 下午1:10
  */
-public class LeaderClientService implements LeaderService{
+
+/**
+ * 服务需要暴露，接收来自不同应用点的注册请求
+ */
+public class LeaderManagerService implements LeaderService{
     @Override
     public Map<String, String> registerClient(String name, List<String> services) {
-        System.out.println("开始注册~") ;
+        System.out.println("注册中心收到注册请求");
         Map<String, String> map = new HashMap<String, String>();
         map.put("seed", "1000");
         return map;

@@ -25,6 +25,10 @@ import com.jd.bdp.hydra.agent.Tracer;
 import com.jd.bdp.hydra.agent.support.TracerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -33,7 +37,7 @@ import org.slf4j.LoggerFactory;
 public class HydraFilter implements Filter {
 
     private HydraFilter configer;
-    private static Logger logger= LoggerFactory.getLogger(HydraFilter.class);
+    private static Logger logger = LoggerFactory.getLogger(HydraFilter.class);
 
     private Tracer tracer = Tracer.getTracer();
 
@@ -49,8 +53,8 @@ public class HydraFilter implements Filter {
                 Span span1 = tracer.getParentSpan();
                 if (span1 == null) {
                     span = tracer.newSpan(context.getMethodName());
-                }else{
-                    span = tracer.genSpan(span1.getTraceId(),span1.getId(),tracer.genSpanId(),context.getMethodName(),span1.isSample());
+                } else {
+                    span = tracer.genSpan(span1.getTraceId(), span1.getId(), tracer.genSpanId(), context.getMethodName(), span1.isSample());
                 }
             } else if (context.isProviderSide()) {
                 Long traceId, parentId, spanId;
@@ -65,8 +69,8 @@ public class HydraFilter implements Filter {
             endpoint.setIp(context.getLocalAddressString());
             endpoint.setPort(context.getLocalPort());
             invokerBefore(invocation, span, endpoint, start);
-            RpcInvocation invocation1 = (RpcInvocation)invocation;
-            setAttachment(span,invocation1);
+            RpcInvocation invocation1 = (RpcInvocation) invocation;
+            setAttachment(span, invocation1);
             Result result = invoker.invoke(invocation);
             return result;
         } catch (RpcException e) {
@@ -79,21 +83,21 @@ public class HydraFilter implements Filter {
         } finally {
             if (span != null) {
                 long end = System.currentTimeMillis();
-                invokerAfter(invocation, endpoint, span, end,isConsumerSide);
+                invokerAfter(invocation, endpoint, span, end, isConsumerSide);
             }
         }
     }
 
 
-    private void setAttachment(Span span,RpcInvocation invocation){
-        if(span.isSample()){
-            invocation.setAttachment(TracerUtils.PID,span.getParentId() != null ? String.valueOf(span.getParentId()) : null);
-            invocation.setAttachment(TracerUtils.SID,span.getId() != null ? String.valueOf(span.getId()) : null);
-            invocation.setAttachment(TracerUtils.TID,span.getTraceId() != null ? String.valueOf(span.getTraceId()) : null);
+    private void setAttachment(Span span, RpcInvocation invocation) {
+        if (span.isSample()) {
+            invocation.setAttachment(TracerUtils.PID, span.getParentId() != null ? String.valueOf(span.getParentId()) : null);
+            invocation.setAttachment(TracerUtils.SID, span.getId() != null ? String.valueOf(span.getId()) : null);
+            invocation.setAttachment(TracerUtils.TID, span.getTraceId() != null ? String.valueOf(span.getTraceId()) : null);
         }
     }
 
-    private void invokerAfter(Invocation invocation, Endpoint endpoint, Span span, long end,boolean isConsumerSide) {
+    private void invokerAfter(Invocation invocation, Endpoint endpoint, Span span, long end, boolean isConsumerSide) {
         if (isConsumerSide && span.isSample()) {
             tracer.clientReceiveRecord(span, endpoint, end);
         } else {
@@ -124,5 +128,13 @@ public class HydraFilter implements Filter {
 
     public void setConfiger(HydraFilter configer) {
         this.configer = configer;
+    }
+
+    /*加载Filter的时候加载hydra配置上下文*/
+    static{
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
+                "/hydra-config.xml"
+        });
+        context.start();
     }
 }

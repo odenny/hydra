@@ -31,6 +31,8 @@ public class DefaultSyncTransfer implements SyncTransfer {
 
     private Long flushSize;
 
+    private Long waitTime;
+
     private Configuration configuration;
 
     public void setTraceService(TraceService traceService) {
@@ -40,9 +42,10 @@ public class DefaultSyncTransfer implements SyncTransfer {
     public DefaultSyncTransfer(Configuration c) {
         this.configuration = c;
         this.flushSize = c.getFlushSize() == null ? 1024L : c.getFlushSize();
+        this.waitTime = c.getDelayTime() == null ? 60000L : c.getDelayTime();
         this.queue = new ArrayBlockingQueue<Span>(c.getQueueSize());
         this.spansCache = new ArrayList<Span>();
-        this.executors = Executors.newSingleThreadExecutor();
+        this.executors = Executors.newFixedThreadPool(1);
     }
 
     @Override
@@ -57,7 +60,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
         }
 
         @Override
-        public void run() {
+        public void run(){
             for (; ; ) {
                 try {
                     if (!isReady()) {
@@ -67,7 +70,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
                             isReady = true;
                         }else{
                             synchronized (this) {
-                                this.wait(100);
+                                this.wait(waitTime);
                             }
                         }
                     } else {

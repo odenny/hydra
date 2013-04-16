@@ -31,18 +31,16 @@ public class TestHydraService implements HydraService {
     @Override
     public synchronized boolean push(List<Span> span) {
         try {
-
-            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++");
-//            collectSpanService.setSpans(span);
+            collectSpanService.setSpans(span);
         }catch (Exception e){
             e.printStackTrace();
         }
         return true;
     }
 
-//    private TestCollectSpanService collectSpanService;
-//
-//    public void setCollectSpanService(TestCollectSpanService collectSpanService) {
-//        this.collectSpanService = collectSpanService;
-//    }
+    private TestCollectSpanService collectSpanService;
+
+    public void setCollectSpanService(TestCollectSpanService collectSpanService) {
+        this.collectSpanService = collectSpanService;
+    }
 }

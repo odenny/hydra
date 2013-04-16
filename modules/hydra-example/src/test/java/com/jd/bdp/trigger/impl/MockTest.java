@@ -18,8 +18,6 @@ package com.jd.bdp.trigger.impl;
 
 import com.jd.bdp.hydra.agent.support.Configuration;
 import com.jd.bdp.hydra.dubbo.HydraConfiger;
-import com.jd.bdp.hydra.dubbomonitor.HydraService;
-import com.jd.bdp.hydra.dubbomonitor.LeaderService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;

@@ -25,7 +25,7 @@
 
     <dubbo:protocol name="dubbo" port="20995" />
     <!--LeaderService-开机-->
-    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leadService" filter="-hydra" timeout="10000000">
+    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leadService" filter="-hydra" timeout="3000">
     </dubbo:service>
     <bean id="leadService" class="com.jd.bdp.sending.TestLeaderService"></bean>
 </beans>

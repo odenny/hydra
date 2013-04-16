@@ -24,7 +24,7 @@
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 用于测试 -->
-    <!--hydraService-->
-    <dubbo:reference id="collectSpanService" interface="com.jd.bdp.sending.TestCollectSpanService" check="false" filter="-hydra">
-    </dubbo:reference>
+    <!--&lt;!&ndash;hydraService&ndash;&gt;-->
+    <!--<dubbo:reference id="collectSpanService" interface="com.jd.bdp.sending.TestCollectSpanService" check="false" filter="-hydra">-->
+    <!--</dubbo:reference>-->
 </beans>

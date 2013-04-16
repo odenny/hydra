@@ -42,7 +42,6 @@ public class MockTest extends AbstractDependencyInjectionSpringContextTests {
     protected String[] getConfigLocations() {
         String[] location = {
                 "/dubbo-service-context.xml",//业务spring上下文
-                "/hydra-config.xml" //hydra标配spring上下文
         };
         return location;
     }

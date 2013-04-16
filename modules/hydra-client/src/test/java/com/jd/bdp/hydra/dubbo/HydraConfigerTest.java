@@ -1,6 +1,7 @@
 package com.jd.bdp.hydra.dubbo;
 
 import junit.framework.Assert;
+import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
 /**
@@ -24,9 +25,9 @@ public class HydraConfigerTest extends AbstractDependencyInjectionSpringContextT
         };
         return location;
     }
-
+     @Test
     public void testSetConfig() throws Exception {
-        Assert.assertEquals("application",hydraConfiger.getConfig().getApplicationName());
+        Assert.assertEquals("hydra-example",hydraConfiger.getConfig().getApplicationName());
         for(String name:hydraConfiger.getConfig().getServices()){
             Assert.assertEquals("demo.DemoService",name);
         }

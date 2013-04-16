@@ -23,7 +23,7 @@ public class SeedMapperTest extends AbstractDependencyInjectionSpringContextTest
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"classpath:mybatis/applicationContext.xml"};
+        String[] location = {"classpath:/hydra-manager.xml"};
         return location;
     }
 

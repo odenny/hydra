@@ -20,7 +20,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
 
     private ArrayBlockingQueue<Span> queue;
 
-    private ExecutorService executors = null;
+    private ScheduledExecutorService executors = null;
     private List<Span> spansCache;
 
     private volatile boolean isReady = false;
@@ -31,6 +31,10 @@ public class DefaultSyncTransfer implements SyncTransfer {
 
     private Long flushSize;
 
+    private Long waitTime;
+
+    private TransferTask task;
+
     private Configuration configuration;
 
     public void setTraceService(TraceService traceService) {
@@ -40,9 +44,11 @@ public class DefaultSyncTransfer implements SyncTransfer {
     public DefaultSyncTransfer(Configuration c) {
         this.configuration = c;
         this.flushSize = c.getFlushSize() == null ? 1024L : c.getFlushSize();
+        this.waitTime = c.getDelayTime() == null ? 60000L : c.getDelayTime();
         this.queue = new ArrayBlockingQueue<Span>(c.getQueueSize());
         this.spansCache = new ArrayList<Span>();
-        this.executors = Executors.newSingleThreadExecutor();
+        this.executors = Executors.newSingleThreadScheduledExecutor();
+        this.task = new TransferTask();
     }
 
     @Override
@@ -57,7 +63,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
         }
 
         @Override
-        public void run() {
+        public void run(){
             for (; ; ) {
                 try {
                     if (!isReady()) {
@@ -67,11 +73,11 @@ public class DefaultSyncTransfer implements SyncTransfer {
                             isReady = true;
                         }else{
                             synchronized (this) {
-                                this.wait(100);
+                                this.wait(waitTime);
                             }
                         }
                     } else {
-                        while (true) {
+                        while (!task.isInterrupted()) {
                             Span first = queue.take();
                             spansCache.add(first);
                             queue.drainTo(spansCache);
@@ -79,9 +85,9 @@ public class DefaultSyncTransfer implements SyncTransfer {
                             spansCache.clear();
                         }
                     }
-                } catch (InterruptedException e) {
+                }catch (Exception e){
                     logger.info(e.getMessage());
-                    Thread.currentThread().interrupt();
+                    //ig
                 }
             }
         }
@@ -105,7 +111,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
     public void start() throws Exception {
         if (traceService != null) {
             logger.info("traceService " + isReady);
-            executors.execute(new TransferTask());
+            task.start();
             Runtime.getRuntime().addShutdownHook(new Thread() {
                 public void run() {
                     cancel();
@@ -117,7 +123,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
     }
 
     public void cancel() {
-        executors.shutdown();
+        task.interrupt();
     }
 
     @Override

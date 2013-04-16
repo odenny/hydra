@@ -39,6 +39,7 @@ public class ServiceMapperTest extends AbstractDependencyInjectionSpringContextT
 
             //define option-entity and query-entiry
             ServicePara servicePara=new ServicePara();
+            servicePara.setId(1);
             servicePara.setName("com.jd.car");
             servicePara.setAppId(app.getId());
             ServicePara queryPara=null;
@@ -73,46 +74,45 @@ public class ServiceMapperTest extends AbstractDependencyInjectionSpringContextT
     //测试根据name和appId查找
     @Test
     public void testFindByName(){
-        AppPara app = new AppPara();
-        app.setName("myApp");
-        appMapper.addApp(app);
-        Integer appId = app.getId();
+        try {
+            AppPara app = new AppPara();
+            app.setName("myApp");
+            appMapper.addApp(app);
+            Integer appId = app.getId();
 
-        ServicePara servicePara1 = new ServicePara();
-        servicePara1.setName("myService1");
-        servicePara1.setAppId(app.getId());
+            ServicePara servicePara1 = new ServicePara();
+            servicePara1.setId(1);
+            servicePara1.setName("myService1");
+            servicePara1.setAppId(app.getId());
 
-        serviceMapper.addService(servicePara1);
+            serviceMapper.addService(servicePara1);
 
-        ServicePara servicePara2 = new ServicePara();
-        servicePara2.setName("myService2");
-        servicePara2.setAppId(appId);
+            ServicePara servicePara2 = new ServicePara();
+            servicePara2.setId(2);
+            servicePara2.setName("myService2");
+            servicePara2.setAppId(appId);
 
-        serviceMapper.addService(servicePara2);
+            serviceMapper.addService(servicePara2);
 
-        assertNotNull(servicePara1);
-        assertNotNull(servicePara2);
-        Integer id1 = servicePara1.getId();
-        Integer id2 = servicePara2.getId();
-        assertTrue(id2 > id1);
+            assertNotNull(servicePara1);
+            assertNotNull(servicePara2);
+            Integer id1 = servicePara1.getId();
+            Integer id2 = servicePara2.getId();
+            assertTrue(id2 > id1);
 
-        ServicePara s1 = serviceMapper.getService("myService1", appId);
-        ServicePara s2 = serviceMapper.getService("myService2", appId);
+            ServicePara s1 = serviceMapper.getService("myService1", appId);
+            ServicePara s2 = serviceMapper.getService("myService2", appId);
 
-        assertEquals(id1, s1.getId());
-        assertEquals(id2, s2.getId());
-        assertEquals(appId, s1.getAppId());
-
-        //最后删除所有的测试数据
-
-        serviceMapper.deleteService(servicePara1);
-        serviceMapper.deleteService(servicePara2);
-
-        appMapper.deleteApp(app);
-
-        assertNull(serviceMapper.getOneService(id1));
-        assertNull(serviceMapper.getOneService(id2));
-        assertNull(appMapper.getOneApp(appId));
+            assertEquals(id1, s1.getId());
+            assertEquals(id2, s2.getId());
+            assertEquals(appId, s1.getAppId());
+        }catch (Exception e){
+           e.printStackTrace();
+        }finally {
+            //最后删除所有的测试数据
+            serviceMapper.deleteAll();
+            appMapper.deleteAll();
+        }
     }
 
     private ServiceMapper serviceMapper;

@@ -16,6 +16,8 @@
 
 package com.jd.bdp.hydra.dubbomonitor.persistent.service.impl;
 
+import com.jd.bdp.hydra.dubbomonitor.persistent.dao.ServiceIdGenMapper;
+import com.jd.bdp.hydra.dubbomonitor.persistent.entity.ServiceIdGen;
 import com.jd.bdp.hydra.dubbomonitor.persistent.service.ServiceIdGenService;
 
 /**
@@ -24,4 +26,34 @@ import com.jd.bdp.hydra.dubbomonitor.persistent.service.ServiceIdGenService;
  * Time: 上午10:04
  */
 public class ServiceIdGenServiceImpl implements ServiceIdGenService {
+
+    @Override
+    public synchronized int getNewServiceId() {
+        ServiceIdGen serviceIdGen = serviceIdGenMapper.getServiceIdGen();
+        int newTrueId;
+        if (serviceIdGen.getMaxId() == serviceIdGen.getIdScope() * 10 - 1){
+            newTrueId = 0;
+        }else {
+            newTrueId = serviceIdGen.getMaxId() + 1;
+        }
+        int oldHeadId = serviceIdGen.getHead();
+        int newHeadId;
+        if (oldHeadId == serviceIdGen.getMaxHead()){
+            newHeadId = 1;
+        }else {
+            newHeadId = oldHeadId + 1;
+        }
+        int serviceId = newHeadId * serviceIdGen.getIdScope() + newTrueId;
+        serviceIdGen.setHead(newHeadId);
+        serviceIdGen.setMaxId(newTrueId);
+        serviceIdGenMapper.updateServiceIdGen(serviceIdGen);
+        return serviceId;
+    }
+
+    private ServiceIdGenMapper serviceIdGenMapper;
+
+    public void setServiceIdGenMapper(ServiceIdGenMapper serviceIdGenMapper) {
+        this.serviceIdGenMapper = serviceIdGenMapper;
+    }
+
 }

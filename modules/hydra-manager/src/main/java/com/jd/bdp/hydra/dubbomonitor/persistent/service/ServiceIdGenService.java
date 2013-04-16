@@ -22,4 +22,5 @@ package com.jd.bdp.hydra.dubbomonitor.persistent.service;
  * Time: 上午10:04
  */
 public interface ServiceIdGenService {
+    int getNewServiceId();
 }

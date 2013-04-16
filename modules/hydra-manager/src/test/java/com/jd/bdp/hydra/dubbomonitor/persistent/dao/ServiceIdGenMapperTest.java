@@ -16,6 +16,8 @@
 
 package com.jd.bdp.hydra.dubbomonitor.persistent.dao;
 
+import com.jd.bdp.hydra.dubbomonitor.persistent.entity.ServiceIdGen;
+import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
 /**
@@ -24,6 +26,39 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
  * Time: 上午10:34
  */
 public class ServiceIdGenMapperTest extends AbstractDependencyInjectionSpringContextTests {
+
+
+    @Test
+    public void testGet(){
+        ServiceIdGen serviceIdGen = serviceIdGenMapper.getServiceIdGen();
+        assertNotNull(serviceIdGen);
+        assertNotNull(serviceIdGen.getMaxId());
+        assertNotNull(serviceIdGen.getMaxHead());
+        assertNotNull(serviceIdGen.getHead());
+        assertTrue(serviceIdGen.getMaxHead() >= serviceIdGen.getHead());
+    }
+
+    @Test
+    public void testUpdate() {
+        ServiceIdGen serviceIdGen = serviceIdGenMapper.getServiceIdGen();
+        int tempId = serviceIdGen.getMaxId() + 1;
+        serviceIdGen.setMaxId(tempId + 1);
+        serviceIdGenMapper.updateServiceIdGen(serviceIdGen);
+        serviceIdGen = serviceIdGenMapper.getServiceIdGen();
+        assertTrue(serviceIdGen.getMaxId() > tempId);
+    }
+
+    @Override
+    protected String[] getConfigLocations() {
+        String[] location = {"classpath:hydra-manager.xml"};
+        return location;
+    }
+
+    private ServiceIdGenMapper serviceIdGenMapper;
+
+    public void setServiceIdGenMapper(ServiceIdGenMapper serviceIdGenMapper) {
+        this.serviceIdGenMapper = serviceIdGenMapper;
+    }
 
 
 }

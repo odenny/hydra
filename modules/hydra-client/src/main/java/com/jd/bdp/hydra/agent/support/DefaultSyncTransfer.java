@@ -85,7 +85,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
                             spansCache.clear();
                         }
                     }
-                }catch (Exception e){
+                }catch (Throwable e){
                     logger.info(e.getMessage());
                     //ig
                 }

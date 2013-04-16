@@ -11,9 +11,10 @@
     <bean id="serviceA" class="com.jd.bdp.service.impl.ServiceA">
         <property name="downService" ref="referenceB"></property>
     </bean>
+    <dubbo:registry file="a" />
     <!--服务暴露-开机-->
     <dubbo:protocol name="dubbo" port="20990" />
-    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceA" ref="serviceA" timeout="10000000">
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceA" ref="serviceA">
     </dubbo:service>
     <!--服务引用-->
     <dubbo:reference id="referenceB" interface="com.jd.bdp.service.inter.InterfaceB" check="false">

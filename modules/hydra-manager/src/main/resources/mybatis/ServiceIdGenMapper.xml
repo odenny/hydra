@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jd.bdp.hydra.dubbomonitor.persistent.dao.ServiceIdGenMapper">
+
+    <resultMap id="ServiceIdGenResultMap" type="ServiceIdGenEntity">
+        <result property="maxId" column="MAX_ID" />
+        <result property="head" column="HEAD" />
+        <result property="maxHead" column="MAX_HEAD" />
+        <result property="idScope" column="ID_SCOPE" />
+    </resultMap>
+
+    <!--修改一个App-->
+    <update id="updateServiceIdGen" parameterType="ServiceIdGenEntity">
+        UPDATE TB_PARA_SERVICE_ID_GEN SET MAX_ID=#{maxId},HEAD=#{head}
+    </update>
+    <!--查询-->
+    <select id="getServiceIdGen" resultMap="ServiceIdGenResultMap" resultType="ServiceIdGenEntity">
+        SELECT *  FROM TB_PARA_SERVICE_ID_GEN
+    </select>
+</mapper>

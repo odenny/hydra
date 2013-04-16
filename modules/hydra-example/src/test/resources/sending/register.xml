@@ -23,8 +23,9 @@
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <!-- 用于测试 -->
-    <!--&lt;!&ndash;hydraService&ndash;&gt;-->
-    <!--<dubbo:reference id="collectSpanService" interface="com.jd.bdp.sending.TestCollectSpanService" check="false" filter="-hydra">-->
-    <!--</dubbo:reference>-->
+    <dubbo:protocol name="dubbo" port="20995" />
+    <!--LeaderService-开机-->
+    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leadService" filter="-hydra" timeout="3000">
+    </dubbo:service>
+    <bean id="leadService" class="com.jd.bdp.sending.TestLeaderService"></bean>
 </beans>

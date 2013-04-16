@@ -9,10 +9,7 @@
 
     <!--新增加一个Service-->
     <insert id="addService" parameterType="ServiceEntity">
-        <selectKey resultType="int" keyProperty="id" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        INSERT INTO TB_PARA_SERVICE(`NAME`,`APP_ID`) VALUES(#{name}, #{appId})
+        INSERT INTO TB_PARA_SERVICE(ID, NAME,APP_ID) VALUES(#{id}, #{name}, #{appId})
     </insert>
     <!--删除一个Service-->
     <delete id="deleteService" parameterType="ServiceEntity">

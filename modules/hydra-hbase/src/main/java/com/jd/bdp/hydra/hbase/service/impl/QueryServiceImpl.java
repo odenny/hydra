@@ -16,8 +16,11 @@
 
 package com.jd.bdp.hydra.hbase.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 
+import com.alibaba.fastjson.JSONObject;
+import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.hbase.service.QueryService;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -26,8 +29,11 @@ import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HTableInterface;
 import org.apache.hadoop.hbase.client.HTablePool;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: biandi
@@ -51,22 +57,58 @@ public class QueryServiceImpl implements QueryService {
         POOL = new HTablePool(conf, 2);
     }
 
-    public JSONArray getTraceInfo(Long traceId) {
+    public JSONObject getTraceInfo(Long traceId) {
         HTableInterface table = POOL.getTable(TR_T);
         try {
             Get g = new Get(traceId.toString().getBytes());
             Result rs = table.get(g);
             List<KeyValue> list = rs.list();
-            JSONArray array = new JSONArray();
-            for (KeyValue kv : list) {
-                array.add(new String(kv.getValue()));
-            }
-            return array;
+            return assembleTrace(list);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
+    private JSONObject assembleTrace(List<KeyValue> list) {
+        JSONObject trace = new JSONObject();
+        Map<String, JSONObject> map = new HashMap<String, JSONObject>();
+        for(KeyValue kv : list){
+            JSONObject content = JSON.parseObject(new String(kv.getValue()));
+            if (map.containsKey(content.get("id"))){
+                JSONObject spanAleadyExist = map.get(content.get("id"));
+                if (isClientSpan(kv)){
+                    spanAleadyExist.put("durationClient", getDurationClient(content));
+                }else {
+
+                }
+            }else {
+
+            }
+        }
+        return trace;
+    }
+
+    private boolean isClientSpan(KeyValue kv) {
+        StringUtils new String(kv.getQualifier())
+        return false;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    private Long getDurationClient(JSONObject content){
+        JSONArray clientAnns = ((JSONArray)content.get("annotations"));
+        Long cr = null;
+        Long cs = null;
+        for (int i = 0; i < clientAnns.size(); i++) {
+            if (((JSONObject)clientAnns.get(i)).get("value").equals(Annotation.CLIENT_RECEIVE)){
+                cr = Long.valueOf(((JSONObject)clientAnns.get(i)).get("timestamp").toString());
+            }
+            if (((JSONObject)clientAnns.get(i)).get("value").equals(Annotation.CLIENT_SEND)){
+                cs = Long.valueOf(((JSONObject)clientAnns.get(i)).get("timestamp").toString());
+            }
+        }
+        return cr - cs;
+    }
+
 
 //    public void setOneItem(String rowkey, String columnName,  byte[] valueParm) {
 //        HTableInterface table = POOL.getTable("trace");

@@ -1,4 +1,4 @@
-package com.jd.bdp.hydra.collector.service.imp;
+package com.jd.bdp.hydra.collector.service.impl;
 
 /**
  * Created with IntelliJ IDEA.

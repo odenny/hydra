@@ -25,9 +25,6 @@ import com.jd.bdp.hydra.agent.Tracer;
 import com.jd.bdp.hydra.agent.support.TracerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -39,11 +36,16 @@ public class HydraFilter implements Filter {
     private HydraFilter configer;
     private static Logger logger = LoggerFactory.getLogger(HydraFilter.class);
 
+    private String serviceId = null;
+
     private Tracer tracer = Tracer.getTracer();
 
     // 调用过程拦截
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         long start = System.currentTimeMillis();
+        if(serviceId == null){
+            this.serviceId=tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
+        }
         RpcContext context = RpcContext.getContext();
         boolean isConsumerSide = context.isConsumerSide();
         Span span = null;
@@ -65,7 +67,7 @@ public class HydraFilter implements Filter {
                 span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample);
             }
             endpoint = tracer.newEndPoint();
-            endpoint.setServiceName(tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface()));
+            endpoint.setServiceName(serviceId);
             endpoint.setIp(context.getLocalAddressString());
             endpoint.setPort(context.getLocalPort());
             invokerBefore(invocation, span, endpoint, start);
@@ -86,6 +88,10 @@ public class HydraFilter implements Filter {
                 invokerAfter(invocation, endpoint, span, end, isConsumerSide);
             }
         }
+    }
+
+    private void setServiceId(String id){
+        this.serviceId = id;
     }
 
 

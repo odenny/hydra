@@ -75,7 +75,7 @@
         <module>modules/hydra-interface</module>
         <module>modules/hydra-manager</module>
         <module>modules/hydra-collector</module>
-        <module>hydra-collector-service</module>
+        <module>modules/hydra-collector-service</module>
     </modules>
 
     <properties>
@@ -136,7 +136,11 @@
                 <artifactId>hydra-manager</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-collector-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- test -->
             <dependency>
                 <groupId>junit</groupId>

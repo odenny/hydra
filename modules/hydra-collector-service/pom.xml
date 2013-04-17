@@ -17,24 +17,23 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-interface</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.collections</groupId>
             <artifactId>google-collections</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-auth</artifactId>
-            <version>2.0.0-cdh4.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>2.0.0-cdh4.1.1</version>
+            <version>bdp-2.0.0-cdh4.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase</artifactId>
-            <version>0.92.1-cdh4.1.1</version>
+            <version>bdp-0.92.1-cdh4.1.1</version>
         </dependency>
         <dependency>
             <groupId>commons-configuration</groupId>

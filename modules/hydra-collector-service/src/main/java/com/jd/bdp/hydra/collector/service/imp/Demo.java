@@ -42,7 +42,7 @@ Qualifier:{
 }
  */
 public class Demo {
-    public static HTablePool POOL ;
+    public static HTablePool POOL;
     public static Configuration conf = HBaseConfiguration.create(new Configuration());
     public static final String duration_index = "duration_index";
     public static final String duration_index_family_colume = "trace";
@@ -55,8 +55,6 @@ public class Demo {
         conf.set("hbase.zookeeper.quorum","192.168.232.68:2181");
         POOL = new HTablePool(conf, 2);
     }
-
-    private static HTablePool POOL;
 
     public void createTable(){
         try {

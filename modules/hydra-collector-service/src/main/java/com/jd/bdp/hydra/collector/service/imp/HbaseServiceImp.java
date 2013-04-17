@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Span;
-import org.apache.commons.lang.StringUtils;
+import com.jd.bdp.hydra.collector.service.HbaseService;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
@@ -42,7 +42,7 @@ Qualifier:{
 	traceId
 }
  */
-public class Demo {
+public class HbaseServiceImp implements HbaseService{
     public static HTablePool POOL;
     public static Configuration conf = HBaseConfiguration.create(new Configuration());
     public static final String duration_index = "duration_index";
@@ -84,23 +84,14 @@ public class Demo {
         }
     }
 
-    private boolean isTopAnntation(Span span){
-        List<Annotation> alist = span.getAnnotations();
-        boolean isfirst = false;
-        for(Annotation a : alist){
-            if(StringUtils.endsWithIgnoreCase("cs",a.getValue())){
-                isfirst = true;
-            }
-        }
-        return isfirst;
-    }
+
 
     public void addSpan(Span span)throws IOException{
         String rowkey = String.valueOf(span.getTraceId());
         Put put = new Put(rowkey.getBytes());
         String jsonValue = JSON.toJSONString(span);
         String spanId = String.valueOf(span.getId());
-        if(isTopAnntation(span)){
+        if(HbaseUtils.isTopAnntation(span)){
             spanId = spanId + "C";
         }else{
             spanId = spanId + "S";
@@ -110,65 +101,34 @@ public class Demo {
         htable.put(put);
     }
 
-    private Annotation getCsAnnotation(List<Annotation> alist){
-        for(Annotation a : alist){
-            if(StringUtils.endsWithIgnoreCase("cs",a.getValue())){
-                return a;
-            }
-        }
-        return null;
-    }
-    private Annotation getCrAnnotation(List<Annotation> alist){
-        for(Annotation a : alist){
-            if(StringUtils.endsWithIgnoreCase("cs",a.getValue())){
-                return a;
-            }
-        }
-        return null;
-    }
 
-    public void buildAnnotationIndex(Span span){
+
+    public void annotationIndex(Span span){
         List<Annotation> alist = span.getAnnotations();
         for(Annotation a : alist){
             String rowkey = a.getHost().getServiceName()+":"+System.currentTimeMillis()+":"+a.getValue();
             Put put = new Put();
-            put.add(ann_index_family_colume.getBytes(),"traceId".getBytes(),Utils.long2ByteArray(span.getTraceId()));
+            put.add(ann_index_family_colume.getBytes(),"traceId".getBytes(),HbaseUtils.long2ByteArray(span.getTraceId()));
         }
 
         for(BinaryAnnotation b : span.getBinaryAnnotations()){
             String rowkey = b.getHost().getServiceName()+":"+System.currentTimeMillis()+":"+b.getKey();
             Put put = new Put(rowkey.getBytes());
-            put.add(ann_index_family_colume.getBytes(),"traceId".getBytes(),Utils.long2ByteArray(span.getTraceId()));
+            put.add(ann_index_family_colume.getBytes(),"traceId".getBytes(),HbaseUtils.long2ByteArray(span.getTraceId()));
         }
     }
 
-    private Annotation getSsAnnotation(List<Annotation> alist){
-        for(Annotation a : alist){
-            if(StringUtils.endsWithIgnoreCase("ss",a.getValue())){
-                return a;
-            }
-        }
-        return null;
-    }
 
-    private Annotation getSrAnnotation(List<Annotation> alist){
-        for(Annotation a : alist){
-            if(StringUtils.endsWithIgnoreCase("sr",a.getValue())){
-                return a;
-            }
-        }
-        return null;
-    }
 
-    public void buildDurationIndex(Span span){
+    public void durationIndex(Span span){
         List<Annotation> alist = span.getAnnotations();
-        Annotation cs = getCsAnnotation(alist);
-        Annotation cr = getCrAnnotation(alist);
+        Annotation cs = HbaseUtils.getCsAnnotation(alist);
+        Annotation cr = HbaseUtils.getCrAnnotation(alist);
         if(cs != null){
             long duration = cs.getTimestamp()-cr.getTimestamp();
             String rowkey = cs.getHost().getServiceName()+":"+duration;
             Put put = new Put(rowkey.getBytes());
-            put.add(duration_index_family_colume.getBytes(),"traceId".getBytes(),Utils.long2ByteArray(span.getTraceId()));
+            put.add(duration_index_family_colume.getBytes(),"traceId".getBytes(),HbaseUtils.long2ByteArray(span.getTraceId()));
         }
     }
 

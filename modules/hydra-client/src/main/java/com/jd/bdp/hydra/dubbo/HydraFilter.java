@@ -51,10 +51,14 @@ public class HydraFilter implements Filter {
         Span span = null;
         Endpoint endpoint = null;
         try {
+            endpoint = tracer.newEndPoint();
+            endpoint.setServiceName(serviceId);
+            endpoint.setIp(context.getLocalAddressString());
+            endpoint.setPort(context.getLocalPort());
             if (context.isConsumerSide()) {
                 Span span1 = tracer.getParentSpan();
                 if (span1 == null) {
-                    span = tracer.newSpan(context.getMethodName());
+                    span = tracer.newSpan(context.getMethodName(),endpoint);
                 } else {
                     span = tracer.genSpan(span1.getTraceId(), span1.getId(), tracer.genSpanId(), context.getMethodName(), span1.isSample());
                 }
@@ -66,10 +70,6 @@ public class HydraFilter implements Filter {
                 boolean isSample = (traceId != null);
                 span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample);
             }
-            endpoint = tracer.newEndPoint();
-            endpoint.setServiceName(serviceId);
-            endpoint.setIp(context.getLocalAddressString());
-            endpoint.setPort(context.getLocalPort());
             invokerBefore(invocation, span, endpoint, start);
             RpcInvocation invocation1 = (RpcInvocation) invocation;
             setAttachment(span, invocation1);
@@ -80,6 +80,7 @@ public class HydraFilter implements Filter {
             exAnnotation.setKey(TracerUtils.EXCEPTION);
             exAnnotation.setValue(e.getMessage().getBytes());
             exAnnotation.setType("string");
+            exAnnotation.setHost(endpoint);
             tracer.addBinaryAnntation(exAnnotation);
             throw e;
         } finally {

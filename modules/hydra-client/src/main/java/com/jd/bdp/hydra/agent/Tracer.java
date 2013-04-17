@@ -13,8 +13,6 @@ import com.jd.bdp.hydra.agent.support.TraceService;
 import com.jd.bdp.hydra.dubbomonitor.HydraService;
 import com.jd.bdp.hydra.dubbomonitor.LeaderService;
 
-import java.util.Random;
-
 /**
  * Date: 13-3-19
  * Time: 下午4:14
@@ -57,7 +55,7 @@ public class Tracer {
         return span;
     }
 
-    public Span newSpan(String spanname) {
+    public Span newSpan(String spanname,Endpoint endpoint) {
         boolean s = isSample();
         Span span = new Span();
         span.setTraceId(s ? genTracerId() : null);
@@ -69,6 +67,7 @@ public class Tracer {
             appname.setKey("dubbo.applicationName");
             appname.setValue(transfer.appName().getBytes());
             appname.setType("string");
+            appname.setHost(endpoint);
             span.addBinaryAnnotation(appname);
         }
         return span;

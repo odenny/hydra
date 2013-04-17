@@ -1,6 +1,7 @@
 package com.jd.bdp.hydra;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * User: yfliuyu
@@ -12,14 +13,24 @@ public class BinaryAnnotation implements Serializable {
     private byte[] value;
     private String type;
     private Integer duration;
+    private Endpoint host;
+
+    public Endpoint getHost() {
+        return host;
+    }
+
+    public void setHost(Endpoint endpoint) {
+        this.host = endpoint;
+    }
 
     @Override
     public String toString() {
         return "BinaryAnnotation{" +
                 "key='" + key + '\'' +
-                ", value=" + value +
+                ", value=" + Arrays.toString(value) +
                 ", type='" + type + '\'' +
                 ", duration=" + duration +
+                ", endpoint=" + host +
                 '}';
     }
 

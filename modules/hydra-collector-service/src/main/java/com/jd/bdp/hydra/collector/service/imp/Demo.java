@@ -2,6 +2,7 @@ package com.jd.bdp.hydra.collector.service.imp;
 
 import com.alibaba.fastjson.JSON;
 import com.jd.bdp.hydra.Annotation;
+import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Span;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -128,6 +129,17 @@ public class Demo {
 
     public void buildAnnotationIndex(Span span){
         List<Annotation> alist = span.getAnnotations();
+        for(Annotation a : alist){
+            String rowkey = a.getHost().getServiceName()+":"+System.currentTimeMillis()+":"+a.getValue();
+            Put put = new Put();
+            put.add(ann_index_family_colume.getBytes(),"traceId".getBytes(),Utils.long2ByteArray(span.getTraceId()));
+        }
+
+        for(BinaryAnnotation b : span.getBinaryAnnotations()){
+            String rowkey = b.getHost().getServiceName()+":"+System.currentTimeMillis()+":"+b.getKey();
+            Put put = new Put(rowkey.getBytes());
+            put.add(ann_index_family_colume.getBytes(),"traceId".getBytes(),Utils.long2ByteArray(span.getTraceId()));
+        }
     }
 
     private Annotation getSsAnnotation(List<Annotation> alist){
@@ -159,5 +171,6 @@ public class Demo {
             put.add(duration_index_family_colume.getBytes(),"traceId".getBytes(),Utils.long2ByteArray(span.getTraceId()));
         }
     }
+
 
 }

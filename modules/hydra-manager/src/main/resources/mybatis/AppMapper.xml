@@ -11,7 +11,7 @@
         <selectKey resultType="int" keyProperty="id" order="AFTER">
            SELECT LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO TB_PARA_APP(`NAME`) VALUES(#{name})
+        INSERT INTO TB_PARA_APP(NAME) VALUES(#{name})
     </insert>
     <!--删除一个App-->
     <delete id="deleteApp" parameterType="AppEntity">

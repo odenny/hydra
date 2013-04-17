@@ -8,10 +8,12 @@
         <typeAlias alias="AppEntity" type="com.jd.bdp.hydra.dubbomonitor.persistent.entity.AppPara" />
         <typeAlias alias="serviceEntity" type="com.jd.bdp.hydra.dubbomonitor.persistent.entity.ServicePara" />
         <typeAlias alias="SeedEntity" type="com.jd.bdp.hydra.dubbomonitor.persistent.entity.SeedData" />
+        <typeAlias alias="ServiceIdGenEntity" type="com.jd.bdp.hydra.dubbomonitor.persistent.entity.ServiceIdGen" />
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/ServiceMapper.xml"/>
         <mapper resource="mybatis/AppMapper.xml"/>
         <mapper resource="mybatis/SeedMapper.xml"/>
+        <mapper resource="mybatis/ServiceIdGenMapper.xml"/>
     </mappers>
 </configuration>

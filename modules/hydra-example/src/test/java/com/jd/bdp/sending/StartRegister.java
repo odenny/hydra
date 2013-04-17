@@ -16,31 +16,18 @@
 
 package com.jd.bdp.sending;
 
-import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.dubbomonitor.HydraService;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * User: biandi
- * Date: 13-4-10
- * Time: 下午4:24
+ * Date: 13-4-11
+ * Time: 下午5:32
  */
-public class TestHydraService implements HydraService {
-    @Override
-    public synchronized boolean push(List<Span> span) {
-        try {
-            collectSpanService.setSpans(span);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return true;
-    }
+public class StartRegister {
 
-    private TestCollectSpanService collectSpanService;
-
-    public void setCollectSpanService(TestCollectSpanService collectSpanService) {
-        this.collectSpanService = collectSpanService;
+    public static void main(String[] args) throws Exception {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"/sending/register.xml"});
+        context.start();
+        Thread.sleep(999999999);
     }
 }

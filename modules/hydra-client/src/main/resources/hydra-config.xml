@@ -19,9 +19,9 @@
         <property name="leaderService" ref="leaderService"/>
     </bean>
     <!--leadService-->
-    <dubbo:reference id="leaderService" interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" check="false" filter="-hydra" timeout="1000000">
+    <dubbo:reference id="leaderService" interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" check="false" filter="-hydra" timeout="2000">
     </dubbo:reference>
     <!--hydraService-->
-    <dubbo:reference id="hydraService" interface="com.jd.bdp.hydra.dubbomonitor.HydraService" check="false" filter="-hydra" timeout="1000000">
+    <dubbo:reference id="hydraService" interface="com.jd.bdp.hydra.dubbomonitor.HydraService" check="false" filter="-hydra" timeout="2000">
     </dubbo:reference>
 </beans>

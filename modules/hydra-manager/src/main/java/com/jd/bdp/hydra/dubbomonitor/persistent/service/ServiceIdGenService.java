@@ -14,20 +14,13 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.sending;
-
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+package com.jd.bdp.hydra.dubbomonitor.persistent.service;
 
 /**
  * User: biandi
- * Date: 13-4-11
- * Time: 下午5:32
+ * Date: 13-4-16
+ * Time: 上午10:04
  */
-public class StartMockService {
-
-    public static void main(String[] args) throws Exception {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"/sending/registry.xml"});
-        context.start();
-        Thread.sleep(999999999);
-    }
+public interface ServiceIdGenService {
+    int getNewServiceId();
 }

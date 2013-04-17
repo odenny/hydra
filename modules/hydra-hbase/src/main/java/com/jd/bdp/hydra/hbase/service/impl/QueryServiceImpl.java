@@ -14,14 +14,18 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.hydra.collector.service.impl;
+package com.jd.bdp.hydra.hbase.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
-import com.jd.bdp.hydra.collector.service.QueryService;
+
+import com.jd.bdp.hydra.hbase.service.QueryService;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.KeyValue;
-import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.client.Get;
+import org.apache.hadoop.hbase.client.HTableInterface;
+import org.apache.hadoop.hbase.client.HTablePool;
+import org.apache.hadoop.hbase.client.Result;
 
 import java.util.List;
 
@@ -39,7 +43,7 @@ public class QueryServiceImpl implements QueryService {
     public static final String ann_index = "annotation_index";
     public static final String ann_index_family_colume = "trace";
     public static final String TR_T = "trace";
-    public static final String trace_family_colume="span";
+    public static final String trace_family_colume = "span";
 
     static {
         conf.set("hbase.zookeeper.quorum", "boss,emp1,emp2");//"boss,emp1,emp2"
@@ -47,18 +51,18 @@ public class QueryServiceImpl implements QueryService {
         POOL = new HTablePool(conf, 2);
     }
 
-    public JSONArray getTraceInfo(Long traceId){
+    public JSONArray getTraceInfo(Long traceId) {
         HTableInterface table = POOL.getTable(TR_T);
         try {
             Get g = new Get(traceId.toString().getBytes());
             Result rs = table.get(g);
-            List<KeyValue> list =  rs.list();
+            List<KeyValue> list = rs.list();
             JSONArray array = new JSONArray();
-            for(KeyValue kv : list){
+            for (KeyValue kv : list) {
                 array.add(new String(kv.getValue()));
             }
             return array;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

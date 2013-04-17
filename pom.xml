@@ -76,6 +76,7 @@
         <module>modules/hydra-manager</module>
         <module>modules/hydra-collector</module>
         <module>modules/hydra-collector-service</module>
+        <module>modules/hydra-hbase</module>
     </modules>
 
     <properties>
@@ -100,6 +101,10 @@
         <mybatis.version>3.0.6</mybatis.version>
         <mybatis-spring>1.0.0</mybatis-spring>
         <mysql-connector-java.version>5.1.22</mysql-connector-java.version>
+        <google-collections.version>1.0</google-collections.version>
+        <hadoop-common.version>bdp-2.0.0-cdh4.1.1</hadoop-common.version>
+        <hbase.version>bdp-0.92.1-cdh4.1.1</hbase.version>
+        <commons-configuration.version>1.9</commons-configuration.version>
     </properties>
 
 
@@ -139,6 +144,11 @@
             <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-collector-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-hbase</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- test -->
@@ -312,11 +322,32 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector-java.version}</version>
             </dependency>
+            <!-- hbase -->
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-common</artifactId>
+                <version>${hadoop-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase</artifactId>
+                <version>${hbase.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>${commons-configuration.version}</version>
+            </dependency>
             <!-- others -->
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${validation-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.collections</groupId>
+                <artifactId>google-collections</artifactId>
+                <version>${google-collections.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -20,6 +20,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-
+    <bean id="queryService" class="com.jd.bdp.hydra.hbase.service.impl.QueryServiceImpl" />
 
 </beans>

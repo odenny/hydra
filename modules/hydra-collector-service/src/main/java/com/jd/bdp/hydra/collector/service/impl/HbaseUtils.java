@@ -1,4 +1,4 @@
-package com.jd.bdp.hydra.collector.service.imp;
+package com.jd.bdp.hydra.collector.service.impl;
 
 import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.Span;

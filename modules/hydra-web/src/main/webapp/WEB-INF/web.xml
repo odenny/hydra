@@ -10,8 +10,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:applicationContext.xml,
-            classpath*:applicationContext-*.xml
+            classpath*:hydra-collector-service.xml
         </param-value>
     </context-param>
 
@@ -39,7 +38,7 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    //过滤js_version的filter
+    <!-- 过滤js_version的filter -->
     <!--<filter>-->
         <!--<filter-name>JsVersionFilter</filter-name>-->
         <!--<filter-class>com.jd.bdp.hydra.action.JsVersionFilter</filter-class>-->

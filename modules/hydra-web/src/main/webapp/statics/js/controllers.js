@@ -29,7 +29,7 @@ function QueryCtrl($scope, serviceQuery) {
 function TraceCtrl($scope, Trace, getMyTrace, createView, createSpanAndDetail, createTree, createTreeDetail, getSpanMap){
     //跟踪的js-model
 
-    var trace = Trace.get({traceId:12},function(t){
+    var trace = Trace.get({traceId:1366178446534},function(t){
         getMyTrace(t);
         var spanMap = getSpanMap(t);
 

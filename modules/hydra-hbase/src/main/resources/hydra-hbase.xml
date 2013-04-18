@@ -17,14 +17,9 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-	http://code.alibabatech.com/schema/dubbo
-	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-    <!-- 用于测试 -->
-    <!--hydraService-->
-    <dubbo:reference id="collectSpanService" interface="com.jd.bdp.sending.TestCollectSpanService" check="false" filter="-hydra">
-    </dubbo:reference>
+    <bean id="queryService" class="com.jd.bdp.hydra.hbase.service.impl.QueryServiceImpl" />
+
 </beans>

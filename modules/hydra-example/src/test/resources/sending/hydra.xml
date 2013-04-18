@@ -28,12 +28,12 @@
     <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.HydraService" ref="hydraService" filter="-hydra" >
     </dubbo:service>
     <bean id="hydraService" class="com.jd.bdp.sending.TestHydraService">
-        <!--<property name="collectSpanService" ref="collectSpanService"></property>-->
+        <property name="collectSpanService" ref="collectSpanService"></property>
     </bean>
     <dubbo:registry file="~/.dubbo/hydraTest" />
 
     <!-- 用于测试 -->
-    <!--<bean id="collectSpanService" class="com.jd.bdp.sending.TestCollectSpanServiceImpl" />-->
-    <!--<dubbo:service interface="com.jd.bdp.sending.TestCollectSpanService" ref="collectSpanService" filter="-hydra" timeout="10000000">-->
-    <!--</dubbo:service>-->
+    <bean id="collectSpanService" class="com.jd.bdp.sending.TestCollectSpanServiceImpl" />
+    <dubbo:service interface="com.jd.bdp.sending.TestCollectSpanService" ref="collectSpanService" filter="-hydra" timeout="10000000">
+    </dubbo:service>
 </beans>

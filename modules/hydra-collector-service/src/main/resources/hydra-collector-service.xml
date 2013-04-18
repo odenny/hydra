@@ -19,6 +19,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
     <bean id="hbaseService" class="com.jd.bdp.hydra.hbase.service.impl.HbaseServiceImpl"/>
     <bean id="sessionFactory" class="com.taobao.metamorphosis.client.MetaMessageSessionFactory">
         <constructor-arg>

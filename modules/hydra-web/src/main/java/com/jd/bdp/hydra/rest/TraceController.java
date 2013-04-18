@@ -22,6 +22,17 @@ import java.util.Map;
 public class TraceController {
 
 
+    @RequestMapping("/list/{startTime}-{endTime}")
+    @ResponseBody
+    public JSONArray getTraces(@PathVariable Long startTime, @PathVariable Long endTime) {
+        System.out.println(startTime);
+        System.out.println(endTime);
+//        System.out.println(current);
+//        System.out.println(pageSum);
+//        System.out.println(lastRowkey);
+        return null;
+    }
+
     @RequestMapping("/{traceId}")
     @ResponseBody
     public JSONObject getTrace(@PathVariable String traceId) {

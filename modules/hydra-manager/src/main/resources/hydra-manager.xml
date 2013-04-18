@@ -16,7 +16,7 @@
         <property name="seedService" ref="seedService"/>
         <property name="serviceService" ref="serviceService"/>
     </bean>
-    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leaderService">
+    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leaderService" filter="-hydra">
     </dubbo:service>
 
     <!--数据库层-->

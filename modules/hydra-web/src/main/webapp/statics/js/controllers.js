@@ -22,7 +22,6 @@ function QueryCtrl($scope, serviceQuery) {
             });
         }
     });
-
 }
 //QueryCtrl.$inject = [$scope, queryService];
 

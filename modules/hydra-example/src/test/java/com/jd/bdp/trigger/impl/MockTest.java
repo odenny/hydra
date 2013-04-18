@@ -40,6 +40,7 @@ public class MockTest extends AbstractDependencyInjectionSpringContextTests {
     protected String[] getConfigLocations() {
         String[] location = {
                 "/dubbo-service-context.xml",//业务spring上下文
+                "/hydra-config.xml"
         };
         return location;
     }
@@ -88,7 +89,7 @@ public class MockTest extends AbstractDependencyInjectionSpringContextTests {
     }
     @Test
     public void testTriggerService() throws Exception {
-        trigger.startWork(10);
+        trigger.startWork(10000000);
     }
 
     //getter and setter

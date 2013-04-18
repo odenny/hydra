@@ -8,7 +8,7 @@
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <bean id="config" class="com.jd.bdp.hydra.agent.support.Configuration">
-        <property name="delayTime" value="50"></property>
+        <property name="delayTime" value="3000"></property>
         <property name="flushSize" value="10"></property>
         <property name="queueSize" value="1024"></property>
     </bean>

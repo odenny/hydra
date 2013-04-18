@@ -23,7 +23,7 @@ public interface ServiceMapper {
 
     /*获得一个应用实体，
     操作失败或数据库没有相应数据，返回null*/
-    ServicePara getOneService(Integer id);
+    ServicePara getOneService(String id);
 
     //删除所有
     void deleteAll();

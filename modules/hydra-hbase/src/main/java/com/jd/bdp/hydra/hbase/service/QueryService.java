@@ -16,7 +16,7 @@
 
 package com.jd.bdp.hydra.hbase.service;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * User: yfliuyu
@@ -25,5 +25,5 @@ import com.alibaba.fastjson.JSONArray;
  */
 public interface QueryService {
 
-    JSONArray getTraceInfo(Long traceId);
+    JSONObject getTraceInfo(Long traceId);
 }

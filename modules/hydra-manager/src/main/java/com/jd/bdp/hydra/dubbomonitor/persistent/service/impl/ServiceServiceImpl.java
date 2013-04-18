@@ -15,7 +15,7 @@ import com.jd.bdp.hydra.dubbomonitor.persistent.service.ServiceService;
 public class ServiceServiceImpl implements ServiceService {
 
     @Override
-    public synchronized Integer getServiceId(String serviceName, String appName) {
+    public synchronized String getServiceId(String serviceName, String appName) {
         AppPara appPara = appMapper.getApp(appName);
         if (appPara == null) {
             throw new RuntimeException("在获取service标识之前不可能没有对应的App!");

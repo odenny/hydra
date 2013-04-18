@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * User: biandi
  * Date: 13-3-21
@@ -22,9 +25,7 @@ public class TraceController {
     @RequestMapping("/{traceId}")
     @ResponseBody
     public JSONObject getTrace(@PathVariable String traceId) {
-        JSONArray array = queryService.getTraceInfo(Long.parseLong(traceId));
-
-        return null;
+        return queryService.getTraceInfo(Long.parseLong(traceId));
 //        JSONObject obj = new JSONObject();
 //        obj.put("traceId", traceId);
 //        obj.put("serviceName", "testService|getUser");

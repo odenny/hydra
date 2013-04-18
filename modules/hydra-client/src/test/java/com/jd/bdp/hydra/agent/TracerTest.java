@@ -67,7 +67,7 @@ public class TracerTest extends TestCase {
             }
             String method = "method_" + i;
             Span span = null;
-            span = tracer.newSpan(method);
+//            span = tracer.newSpan(method);
             if (span.isSample()) {
                 long start = System.currentTimeMillis();
                 tracer.clientSendRecord(span, clientEndPoint, start);

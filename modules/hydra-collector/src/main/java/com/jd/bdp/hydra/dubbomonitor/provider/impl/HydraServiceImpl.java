@@ -3,9 +3,7 @@ package com.jd.bdp.hydra.dubbomonitor.provider.impl;
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.dubbomonitor.HydraDubbeConfig;
 import com.jd.bdp.hydra.dubbomonitor.HydraService;
-import com.jd.bdp.hydra.dubbomonitor.LogEvent;
 import com.jd.dd.glowworm.PB;
-import com.lmax.disruptor.*;
 import com.taobao.metamorphosis.Message;
 import com.taobao.metamorphosis.client.MessageSessionFactory;
 import com.taobao.metamorphosis.client.MetaClientConfig;
@@ -18,8 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class HydraServiceImpl implements HydraService {
     private static final Logger log = LoggerFactory.getLogger(HydraServiceImpl.class);

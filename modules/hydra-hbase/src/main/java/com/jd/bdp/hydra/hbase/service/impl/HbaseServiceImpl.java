@@ -76,25 +76,21 @@ public class HbaseServiceImpl implements HbaseService {
     public void createTable() {
         try {
             HBaseAdmin hBaseAdmin = new HBaseAdmin(conf);
-
             if (!hBaseAdmin.tableExists(duration_index)) {
                 HTableDescriptor hTableDescriptor = new HTableDescriptor(duration_index);
                 hTableDescriptor.addFamily(new HColumnDescriptor(duration_index_family_colume));
                 hBaseAdmin.createTable(hTableDescriptor);
             }
-
             if (!hBaseAdmin.tableExists(TR_T)) {
                 HTableDescriptor hTableDescriptor = new HTableDescriptor(TR_T);
                 hTableDescriptor.addFamily(new HColumnDescriptor());
                 hBaseAdmin.createTable(hTableDescriptor);
             }
-
             if (!hBaseAdmin.tableExists(ann_index)) {
                 HTableDescriptor hTableDescriptor = new HTableDescriptor(trace_family_colume);
                 hTableDescriptor.addFamily(new HColumnDescriptor(ann_index_family_colume));
                 hBaseAdmin.createTable(hTableDescriptor);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -145,5 +141,8 @@ public class HbaseServiceImpl implements HbaseService {
         }
     }
 
+    public static void main(String[] strings){
+        HbaseServiceImpl hbaseService = new HbaseServiceImpl();
 
+    }
 }

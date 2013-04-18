@@ -28,10 +28,10 @@ import com.jd.bdp.hydra.dubbomonitor.persistent.service.ServiceIdGenService;
 public class ServiceIdGenServiceImpl implements ServiceIdGenService {
 
     @Override
-    public synchronized int getNewServiceId() {
+    public synchronized String getNewServiceId() {
         ServiceIdGen serviceIdGen = serviceIdGenMapper.getServiceIdGen();
         int newTrueId;
-        if (serviceIdGen.getMaxId() == serviceIdGen.getIdScope() * 10 - 1){
+        if (serviceIdGen.getMaxId() == serviceIdGen.getIdScope() - 1){
             newTrueId = 0;
         }else {
             newTrueId = serviceIdGen.getMaxId() + 1;
@@ -47,7 +47,12 @@ public class ServiceIdGenServiceImpl implements ServiceIdGenService {
         serviceIdGen.setHead(newHeadId);
         serviceIdGen.setMaxId(newTrueId);
         serviceIdGenMapper.updateServiceIdGen(serviceIdGen);
-        return serviceId;
+        int fullLength = String.valueOf(serviceIdGen.getMaxHead() * serviceIdGen.getIdScope()).length();
+        if (String.valueOf(serviceId).length() < fullLength){
+            return "0" + String.valueOf(serviceId);//只限head为2位的
+        }else {
+            return String.valueOf(serviceId);
+        }
     }
 
     private ServiceIdGenMapper serviceIdGenMapper;

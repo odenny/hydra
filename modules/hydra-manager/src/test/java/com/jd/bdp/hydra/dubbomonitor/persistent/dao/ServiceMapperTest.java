@@ -39,7 +39,7 @@ public class ServiceMapperTest extends AbstractDependencyInjectionSpringContextT
 
             //define option-entity and query-entiry
             ServicePara servicePara=new ServicePara();
-            servicePara.setId(1);
+            servicePara.setId("1");
             servicePara.setName("com.jd.car");
             servicePara.setAppId(app.getId());
             ServicePara queryPara=null;
@@ -81,14 +81,14 @@ public class ServiceMapperTest extends AbstractDependencyInjectionSpringContextT
             Integer appId = app.getId();
 
             ServicePara servicePara1 = new ServicePara();
-            servicePara1.setId(1);
+            servicePara1.setId("1");
             servicePara1.setName("myService1");
             servicePara1.setAppId(app.getId());
 
             serviceMapper.addService(servicePara1);
 
             ServicePara servicePara2 = new ServicePara();
-            servicePara2.setId(2);
+            servicePara2.setId("2");
             servicePara2.setName("myService2");
             servicePara2.setAppId(appId);
 
@@ -96,9 +96,10 @@ public class ServiceMapperTest extends AbstractDependencyInjectionSpringContextT
 
             assertNotNull(servicePara1);
             assertNotNull(servicePara2);
-            Integer id1 = servicePara1.getId();
-            Integer id2 = servicePara2.getId();
-            assertTrue(id2 > id1);
+            String id1 = servicePara1.getId();
+            String id2 = servicePara2.getId();
+            assertNotNull(id1);
+            assertNotNull(id2);
 
             ServicePara s1 = serviceMapper.getService("myService1", appId);
             ServicePara s2 = serviceMapper.getService("myService2", appId);

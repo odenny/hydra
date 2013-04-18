@@ -78,7 +78,6 @@ public class ServiceIdGenServiceTest extends AbstractDependencyInjectionSpringCo
         public void run() {
             for (int i = 0; i < 50; i++) {
                 String id = serviceIdGenService.getNewServiceId();
-                System.out.println(id);
                 map.put(id, id);
             }
         }

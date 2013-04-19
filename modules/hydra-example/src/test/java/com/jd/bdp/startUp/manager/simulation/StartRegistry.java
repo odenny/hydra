@@ -1,4 +1,4 @@
-package com.jd.bdp.registry.manager.simulation;
+package com.jd.bdp.startUp.manager.simulation;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -8,7 +8,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Time: 上午10:32
  */
 public class StartRegistry {
-
     public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
                 "/registry/manager/registry.xml"

@@ -1,4 +1,4 @@
-package com.jd.bdp.registry.manager.reality;
+package com.jd.bdp.startUp.manager.reality;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

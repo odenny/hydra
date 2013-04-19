@@ -14,10 +14,11 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.trigger.impl;
+package com.jd.bdp.mock;
 
 import com.jd.bdp.hydra.agent.support.Configuration;
 import com.jd.bdp.hydra.dubbo.HydraConfiger;
+import com.jd.bdp.trigger.impl.Trigger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
@@ -35,19 +36,19 @@ import java.util.Properties;
  */
 public class MockTest extends AbstractDependencyInjectionSpringContextTests {
     private Trigger trigger;
-    private HydraConfiger configer;
     @Override
     protected String[] getConfigLocations() {
         String[] location = {
                 "/dubbo-service-context.xml",//业务spring上下文
-                "/hydra-config.xml"
+//                "/hydra-config.xml"
         };
         return location;
     }
 
-    @Test
+
     public void testConfiger() throws Exception {
         //1：获取 Hydra感知的配置信息
+        HydraConfiger configer=null;
         Configuration envData=configer.getConfig();
         String appEnvName=envData.getApplicationName();
         List<String> serviceEnvList=envData.getServices();
@@ -89,7 +90,7 @@ public class MockTest extends AbstractDependencyInjectionSpringContextTests {
     }
     @Test
     public void testTriggerService() throws Exception {
-        trigger.startWork(10000000);
+        trigger.startWork(100);
     }
 
     //getter and setter
@@ -98,11 +99,5 @@ public class MockTest extends AbstractDependencyInjectionSpringContextTests {
     }
     public void setTrigger(Trigger trigger) {
         this.trigger = trigger;
-    }
-    public HydraConfiger getConfiger() {
-        return configer;
-    }
-    public void setConfiger(HydraConfiger configer) {
-        this.configer = configer;
     }
 }

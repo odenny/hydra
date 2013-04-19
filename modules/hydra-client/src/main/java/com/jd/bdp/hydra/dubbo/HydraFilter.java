@@ -17,6 +17,10 @@ package com.jd.bdp.hydra.dubbo;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
+import com.alibaba.dubbo.common.extension.ExtensionLoader;
+import com.alibaba.dubbo.container.Container;
+import com.alibaba.dubbo.container.jetty.JettyContainer;
+import com.alibaba.dubbo.container.spring.SpringContainer;
 import com.alibaba.dubbo.rpc.*;
 import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Endpoint;
@@ -33,7 +37,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 @Activate(group = {Constants.PROVIDER, Constants.CONSUMER})
 public class HydraFilter implements Filter {
 
-    private HydraFilter configer;
     private static Logger logger = LoggerFactory.getLogger(HydraFilter.class);
 
     private String serviceId = null;
@@ -127,21 +130,17 @@ public class HydraFilter implements Filter {
         }
     }
 
+
+
     //setter and getter
-
-    public HydraFilter getConfiger() {
-        return configer;
-    }
-
-    public void setConfiger(HydraFilter configer) {
-        this.configer = configer;
-    }
-
     /*加载Filter的时候加载hydra配置上下文*/
     static{
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
-                "/hydra-config.xml"
-        });
-        context.start();
+//        SpringContainer container = (SpringContainer) ExtensionLoader.getExtensionLoader(Container.class).getExtension("spring");
+//        container.start();
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
+//                "/hydra-config.xml"
+//        });
+//        context.start();
     }
+
 }

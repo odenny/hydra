@@ -57,8 +57,10 @@ public class HydraConfiger implements ApplicationContextAware {
         List serviceNames = new ArrayList();
         if (servicesConfigMap != null && servicesConfigMap.size() > 0) {
             for (ServiceConfig config : servicesConfigMap.values()) {
-                if (config.getInterface() != HydraService.class.getName()
-                        || config.getInterface() != LeaderService.class.getName())
+                if (config.getInterface().equals(HydraService.class.getName())
+                        || config.getInterface().equals(LeaderService.class.getName()))
+                    ;
+                else
                     serviceNames.add(config.getInterface());
             }
         } else {
@@ -69,8 +71,11 @@ public class HydraConfiger implements ApplicationContextAware {
             for (ReferenceConfig config : referenceConfigMap.values()) {
                 System.out.println(config.getInterface());
                 System.out.println(HydraService.class.getName());
-                if (!config.getInterface() .equals(HydraService.class.getName())
-                        && !config.getInterface() .equals(LeaderService.class.getName()))
+                System.out.println(LeaderService.class.getName());
+                if (config.getInterface().equals(HydraService.class.getName())
+                        || config.getInterface().equals(LeaderService.class.getName()))
+                    ;
+                else
                     serviceNames.add(config.getInterface());
             }
         } else {

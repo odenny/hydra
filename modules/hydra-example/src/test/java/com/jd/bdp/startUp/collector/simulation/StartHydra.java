@@ -14,24 +14,20 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.registry.client.support;
+package com.jd.bdp.startUp.collector.simulation;
 
-import com.jd.bdp.hydra.dubbomonitor.LeaderService;
-
-import java.util.List;
-import java.util.Map;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * User: biandi
- * Date: 13-4-10
- * Time: 下午4:12
+ * Date: 13-4-11
+ * Time: 下午5:32
  */
+public class StartHydra {
 
-/*针对业务接入单点的一个注册实体（只会收到一次注册请求）*/
-public class LeaderClientService implements LeaderService{
-    @Override
-    public Map<String, String> registerClient(String name, List<String> services) {
-        System.out.println("业务方开始发起注册请求~") ;
-        return null;
+    public static void main(String[] args) throws Exception {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"/sending/hydra.xml"});
+        context.start();
+        Thread.sleep(999999999);
     }
 }

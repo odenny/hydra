@@ -9,8 +9,8 @@
 
     <!--LeaderService-开机-->
     <dubbo:protocol name="dubbo" port="20996" />
-    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leadService">
+    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leadService" filter="-hydra" timeout="3000">
     </dubbo:service>
-    <bean id="leadService" class="com.jd.bdp.registry.manager.simulation.support.LeaderManagerService"></bean>
+    <bean id="leadService" class="com.jd.bdp.startUp.manager.simulation.support.LeaderManagerService"></bean>
 
 </beans>

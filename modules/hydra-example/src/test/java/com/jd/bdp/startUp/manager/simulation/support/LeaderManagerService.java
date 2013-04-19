@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.registry.manager.simulation.support;
+package com.jd.bdp.startUp.manager.simulation.support;
 
 import com.jd.bdp.hydra.dubbomonitor.LeaderService;
 
@@ -34,9 +34,11 @@ import java.util.Map;
 public class LeaderManagerService implements LeaderService{
     @Override
     public Map<String, String> registerClient(String name, List<String> services) {
-        System.out.println("注册中心收到注册请求");
         Map<String, String> map = new HashMap<String, String>();
         map.put("seed", "1000");
+        map.put("com.jd.bdp.service.inter.InterfaceA", "1");
+        map.put("com.jd.bdp.service.inter.InterfaceB", "2");
+        map.put("com.jd.bdp.service.inter.InterfaceC", "3");
         return map;
     }
 }

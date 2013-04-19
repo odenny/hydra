@@ -14,12 +14,12 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.sending;
+package com.jd.bdp.startUp.collector.simulation.support;
 
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.dubbomonitor.HydraService;
+import com.jd.bdp.sending.TestCollectSpanService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

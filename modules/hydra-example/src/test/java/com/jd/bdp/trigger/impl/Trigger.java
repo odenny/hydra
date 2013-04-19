@@ -54,10 +54,10 @@ public class Trigger implements InitializingBean{
     public void startWorkWithSleep(int num) throws InterruptedException {
         for(int i=0;i<num;i++){
             System.out.println(i);
-            Thread.sleep(1000);
-            if (i == 200){
-                Thread.sleep(20000);
-            }
+//            Thread.sleep(1000);
+//            if (i == 200){
+//                Thread.sleep(20000);
+//            }
             Object result=rootService.functionA();
             System.out.println("result:"+result);
         }

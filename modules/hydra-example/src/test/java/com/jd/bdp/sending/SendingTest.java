@@ -170,7 +170,7 @@ public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
     //发起10000次PRC,不做数据校验，只模拟当leaderService和hydraService阻塞或停止或重启的情况是否符合预期
     //需要停止内部的collectSpanService的注入，因为会延迟
     public void testSendSpanSum10000() throws InterruptedException {
-        int sum = 10000;
+        int sum = 1000000;
         collectSpanService.clear();
         trigger.startWorkWithSleep(sum);
     }

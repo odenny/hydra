@@ -40,7 +40,7 @@ public class ServiceMapperImpl implements ServiceMapper {
     }
 
     @Override
-    public ServicePara getOneService(Integer id) {
+    public ServicePara getOneService(String id) {
         return (ServicePara) sqlSession.selectOne("getServiceById",id);
     }
 

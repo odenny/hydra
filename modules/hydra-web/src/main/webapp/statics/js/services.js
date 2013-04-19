@@ -148,12 +148,11 @@ angular.module('hydra.services', ['ngResource'])
                         d3.select(this).attr('stroke-width', '0px');
                     });
 
-                console.log(maxIndex)
                 view.svg.append("g")
                     .attr("class", "y axis")
                     .attr('id', 'yaxis')
                     .append("line")
-                .attr("y1", (maxIndex+1) * view.y * 1.2);
+                    .attr("y1", (maxIndex+1) * view.y * 1.2);
 
                 createSpanTip(spanMap, view);//tip
 
@@ -346,34 +345,32 @@ angular.module('hydra.services', ['ngResource'])
             function getMySpan(span, spanIndex) {
                 var anMap = {};
                 for (var i in span.annotations) {
-                    if (span.annotations[i]['cs']) {
-                        anMap['cs'] = span.annotations[i]['cs'];
+                    if (span.annotations[i]['value']=='cs') {
+                        anMap['cs'] = span.annotations[i]['timestamp'];
                         continue;
                     }
-                    if (span.annotations[i]['ss']) {
-                        anMap['ss'] = span.annotations[i]['ss'];
+                    if (span.annotations[i]['value']=='ss') {
+                        anMap['ss'] = span.annotations[i]['timestamp'];
                         continue;
                     }
-                    if (span.annotations[i]['sr']) {
-                        anMap['sr'] = span.annotations[i]['sr'];
+                    if (span.annotations[i]['value']=='sr') {
+                        anMap['sr'] = span.annotations[i]['timestamp'];
                         continue;
                     }
-                    if (span.annotations[i]['cr']) {
-                        anMap['cr'] = span.annotations[i]['cr'];
+                    if (span.annotations[i]['value']=='cr') {
+                        anMap['cr'] = span.annotations[i]['timestamp'];
                         continue;
                     }
                 }
-                span.durationClient = parseInt(anMap['cr']) - parseInt(anMap['cs']);
-                span.durationServer = parseInt(anMap['ss']) - parseInt(anMap['sr']);
                 span.used = {
-                    spanId: span.spanId,
+                    spanId: span.id,
                     start: anMap['cs'],
                     duration: span.durationServer,
                     viewIndex: spanIndex.index,
                     type: 'used'
                 }
                 span.wasted = {
-                    spanId: span.spanId,
+                    spanId: span.id,
                     start: parseInt(anMap['cs']) + parseInt(span.durationServer),
                     duration: parseInt(span.durationClient) - parseInt(span.durationServer),
                     viewIndex: spanIndex.index,
@@ -394,7 +391,7 @@ angular.module('hydra.services', ['ngResource'])
 
             function hideChildrenSpan(span) {
                 for (var i in span.children) {
-                    d3.selectAll('g[span="' + span.children[i].spanId + '"]')
+                    d3.selectAll('g[span="' + span.children[i].id + '"]')
                         .style("opacity", 0)
                     hideChildrenSpan(span.children[i]);
                 }
@@ -425,7 +422,7 @@ angular.module('hydra.services', ['ngResource'])
 
             function showChildrenSpan(span) {
                 for (var i in span.children) {
-                    d3.selectAll('g[span="' + span.children[i].spanId + '"]').style("opacity", 1)
+                    d3.selectAll('g[span="' + span.children[i].id + '"]').style("opacity", 1)
                     showChildrenSpan(span.children[i]);
                 }
             }
@@ -463,7 +460,7 @@ angular.module('hydra.services', ['ngResource'])
                         viewport: $(window)
                     },
                     hide:{
-                        delay:500,
+                        delay:200,
                         fixed:true
                     },
                     content:function(){
@@ -486,12 +483,12 @@ angular.module('hydra.services', ['ngResource'])
     .factory('getSpanMap', function(){
         return function(trace){
             var spanMap = {};
-            spanMap[trace.rootSpan.spanId] = trace.rootSpan;
+            spanMap[trace.rootSpan.id] = trace.rootSpan;
             setAllSpanIn(trace.rootSpan);
 
             function setAllSpanIn(span){
                 for(var i in span.children){
-                    spanMap[span.children[i].spanId] = span.children[i];
+                    spanMap[span.children[i].id] = span.children[i];
                     setAllSpanIn(span.children[i]);
                 }
             }

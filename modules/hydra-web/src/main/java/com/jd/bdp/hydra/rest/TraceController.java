@@ -25,18 +25,7 @@ public class TraceController {
     @RequestMapping("/{traceId}")
     @ResponseBody
     public JSONObject getTrace(@PathVariable String traceId) {
-        JSONArray array = queryService.getTraceInfo(Long.parseLong(traceId));
-        JSONObject trace = new JSONObject();
-        Map<String, JSONObject> map = new HashMap<String, JSONObject>();
-        for(Object obj: array){
-            JSONObject halfSpan = (JSONObject)obj;
-            if (map.containsKey(halfSpan.get("id"))){
-                JSONObject
-            }else {
-                map.put()
-            }
-        }
-        return null;
+        return queryService.getTraceInfo(Long.parseLong(traceId));
 //        JSONObject obj = new JSONObject();
 //        obj.put("traceId", traceId);
 //        obj.put("serviceName", "testService|getUser");

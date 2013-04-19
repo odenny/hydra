@@ -6,5 +6,5 @@ package com.jd.bdp.hydra.dubbomonitor.persistent.service;
  * Time: 下午1:17
  */
 public interface ServiceService {
-    Integer getServiceId(String serviceName, String appName);
+    String getServiceId(String serviceName, String appName);
 }

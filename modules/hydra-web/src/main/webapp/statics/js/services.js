@@ -14,6 +14,9 @@ angular.module('hydra.services', ['ngResource'])
     .factory('Trace', function ($resource) {
         return $resource('/rest/trace/:traceId');
     })
+    .factory('TraceQuery', function ($resource) {
+        return $resource('/rest/trace/list/:serviceId');
+    })
     .factory('createView', function () {
         return function (trace) {
             var view = {};

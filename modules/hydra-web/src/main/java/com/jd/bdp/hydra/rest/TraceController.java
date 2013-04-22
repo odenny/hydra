@@ -22,11 +22,11 @@ import java.util.Map;
 public class TraceController {
 
 
-    @RequestMapping("/list/{startTime}-{endTime}")
+    @RequestMapping("/list/{serviceId}")
     @ResponseBody
-    public JSONArray getTraces(@PathVariable Long startTime, @PathVariable Long endTime) {
-        System.out.println(startTime);
-        System.out.println(endTime);
+    public JSONArray getTraces(@PathVariable String serviceId) {
+        System.out.println("111111111111111");
+        System.out.println(serviceId);
 //        System.out.println(current);
 //        System.out.println(pageSum);
 //        System.out.println(lastRowkey);

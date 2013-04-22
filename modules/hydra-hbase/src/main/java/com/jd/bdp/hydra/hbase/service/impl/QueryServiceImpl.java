@@ -24,12 +24,15 @@ import com.jd.bdp.hydra.hbase.service.QueryService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.filter.*;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,22 +42,7 @@ import java.util.Map;
  * Date: 13-4-17
  * Time: 下午1:27
  */
-public class QueryServiceImpl implements QueryService {
-
-    public static HTablePool POOL;
-    public static Configuration conf = HBaseConfiguration.create(new Configuration());
-    public static final String duration_index = "duration_index";
-    public static final String duration_index_family_colume = "trace";
-    public static final String ann_index = "annotation_index";
-    public static final String ann_index_family_colume = "trace";
-    public static final String TR_T = "trace";
-    public static final String trace_family_colume = "span";
-
-    static {
-        conf.set("hbase.zookeeper.quorum", "boss,emp1,emp2");//"boss,emp1,emp2"
-        conf.set("hbase.client.retries.number", "3");
-        POOL = new HTablePool(conf, 2);
-    }
+public class QueryServiceImpl extends HbaseUtils implements QueryService {
 
     public JSONObject getTraceInfo(Long traceId) {
         HTableInterface table = null;
@@ -77,27 +65,31 @@ public class QueryServiceImpl implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesOrderByTimestamp(String serviceId, Long start, Long end, int num) {
+    public JSONArray getTracesByDuration(String serviceId, Long start, int num, int durationMin, int durationMax) {
         JSONArray array = new JSONArray();
         Scan scan = new Scan();
         scan.setStartRow(new String(serviceId + "." + start).getBytes());
-        scan.setStopRow(new String(serviceId + "." + end).getBytes());
         Filter filter = new PageFilter(num);
         scan.setFilter(filter);
-        HTableInterface table = null;
+        try {
+            scan.setTimeRange(durationMin, durationMax);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        HTableInterface table;
         ResultScanner rs = null;
         try {
             table = POOL.getTable(duration_index);
             rs = table.getScanner(scan);
-            for (Result res : rs){
+            for (Result res : rs) {
                 List<KeyValue> list = res.list();
-                for (KeyValue kv : list){
+                for (KeyValue kv : list) {
                     JSONObject obj = new JSONObject();
-                    String[] key = new String(kv.getRow()).split("\\.");
+                    String[] key = new String(kv.getRow()).split(":");
                     obj.put("serviceId", key[0]);
-                    obj.put("timestamp", key[1]);
-                    obj.put("duration", key[2]);
-                    obj.put("traceId", new String(kv.getValue()));
+                    obj.put("timestamp", Long.parseLong(key[1]));
+                    obj.put("duration", kv.getTimestamp());
+                    obj.put("traceId", byteArray2Long(kv.getQualifier()));
                     array.add(obj);
                 }
             }
@@ -105,7 +97,7 @@ public class QueryServiceImpl implements QueryService {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
-        }finally {
+        } finally {
             rs.close();
         }
     }
@@ -187,54 +179,68 @@ public class QueryServiceImpl implements QueryService {
     }
 
 
-    public void setOneItem(String rowkey, String columnName, byte[] valueParm) {
-        HTableInterface table = POOL.getTable("duration_index");
-        table.setAutoFlush(true);//自动提交
-        try {
-            Put put = new Put(Bytes.toBytes(rowkey));
-            put.add(Bytes.toBytes(duration_index_family_colume), Bytes.toBytes(columnName), valueParm);
-            table.put(put);
-//            table.flushCommits();//手动提交，最好每次close之前手动提交...
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                table.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    public void setOneItem(String tableName, String familyColumnName, String rowkey, String columnName, byte[] valueParm) {
+//        HTableInterface table = POOL.getTable(tableName);
+//        table.setAutoFlush(true);//自动提交
+//        try {
+//            Put put = new Put(Bytes.toBytes(rowkey));
+//            put.add(Bytes.toBytes(familyColumnName), Bytes.toBytes(columnName), valueParm);
+//            table.put(put);
+////            table.flushCommits();//手动提交，最好每次close之前手动提交...
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                table.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
-    /**
-     * 删除指定表名的rowKey下某时间戳的数据。
-     */
-    public boolean delete(String tableName, String rowKey) {
-        boolean result = false;
-        HTableInterface hTable = null;
-        try {
-            hTable = POOL.getTable(Bytes.toBytes(tableName));
-
-            if (hTable == null) {
-                return result;
-            }
-
-            byte[] rowKeys = Bytes.toBytes(rowKey);
-            Delete delete = new Delete(rowKeys);
-            hTable.delete(delete);
-            result = true;
-        } catch (Exception e) {
-
-
-        } finally {
-            try {
-                hTable.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return result;
-    }
+//    /**
+//     * 删除指定表名的rowKey下某时间戳的数据。
+//     */
+//    public boolean delete(String tableName, String rowKey) {
+//        boolean result = false;
+//        HTableInterface hTable = null;
+//        try {
+//            hTable = POOL.getTable(Bytes.toBytes(tableName));
+//
+//            if (hTable == null) {
+//                return result;
+//            }
+//
+//            byte[] rowKeys = Bytes.toBytes(rowKey);
+//            Delete delete = new Delete(rowKeys);
+//            hTable.delete(delete);
+//            result = true;
+//        } catch (Exception e) {
+//
+//
+//        } finally {
+//            try {
+//                hTable.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        return result;
+//    }
+//
+//
+//    public void createTable(String tableName, String familyColumnName) {
+//        try {
+//            HBaseAdmin hBaseAdmin = new HBaseAdmin(conf);
+//            if (!hBaseAdmin.tableExists(tableName)) {
+//                HTableDescriptor hTableDescriptor = new HTableDescriptor(tableName);
+//                hTableDescriptor.addFamily(new HColumnDescriptor(familyColumnName));
+//                hBaseAdmin.createTable(hTableDescriptor);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

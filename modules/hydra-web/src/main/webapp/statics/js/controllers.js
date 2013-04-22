@@ -3,7 +3,7 @@
 /* Controllers */
 
 //用来操作多条件查询和grid展现的Ctrl
-function QueryCtrl($scope, serviceQuery) {
+function QueryCtrl($scope, serviceQuery, TraceQuery) {
 //    $scope.serviceArray =
     $('#startTime').datetimepicker({
         language:  'zh-CN',
@@ -21,6 +21,9 @@ function QueryCtrl($scope, serviceQuery) {
                 console.log(array)
             });
         }
+    });
+    var traceList = TraceQuery.get({serviceId:123123123},function(t){
+        alert(t)
     });
 }
 //QueryCtrl.$inject = [$scope, queryService];

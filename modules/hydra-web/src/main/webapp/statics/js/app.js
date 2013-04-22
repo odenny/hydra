@@ -2,7 +2,11 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp', ['myApp.filters', 'hydra.services', 'myApp.directives']).
+angular.module('myApp',
+        [
+            'hydra.services.sequence','hydra.services.tree',
+            'hydra.repository.trace','hydra.repository.service'
+        ]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/query', {templateUrl: '/index/query.html', controller: QueryCtrl});
         $routeProvider.when('/trace', {templateUrl: '/index/trace.html', controller: TraceCtrl});

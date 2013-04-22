@@ -30,9 +30,17 @@
 
 
 <script src="/statics/js/app.js"></script>
-<script src="/statics/js/services.js?_version=${staticVersion}"></script>
+<!-- repo -->
+<script src="/statics/js/repository/trace-repo.js"></script>
+<script src="/statics/js/repository/service-repo.js"></script>
+
+<!-- service -->
+<script src="/statics/js/service/sequence-service.js"></script>
+<script src="/statics/js/service/tree-service.js"></script>
+<%--<script src="/statics/js/services.js?_version=${staticVersion}"></script>--%>
 <script src="/statics/js/controllers.js?_version=${staticVersion}"></script>
-<script src="/statics/js/filters.js"></script>
-<script src="/statics/js/directives.js"></script>
+
+<%--<script src="/statics/js/filters.js"></script>--%>
+<%--<script src="/statics/js/directives.js"></script>--%>
 </body>
 </html>

@@ -3,7 +3,7 @@
 /* Controllers */
 
 //用来操作多条件查询和grid展现的Ctrl
-function QueryCtrl($scope, serviceQuery, TraceQuery) {
+function QueryCtrl($scope, serviceQuery, TraceList) {
 //    $scope.serviceArray =
     $('#startTime').datetimepicker({
         language:  'zh-CN',
@@ -22,25 +22,22 @@ function QueryCtrl($scope, serviceQuery, TraceQuery) {
             });
         }
     });
-    var traceList = TraceQuery.get({serviceId:123123123},function(t){
+    var traceList = TraceList.get({serviceId:123123123},function(t){
         alert(t)
     });
 }
 //QueryCtrl.$inject = [$scope, queryService];
 
-function TraceCtrl($scope, Trace, getMyTrace, createView, createSpanAndDetail, createTree, createTreeDetail, getSpanMap){
-    //跟踪的js-model
-
+function TraceCtrl($scope, Trace, sequenceService, treeService){
     var trace = Trace.get({traceId:1366178446534},function(t){
-        getMyTrace(t);
-        var spanMap = getSpanMap(t);
+        sequenceService.getMyTrace(t);
+        var spanMap = sequenceService.getSpanMap(t);
 
-        createView(t);//生成时序图的svg
-        createSpanAndDetail(t, spanMap);//生成时序图的具体细节
+        sequenceService.createView(t);//生成时序图的svg
+        sequenceService.createSpanAndDetail(t, spanMap);//生成时序图的具体细节
 
-        createTree(t);//生成树的svg
-        createTreeDetail(t);//生成树的具体结构
-
+        treeService.createTree(t);//生成树的svg
+        treeService.createTreeDetail(t);//生成树的具体结构
     });
 
     $scope.trace = trace;

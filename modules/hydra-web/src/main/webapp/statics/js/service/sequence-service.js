@@ -1,0 +1,272 @@
+/*
+ * Copyright jd
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+'use strict';
+angular.module('hydra.services.sequence', [])
+    .factory('sequenceService', function(){
+        return {
+            getMyTrace :function (trace) {
+                var span = trace.rootSpan;
+                var spanIndex = {index: 0}
+                getMySpan(span, spanIndex);
+
+
+                function getMySpan(span, spanIndex) {
+                    var anMap = {};
+                    for (var i in span.annotations) {
+                        if (span.annotations[i]['value']=='cs') {
+                            anMap['cs'] = span.annotations[i]['timestamp'];
+                            continue;
+                        }
+                        if (span.annotations[i]['value']=='ss') {
+                            anMap['ss'] = span.annotations[i]['timestamp'];
+                            continue;
+                        }
+                        if (span.annotations[i]['value']=='sr') {
+                            anMap['sr'] = span.annotations[i]['timestamp'];
+                            continue;
+                        }
+                        if (span.annotations[i]['value']=='cr') {
+                            anMap['cr'] = span.annotations[i]['timestamp'];
+                            continue;
+                        }
+                    }
+                    span.used = {
+                        spanId: span.id,
+                        start: anMap['cs'],
+                        duration: span.durationServer,
+                        viewIndex: spanIndex.index,
+                        type: 'used'
+                    }
+                    span.wasted = {
+                        spanId: span.id,
+                        start: parseInt(anMap['cs']) + parseInt(span.durationServer),
+                        duration: parseInt(span.durationClient) - parseInt(span.durationServer),
+                        viewIndex: spanIndex.index,
+                        type: 'wasted'
+                    }
+                    spanIndex.index++;
+
+                    for (var i in span.children) {
+                        getMySpan(span.children[i], spanIndex);
+                    }
+                }
+            },
+            getSpanMap:function(trace){
+                var spanMap = {};
+                spanMap[trace.rootSpan.id] = trace.rootSpan;
+                setAllSpanIn(trace.rootSpan);
+
+                function setAllSpanIn(span){
+                    for(var i in span.children){
+                        spanMap[span.children[i].id] = span.children[i];
+                        setAllSpanIn(span.children[i]);
+                    }
+                }
+                return spanMap;
+            },
+            createView:function (trace) {
+                var view = {};
+                var margin = {top: 20, right: 40, bottom: 20, left: 5};
+                view.width = $('#sequenceDiv').width() - margin.right - margin.left;
+                view.height = 600 - margin.top - margin.bottom;
+
+                view.x = d3.scale.linear()
+                    .range([0, view.width]);
+
+                view.y = 20; // bar height
+
+                view.duration = 750;
+                view.delay = 25;
+                view.color = {};
+                view.color.used = '#1AC8AF';
+                view.color.wasted = '#C3ECF2';
+
+
+                view.hierarchy = d3.layout.partition()
+                    .value(function (d) {
+                        return d.size;
+                    });
+
+                view.xAxis = d3.svg.axis()
+                    .scale(view.x)
+                    .orient("top");
+
+                view.svg = d3.select("#sequenceDiv").append("svg")
+                    .attr("width", view.width + margin.right + margin.left)
+                    .attr("height", view.height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                view.svg.append("rect")
+                    .attr("class", "background")
+                    .attr("width", view.width)
+                    .attr("height", view.height);
+
+                view.svg.append("g")
+                    .attr("class", "x axis");
+
+
+                view.svg.append("svg:text")
+                    .attr("dy", 5)
+                    .attr("dx", view.width + 2)
+                    .text("ms");
+                trace.view = view;
+            },
+            createSpanAndDetail:function (trace, spanMap) {
+
+                var rootSpan = trace.rootSpan;
+                var view = trace.view;
+                if (!rootSpan.children) return;
+
+                view.x.domain([0, rootSpan.durationClient]).nice();
+
+                var enter = bar(rootSpan, spanMap)
+                    .attr("transform", stack(0))
+                    .style("opacity", 1)
+                    .style('fill', '#F0FFF0');
+
+
+                // Update the x-axis.
+                view.svg.selectAll(".x.axis").transition().duration(view.duration).call(view.xAxis);
+
+                // Transition entering bars to their new position.
+                var enterTransition = enter.transition()
+                    .duration(view.duration)
+                    .delay(function (d, i) {
+                        return i * view.delay;
+                    })
+                    .attr("transform", function (time) {
+                        return 'translate(' + view.x(time.start - rootSpan.used.start) + ',' + view.y * time.viewIndex * 1.2 + ')';
+                    })
+                    .style('fill', function (time) {
+                        return view.color[time.type];
+                    });
+
+                //生成每一个span
+                function bar(rootSpan) {
+                    var spans = [rootSpan.used, rootSpan.wasted];
+
+                    var maxIndex = 0;
+                    function pushChildren(span) {
+                        if (span.children) {
+                            for (var i in span.children) {
+                                if (span.children[i].used.viewIndex > maxIndex){
+                                    maxIndex = span.children[i].used.viewIndex;
+                                }
+                                spans.push(span.children[i].used);
+                                spans.push(span.children[i].wasted);
+                                pushChildren(span.children[i]);
+                            }
+                        }
+                    }
+
+                    pushChildren(rootSpan);
+
+
+                    var bar = view.svg.insert("g", ".y.axis")
+                        .attr("class", "enter")
+                        .attr("transform", "translate(0,5)")
+                        .selectAll("g")
+                        .data(spans)
+                        .enter().append("g")
+                        .style("cursor", function (d) {
+                            return "pointer";
+                        })
+                        .attr('span', function (time) {
+                            return time.spanId;
+                        })
+                        .attr('viewindex', function (time) {
+                            return time.viewIndex;
+                        })
+                        .attr('timetype', function(time){
+                            return time.type;
+                        });
+
+
+                    bar.append("rect")
+                        .attr("width", function (time) {
+                            return view.x(time.duration);
+                        })
+                        .attr("height", view.y)
+                        .on('mouseover', function(){
+                            d3.select(this).attr('stroke', '#F3B1A5').attr('stroke-width', '3px');
+                        })
+                        .on('mouseout', function(){
+                            d3.select(this).attr('stroke-width', '0px');
+                        });
+
+                    view.svg.append("g")
+                        .attr("class", "y axis")
+                        .attr('id', 'yaxis')
+                        .append("line")
+                        .attr("y1", (maxIndex+1) * view.y * 1.2);
+
+                    createSpanTip(spanMap);//tip
+
+                    return bar;
+                }
+
+                //span展开前的位置
+                function stack(i) {
+                    var x0 = 0;
+                    return function (d) {
+                        var tx = "translate(" + x0 + "," + view.y * i * 1.2 + ")";
+                        x0 += view.x(d.duration);
+                        return tx;
+                    };
+                }
+
+                function createSpanTip(spanMap){
+                    $('#sequenceDiv g[span]').each(function(){
+                        var spanId = $(this).attr('span');
+                        var spanModel = spanMap[spanId];
+
+                        var isUsed = $(this).attr('timetype')=='used'?true:false;
+                        $(this).qtip({
+                            style:{
+                                classes:'alert alert-block',
+                                width:150
+                            },
+                            position:{
+                                viewport: $(window)
+                            },
+                            hide:{
+                                delay:200,
+                                fixed:true
+                            },
+                            content:function(){
+                                var html = '<div><table class="table table-condensed" style="width:150;font-family:Tahoma;">';
+
+                                html += '<tr><td>服务名:</td><td>'+spanModel.spanName+'</td></tr>';
+                                if (isUsed){
+                                    html += '<tr><td style="text-align:center;"><span class="label label-success">调用时长</span></td>';
+                                }else {
+                                    html += '<tr><td style="text-align:center;"><span class="label label-info">网络消耗</span></td>';
+                                }
+                                html += '<td>'+(isUsed?spanModel.used.duration:spanModel.wasted.duration)+'ms</td></tr>';
+                                html += '</table></div>';
+                                return html;
+                            }()
+                        });
+                    })
+                }
+
+            }
+
+
+        }
+    });

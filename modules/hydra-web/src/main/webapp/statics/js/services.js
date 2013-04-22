@@ -5,18 +5,7 @@
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-angular.module('hydra.services', ['ngResource'])
-    .factory('serviceQuery', function ($resource) {
-        return $resource('/rest/service/all', {}, {
-            getAllService: {method: 'GET', isArray: true}
-        });
-    })
-    .factory('Trace', function ($resource) {
-        return $resource('/rest/trace/:traceId');
-    })
-    .factory('TraceQuery', function ($resource) {
-        return $resource('/rest/trace/list/:serviceId');
-    })
+angular.module('hydra.services', [])
     .factory('createView', function () {
         return function (trace) {
             var view = {};

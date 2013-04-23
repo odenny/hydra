@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 'use strict';
-function QueryCtrl($scope, queryService, TraceList) {
+function QueryCtrl($scope, queryService, TraceList, AppList, ServiceList) {
     $('#startTime').datetimepicker({
         language:  'zh-CN',
         weekStart: 1,
@@ -25,13 +25,20 @@ function QueryCtrl($scope, queryService, TraceList) {
         forceParse: 0,
         pickerReferer:'input'
     });
-//    $('#serviceName').typeahead({
-//        source:function(){
-//            return serviceQuery.getAllService(function(array){
-//                console.log(array)
-//            });
-//        }
-//    });
+
+    $scope.appList = AppList.getAll();
+
+    var service = {change:function(appId){
+        $scope.service.list = ServiceList.getAll({appId:appId},function(serviceList){
+            var serviceArray = [];
+            for(var i in serviceList){
+                serviceArray.push(serviceList[i].name);
+            }
+            $('#serviceName').typeahead({source:serviceArray});
+        });
+    }}
+
+    $scope.service = service;
 
     $scope.traceList =  TraceList.getTraceList({serviceId:22001, startTime:1366614281227, durationMin:20, durationMax:90, sum:500}, function(traceList){
         queryService.initTable(traceList);

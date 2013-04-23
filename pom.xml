@@ -77,6 +77,7 @@
         <module>modules/hydra-collector</module>
         <module>modules/hydra-collector-service</module>
         <module>modules/hydra-hbase</module>
+        <module>modules/hydra-mysql</module>
     </modules>
 
     <properties>
@@ -149,6 +150,11 @@
             <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-hbase</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-mysql</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- test -->

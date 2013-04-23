@@ -13,15 +13,19 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-'use strict';
-angular.module('hydra.repository.service', ['ngResource'])
-    .factory('ServiceList', function ($resource) {
-        return $resource('/rest/service/:appId', {}, {
-            getAll: {method: 'GET', isArray: true}
-        });
-    })
-    .factory('AppList', function ($resource) {
-        return $resource('/rest/service/appList', {}, {
-            getAll: {method: 'GET', isArray: true}
-        });
-    });
+
+package com.jd.bdp.hydra.mysql.persistent.dao;
+
+import com.jd.bdp.hydra.mysql.persistent.entity.ServiceIdGen;
+
+/**
+ * User: biandi
+ * Date: 13-4-16
+ * Time: 上午9:49
+ */
+public interface ServiceIdGenMapper {
+
+    void updateServiceIdGen(ServiceIdGen serviceIdGen);
+
+    ServiceIdGen getServiceIdGen();
+}

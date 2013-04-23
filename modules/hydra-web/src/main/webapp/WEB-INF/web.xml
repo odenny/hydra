@@ -10,7 +10,8 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:hydra-hbase.xml
+            classpath*:hydra-hbase.xml,
+            classpath*:hydra-mysql.xml
         </param-value>
     </context-param>
 

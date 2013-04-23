@@ -1,9 +1,9 @@
 package com.jd.bdp.hydra.dubbomonitor.provider.impl;
 
 import com.jd.bdp.hydra.dubbomonitor.LeaderService;
-import com.jd.bdp.hydra.dubbomonitor.persistent.service.AppService;
-import com.jd.bdp.hydra.dubbomonitor.persistent.service.SeedService;
-import com.jd.bdp.hydra.dubbomonitor.persistent.service.ServiceService;
+import com.jd.bdp.hydra.mysql.persistent.service.AppService;
+import com.jd.bdp.hydra.mysql.persistent.service.SeedService;
+import com.jd.bdp.hydra.mysql.persistent.service.ServiceService;
 
 import java.util.HashMap;
 import java.util.List;

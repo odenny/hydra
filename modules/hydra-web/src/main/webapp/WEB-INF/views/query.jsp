@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="en">
 <head>
     <style type="text/css">
         .queryDiv {
             float: left;
             height: auto;
-            width: 300px;
+            width: 350px;
             padding: 40 0 0 20;
         }
         .resultDiv{
@@ -83,17 +83,25 @@
 <body ng-controller="QueryCtrl">
 <div id="query" class="queryDiv">
     <form class="form-horizontal">
-        <table class="table table-striped" style="width: 100%;">
+        <table class="table table-striped table-bordered" style="width: 100%;">
             <thead>
             <tr>
-                <th colspan="2"></th>
+                <th colspan="2" style="text-align: center;">查询跟踪</th>
             </tr>
             </thead>
             <tbody>
             <tr>
+                <td style="width: 120px;">所属应用：</td>
+                <td>
+                    <select style="width: 100%;" ng-model="app" ng-options="app.name for app in appList" ng-change="service.change(app.id)">
+                        <option value="">选择一个应用</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>服务名：</td>
                 <td>
-                    <input id="serviceName" type="text" data-provide="typeahead" style="width: 175px;height: 30px;"/>
+                    <input id="serviceName" type="text" data-provide="typeahead" style="height: 30px;"/>
                 </td>
             </tr>
             <tr>
@@ -101,7 +109,7 @@
                 <td>
                     <div id="startTime" class="input-append date form_datetime"
                          data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1" style="width: 150px;">
-                        <input size="16" type="text" value="" style="height: 30px;width: 120px;" readonly>
+                        <input size="16" type="text" value="" style="height: 30px;width: 100%;" readonly>
                         <span class="add-on"><i class="icon-remove"></i></span>
                         <span class="add-on"><i class="icon-th"></i></span>
                     </div>

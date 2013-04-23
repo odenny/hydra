@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright jd
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jd.bdp.hydra.mysql.persistent.dao.SeedMapper">
+
+    <resultMap id="SeedResultMap" type="SeedEntity">
+        <id property="SeedId" column="Id"/>
+        <result property="seedPlusId" column="seedPlusValue"/>
+    </resultMap>
+
+    <!--新增加一个Seed-->
+    <insert id="addSeed" parameterType="SeedEntity" useGeneratedKeys="true">
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+           SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TB_DATA_SEED(`VALUE`) VALUES(#{value})
+    </insert>
+    <!--删除一个Seed-->
+    <delete id="deleteSeed" parameterType="SeedEntity">
+        DELETE FROM TB_DATA_SEED WHERE ID=#{id}
+    </delete>
+    <!--修改一个Seed-->
+    <update id="updateSeed" parameterType="SeedEntity">
+        UPDATE TB_DATA_SEED SET VALUE=#{value} WHERE ID=#{id}
+    </update>
+    <!--查询-->
+    <select id="getSeedById" parameterType="int" resultType="SeedEntity">
+        SELECT *  FROM TB_DATA_SEED WHERE ID = #{id}
+    </select>
+    <select id="findSeedByValue" parameterType="Integer" resultType="Integer">
+        SELECT COUNT(*) FROM TB_DATA_SEED WHERE VALUE=#{value}
+    </select>
+    <!--查最大的种子数-->
+    <select id="getMaxSeedValue" resultType="java.lang.Integer">
+        SELECT MAX(VALUE) FROM TB_DATA_SEED
+    </select>
+
+    <!--版本2的种子逻辑-->
+    <!--获取数据库中的唯一种子数-->
+    <select id="findTheSeed" resultType="SeedEntity">
+           SELECT * FROM TB_DATA_SEED WHERE ID=(
+                   SELECT MAX(ID) FROM TB_DATA_SEED
+           )
+    </select>
+</mapper>

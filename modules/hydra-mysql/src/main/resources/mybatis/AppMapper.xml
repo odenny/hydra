@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright jd
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jd.bdp.hydra.mysql.persistent.dao.AppMapper">
+
+    <resultMap id="AppResultMap" type="AppEntity">
+    </resultMap>
+
+    <!--新增加一个App-->
+    <insert id="addApp" parameterType="AppEntity" useGeneratedKeys="true">
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+           SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO TB_PARA_APP(NAME) VALUES(#{name})
+    </insert>
+    <!--删除一个App-->
+    <delete id="deleteApp" parameterType="AppEntity">
+        DELETE FROM TB_PARA_APP WHERE TB_PARA_APP.id=#{id}
+    </delete>
+    <!--修改一个App-->
+    <update id="updateApp" parameterType="AppEntity">
+        UPDATE TB_PARA_APP SET NAME=#{name} WHERE ID=#{id}
+    </update>
+    <!--查询-->
+    <select id="getAppById" parameterType="int" resultType="AppEntity">
+        SELECT *  FROM TB_PARA_APP WHERE ID = #{id}
+    </select>
+    <!-- 查询服务器列表 -->
+    <select id="getAppAll" resultType="AppEntity" resultMap="AppResultMap">
+            SELECT * FROM TB_PARA_APP
+    </select>
+
+    <!-- 根据name查app -->
+    <select id="getAppByName" parameterType="String" resultType="AppEntity">
+        SELECT *  FROM TB_PARA_APP WHERE NAME = #{name}
+    </select>
+    <!-- 删除所有app -->
+    <delete id="deleteAllApp">
+        DELETE FROM TB_PARA_APP
+    </delete>
+
+</mapper>

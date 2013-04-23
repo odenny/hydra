@@ -2,8 +2,12 @@ package com.jd.bdp.hydra.rest;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.jd.bdp.hydra.mysql.persistent.service.AppService;
+import com.jd.bdp.hydra.mysql.persistent.service.ServiceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,25 +24,22 @@ import java.util.Date;
 public class ServiceController {
 
 
-    @RequestMapping("/all")
+    @RequestMapping("/appList")
     @ResponseBody
-    public JSONArray getAllServices() {
-        JSONArray array = new JSONArray();
-        for (int i = 0; i < 10; i++) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", i);
-            obj.put("name", "service" + i);
-            array.add(obj);
-        }
-        return array;
+    public JSONArray getAllApp() {
+        return (JSONArray) JSONArray.toJSON(appService.getAll());
     }
 
 
-    @RequestMapping("/testAjax")
+    @RequestMapping("/{appId}")
     @ResponseBody
-    public JSONObject testAjax(HttpServletRequest request) {
-        JSONObject obj = new JSONObject();
-        obj.put("123", "123");
-        return obj;
+    public JSONArray testAjax(@PathVariable int appId) {
+        return (JSONArray) JSONArray.toJSON(serviceService.get(appId));
     }
+
+    @Autowired
+    private AppService appService;
+
+    @Autowired
+    private ServiceService serviceService;
 }

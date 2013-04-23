@@ -57,28 +57,14 @@ Qualifier:{
 	traceId
 }
  */
-public class HbaseServiceImpl implements HbaseService {
-    public static HTablePool POOL;
-    public static Configuration conf = HBaseConfiguration.create(new Configuration());
-    public static final String duration_index = "duration_index";
-    public static final String duration_index_family_colume = "trace";
-    public static final String ann_index = "annotation_index";
-    public static final String ann_index_family_colume = "trace";
-    public static final String TR_T = "trace";
-    public static final String trace_family_colume = "span";
-
-    static {
-        conf.set("hbase.zookeeper.quorum", "boss,emp1,emp2");
-        conf.set("hbase.client.retries.number", "3");
-        POOL = new HTablePool(conf, 2);
-    }
+public class HbaseServiceImpl extends HbaseUtils implements HbaseService {
 
     public void createTable() {
         try {
             HBaseAdmin hBaseAdmin = new HBaseAdmin(conf);
             if (!hBaseAdmin.tableExists(duration_index)) {
                 HTableDescriptor hTableDescriptor = new HTableDescriptor(duration_index);
-                hTableDescriptor.addFamily(new HColumnDescriptor(duration_index_family_colume));
+                hTableDescriptor.addFamily(new HColumnDescriptor(duration_index_family_column));
                 hBaseAdmin.createTable(hTableDescriptor);
             }
             if (!hBaseAdmin.tableExists(TR_T)) {
@@ -87,8 +73,8 @@ public class HbaseServiceImpl implements HbaseService {
                 hBaseAdmin.createTable(hTableDescriptor);
             }
             if (!hBaseAdmin.tableExists(ann_index)) {
-                HTableDescriptor hTableDescriptor = new HTableDescriptor(trace_family_colume);
-                hTableDescriptor.addFamily(new HColumnDescriptor(ann_index_family_colume));
+                HTableDescriptor hTableDescriptor = new HTableDescriptor(trace_family_column);
+                hTableDescriptor.addFamily(new HColumnDescriptor(ann_index_family_column));
                 hBaseAdmin.createTable(hTableDescriptor);
             }
         } catch (IOException e) {
@@ -102,14 +88,14 @@ public class HbaseServiceImpl implements HbaseService {
         Put put = new Put(rowkey.getBytes());
         String jsonValue = JSON.toJSONString(span);
         String spanId = String.valueOf(span.getId());
-        if (HbaseUtils.isTopAnntation(span)) {
+        if (isTopAnntation(span)) {
             spanId = spanId + "C";
         } else {
             spanId = spanId + "S";
         }
         HTableInterface htable = null;
         try {
-            put.add(trace_family_colume.getBytes(), spanId.getBytes(), jsonValue.getBytes());
+            put.add(trace_family_column.getBytes(), spanId.getBytes(), jsonValue.getBytes());
             htable = POOL.getTable(TR_T);
             htable.put(put);
         } catch (IOException e) {
@@ -128,14 +114,14 @@ public class HbaseServiceImpl implements HbaseService {
         for (Annotation a : alist) {
             String rowkey = a.getHost().getServiceName() + ":" + System.currentTimeMillis() + ":" + a.getValue();
             Put put = new Put(rowkey.getBytes());
-            put.add(ann_index_family_colume.getBytes(), "traceId".getBytes(), HbaseUtils.long2ByteArray(span.getTraceId()));
+            put.add(ann_index_family_column.getBytes(), "traceId".getBytes(), long2ByteArray(span.getTraceId()));
             putlist.add(put);
         }
 
         for (BinaryAnnotation b : span.getBinaryAnnotations()) {
             String rowkey = b.getHost().getServiceName() + ":" + System.currentTimeMillis() + ":" + b.getKey();
             Put put = new Put(rowkey.getBytes());
-            put.add(ann_index_family_colume.getBytes(), "traceId".getBytes(), HbaseUtils.long2ByteArray(span.getTraceId()));
+            put.add(ann_index_family_column.getBytes(), "traceId".getBytes(), long2ByteArray(span.getTraceId()));
             putlist.add(put);
         }
 
@@ -159,14 +145,16 @@ public class HbaseServiceImpl implements HbaseService {
 
     public void durationIndex(Span span) {
         List<Annotation> alist = span.getAnnotations();
-        Annotation cs = HbaseUtils.getCsAnnotation(alist);
-        Annotation cr = HbaseUtils.getCrAnnotation(alist);
+        Annotation cs = getCsAnnotation(alist);
+        Annotation cr = getCrAnnotation(alist);
         if (cs != null) {
             long duration = cs.getTimestamp() - cr.getTimestamp();
-            String rowkey = cs.getHost().getServiceName() + ":" + duration;
-            System.out.println(rowkey);
+            String rowkey = cs.getHost().getServiceName() + ":" + cs.getTimestamp();
             Put put = new Put(rowkey.getBytes());
-            put.add(duration_index_family_colume.getBytes(), "traceId".getBytes(), HbaseUtils.long2ByteArray(span.getTraceId()));
+            //rowkey:serviceId:csTime
+            //每列的timestamp为duration
+            //每列列名为traceId，值为1（用来区分1ms内的跟踪）
+            put.add(duration_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), duration,  "1".getBytes());
             HTableInterface htable = null;
             try {
                 htable = POOL.getTable(duration_index);
@@ -185,65 +173,5 @@ public class HbaseServiceImpl implements HbaseService {
         }
     }
 
-    public static void main(String[] strings){
-        HbaseServiceImpl hbaseService = new HbaseServiceImpl();
-        for(int i = 0 ; i < 100;i++){
-            if(i%2 == 0){
-                Span span = new Span();
-                Endpoint endpoint = new Endpoint();
-                endpoint.setServiceName(i+"");
-                endpoint.setPort(1234);
-                endpoint.setIp("127.0.0."+i);
-                Annotation cs = new Annotation();
-                cs.setHost(endpoint);
-                cs.setTimestamp(System.currentTimeMillis());
-                cs.setValue("cs");
-                Annotation cr = new Annotation();
-                cr.setTimestamp(System.currentTimeMillis()-100);
-                cr.setValue("cr");
-                cr.setHost(endpoint);
-                span.setId(new Long(i));
-                span.setSample(true);
-                span.setTraceId(new Long(i+i));
-                span.setSpanName("method_"+i);
-                span.setParentId(new Long(i+1));
-                span.addAnnotation(cr);
-                span.addAnnotation(cs);
-                try {
-                    hbaseService.addSpan(span);
-                    hbaseService.durationIndex(span);
-                    hbaseService.annotationIndex(span);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                Span span = new Span();
-                Endpoint endpoint = new Endpoint();
-                endpoint.setServiceName(i+"");
-                endpoint.setPort(4321);
-                endpoint.setIp("127.0.0."+i);
-                Annotation sr = new Annotation();
-                sr.setHost(endpoint);
-                sr.setTimestamp(System.currentTimeMillis());
-                sr.setValue("ss");
-                Annotation ss = new Annotation();
-                ss.setTimestamp(System.currentTimeMillis()-100);
-                ss.setValue("sr");
-                ss.setHost(endpoint);
-                span.setParentId(new Long(i+1));
-                span.setId(new Long(i));
-                span.setSpanName("method_"+i);
-                span.setTraceId(new Long(i+i));
-                span.addAnnotation(sr);
-                span.addAnnotation(ss);
-                try{
-                    hbaseService.addSpan(span);
-                    hbaseService.durationIndex(span);
-                    hbaseService.annotationIndex(span);
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+
 }

@@ -16,6 +16,7 @@
 
 package com.jd.bdp.hydra.hbase.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -26,4 +27,6 @@ import com.alibaba.fastjson.JSONObject;
 public interface QueryService {
 
     JSONObject getTraceInfo(Long traceId);
+
+    JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax);
 }

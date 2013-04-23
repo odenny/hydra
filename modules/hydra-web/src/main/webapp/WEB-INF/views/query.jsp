@@ -1,28 +1,107 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="en">
 <head>
-    <style>
-        .viewDiv {
-            border: 1px solid red;
-            display: inline-block;
+    <style type="text/css">
+        .queryDiv {
+            float: left;
             height: auto;
+            width: 350px;
+            padding: 40 0 0 20;
         }
+        .resultDiv{
+            float: left;
+            height: auto;
+            width:75%;
+            padding: 40 0 0 20;
+        }
+        <!-- bootstrap-table -->
+        div.dataTables_length label {
+            float: left;
+            text-align: left;
+        }
+
+        div.dataTables_length select {
+            width: 80px;
+        }
+
+        div.dataTables_filter label {
+            float: right;
+        }
+
+        div.dataTables_filter input {
+            height: 30px;
+        }
+
+        div.dataTables_info {
+            padding-top: 8px;
+        }
+
+        div.dataTables_paginate {
+            float: right;
+            margin: 0;
+        }
+
+        table {
+            margin: 1em 0;
+            clear: both;
+        }
+
+        table.dataTable th:active {
+            outline: none;
+        }
+        .sorting_1{
+
+        }
+        .mySpan{
+            width: 95%;
+        }
+        .dataTables_info{
+            padding-left: 20px;
+        }
+        .dataTables_length{
+            padding-left: 20px;
+        }
+
+
+        #traceTable tr.even:hover td {
+            background-color: #DDFF75;
+        }
+
+
+        #traceTable tr.odd:hover td{
+            background-color: #E6FF99;
+        }
+
     </style>
+    <link href="/statics/lib/bootstrap/datetimepicker/css/datetimepicker.css" rel="stylesheet" media="screen">
+    <link href="/statics/lib/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/plugin.js"></script>
+    <script type="text/javascript" src="/statics/lib/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/statics/lib/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 </head>
-<body>
-<div id="query" class="viewDiv container" style="width: 300px;">
+<body ng-controller="QueryCtrl">
+<div id="query" class="queryDiv">
     <form class="form-horizontal">
-        <table class="table table-striped" style="width: 100%;">
+        <table class="table table-striped table-bordered" style="width: 100%;">
             <thead>
             <tr>
-                <th colspan="2"></th>
+                <th colspan="2" style="text-align: center;">查询跟踪</th>
             </tr>
             </thead>
             <tbody>
             <tr>
+                <td style="width: 120px;">所属应用：</td>
+                <td>
+                    <select style="width: 100%;" ng-model="app" ng-options="app.name for app in appList" ng-change="service.change(app.id)">
+                        <option value="">选择一个应用</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>服务名：</td>
                 <td>
-                    <input id="serviceName" type="text" data-provide="typeahead" style="width: 175px;height: 30px;"/>
+                    <input id="serviceName" type="text" data-provide="typeahead" style="height: 30px;"/>
                 </td>
             </tr>
             <tr>
@@ -30,23 +109,11 @@
                 <td>
                     <div id="startTime" class="input-append date form_datetime"
                          data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1" style="width: 150px;">
-                        <input size="16" type="text" value="" style="height: 30px;width: 120px;" readonly>
+                        <input size="16" type="text" value="" style="height: 30px;width: 100%;" readonly>
                         <span class="add-on"><i class="icon-remove"></i></span>
                         <span class="add-on"><i class="icon-th"></i></span>
                     </div>
                     <input type="hidden" id="dtp_input1" value=""/><br/>
-                </td>
-            </tr>
-            <tr>
-                <td>结束时间:</td>
-                <td>
-                    <div id="endTime" class="input-append date form_datetime"
-                         data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1" style="width: 150px;">
-                        <input size="16" type="text" value="" style="height: 30px;width: 120px;" readonly>
-                        <span class="add-on"><i class="icon-remove"></i></span>
-                        <span class="add-on"><i class="icon-th"></i></span>
-                    </div>
-                    <input type="hidden" id="dtp_input2" value=""/><br/>
                 </td>
             </tr>
             <tr>
@@ -58,6 +125,17 @@
         </table>
     </form>
 </div>
-<div id="result" class="viewDiv" style=""></div>
+<div id="result" class="resultDiv">
+    <table cellpadding="0" cellspacing="0" border="0" class="bordered-table table-striped" id="traceTable">
+        <thead>
+        <tr>
+            <th>服务名</th>
+            <th>调用时间</th>
+            <th>调用时长</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+    </table>
+</div>
 </body>
 </html>

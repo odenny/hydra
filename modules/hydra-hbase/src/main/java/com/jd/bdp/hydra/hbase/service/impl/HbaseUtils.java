@@ -19,6 +19,9 @@ package com.jd.bdp.hydra.hbase.service.impl;
 import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.Span;
 import org.apache.commons.lang.StringUtils;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.client.HTablePool;
 
 import java.util.List;
 
@@ -29,7 +32,22 @@ import java.util.List;
  * Time: 下午4:19
   */
 public class HbaseUtils {
-    static Annotation getSsAnnotation(List<Annotation> alist){
+    public static HTablePool POOL;
+    public static Configuration conf = HBaseConfiguration.create(new Configuration());
+    public static final String duration_index = "duration_index";
+    public static final String duration_index_family_column = "trace";
+    public static final String ann_index = "annotation_index";
+    public static final String ann_index_family_column = "trace";
+    public static final String TR_T = "trace";
+    public static final String trace_family_column = "span";
+
+    static {
+        conf.set("hbase.zookeeper.quorum", "boss,emp1,emp2");
+        conf.set("hbase.client.retries.number", "3");
+        POOL = new HTablePool(conf, 2);
+    }
+
+    Annotation getSsAnnotation(List<Annotation> alist){
         for(Annotation a : alist){
             if(StringUtils.endsWithIgnoreCase("ss",a.getValue())){
                 return a;
@@ -38,7 +56,7 @@ public class HbaseUtils {
         return null;
     }
 
-    static Annotation getSrAnnotation(List<Annotation> alist){
+    Annotation getSrAnnotation(List<Annotation> alist){
         for(Annotation a : alist){
             if(StringUtils.endsWithIgnoreCase("sr",a.getValue())){
                 return a;
@@ -47,7 +65,7 @@ public class HbaseUtils {
         return null;
     }
 
-    static long byteArray2Long(byte[] value){
+    long byteArray2Long(byte[] value){
         long s = 0;
         long s0 = value[0] & 0xff;
         long s1 = value[1] & 0xff;
@@ -69,7 +87,7 @@ public class HbaseUtils {
     }
 
 
-    static byte[] long2ByteArray(Long value){
+    byte[] long2ByteArray(Long value){
         long v = value.longValue();
         byte[] b = new byte[8];
         for(int i = 0 ; i < b.length;i++){
@@ -79,7 +97,7 @@ public class HbaseUtils {
         return b;
     }
 
-    static boolean isTopAnntation(Span span){
+    boolean isTopAnntation(Span span){
         List<Annotation> alist = span.getAnnotations();
         boolean isfirst = false;
         for(Annotation a : alist){
@@ -90,7 +108,7 @@ public class HbaseUtils {
         return isfirst;
     }
 
-    static Annotation getCsAnnotation(List<Annotation> alist){
+    Annotation getCsAnnotation(List<Annotation> alist){
         for(Annotation a : alist){
             if(StringUtils.endsWithIgnoreCase("cs", a.getValue())){
                 return a;
@@ -99,9 +117,9 @@ public class HbaseUtils {
         return null;
     }
 
-    static Annotation getCrAnnotation(List<Annotation> alist){
+    Annotation getCrAnnotation(List<Annotation> alist){
         for(Annotation a : alist){
-            if(StringUtils.endsWithIgnoreCase("cs",a.getValue())){
+            if(StringUtils.endsWithIgnoreCase("cr",a.getValue())){
                 return a;
             }
         }

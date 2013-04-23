@@ -19,6 +19,10 @@
             <artifactId>hydra-interface</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-mysql</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>

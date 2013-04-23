@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright jd
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jd.bdp.hydra.mysql.persistent.dao.ServiceMapper">
+
+    <resultMap id="ServiceResultMap" type="ServiceEntity">
+        <result property="appId" column="APP_ID" />
+    </resultMap>
+
+    <!--新增加一个Service-->
+    <insert id="addService" parameterType="ServiceEntity">
+        INSERT INTO TB_PARA_SERVICE(ID, NAME,APP_ID) VALUES(#{id}, #{name}, #{appId})
+    </insert>
+    <!--删除一个Service-->
+    <delete id="deleteService" parameterType="ServiceEntity">
+        DELETE FROM TB_PARA_SERVICE WHERE TB_PARA_SERVICE.id=#{id}
+    </delete>
+    <!--修改一个Service-->
+    <update id="updateService" parameterType="ServiceEntity">
+        UPDATE TB_PARA_SERVICE SET name=#{name},app_id=#{appId} WHERE id=#{id}
+    </update>
+    <!--查询-->
+    <select id="getServiceById" parameterType="int" resultMap="ServiceResultMap">
+        SELECT *  FROM TB_PARA_SERVICE WHERE ID = #{id}
+    </select>
+    <!-- 查询服务器列表 -->
+    <select id="getServiceAll" resultType="ServiceEntity" resultMap="ServiceResultMap">
+            SELECT * FROM TB_PARA_SERVICE
+    </select>
+
+    <!-- 根据名称查Service -->
+    <select id="getServiceByName" parameterType="map" resultMap="ServiceResultMap">
+        SELECT * FROM TB_PARA_SERVICE WHERE NAME =#{name} AND APP_ID = #{appId}
+    </select>
+    <!--删除所有Service-->
+    <delete id="deleteAllService" parameterType="ServiceEntity">
+        DELETE FROM TB_PARA_SERVICE
+    </delete>
+
+    <!-- 根据appId查找 -->
+    <select id="getServiceByAppId" parameterType="int" resultMap="ServiceResultMap">
+        SELECT * FROM TB_PARA_SERVICE WHERE APP_ID = #{appId}
+    </select>
+
+</mapper>

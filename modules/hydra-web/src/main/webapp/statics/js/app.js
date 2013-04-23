@@ -5,7 +5,7 @@
 angular.module('myApp',
         [
             'hydra.services.sequence','hydra.services.tree',
-            'hydra.repository.trace','hydra.repository.service'
+            'hydra.repository.trace','hydra.repository.service','hydra.services.query'
         ]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/query', {templateUrl: '/index/query.html', controller: QueryCtrl});

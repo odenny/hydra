@@ -28,5 +28,5 @@ public interface QueryService {
 
     JSONObject getTraceInfo(Long traceId);
 
-    JSONArray getTracesByDuration(String serviceId, Long start, int num, int durationMin, int durationMax);
+    JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax);
 }

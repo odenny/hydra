@@ -22,15 +22,10 @@ import java.util.Map;
 public class TraceController {
 
 
-    @RequestMapping("/list/{serviceId}")
+    @RequestMapping("/list/{serviceId}/{startTime}/{durationMin}/{durationMax}/{sum}")
     @ResponseBody
-    public JSONArray getTraces(@PathVariable String serviceId) {
-        System.out.println("111111111111111");
-        System.out.println(serviceId);
-//        System.out.println(current);
-//        System.out.println(pageSum);
-//        System.out.println(lastRowkey);
-        return null;
+    public JSONArray getTraces(@PathVariable String serviceId, @PathVariable long startTime, @PathVariable int durationMin, @PathVariable int durationMax, @PathVariable int sum) {
+        return queryService.getTracesByDuration(serviceId, startTime, sum, durationMin, durationMax);
     }
 
     @RequestMapping("/{traceId}")
@@ -221,9 +216,6 @@ public class TraceController {
 //        return obj;
     }
 
-
     @Autowired
     private QueryService queryService;
-
-
 }

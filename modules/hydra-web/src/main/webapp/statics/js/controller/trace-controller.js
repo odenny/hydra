@@ -1,33 +1,19 @@
+/*
+ * Copyright jd
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
 'use strict';
-
-/* Controllers */
-
-//用来操作多条件查询和grid展现的Ctrl
-function QueryCtrl($scope, serviceQuery, TraceList) {
-//    $scope.serviceArray =
-    $('#startTime').datetimepicker({
-        language:  'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0,
-        pickerReferer:'input'
-    });
-    $('#serviceName').typeahead({
-        source:function(){
-            return serviceQuery.getAllService(function(array){
-                console.log(array)
-            });
-        }
-    });
-    var traceList = TraceList.get({serviceId:123123123},function(t){
-        alert(t)
-    });
-}
-//QueryCtrl.$inject = [$scope, queryService];
-
 function TraceCtrl($scope, Trace, sequenceService, treeService){
     var trace = Trace.get({traceId:1366178446534},function(t){
         sequenceService.getMyTrace(t);
@@ -41,7 +27,6 @@ function TraceCtrl($scope, Trace, sequenceService, treeService){
     });
 
     $scope.trace = trace;
-
 
 
 //    trace = {
@@ -124,8 +109,3 @@ function TraceCtrl($scope, Trace, sequenceService, treeService){
 //    };
 
 }
-
-
-function MyCtrl2() {
-}
-MyCtrl2.$inject = [];

@@ -65,18 +65,18 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesByDuration(String serviceId, Long start, int num, int durationMin, int durationMax) {
+    public JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax) {
         JSONArray array = new JSONArray();
         Scan scan = new Scan();
         scan.setStartRow(new String(serviceId + "." + start).getBytes());
-        Filter filter = new PageFilter(num);
+        Filter filter = new PageFilter(sum);
         scan.setFilter(filter);
         try {
             scan.setTimeRange(durationMin, durationMax);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        HTableInterface table;
+        HTableInterface table = null;
         ResultScanner rs = null;
         try {
             table = POOL.getTable(duration_index);
@@ -98,7 +98,12 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
             e.printStackTrace();
             return null;
         } finally {
-            rs.close();
+            try {
+                table.close();
+                rs.close();
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
     }
 

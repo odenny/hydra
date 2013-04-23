@@ -4,6 +4,8 @@
 <head>
     <title></title>
     <link href="/statics/lib/qTip2-2.0.1/dist/jquery.qtip.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="http://img.bdp.jd.com/d3/v3/d3.v3.min.js"></script>
+    <script src="/statics/lib/qTip2-2.0.1/dist/jquery.qtip.js" type="text/javascript"></script>
     <style type="text/css">
 
         rect.background {

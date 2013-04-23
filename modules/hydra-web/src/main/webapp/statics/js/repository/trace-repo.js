@@ -19,5 +19,10 @@ angular.module('hydra.repository.trace', ['ngResource'])
         return $resource('/rest/trace/:traceId');
     })
     .factory('TraceList', function ($resource) {
-        return $resource('/rest/trace/list/:serviceId');
+        return $resource('/rest/trace/list/:serviceId/:startTime/:durationMin/:durationMax/:sum', {}, {
+            getTraceList:{
+                method:'GET',
+                isArray:true
+            }
+        });
     });

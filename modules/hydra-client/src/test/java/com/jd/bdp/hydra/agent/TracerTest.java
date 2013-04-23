@@ -6,16 +6,23 @@ import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.agent.support.Configuration;
 import junit.framework.TestCase;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {
+        "/hydra-config-test.xml"
+})
 public class TracerTest extends TestCase {
-
+    @Autowired
+    private Tracer tracer;
     private int threads = 20;
-    private Tracer tracer = null;
     private CyclicBarrier cyclicbarrier = new CyclicBarrier(threads);
     private CountDownLatch countDownLatch = new CountDownLatch(threads);
 
@@ -35,11 +42,6 @@ public class TracerTest extends TestCase {
 
     @Test
     public void testTracer() throws Exception {
-        tracer = Tracer.getTracer();
-        Configuration configuration = new Configuration();
-        configuration.setApplicationName("test1");
-        configuration.setQueueSize(1024);
-        tracer.setConfig(configuration,new TestLeaderService(),new TestHydraService());
         for(int k = 0 ; k < threads ; k++){
             Thread t = new TestTask();
             t.start();
@@ -67,7 +69,7 @@ public class TracerTest extends TestCase {
             }
             String method = "method_" + i;
             Span span = null;
-//            span = tracer.newSpan(method);
+            span = tracer.newSpan(method,clientEndPoint);
             if (span.isSample()) {
                 long start = System.currentTimeMillis();
                 tracer.clientSendRecord(span, clientEndPoint, start);

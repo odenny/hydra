@@ -1,0 +1,18 @@
+package com.jd.bdp.hydra.benchmark.startCollector;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ * User: xiangkui
+ * Date: 13-4-23
+ * Time: 下午6:19
+ */
+public class startCollector {
+    public static void main(Exception[] args) throws Exception {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
+                "/dubbo-hydra-provider.xml"
+        });
+        context.start();
+        Thread.sleep(999999999);
+    }
+}

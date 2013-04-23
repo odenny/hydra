@@ -21,4 +21,9 @@ public class TestLeaderService implements LeaderService{
         hash.put("testMethodC","2");
         return null;
     }
+
+    @Override
+    public String registerClient(String name, String service) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

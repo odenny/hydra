@@ -11,39 +11,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hydra-example</artifactId>
+    <packaging>pom</packaging>
     <name>HYDRA EXAMPLE</name>
-    <build>
-        <plugins>
-            <!-- compiler插件, 设定JDK版本 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-            <!-- resource插件, 设定编码 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-        </plugins>
-        <filters>
-            <filter>${project.basedir}/src/main/resources/filters/${file_name}.properties</filter>
-        </filters>
-        <!--资源-->
-        <resources>
-            <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
-
+    <modules>
+        <module>hydra-example-exp2</module>
+        <module>hydra-example-benchmark</module>
+        <module>hydra-example-test</module>
+    </modules>
     <dependencies>
         <!--测试hydra-client-->
         <dependency>
@@ -74,37 +48,17 @@
         </dependency>
     </dependencies>
 
-
-    <profiles>
-        <!-- 48-zk-test1-->
-        <profile>
-            <id>zk-48</id>
-            <activation>
-                <!--默认启用的是48环境配置-->
-                <activeByDefault>true</activeByDefault>
-                <property>
-                    <name>my_env</name>
-                    <value>test-48</value>
-                </property>
-            </activation>
-            <properties>
-                <file_name>zk-48</file_name>
-                <dubbo.registry.address>192.168.227.48:2181</dubbo.registry.address>
-            </properties>
-        </profile>
-        <!-- 49-zk-test1-->
-        <profile>
-            <id>zk-49</id>
-            <activation>
-                <property>
-                    <name>my_env</name>
-                    <value>test-49</value>
-                </property>
-            </activation>
-            <properties>
-                <file_name>zk-49</file_name>
-                <dubbo.registry.address>192.168.227.49:2181</dubbo.registry.address>
-            </properties>
-        </profile>
-    </profiles>
+    <build>
+        <plugins>
+            <!-- compiler插件, 设定JDK版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

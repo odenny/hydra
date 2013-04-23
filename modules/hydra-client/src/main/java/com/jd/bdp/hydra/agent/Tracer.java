@@ -6,10 +6,7 @@ import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Endpoint;
 import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.agent.support.Configuration;
-import com.jd.bdp.hydra.agent.support.DefaultSyncTransfer;
-import com.jd.bdp.hydra.agent.support.SampleImp;
-import com.jd.bdp.hydra.agent.support.TraceService;
+import com.jd.bdp.hydra.agent.support.*;
 import com.jd.bdp.hydra.dubbomonitor.HydraService;
 import com.jd.bdp.hydra.dubbomonitor.LeaderService;
 
@@ -29,9 +26,10 @@ public class Tracer {
 
     private ThreadLocal<Span> spanThreadLocal = new ThreadLocal<Span>();
 
+    TraceService traceService;
+
     private Tracer() {
     }
-
 
     public void removeParentSpan() {
         spanThreadLocal.remove();
@@ -55,7 +53,7 @@ public class Tracer {
         return span;
     }
 
-    public Span newSpan(String spanname,Endpoint endpoint) {
+    public Span newSpan(String spanname, Endpoint endpoint) {
         boolean s = isSample();
         Span span = new Span();
         span.setTraceId(s ? genTracerId() : null);
@@ -86,23 +84,18 @@ public class Tracer {
         return tracer;
     }
 
-    public void setConfig(Configuration c, LeaderService leaderService, HydraService hydraService) throws Exception {
-        transfer = new DefaultSyncTransfer(c);
-        TraceService traceService = new TraceService();
-        traceService.setHydraService(hydraService);
-        traceService.setLeaderService(leaderService);
-        transfer.setTraceService(traceService);
+    public void start() throws Exception {
         transfer.start();
     }
 
-    public static void setConfiguration(Configuration configuration, LeaderService leaderService, HydraService hydraService) {
-        Tracer t = getTracer();
+    public static void startTraceWork() {
         try {
-            t.setConfig(configuration, leaderService, hydraService);
+            getTracer().start();
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
     }
+
 
     public boolean isSample() {
         return sampler.isSample() && (transfer != null && transfer.isReady());
@@ -155,7 +148,7 @@ public class Tracer {
 
     public String getServiceId(String name) {
         String id = null;
-        if(transfer != null){
+        if (transfer != null) {
             id = transfer.getServiceId(name);
         }
         return id;
@@ -167,6 +160,14 @@ public class Tracer {
 
     public Long genSpanId() {
         return transfer.getSpanId();
+    }
+
+    public void setTraceService(TraceService traceService) {
+        this.traceService = traceService;
+    }
+
+    public void setTransfer(SyncTransfer transfer) {
+        this.transfer = transfer;
     }
 }
 

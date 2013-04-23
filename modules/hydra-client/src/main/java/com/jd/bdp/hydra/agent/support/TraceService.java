@@ -9,6 +9,7 @@ import com.jd.bdp.hydra.dubbomonitor.LeaderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,23 +37,41 @@ public class TraceService implements RegisterService, CollectorService {
         //fixme try-catch性能影响？
         try {
             hydraService.push(spanList);
-        }   catch (Exception e){
+        } catch (Exception e) {
             logger.warn("跟踪数据推送失败~");
         }
     }
 
     @Override
     public boolean registerService(String name, List<String> services) {
-        logger.info(name+" "+services);
+        logger.info(name + " " + services);
         try {
             this.registerInfo = leaderService.registerClient(name, services);
-        }   catch (Exception e){
-             logger.warn("client cannot regist into the hydra system,will not to trace ..");
+        } catch (Exception e) {
+            logger.warn("client cannot regist into the hydra system");
         }
         if (registerInfo != null) {
+            logger.info("Global registry option is ok!");
             isRegister = true;
         }
         return isRegister;
+    }
+
+    /*更新注册信息*/
+    public boolean registerService(String appName, String serviceName) {
+        logger.info(appName + " " + serviceName);
+        String serviceId = null;
+        try {
+            serviceId = leaderService.registerClient(appName, serviceName);
+        } catch (Exception e) {
+            logger.warn("client cannot regist service <" + serviceName + "> into the hydra system");
+        }
+        if (serviceId != null) {
+            logger.info("Registry <"+serviceName+"> option is ok!");
+            registerInfo.put(serviceName, serviceId); //更新本地注册信息
+            return true;
+        } else
+            return false;
     }
 
     public LeaderService getLeaderService() {
@@ -72,10 +91,10 @@ public class TraceService implements RegisterService, CollectorService {
     }
 
     public String getServiceId(String service) {
-        if (isRegister) {
+        if (isRegister && registerInfo.containsKey(service))
             return registerInfo.get(service);
-        }
-        return null;
+        else
+            return null;
     }
 
     public Long getSeed() {

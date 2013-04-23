@@ -13,6 +13,7 @@ public interface SyncTransfer{
     public Long getTraceId();
     public Long getSpanId();
     public boolean isReady();
+    public boolean isServiceReady(String serviceName);
     public void start() throws Exception;
     public String getServiceId(String name);
     public void cancel();

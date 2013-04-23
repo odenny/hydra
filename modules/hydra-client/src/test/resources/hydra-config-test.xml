@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="configuration" class="com.jd.bdp.hydra.agent.support.Configuration">
+        <property name="delayTime" value="3000"></property>
+        <property name="flushSize" value="10"></property>
+        <property name="queueSize" value="1024"></property>
+    </bean>
+    <!--leadService-->
+    <bean id="leaderService" class="com.jd.bdp.hydra.agent.TestLeaderService"/>
+    <!--hydraService-->
+    <bean id="hydraService" class="com.jd.bdp.hydra.agent.TestHydraService"/>
+
+    <bean id="traceService" class="com.jd.bdp.hydra.agent.support.TraceService">
+        <property name="hydraService" ref="hydraService"></property>
+        <property name="leaderService" ref="leaderService"></property>
+    </bean>
+    <bean id="transfer" class="com.jd.bdp.hydra.agent.support.DefaultSyncTransfer">
+        <constructor-arg ref="configuration"/>
+    </bean>
+    <!--被HydraFilter使用-->
+    <bean id="tracer" class="com.jd.bdp.hydra.agent.Tracer" factory-method="getTracer">
+        <property name="traceService" ref="traceService"/>
+        <property name="transfer" ref="transfer"/>
+    </bean>
+
+</beans>

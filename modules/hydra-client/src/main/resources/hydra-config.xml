@@ -7,21 +7,32 @@
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <bean id="config" class="com.jd.bdp.hydra.agent.support.Configuration">
+    <bean id="configuration" class="com.jd.bdp.hydra.agent.support.Configuration">
         <property name="delayTime" value="3000"></property>
         <property name="flushSize" value="10"></property>
         <property name="queueSize" value="1024"></property>
     </bean>
-    <!--负责元数据的注入-->
-    <bean id="configer" class="com.jd.bdp.hydra.dubbo.HydraConfiger">
-        <property name="config" ref="config"/>
-        <property name="hydraService" ref="hydraService"/>
-        <property name="leaderService" ref="leaderService"/>
-    </bean>
     <!--leadService-->
-    <dubbo:reference id="leaderService" interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" check="false" filter="-hydra" timeout="2000">
+    <dubbo:reference id="leaderService" interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" check="false"
+                     filter="-hydra" timeout="2000">
     </dubbo:reference>
     <!--hydraService-->
-    <dubbo:reference id="hydraService" interface="com.jd.bdp.hydra.dubbomonitor.HydraService" check="false" filter="-hydra" timeout="2000">
+    <dubbo:reference id="hydraService" interface="com.jd.bdp.hydra.dubbomonitor.HydraService" check="false"
+                     filter="-hydra" timeout="2000">
     </dubbo:reference>
+
+    <bean id="traceService" class="com.jd.bdp.hydra.agent.support.TraceService">
+        <property name="hydraService" ref="hydraService"></property>
+        <property name="leaderService" ref="leaderService"></property>
+    </bean>
+    <bean id="transfer" class="com.jd.bdp.hydra.agent.support.DefaultSyncTransfer">
+        <property name="traceService" ref="traceService"/>
+        <constructor-arg ref="configuration"/>
+    </bean>
+    <!--被HydraFilter使用-->
+    <bean id="tracer" class="com.jd.bdp.hydra.agent.Tracer" factory-method="getTracer">
+        <property name="traceService" ref="traceService"/>
+        <property name="transfer" ref="transfer"/>
+    </bean>
+
 </beans>

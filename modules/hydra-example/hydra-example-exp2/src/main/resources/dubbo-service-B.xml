@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <bean id="serviceB" class="com.jd.bdp.ServiceB">
+        <property name="downService" ref="referenceC"></property>
+    </bean>
+
+    <dubbo:protocol name="dubbo" port="20991" />
+    <dubbo:service interface="com.jd.bdp.InterfaceB" ref="serviceB" >
+    </dubbo:service>
+    <dubbo:reference id="referenceC" interface="com.jd.bdp.InterfaceC1" check="false">
+    </dubbo:reference>
+
+</beans>

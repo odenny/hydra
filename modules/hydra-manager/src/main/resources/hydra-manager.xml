@@ -8,7 +8,7 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <dubbo:application name="hydra-manager"/>
-    <dubbo:registry protocol="zookeeper" address="192.168.227.48:2181"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.227.48:2181" file="registry.properties"/>
     <!-- 用dubbo协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20889"/>
     <bean id="leaderService" class="com.jd.bdp.hydra.dubbomonitor.provider.impl.LeaderServiceImpl">
@@ -16,7 +16,8 @@
         <property name="seedService" ref="seedService"/>
         <property name="serviceService" ref="serviceService"/>
     </bean>
-    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leaderService">
+    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leaderService"
+                   filter="-hydra">
     </dubbo:service>
 
     <!--数据库层-->
@@ -58,6 +59,7 @@
     <bean id="serviceService" class="com.jd.bdp.hydra.dubbomonitor.persistent.service.impl.ServiceServiceImpl">
         <property name="serviceMapper" ref="serviceMapper"/>
         <property name="appMapper" ref="appMapper"/>
+        <property name="serviceIdGenService" ref="serviceIdGenService"/>
     </bean>
     <bean id="seedService" class="com.jd.bdp.hydra.dubbomonitor.persistent.service.impl.SeedServiceImpl">
         <property name="seedMapper" ref="seedParaMapper"/>

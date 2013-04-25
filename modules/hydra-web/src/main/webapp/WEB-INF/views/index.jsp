@@ -34,7 +34,8 @@
 <script src="/statics/js/controller/query-controller.js"></script>
 <script src="/statics/js/controller/trace-controller.js"></script>
 
-<%--<script src="/statics/js/filters.js"></script>--%>
+<!-- filter -->
+<script src="/statics/js/filters.js"></script>
 <%--<script src="/statics/js/directives.js"></script>--%>
 </body>
 </html>

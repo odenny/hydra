@@ -14,33 +14,63 @@
  *    limitations under the License.
  */
 'use strict';
-function QueryCtrl($scope, queryService, TraceList, AppList, ServiceList) {
-    $('#startTime').datetimepicker({
-        language:  'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0,
-        pickerReferer:'input'
-    });
+function QueryCtrl($scope,$filter, queryService, TraceList, AppList, ServiceList) {
 
-    $scope.appList = AppList.getAll();
+    //以下为测试
+//    $scope.abc = "11111111122222222233333333333";
+//    $scope.test1= function(){
+//        alert("1923890128390123");
+//    }
 
-    var service = {change:function(appId){
-        $scope.service.list = ServiceList.getAll({appId:appId},function(serviceList){
-            var serviceArray = [];
-            for(var i in serviceList){
-                serviceArray.push(serviceList[i].name);
+    queryService.initDate();
+
+    $scope.traceList = [];
+
+    queryService.initTable($scope.traceList, $scope);
+
+    var query = {
+        exBtn:{
+            type:false,
+            name:function(){
+                if ($scope.query.exBtn.type){
+                    return '出现异常';
+                }else {
+                    return '正常调用';
+                }
+            },
+            click:function(){
+                $scope.query.exBtn.type = $scope.query.exBtn.type?false:true;
             }
-            $('#serviceName').typeahead({source:serviceArray});
-        });
-    }}
+        },
+        appList : AppList.getAll(),
+        serviceList:[],
+        sum :500,
+        submitQuery: function () {
+            var serviceId;
+            var serviceName;
+            for(var i in $scope.query.serviceList){
+                if ($scope.query.serviceList[i].name == $('#serviceName').val()){
+                    serviceId = $scope.query.serviceList[i].id;
+                    serviceName = $scope.query.serviceList[i].name;
+                }
+            }
+            var startTime = $filter('dateToLong')($('#realTime').val());
+            queryService.setTableServiceName(serviceName);
+            $scope.traceList = TraceList.getTraceList({serviceId: serviceId, startTime: startTime, durationMin: $scope.query.durationMin, durationMax: $scope.query.durationMax, sum: $scope.query.sum},function(traceList){
+                queryService.loadTableData(traceList);
+            });
+        },
+        appChange : function (appId) {
+            var appId = $scope.query.selectApp.id;
+            $scope.query.serviceList = ServiceList.getAll({appId: appId}, function (serviceList) {
+                var serviceArray = [];
+                for (var i in serviceList) {
+                    serviceArray.push(serviceList[i].name);
+                }
+                $('#serviceName').typeahead({source: serviceArray});
+            });
+        }
+    };
 
-    $scope.service = service;
-
-    $scope.traceList =  TraceList.getTraceList({serviceId:22001, startTime:1366614281227, durationMin:20, durationMax:90, sum:500}, function(traceList){
-        queryService.initTable(traceList);
-    });
+    $scope.query = query;
 }

@@ -82,7 +82,7 @@ public class ServiceFactory<T> {
         // hardcode
         referenceConfig.setConnections(clientNums);
         ApplicationConfig application = new ApplicationConfig();
-        application.setName("dubbo_consumer");
+        application.setName("dubbo_benchmark_consumer");
         referenceConfig.setApplication(application);
         referenceConfig.setTimeout(connectTimeout);
         return referenceConfig.get();

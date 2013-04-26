@@ -188,8 +188,9 @@ public abstract class AbstractBenchmarkClient {
         }
         //------------------------------- 输出结果----------------------------------------------
         boolean isWriteResult = Boolean.parseBoolean(System.getProperty("write.statistics", "false"));
-        if (isWriteResult) {
+        if (true&&isWriteResult) {
             BufferedWriter writer = new BufferedWriter(new FileWriter("benchmark.all.results"));
+            System.out.println("-----------"+writer.toString());
             for (Map.Entry<String, Long[]> entry : times.entrySet()) {
                 writer.write(entry.getKey() + "," + entry.getValue()[0] + "," + entry.getValue()[1] + "\r\n");
             }
@@ -223,12 +224,6 @@ public abstract class AbstractBenchmarkClient {
         System.out.println(" RT > 1000: " + (above1000sum * 100 / allRequest) + "% " + above1000sum + "/" + allRequest);
         System.exit(0);
         //----------------------------------------------------------------------------------------------------------------
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
-                "classpath*:trigger-context.xml",
-        });
-        context.start();
-        Trigger trigger = (Trigger)context.getBean("trigger");
-        Thread.sleep(999999999);
     }
 
     //template function

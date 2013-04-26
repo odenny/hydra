@@ -19,6 +19,7 @@ package com.jd.bdp.hydra.benchmark.startBenchTest.support;
 import com.jd.bdp.hydra.benchmark.startBenchTest.support.AbstractClientRunnable;
 import com.jd.bdp.hydra.benchmark.startBenchTest.support.ServiceFactory;
 import com.jd.bdp.service.impl.ServiceA;
+import com.jd.bdp.service.inter.InterfaceA;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
@@ -36,7 +37,7 @@ public class DemoRunnable extends AbstractClientRunnable {
 
     @Override
     public Object invoke(ServiceFactory serviceFactory) {
-        ServiceA rootService = (ServiceA) serviceFactory.get(ServiceA.class);
+        InterfaceA rootService = (InterfaceA) serviceFactory.get(InterfaceA.class);
         return rootService.functionA();
     }
 }

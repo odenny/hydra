@@ -61,7 +61,6 @@ public class Trigger implements InitializingBean {
 
     //getter and setter
     private InterfaceA rootService;
-
     public void setRootService(InterfaceA rootService) {
         this.rootService = rootService;
     }

@@ -26,15 +26,30 @@ public class TraceController {
     @ResponseBody
     public JSONArray getTraces(@PathVariable String serviceId, @PathVariable long startTime, @PathVariable int durationMin, @PathVariable int durationMax, @PathVariable int sum) {
         try {
-            return null;
-//            return queryService.getTracesByDuration(serviceId, startTime, sum, durationMin, durationMax);
+            serviceId = "22001";
+            startTime = 1366614281166L;
+            durationMin = 20;
+            durationMax = 80;
+            sum = 500;
+            return queryService.getTracesByDuration(serviceId, startTime, sum, durationMin, durationMax);
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
-    @RequestMapping("/{traceId}")
+    @RequestMapping("/list/ex/{serviceId}/{startTime}/{sum}")
+    @ResponseBody
+    public JSONArray getTraces(@PathVariable String serviceId, @PathVariable long startTime, @PathVariable int sum) {
+        try {
+            return queryService.getTracesByEx(serviceId, startTime, sum);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/one/{traceId}")
     @ResponseBody
     public JSONObject getTrace(@PathVariable String traceId) {
         try {

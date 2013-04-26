@@ -25,6 +25,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * User: xiangkui
  * Date: 13-4-9
@@ -60,7 +61,19 @@ public class Trigger implements InitializingBean {
 
     //getter and setter
     private InterfaceA rootService;
+
     public void setRootService(InterfaceA rootService) {
         this.rootService = rootService;
     }
+
+    public static void main(String[] args) throws InterruptedException {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
+                "classpath*:trigger-context.xml",
+        });
+        context.start();
+        Trigger trigger = (Trigger)context.getBean("trigger");
+        trigger.startWorkWithSleep(5,0);
+        Thread.sleep(999999999);
+    }
+
 }

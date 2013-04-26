@@ -16,24 +16,18 @@
 
 'use strict';
 angular.module('hydra.services.query', [])
-    .factory('queryService', function(){
+    .factory('queryService', ['$filter', '$compile',  function($filter, $compile){
         return {
-            initTable:function(traceList){
-//                $.extend( $.fn.dataTableExt.oStdClasses, {
-//                    "sSortAsc": "header headerSortDown",
-//                    "sSortDesc": "header headerSortUp",
-//                    "sSortable": "header"
-//                } );
-
+            initTable:function(traceList, myScope){
                 $('#traceTable').dataTable({
                     sDom: "<'row'<'mySpan'l><'mySpan'f>r>t<'row'<'mySpan'i><'mySpan'p>>",
                     sInfo:"Showing _START_ to _END_ of _TOTAL_ entries",
                     aaData:traceList,
                     aoColumns: [
                         { "mData": "serviceId" },
-                        { "mData": "timestamp" },
-                        { "mData": "duration" },
-                        { "mData": "traceId" }
+                        { "mData": "timestamp" , "sClass": "center"},
+                        { "mData": "duration" ,"sClass": "center"},
+                        { "mData": "traceId" ,"sClass": "center"}
                     ],
                     sPaginationType: "bootstrap",
                     oLanguage: {
@@ -41,12 +35,41 @@ angular.module('hydra.services.query', [])
                         sZeroRecords: "没有任何数据",
                         sInfo: "从 _START_ 到 _END_ 总共 _TOTAL_ 条数据",
                         sInfoEmpty: "从 0 到 0 总共 0 条数据",
-                        sSearch:"搜索："
-//                        sPrevious:"上一页",
-//                        sNext:"下一页"
+                        sSearch:"搜索：",
+                        oPaginate: {
+                            sPrevious: "上一页",
+                            sNext: "下一页"
+                        }
                     },
-                    aLengthMenu: [[10, 25, 50, -1], [10, 25, 50, "全部"]]
+                    aLengthMenu: [[25, 50, 100, -1], [25, 50, 100, "全部"]],
+                    iDisplayLength: 25,
+                    fnRowCallback: function( nRow, aData, iDisplayIndex ) {
+                        $('td:eq(0)', nRow).html(myScope.serviceName);
+                        $('td:eq(1)', nRow).html($filter('date')(aData['timestamp'], "yyyy-MM-dd HH:mm:ss"));
+                        var element = $compile('<button type="button" class="btn btn-info" ng-click="linkToDetail();">查看详细</button>')(myScope);
+                        $('td:eq(3)', nRow).html(element);
+                    }
                 } );
+
+            },
+            initDate : function(){
+                $('#startTime').datetimepicker({
+                    language:  'zh-CN',
+                    weekStart: 1,
+                    todayBtn:  1,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 2,
+                    forceParse: 0,
+                    pickerReferer:'input'
+                });
+            },
+            initAuto: function(){
+                $('#serviceName').typeahead({});
+            },
+            loadTableData : function(traceList){
+                $('#traceTable').dataTable().fnClearTable();
+                $('#traceTable').dataTable().fnAddData(traceList);
             }
         };
-    });
+    }]);

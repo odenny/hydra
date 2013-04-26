@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Time: 下午6:19
  */
 public class StartManager {
+
     public static void main(String[] args)  {
         try {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{

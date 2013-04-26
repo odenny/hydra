@@ -28,6 +28,14 @@ public class CollectorService {
     private ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     private AtomicLong c = new AtomicLong(0L);
 
+    public void setConsumer(MessageConsumer consumer) {
+        this.consumer = consumer;
+    }
+
+    public void setHbaseService(HbaseService hbaseService) {
+        this.hbaseService = hbaseService;
+    }
+
     class HbaseConsumer implements MessageListener{
         @Override
         public void recieveMessages(Message message) {

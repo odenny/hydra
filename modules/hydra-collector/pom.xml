@@ -22,6 +22,10 @@
             <artifactId>hydra-interface</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.taobao.metamorphosis</groupId>
             <artifactId>metamorphosis-client</artifactId>
         </dependency>

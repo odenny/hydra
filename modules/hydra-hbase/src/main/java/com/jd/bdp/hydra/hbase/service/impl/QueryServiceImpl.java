@@ -22,17 +22,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.hbase.service.QueryService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
-import org.apache.hadoop.hbase.HColumnDescriptor;
-import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.*;
-import org.apache.hadoop.hbase.filter.*;
-import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.hadoop.hbase.filter.Filter;
+import org.apache.hadoop.hbase.filter.PageFilter;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +63,7 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     public JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax) {
         JSONArray array = new JSONArray();
         Scan scan = new Scan();
-        scan.setStartRow(new String(serviceId + "." + start).getBytes());
+        scan.setStartRow(new String(serviceId + ":" + start).getBytes());
         Filter filter = new PageFilter(sum);
         scan.setFilter(filter);
         try {
@@ -89,6 +84,43 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
                     obj.put("serviceId", key[0]);
                     obj.put("timestamp", Long.parseLong(key[1]));
                     obj.put("duration", kv.getTimestamp());
+                    obj.put("traceId", byteArray2Long(kv.getQualifier()));
+                    array.add(obj);
+                }
+            }
+            return array;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                table.close();
+                rs.close();
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+    }
+
+    @Override
+    public JSONArray getTracesByEx(String serviceId, long startTime, int sum) {
+        JSONArray array = new JSONArray();
+        Scan scan = new Scan();
+        scan.setStartRow(new String(serviceId + ":" + startTime + ":dubbo.exception".getBytes()).getBytes());
+        Filter filter = new PageFilter(sum);
+        scan.setFilter(filter);
+        HTableInterface table = null;
+        ResultScanner rs = null;
+        try {
+            table = POOL.getTable(duration_index);
+            rs = table.getScanner(scan);
+            for (Result res : rs) {
+                List<KeyValue> list = res.list();
+                for (KeyValue kv : list) {
+                    JSONObject obj = new JSONObject();
+                    String[] key = new String(kv.getRow()).split(":");
+                    obj.put("serviceId", key[0]);
+                    obj.put("timestamp", Long.parseLong(key[1]));
                     obj.put("traceId", byteArray2Long(kv.getQualifier()));
                     array.add(obj);
                 }

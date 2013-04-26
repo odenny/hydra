@@ -18,16 +18,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+        default-autowire="byName">
 
     <bean id="hbaseService" class="com.jd.bdp.hydra.hbase.service.impl.HbaseServiceImpl"/>
+    <bean id="collectorService" class="com.jd.bdp.hydra.collector.service.CollectorService" />
+
     <bean id="sessionFactory" class="com.taobao.metamorphosis.client.MetaMessageSessionFactory">
         <constructor-arg>
             <bean class="com.taobao.metamorphosis.client.MetaClientConfig">
                 <property name="zkConfig">
                     <bean class="com.taobao.metamorphosis.utils.ZkUtils.ZKConfig">
                         <constructor-arg>
-                            <value>127.0.0.1:2181</value>
+                            <value>192.168.227.83:2181</value>
                         </constructor-arg>
                         <constructor-arg>
                             <value>30000</value>

@@ -79,5 +79,14 @@ public class Trigger implements InitializingBean {
         this.rootService = rootService;
     }
 
+    public static void main(String[] args) throws InterruptedException {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
+                "classpath*:trigger-context.xml",
+        });
+        context.start();
+        Trigger trigger = (Trigger)context.getBean("trigger");
+        trigger.startWorkWithSleep(5,0);
+        Thread.sleep(999999999);
+    }
 
 }

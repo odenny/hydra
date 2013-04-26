@@ -16,6 +16,7 @@ public class Bootstrap {
         try {
             ApplicationContext context = new ClassPathXmlApplicationContext("hydra-collector-service.xml");
             Bootstrap bootstrap = new Bootstrap();
+            bootstrap.collectorService = (CollectorService)context.getBean("collectorService");
             bootstrap.start();
         } catch (Exception e) {
             e.printStackTrace();
@@ -25,4 +26,5 @@ public class Bootstrap {
     public void start()throws Exception{
         collectorService.subscribe(topic);
     }
+
 }

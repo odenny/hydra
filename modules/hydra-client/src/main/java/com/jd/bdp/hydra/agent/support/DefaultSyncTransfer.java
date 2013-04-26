@@ -86,7 +86,10 @@ public class DefaultSyncTransfer implements SyncTransfer {
                             //检查是否有未注册服务，先注册
                             for (Map.Entry<String, Boolean> entry : isServiceReady.entrySet()) {
                                 if (false == entry.getValue()) {//没有注册，先注册
-                                    traceService.registerService(appName(), entry.getKey());
+                                    boolean r = traceService.registerService(appName(), entry.getKey());
+                                    if (r) {
+                                        entry.setValue(true);
+                                    }
                                 }
                             }
                             //-----------------------------
@@ -137,7 +140,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
                     cancel();
                 }
             });
-        } else if(traceService == null){
+        } else if (traceService == null) {
             throw new Exception("TraceServie is null.can't starting SyncTransfer");
         }
     }

@@ -19,5 +19,5 @@
     <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.LeaderService" ref="leaderService" filter="-hydra">
     </dubbo:service>
 
-    <import resource="hydra-mysql.xml" />
+    <import resource="classpath*:hydra-mysql.xml" />
 </beans>

@@ -1,4 +1,4 @@
-package com.jd.bdp.hydra.benchmark.support;
+package com.jd.bdp.hydra.benchmark.startBenchTest.support;
 
 /**
  * nfs-rpc
@@ -7,8 +7,7 @@ package com.jd.bdp.hydra.benchmark.support;
  *   http://code.google.com/p/nfs-rpc (c) 2011
  */
 
-import com.alibaba.dubbo.common.utils.ConfigUtils;
-import com.jd.bdp.hydra.benchmark.trigger.Trigger;
+import com.jd.bdp.hydra.benchmark.startTrigger.support.Trigger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.BufferedWriter;
@@ -65,7 +64,7 @@ public abstract class AbstractBenchmarkClient {
     // > 1000
     private static long above1000sum;
 
-    private static Properties properties = new Properties();
+    protected static Properties properties = new Properties();
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public void run(String[] args) throws Exception {
@@ -74,8 +73,8 @@ public abstract class AbstractBenchmarkClient {
         final int serverPort = Integer.parseInt(properties.getProperty("serverport"));
         final int concurrents = Integer.parseInt(properties.getProperty("concurrents"));
         final int timeout = Integer.parseInt(properties.getProperty("timeout"));
-        final int callCount = Integer.parseInt(properties.getProperty("callCount"));
-        long waitTime = Long.parseLong(properties.getProperty("waitTime")) * 1000L;
+//        final int callCount = Integer.parseInt(properties.getProperty("callCount"));
+//        int waitTime = Integer.parseInt(properties.getProperty("waitTime"));
         runtime = Integer.parseInt(properties.getProperty("runtime"));
         final long endtime = System.nanoTime() / 1000L + runtime * 1000 * 1000L;
         final int clientNums = Integer.parseInt(properties.getProperty("connectionnums"));
@@ -83,19 +82,21 @@ public abstract class AbstractBenchmarkClient {
         Date currentDate = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
-        calendar.add(Calendar.SECOND, (int) (runtime / 1000));
+        calendar.add(Calendar.SECOND, runtime);
         StringBuilder startInfo = new StringBuilder(dateFormat.format(currentDate));
-        startInfo.append(" ready to start client benchmark");
-        startInfo.append("callCount is: ").append(callCount).append(" Ts ");
-        startInfo.append(",waitTime is:").append(waitTime).append(" ms ");
-        startInfo.append("the benchmark will end at:").append(dateFormat.format(calendar.getTime()));
+        startInfo.append(" ready to start client benchmark,server is ");
+        startInfo.append(serverIP).append(":").append(serverPort);
+        startInfo.append(",concurrents is: ").append(concurrents);
+        startInfo.append(",clientNums is: ").append(clientNums);
+        startInfo.append(",timeout is:").append(timeout);
+        startInfo.append(" s,the benchmark will end at:").append(dateFormat.format(calendar.getTime()));
         System.out.println(startInfo.toString());
         //----------------- construct the test context  ---------------------
         CyclicBarrier barrier = new CyclicBarrier(concurrents);
         CountDownLatch latch = new CountDownLatch(concurrents);
         List<ClientRunnable> runnables = new ArrayList<ClientRunnable>();
         // will warm up before runnable start to work
-        long beginTime = System.nanoTime() / 1000L + 30 * 1000 * 1000L;
+        long beginTime = System.nanoTime() / 1000L + 30 * 1000 * 1000L; //kns
         for (int i = 0; i < concurrents; i++) {
             ClientRunnable runnable = getClientRunnable(serverIP, serverPort, clientNums, timeout, barrier, latch,
                     beginTime, endtime);
@@ -164,6 +165,7 @@ public abstract class AbstractBenchmarkClient {
                 ignoreErrorRequest += errorValues[0];
             }
         }
+        //计算汇总信息
         for (Map.Entry<String, Long[]> entry : times.entrySet()) {
             long successRequest = entry.getValue()[0];
             long errorRequest = 0;
@@ -196,6 +198,7 @@ public abstract class AbstractBenchmarkClient {
         //--------------------------------print benchmark messages-----------------------------
         System.out.println("----------Benchmark Statistics--------------");
         System.out.println(" Concurrents: " + concurrents);
+        System.out.println(" ClientNums: " + clientNums);
         System.out.println(" Runtime: " + runtime + " seconds");
         System.out.println(" Benchmark Time: " + times.keySet().size());
         long benchmarkRequest = allRequestSum + allErrorRequestSum;
@@ -225,7 +228,6 @@ public abstract class AbstractBenchmarkClient {
         });
         context.start();
         Trigger trigger = context.getBean("trigger", Trigger.class);
-        trigger.startWorkWithSleep(callCount, waitTime);
         Thread.sleep(999999999);
     }
 

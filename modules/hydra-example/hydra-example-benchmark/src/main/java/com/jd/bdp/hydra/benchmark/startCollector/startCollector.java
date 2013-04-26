@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Time: 下午6:19
  */
 public class StartCollector {
-    public static void main(Exception[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
                 "/dubbo-hydra-provider.xml"
         });

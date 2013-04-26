@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.hydra.benchmark.trigger;
+package com.jd.bdp.hydra.benchmark.startTrigger.support;
 
 import com.jd.bdp.service.inter.InterfaceA;
 import com.jd.bdp.service.inter.support.Service;
@@ -25,7 +25,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 /**
  * User: xiangkui
  * Date: 13-4-9
@@ -36,19 +35,6 @@ public class Trigger implements InitializingBean {
     public void afterPropertiesSet() throws InterruptedException {
         Thread.sleep(200);//服务预热
     }
-
-    public void startWork(int num) {
-        for (int i = 0; i < num; i++) {
-            try {
-                Object result = rootService.functionA();
-                System.out.println("result:" + result);
-                Thread.sleep(500);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     /**
      *
      * @param num  调用次数
@@ -74,10 +60,7 @@ public class Trigger implements InitializingBean {
 
     //getter and setter
     private InterfaceA rootService;
-
     public void setRootService(InterfaceA rootService) {
         this.rootService = rootService;
     }
-
-
 }

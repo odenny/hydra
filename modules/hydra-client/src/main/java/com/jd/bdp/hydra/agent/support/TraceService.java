@@ -38,17 +38,17 @@ public class TraceService implements RegisterService, CollectorService {
         try {
             hydraService.push(spanList);
         } catch (Exception e) {
-            logger.warn("跟踪数据推送失败~");
+            logger.warn("Trace data push failure~");
         }
     }
 
     @Override
     public boolean registerService(String name, List<String> services) {
-        logger.info(name + " " + services);
+       // logger.info(name + " " + services);
         try {
             this.registerInfo = leaderService.registerClient(name, services);
         } catch (Exception e) {
-            logger.warn("client cannot regist into the hydra system");
+            logger.warn("client global config-info cannot regist into the hydra system");
         }
         if (registerInfo != null) {
             logger.info("Global registry option is ok!");
@@ -58,6 +58,7 @@ public class TraceService implements RegisterService, CollectorService {
     }
 
     /*更新注册信息*/
+    @Override
     public boolean registerService(String appName, String serviceName) {
         logger.info(appName + " " + serviceName);
         String serviceId = null;
@@ -67,7 +68,7 @@ public class TraceService implements RegisterService, CollectorService {
             logger.warn("client cannot regist service <" + serviceName + "> into the hydra system");
         }
         if (serviceId != null) {
-            logger.info("Registry <"+serviceName+"> option is ok!");
+            logger.info("Registry ["+serviceName+"] option is ok!");
             registerInfo.put(serviceName, serviceId); //更新本地注册信息
             return true;
         } else

@@ -57,6 +57,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
 
     @Override
     public String appName() {
+        //fixme
         return "test";
     }
 
@@ -70,7 +71,8 @@ public class DefaultSyncTransfer implements SyncTransfer {
             for (; ; ) {
                 try {
                     if (!isReady()) {
-                        boolean r = traceService.registerService("test", new ArrayList<String>());
+                        //全局信息网络注册，输入流：应用名 @ 输出流：包含种子的Map对象
+                        boolean r = traceService.registerService(appName(), new ArrayList<String>());
                         if (r) {
                             generateTraceId = new GenerateTraceId(traceService.getSeed());
                             isReady = true;
@@ -151,8 +153,6 @@ public class DefaultSyncTransfer implements SyncTransfer {
         //可能是未注册的服务
         if (null == serviceId) {
             isServiceReady.putIfAbsent(name, false);//设置未注册标志，交给task去注册
-        }else {
-            logger.info("!!!!!!serviceId="+serviceId);
         }
         return serviceId;
     }

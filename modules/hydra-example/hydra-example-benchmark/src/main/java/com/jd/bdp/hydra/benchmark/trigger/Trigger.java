@@ -34,7 +34,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Trigger implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws InterruptedException {
-        Thread.sleep(100);//服务预热
+        Thread.sleep(200);//服务预热
     }
 
     public void startWork(int num) {
@@ -47,6 +47,28 @@ public class Trigger implements InitializingBean {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     *
+     * @param num  调用次数
+     * @param sleepTime  每次调用后沉默时间
+     */
+    public void startWorkWithSleep(int num,long sleepTime) {
+        for (int i = 0; i < num; i++) {
+            try {
+                Object result = rootService.functionA();
+                System.out.println("result:" + result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    Thread.sleep(sleepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        }
 
     }
 
@@ -57,15 +79,5 @@ public class Trigger implements InitializingBean {
         this.rootService = rootService;
     }
 
-    public void startWorkWithSleep(int num) throws InterruptedException {
-        for (int i = 0; i < num; i++) {
-            System.out.println(i);
-//            Thread.sleep(1000);
-//            if (i == 200){
-//                Thread.sleep(20000);
-//            }
-            Object result = rootService.functionA();
-            System.out.println("result:" + result);
-        }
-    }
+
 }

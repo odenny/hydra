@@ -10,7 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class StartC {
     public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
-                "/dubbo-service-C.xml"}
+                "classpath*:dubbo-service-C.xml"}
         );
         context.start();
         Thread.sleep(999999999);

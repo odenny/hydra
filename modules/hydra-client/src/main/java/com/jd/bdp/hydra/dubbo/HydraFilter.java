@@ -29,6 +29,10 @@ import com.jd.bdp.hydra.agent.support.TracerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
+import java.io.IOException;
 
 /**
  *
@@ -48,10 +52,9 @@ public class HydraFilter implements Filter {
             Tracer.startTraceWork();
             this.serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
             //有可能为null
-            if(serviceId==null){
-                logger.debug("serviceId is null,will not trace until service registy successfully");
-                Result result = invoker.invoke(invocation);
-                return result;
+            if (serviceId == null) {
+                // logger.debug("serviceId is null,will not trace until service registy successfully");
+                return invoker.invoke(invocation);
             }
         }
         long start = System.currentTimeMillis();
@@ -99,6 +102,7 @@ public class HydraFilter implements Filter {
             }
         }
     }
+
     private void setAttachment(Span span, RpcInvocation invocation) {
         if (span.isSample()) {
             invocation.setAttachment(TracerUtils.PID, span.getParentId() != null ? String.valueOf(span.getParentId()) : null);
@@ -135,12 +139,14 @@ public class HydraFilter implements Filter {
         this.tracer = tracer;
     }
 
-
     /*加载Filter的时候加载hydra配置上下文*/
     static {
+        logger.info("Hydra filter is loading hydra-config file...");
+        String resourceName = "classpath*:hydra-config.xml";
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
-                "/hydra-config.xml"
+                resourceName
         });
+        logger.info("Hydra config context is starting,config file path is:" + resourceName);
         context.start();
     }
 }

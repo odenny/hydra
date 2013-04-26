@@ -10,4 +10,7 @@ import java.util.Map;
  */
 public interface RegisterService {
     public boolean registerService(String name,List<String> services);
+
+    /*更新注册信息*/
+    boolean registerService(String appName, String serviceName);
 }

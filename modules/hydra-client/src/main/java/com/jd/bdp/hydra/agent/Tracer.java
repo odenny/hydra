@@ -75,13 +75,11 @@ public class Tracer {
         return new Endpoint();
     }
 
+    private static class  TraceHolder{
+        static Tracer instance=new Tracer();
+    }
     public static Tracer getTracer() {
-        if (tracer == null) {
-            synchronized (Tracer.class) {
-                tracer = new Tracer();
-            }
-        }
-        return tracer;
+       return TraceHolder.instance;
     }
 
     public void start() throws Exception {
@@ -144,8 +142,6 @@ public class Tracer {
         span.addAnnotation(annotation);
         transfer.syncSend(span);
     }
-
-
     public String getServiceId(String name) {
         String id = null;
         if (transfer != null) {

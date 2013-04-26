@@ -19,9 +19,11 @@
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-client</artifactId>
         </dependency>
-
     </dependencies>
+
     <build>
+
+        <!--不打包到jar中-->
         <plugins>
             <!-- compiler插件, 设定JDK版本 -->
             <plugin>
@@ -35,16 +37,10 @@
             <!-- resource插件, 设定编码 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.2.1</version>
                 <configuration>
+
                     <descriptors>
                         <descriptor>src/main/assembly/assembly.xml</descriptor>
                     </descriptors>

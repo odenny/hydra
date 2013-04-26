@@ -7,6 +7,9 @@
         <dependencySet>
             <useProjectArtifact>true</useProjectArtifact>
             <outputDirectory>lib</outputDirectory>
+            <excludes>
+                <exclude>*:sources</exclude>
+            </excludes>
         </dependencySet>
     </dependencySets>
     <fileSets>
@@ -27,14 +30,24 @@
                 <exclude>/scripts</exclude>
             </excludes>
         </fileSet>
+        <!--windows bat-->
         <fileSet>
-            <directory>/src/main/resources/scripts</directory>
+            <directory>/src/main/resources/scripts/windows</directory>
             <outputDirectory>/bin</outputDirectory>
             <includes>
                 <include>startABC/*.*</include>
                 <include>*.*</include>
             </includes>
         </fileSet>
+        <!--linux shell-->
+        <!--<fileSet>-->
+            <!--<directory>/src/main/resources/scripts/linux</directory>-->
+            <!--<outputDirectory>/bin/linux</outputDirectory>-->
+            <!--<includes>-->
+                <!--<include>startABC/*.*</include>-->
+                <!--<include>*.*</include>-->
+            <!--</includes>-->
+        <!--</fileSet>-->
         <fileSet>
             <directory>/src/main/resources/log</directory>
             <outputDirectory>/log</outputDirectory>

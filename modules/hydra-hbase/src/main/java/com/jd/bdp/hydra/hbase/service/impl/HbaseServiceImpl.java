@@ -111,17 +111,17 @@ public class HbaseServiceImpl extends HbaseUtils implements HbaseService {
     public void annotationIndex(Span span) {
         List<Annotation> alist = span.getAnnotations();
         List<Put> putlist = new ArrayList<Put>();
-        for (Annotation a : alist) {
-            String rowkey = a.getHost().getServiceName() + ":" + System.currentTimeMillis() + ":" + a.getValue();
-            Put put = new Put(rowkey.getBytes());
-            put.add(ann_index_family_column.getBytes(), "traceId".getBytes(), long2ByteArray(span.getTraceId()));
-            putlist.add(put);
-        }
+//        for (Annotation a : alist) {
+//            String rowkey = a.getHost().getServiceName() + ":" + System.currentTimeMillis() + ":" + a.getValue();
+//            Put put = new Put(rowkey.getBytes());
+//            put.add(ann_index_family_column.getBytes(), "traceId".getBytes(), long2ByteArray(span.getTraceId()));
+//            putlist.add(put);
+//        }
 
         for (BinaryAnnotation b : span.getBinaryAnnotations()) {
             String rowkey = b.getHost().getServiceName() + ":" + System.currentTimeMillis() + ":" + b.getKey();
             Put put = new Put(rowkey.getBytes());
-            put.add(ann_index_family_column.getBytes(), "traceId".getBytes(), long2ByteArray(span.getTraceId()));
+            put.add(ann_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), "1".getBytes());
             putlist.add(put);
         }
 

@@ -83,7 +83,7 @@
 </head>
 <body ng-controller="QueryCtrl">
 <div id="query" class="queryDiv">
-    <form class="form-horizontal" ng-submit="query.submitQuery()">
+    <form class="form-horizontal" ng-submit="query.submitQuery()" id="myForm" name="myForm">
         <table class="table table-striped table-bordered" style="width: 100%;">
             <thead>
             <tr>
@@ -110,7 +110,7 @@
                 <td>
                     <div id="startTime" class="input-append date form_datetime"
                          data-date-format="yyyy-mm-dd hh:ii" data-link-field="realTime" style="width: 150px;">
-                        <input size="16" type="text" value="" style="height: 30px;width: 100%;" readonly>
+                        <input name="start" size="16" type="text" value="" style="height: 30px;width: 100%;" readonly >
                         <span class="add-on"><i class="icon-remove"></i></span>
                         <span class="add-on"><i class="icon-th"></i></span>
                     </div>
@@ -128,22 +128,25 @@
                 </td>
             </tr>
             <tr>
-                <th colspan="2" style="text-align: center;">可选条件</th>
+                <th colspan="2" style="text-align: center;">可选条件（以下筛选条件只能选择一种）</th>
             </tr>
             <tr>
                 <td style="text-align: center;">调用时长(ms):</td>
                 <td>
-                    <input id="durationMin" type="number" min="0" max="5000" style="width: 90px;height: 30px;" ng-model="query.durationMin"/> --- <input id="durationMax" type="number" min="{{query.durationMin}}" max="5000" style="width: 90px;height: 30px;" ng-model="query.durationMax"/>
+                    <input id="durationMin" type="number" min="0" max="5000" style="width: 90px;height: 30px;" ng-model="query.durationMin" ng-change="query.durationChange()"/> --- <input id="durationMax" type="number" min="{{query.durationMin}}" max="5000" style="width: 90px;height: 30px;" ng-model="query.durationMax" ng-change="query.durationChange()"/>
                 </td>
             </tr>
             <tr>
                 <td style="text-align: center;">异常状况:</td>
                 <td>
-                    <button type="button" class="btn btn-warning" data-toggle="button" ng-click="query.exBtn.click()">{{query.exBtn.name()}}</button>
+                    <button id="ex" type="button" class="btn btn-warning" data-toggle="button" ng-click="query.exBtn.click()">{{query.exBtn.name()}}</button>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center;">
+                    <div class="alert alert-error" id="alertDiv" ng-show="query.invalid">
+                        {{query.validateMsg}}
+                    </div>
                     <button class="btn btn-success btn-large" type="submit" style="width: 200px;">查询</button>
                 </td>
             </tr>

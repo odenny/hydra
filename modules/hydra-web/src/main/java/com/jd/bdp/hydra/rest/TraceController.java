@@ -38,6 +38,17 @@ public class TraceController {
         }
     }
 
+    @RequestMapping("/list/ex/{serviceId}/{startTime}/{sum}")
+    @ResponseBody
+    public JSONArray getTraces(@PathVariable String serviceId, @PathVariable long startTime, @PathVariable int sum) {
+        try {
+            return queryService.getTracesByEx(serviceId, startTime, sum);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @RequestMapping("/one/{traceId}")
     @ResponseBody
     public JSONObject getTrace(@PathVariable String traceId) {

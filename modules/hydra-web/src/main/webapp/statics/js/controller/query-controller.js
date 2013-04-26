@@ -14,19 +14,13 @@
  *    limitations under the License.
  */
 'use strict';
-function QueryCtrl($scope,$filter, queryService, TraceList, AppList, ServiceList) {
-
-    //以下为测试
-//    $scope.abc = "11111111122222222233333333333";
-//    $scope.test1= function(){
-//        alert("1923890128390123");
-//    }
+function QueryCtrl($scope,$filter, queryService, TraceList, TraceListEx, AppList, ServiceList) {
 
     queryService.initDate();
-
     $scope.traceList = [];
-
     queryService.initTable($scope.traceList, $scope);
+
+    queryService.initAuto();
 
     var query = {
         exBtn:{
@@ -40,6 +34,10 @@ function QueryCtrl($scope,$filter, queryService, TraceList, AppList, ServiceList
             },
             click:function(){
                 $scope.query.exBtn.type = $scope.query.exBtn.type?false:true;
+                if ($scope.query.exBtn.type){
+                    delete $scope.query.durationMin;
+                    delete $scope.query.durationMax;
+                }
             }
         },
         appList : AppList.getAll(),
@@ -54,23 +52,71 @@ function QueryCtrl($scope,$filter, queryService, TraceList, AppList, ServiceList
                     serviceName = $scope.query.serviceList[i].name;
                 }
             }
+
+            var isValid = true;
+            var validateMsg;
+            //验证
+            if (isValid && !serviceId ){
+                validateMsg = "服务名不正确！";
+                isValid = false;
+            }
+            if (isValid && $('#realTime').val() == ""){
+                validateMsg = "请输入开始时间！";
+                isValid = false;
+            }
+            showValidateMsg(isValid, validateMsg);
+
             var startTime = $filter('dateToLong')($('#realTime').val());
-            queryService.setTableServiceName(serviceName);
-            $scope.traceList = TraceList.getTraceList({serviceId: serviceId, startTime: startTime, durationMin: $scope.query.durationMin, durationMax: $scope.query.durationMax, sum: $scope.query.sum},function(traceList){
-                queryService.loadTableData(traceList);
-            });
+            var durationMin = $scope.query.durationMin || 0;
+            var durationMax = $scope.query.durationMax || 1000000;
+            $scope.serviceName = serviceName;
+
+            function showValidateMsg(isValid, validateMsg){
+                $scope.query.invalid = !isValid;
+                $scope.query.validateMsg = validateMsg;
+            }
+
+            //查询
+            if (isValid){
+                if ($scope.query.exBtn.type){//如果查询所有异常trace
+                    $scope.traceList = TraceListEx.getTraceList({serviceId: serviceId, startTime: startTime, sum: $scope.query.sum},function(traceList){
+                        queryService.loadTableData(traceList);
+                    });
+                }else{
+                    $scope.traceList = TraceList.getTraceList({serviceId: serviceId, startTime: startTime, durationMin: durationMin, durationMax: durationMax, sum: $scope.query.sum},function(traceList){
+                        queryService.loadTableData(traceList);
+                    });
+                }
+            }
         },
         appChange : function (appId) {
-            var appId = $scope.query.selectApp.id;
-            $scope.query.serviceList = ServiceList.getAll({appId: appId}, function (serviceList) {
-                var serviceArray = [];
-                for (var i in serviceList) {
-                    serviceArray.push(serviceList[i].name);
-                }
-                $('#serviceName').typeahead({source: serviceArray});
-            });
-        }
+            $('#serviceName').val('');
+            var appId;
+            if ($scope.query.selectApp){
+                appId = $scope.query.selectApp.id;
+            }
+            if (appId){
+                $scope.query.serviceList = ServiceList.getAll({appId: appId}, function (serviceList) {
+                    var serviceArray = [];
+                    for (var i in serviceList) {
+                        serviceArray.push(serviceList[i].name);
+                    }
+                    $('#serviceName').data('typeahead').source = serviceArray;
+                });
+            }else {
+                $('#serviceName').data('typeahead').source = [];
+            }
+        },
+        durationChange : function(){
+            $scope.query.exBtn.type = false;
+            $('#ex').removeClass('active');
+        },
+        invalid:false
     };
+
+    $scope.linkToDetail = function(){
+        alert("1231231");
+    }
 
     $scope.query = query;
 }

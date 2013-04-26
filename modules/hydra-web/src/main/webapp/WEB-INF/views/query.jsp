@@ -14,6 +14,7 @@
             width:75%;
             margin: 20 10 0 20;
             border:solid 1px #ddd;
+            -webkit-border-radius: 4px;
         }
         <!-- bootstrap-table -->
         div.dataTables_length label {
@@ -81,7 +82,7 @@
     <script type="text/javascript" src="/statics/lib/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="/statics/lib/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 </head>
-<body ng-controller="QueryCtrl">
+<body>
 <div id="query" class="queryDiv">
     <form class="form-horizontal" ng-submit="query.submitQuery()" id="myForm" name="myForm">
         <table class="table table-striped table-bordered" style="width: 100%;">
@@ -155,12 +156,22 @@
     </form>
 </div>
 <div id="result" class="resultDiv">
-    <table cellpadding="0" cellspacing="0" border="0" class="bordered-table table-striped" id="traceTable">
+    <table cellpadding="0" cellspacing="0" border="0" class="bordered-table table-striped" id="traceTable" ng-show="tableType == 'duration'">
         <thead>
         <tr>
             <th>服务名</th>
             <th>调用时间</th>
             <th>调用时长(ms)</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+    </table>
+    <table cellpadding="0" cellspacing="0" border="0" class="bordered-table table-striped" id="traceExTable" ng-show="tableType == 'ex'">
+        <thead>
+        <tr>
+            <th>服务名</th>
+            <th>调用时间</th>
+            <th>异常信息</th>
             <th>操作</th>
         </tr>
         </thead>

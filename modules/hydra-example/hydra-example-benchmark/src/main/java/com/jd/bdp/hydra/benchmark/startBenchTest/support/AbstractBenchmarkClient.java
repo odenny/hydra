@@ -227,7 +227,7 @@ public abstract class AbstractBenchmarkClient {
                 "classpath*:trigger-context.xml",
         });
         context.start();
-        Trigger trigger = context.getBean("trigger", Trigger.class);
+        Trigger trigger = (Trigger)context.getBean("trigger");
         Thread.sleep(999999999);
     }
 

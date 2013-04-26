@@ -73,7 +73,7 @@ public class Trigger implements InitializingBean {
         context.start();
         Trigger trigger = (Trigger)context.getBean("trigger");
         trigger.startWorkWithSleep(5,0);
-        Thread.sleep(999999999);
+//        Thread.sleep(999999999);
     }
 
 }

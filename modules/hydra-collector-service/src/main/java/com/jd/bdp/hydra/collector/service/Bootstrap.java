@@ -10,7 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Bootstrap {
     private CollectorService collectorService;
-    private final String topic = "meta";
+    private final String topic = "hydra_test";
 
     public static void main(String[] strings){
         try {

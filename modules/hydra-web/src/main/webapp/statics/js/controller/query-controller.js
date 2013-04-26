@@ -14,11 +14,14 @@
  *    limitations under the License.
  */
 'use strict';
-function QueryCtrl($scope,$filter, queryService, TraceList, TraceListEx, AppList, ServiceList) {
+function QueryCtrl($scope,$filter,$location, queryService, TraceList, TraceListEx, AppList, ServiceList) {
 
     queryService.initDate();
-    $scope.traceList = [];
-    queryService.initTable($scope.traceList, $scope);
+    $scope.tableType = 'duration';
+
+    var setting = queryService.getTableSetting($scope);
+    queryService.initTable(setting, $scope);
+    queryService.initTableEx(setting, $scope);
 
     queryService.initAuto();
 
@@ -79,33 +82,20 @@ function QueryCtrl($scope,$filter, queryService, TraceList, TraceListEx, AppList
             //查询
             if (isValid){
                 if ($scope.query.exBtn.type){//如果查询所有异常trace
-                    $scope.traceList = TraceListEx.getTraceList({serviceId: serviceId, startTime: startTime, sum: $scope.query.sum},function(traceList){
-                        queryService.loadTableData(traceList);
+                    $scope.tableType = 'ex';
+                    $scope.traceListEx = TraceListEx.getTraceList({serviceId: serviceId, startTime: startTime, sum: $scope.query.sum},function(traceList){
+                        queryService.loadTableData($('#traceExTable').dataTable(),traceList);
                     });
-                }else{
+                }else{//如果是查duration
+                    $scope.tableType = 'duration';
                     $scope.traceList = TraceList.getTraceList({serviceId: serviceId, startTime: startTime, durationMin: durationMin, durationMax: durationMax, sum: $scope.query.sum},function(traceList){
-                        queryService.loadTableData(traceList);
+                        queryService.loadTableData($('#traceTable').dataTable(),traceList);
                     });
                 }
             }
         },
-        appChange : function (appId) {
-            $('#serviceName').val('');
-            var appId;
-            if ($scope.query.selectApp){
-                appId = $scope.query.selectApp.id;
-            }
-            if (appId){
-                $scope.query.serviceList = ServiceList.getAll({appId: appId}, function (serviceList) {
-                    var serviceArray = [];
-                    for (var i in serviceList) {
-                        serviceArray.push(serviceList[i].name);
-                    }
-                    $('#serviceName').data('typeahead').source = serviceArray;
-                });
-            }else {
-                $('#serviceName').data('typeahead').source = [];
-            }
+        appChange : function(){
+            queryService.appChange($scope);
         },
         durationChange : function(){
             $scope.query.exBtn.type = false;
@@ -114,9 +104,12 @@ function QueryCtrl($scope,$filter, queryService, TraceList, TraceListEx, AppList
         invalid:false
     };
 
-    $scope.linkToDetail = function(){
-        alert("1231231");
+    $scope.linkToDetail = function(traceId){
+        $location.url('/trace').search({traceId:traceId, serviceName: $scope.serviceName});
     }
 
     $scope.query = query;
+
+    $scope.routeType = 'query';
+
 }

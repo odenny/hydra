@@ -14,8 +14,16 @@
  *    limitations under the License.
  */
 'use strict';
-function TraceCtrl($scope, Trace, sequenceService, treeService){
-    var trace = Trace.get({traceId:1366178446534},function(t){
+function TraceCtrl($scope, $location, Trace, sequenceService, treeService){
+
+    var params = $location.search();
+    var traceId = params['traceId'];
+    $scope.serviceName = params['serviceName'];
+    $scope.returnToQuery = function(){
+
+    }
+
+    var trace = Trace.get({traceId:traceId},function(t){
         sequenceService.getMyTrace(t);
         var spanMap = sequenceService.getSpanMap(t);
 

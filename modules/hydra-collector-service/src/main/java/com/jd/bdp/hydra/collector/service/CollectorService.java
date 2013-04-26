@@ -54,7 +54,12 @@ public class CollectorService {
     }
 
     public void persistent(Message message){
-        List<Span> spanList = PB.parsePBBytes(message.getData(),ArrayList.class);
+        List<Span> spanList = new ArrayList<Span>();
+        try{
+            spanList = (List)PB.parsePBBytes(message.getData());
+        }catch (Exception e){
+           log.error(e.getMessage());
+        }
         try{
           for(Span s : spanList){
               hbaseService.addSpan(s);

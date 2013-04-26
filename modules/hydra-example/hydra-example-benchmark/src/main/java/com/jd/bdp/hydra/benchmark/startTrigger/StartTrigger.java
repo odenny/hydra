@@ -15,7 +15,7 @@ public class StartTrigger {
                     "classpath*:trigger-context.xml"
             });
             context.start();
-            Trigger trigger=context.getBean("trigger", Trigger.class);
+            Trigger trigger=(Trigger)context.getBean("trigger");
             // 每隔3s触发一次调用
             trigger.startWorkWithSleep(Integer.MAX_VALUE,3000);
             Thread.sleep(999999999);

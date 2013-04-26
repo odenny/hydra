@@ -16,26 +16,18 @@
 
 'use strict';
 angular.module('hydra.services.query', [])
-    .factory('queryService', ['$filter', '$compile',  function($filter, $compile){
+    .factory('queryService', ['$filter', '$compile','ServiceList', function($filter, $compile, ServiceList){
         return {
-            initTable:function(traceList, myScope){
-                $('#traceTable').dataTable({
-                    sDom: "<'row'<'mySpan'l><'mySpan'f>r>t<'row'<'mySpan'i><'mySpan'p>>",
+            getTableSetting : function(myScope){
+                var setting = {
+                    sDom: "<'row'<'mySpan'l>r>t<'row'<'mySpan'i><'mySpan'p>>",
                     sInfo:"Showing _START_ to _END_ of _TOTAL_ entries",
-                    aaData:traceList,
-                    aoColumns: [
-                        { "mData": "serviceId" },
-                        { "mData": "timestamp" , "sClass": "center"},
-                        { "mData": "duration" ,"sClass": "center"},
-                        { "mData": "traceId" ,"sClass": "center"}
-                    ],
                     sPaginationType: "bootstrap",
                     oLanguage: {
                         sLengthMenu: "每页展示 _MENU_ 条数据",
                         sZeroRecords: "没有任何数据",
                         sInfo: "从 _START_ 到 _END_ 总共 _TOTAL_ 条数据",
                         sInfoEmpty: "从 0 到 0 总共 0 条数据",
-                        sSearch:"搜索：",
                         oPaginate: {
                             sPrevious: "上一页",
                             sNext: "下一页"
@@ -46,11 +38,29 @@ angular.module('hydra.services.query', [])
                     fnRowCallback: function( nRow, aData, iDisplayIndex ) {
                         $('td:eq(0)', nRow).html(myScope.serviceName);
                         $('td:eq(1)', nRow).html($filter('date')(aData['timestamp'], "yyyy-MM-dd HH:mm:ss"));
-                        var element = $compile('<button type="button" class="btn btn-info" ng-click="linkToDetail();">查看详细</button>')(myScope);
+                        var element = $compile('<button type="button" class="btn btn-info" ng-click="linkToDetail('+aData['traceId']+')">查看详细</button>')(myScope);
                         $('td:eq(3)', nRow).html(element);
                     }
-                } );
-
+                }
+                return setting;
+            },
+            initTable:function(setting, myScope){
+                setting.aoColumns = [
+                    { "mData": "serviceId" },
+                    { "mData": "timestamp" , "sClass": "center"},
+                    { "mData": "duration" ,"sClass": "center"},
+                    { "mData": "traceId" ,"sClass": "center"}
+                ];
+                $('#traceTable').dataTable(setting);
+            },
+            initTableEx:function(setting, myScope){
+                setting.aoColumns = [
+                    { "mData": "serviceId" },
+                    { "mData": "timestamp" , "sClass": "center"},
+                    { "mData": "exInfo" ,"sClass": "center"},
+                    { "mData": "traceId" ,"sClass": "center"}
+                ];
+                $('#traceExTable').dataTable(setting);
             },
             initDate : function(){
                 $('#startTime').datetimepicker({
@@ -67,9 +77,27 @@ angular.module('hydra.services.query', [])
             initAuto: function(){
                 $('#serviceName').typeahead({});
             },
-            loadTableData : function(traceList){
-                $('#traceTable').dataTable().fnClearTable();
-                $('#traceTable').dataTable().fnAddData(traceList);
+            loadTableData : function(table, traceList){
+                table.fnClearTable();
+                table.fnAddData(traceList);
+            },
+            appChange:function (myScope) {
+                $('#serviceName').val('');
+                var appId;
+                if (myScope.query.selectApp){
+                    appId = myScope.query.selectApp.id;
+                }
+                if (appId){
+                    myScope.query.serviceList = ServiceList.getAll({appId: appId}, function (serviceList) {
+                        var serviceArray = [];
+                        for (var i in serviceList) {
+                            serviceArray.push(serviceList[i].name);
+                        }
+                        $('#serviceName').data('typeahead').source = serviceArray;
+                    });
+                }else {
+                    $('#serviceName').data('typeahead').source = [];
+                }
             }
         };
     }]);

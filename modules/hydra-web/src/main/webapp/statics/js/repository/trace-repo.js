@@ -16,7 +16,7 @@
 'use strict';
 angular.module('hydra.repository.trace', ['ngResource'])
     .factory('Trace', function ($resource) {
-        return $resource('/rest/trace/:traceId');
+        return $resource('/rest/trace/one/:traceId');
     })
     .factory('TraceList', function ($resource) {
         return $resource('/rest/trace/list/:serviceId/:startTime/:durationMin/:durationMax/:sum', {}, {

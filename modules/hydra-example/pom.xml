@@ -34,6 +34,11 @@
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-collector</artifactId>
         </dependency>
+        <!-- 测试hydra-collector-service -->
+        <dependency>
+            <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-collector-service</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>

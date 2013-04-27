@@ -42,7 +42,7 @@ public class HbaseServiceTest {
                 cs.setTimestamp(System.currentTimeMillis());
                 cs.setValue("cs");
                 Annotation cr = new Annotation();
-                cr.setTimestamp(System.currentTimeMillis()-(int)(Math.random() * 100));
+                cr.setTimestamp(System.currentTimeMillis()+(int)(Math.random() * 100));
                 cr.setValue("cr");
                 cr.setHost(endpoint);
                 span.setId(new Long(i));
@@ -68,10 +68,10 @@ public class HbaseServiceTest {
                 Annotation sr = new Annotation();
                 sr.setHost(endpoint);
                 sr.setTimestamp(System.currentTimeMillis());
-                sr.setValue("ss");
+                sr.setValue("sr");
                 Annotation ss = new Annotation();
-                ss.setTimestamp(System.currentTimeMillis()-(int)(Math.random() * 100));
-                ss.setValue("sr");
+                ss.setTimestamp(System.currentTimeMillis()+(int)(Math.random() * 100));
+                ss.setValue("ss");
                 ss.setHost(endpoint);
                 span.setParentId(new Long(i+1));
                 span.setId(new Long(i));

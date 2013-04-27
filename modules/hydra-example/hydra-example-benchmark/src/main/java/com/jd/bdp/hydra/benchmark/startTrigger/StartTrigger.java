@@ -17,7 +17,7 @@ public class StartTrigger {
             context.start();
             Trigger trigger=(Trigger)context.getBean("trigger");
             // 每隔3s触发一次调用
-            trigger.startWorkWithSleep(Integer.MAX_VALUE,3000);
+            trigger.startWorkWithSleep(5,500);
             Thread.sleep(999999999);
         } catch (Exception e) {
             e.printStackTrace();

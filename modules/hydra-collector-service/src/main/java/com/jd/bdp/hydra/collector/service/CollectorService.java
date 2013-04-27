@@ -57,6 +57,7 @@ public class CollectorService {
         List<Span> spanList = new ArrayList<Span>();
         try{
             spanList = (List)PB.parsePBBytes(message.getData());
+            log.info("成功接受message");
         }catch (Exception e){
            log.error(e.getMessage());
         }

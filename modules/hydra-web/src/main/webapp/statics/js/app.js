@@ -10,6 +10,5 @@ angular.module('myApp',
         ]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/query', {templateUrl: '/index/query.html', controller: QueryCtrl});
-        $routeProvider.when('/trace', {templateUrl: '/index/trace.html', controller: TraceCtrl});
     $routeProvider.otherwise({redirectTo: '/query'});
     }]);

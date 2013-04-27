@@ -14,7 +14,9 @@
  *    limitations under the License.
  */
 'use strict';
-function QueryCtrl($scope,$filter,$location, queryService, TraceList, TraceListEx, AppList, ServiceList) {
+function QueryCtrl($scope,$filter,$location,//内置
+                   queryService,sequenceService,treeService,//service
+                   TraceList, TraceListEx, AppList, ServiceList, Trace) {//repository
 
     queryService.initDate();
     $scope.tableType = 'duration';
@@ -105,11 +107,32 @@ function QueryCtrl($scope,$filter,$location, queryService, TraceList, TraceListE
     };
 
     $scope.linkToDetail = function(traceId){
-        $location.url('/trace').search({traceId:traceId, serviceName: $scope.serviceName});
+        $scope.showType = 'trace';
+
+
+        $scope.returnToQuery = function(){
+            $scope.showType = 'query';
+            $('#treeDiv').empty();
+            $('#sequenceDiv').empty();
+            delete $scope.trace;
+        }
+
+        var trace = Trace.get({traceId:traceId},function(t){
+            sequenceService.getMyTrace(t);
+            var spanMap = sequenceService.getSpanMap(t);
+
+            sequenceService.createView(t);//生成时序图的svg
+            sequenceService.createSpanAndDetail(t, spanMap);//生成时序图的具体细节
+
+            treeService.createTree(t);//生成树的svg
+            treeService.createTreeDetail(t);//生成树的具体结构
+        });
+
+        $scope.trace = trace;
     }
 
     $scope.query = query;
 
-    $scope.routeType = 'query';
+    $scope.showType = 'query';
 
 }

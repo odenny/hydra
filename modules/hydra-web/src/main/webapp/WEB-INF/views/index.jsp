@@ -32,7 +32,6 @@
 <script src="/statics/js/service/query-service.js"></script>
 <!-- controller -->
 <script src="/statics/js/controller/query-controller.js"></script>
-<script src="/statics/js/controller/trace-controller.js"></script>
 
 <!-- filter -->
 <script src="/statics/js/filters.js"></script>

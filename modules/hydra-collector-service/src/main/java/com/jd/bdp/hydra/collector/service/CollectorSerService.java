@@ -21,8 +21,9 @@ import java.util.concurrent.atomic.AtomicLong;
  * Date: 13-4-17
  * Time: 下午5:03
  */
-public class CollectorService {
-    private static final Logger log = LoggerFactory.getLogger(CollectorService.class);
+public class CollectorSerService {
+    private static final Logger log = LoggerFactory.getLogger(CollectorSerService.class);
+    private String topic;
     private MessageConsumer consumer;
     private HbaseService hbaseService;
     private ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
@@ -34,6 +35,10 @@ public class CollectorService {
 
     public void setHbaseService(HbaseService hbaseService) {
         this.hbaseService = hbaseService;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     class HbaseConsumer implements MessageListener{
@@ -49,7 +54,7 @@ public class CollectorService {
     }
 
 
-    public void subscribe(String topic)throws Exception{
+    public void subscribe()throws Exception{
         consumer.subscribe(topic,1024*1024,new HbaseConsumer()).completeSubscribe();
     }
 
@@ -57,7 +62,6 @@ public class CollectorService {
         List<Span> spanList = new ArrayList<Span>();
         try{
             spanList = (List)PB.parsePBBytes(message.getData());
-            log.info("成功接受message");
         }catch (Exception e){
            log.error(e.getMessage());
         }

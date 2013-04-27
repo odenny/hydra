@@ -144,33 +144,42 @@ public class HbaseServiceImpl extends HbaseUtils implements HbaseService {
 
 
     public void durationIndex(Span span) {
-        List<Annotation> alist = span.getAnnotations();
-        Annotation cs = getCsAnnotation(alist);
-        Annotation cr = getCrAnnotation(alist);
-        if (cs != null) {
-            long duration = cs.getTimestamp() - cr.getTimestamp();
-            String rowkey = cs.getHost().getServiceName() + ":" + cs.getTimestamp();
-            Put put = new Put(rowkey.getBytes());
-            //rowkey:serviceId:csTime
-            //每列的timestamp为duration
-            //每列列名为traceId，值为1（用来区分1ms内的跟踪）
-            put.add(duration_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), duration,  "1".getBytes());
-            HTableInterface htable = null;
-            try {
-                htable = POOL.getTable(duration_index);
-                htable.put(put);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }finally {
-                if(htable != null){
-                    try {
-                        htable.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        if (isRootSpan(span)) {
+            List<Annotation> alist = span.getAnnotations();
+            Annotation cs = getCsAnnotation(alist);
+            Annotation cr = getCrAnnotation(alist);
+            if (cs != null) {
+                long duration = cr.getTimestamp() - cs.getTimestamp();
+                String rowkey = cs.getHost().getServiceName() + ":" + cs.getTimestamp();
+                Put put = new Put(rowkey.getBytes());
+                //rowkey:serviceId:csTime
+                //每列的timestamp为duration
+                //每列列名为traceId，值为1（用来区分1ms内的跟踪）
+                put.add(duration_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), duration,  "1".getBytes());
+                HTableInterface htable = null;
+                try {
+                    htable = POOL.getTable(duration_index);
+                    System.out.println(1);
+                    htable.put(put);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }finally {
+                    if(htable != null){
+                        try {
+                            htable.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
         }
+    }
+
+    private boolean isRootSpan(Span span) {
+        return span.getParentId() == null;
     }
 
 

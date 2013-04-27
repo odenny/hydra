@@ -9,22 +9,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Time: 上午11:01
  */
 public class Bootstrap {
-    private CollectorService collectorService;
-    private final String topic = "hydra_test";
 
     public static void main(String[] strings){
         try {
             ApplicationContext context = new ClassPathXmlApplicationContext("hydra-collector-service.xml");
-            Bootstrap bootstrap = new Bootstrap();
-            bootstrap.collectorService = (CollectorService)context.getBean("collectorService");
-            bootstrap.start();
+            CollectorSerService collectorSerService = (CollectorSerService)context.getBean("collectorService");
+            collectorSerService.subscribe();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void start()throws Exception{
-        collectorService.subscribe(topic);
     }
 
 }

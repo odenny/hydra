@@ -23,7 +23,6 @@ angular.module('hydra.services.sequence', [])
                 var spanIndex = {index: 0}
                 getMySpan(span, spanIndex);
 
-
                 function getMySpan(span, spanIndex) {
                     var anMap = {};
                     for (var i in span.annotations) {

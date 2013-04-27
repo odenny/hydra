@@ -30,7 +30,8 @@ public abstract class AbstractBenchmarkClient {
 
     public AbstractBenchmarkClient() {
         try {
-            InputStream in = ClassLoader.getSystemResourceAsStream("benchmark.properties");
+
+            InputStream in = getClass().getResourceAsStream("/benchmark.properties");
             properties.load(in);
         } catch (IOException e) {
             e.printStackTrace();

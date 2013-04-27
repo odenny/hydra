@@ -27,10 +27,6 @@
         <level value="ERROR" />
         <appender-ref ref="CONSOLE" />
     </category>
-    <category name="org.apache.ibatis">
-        <level value="ERROR" />
-        <appender-ref ref="CONSOLE" />
-    </category>
     <category name="org.apache.zookeeper">
         <level value="ERROR" />
         <appender-ref ref="CONSOLE" />

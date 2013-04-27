@@ -12,5 +12,5 @@
     <dubbo:protocol name="dubbo" port="20992" />
     <dubbo:service interface="com.jd.bdp.service.inter.InterfaceC" ref="serviceC" >
     </dubbo:service>
-    <dubbo:registry file="c" />
+    <dubbo:registry file="logs/c" />
 </beans>

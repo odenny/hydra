@@ -15,7 +15,7 @@
     <dubbo:protocol name="dubbo" port="20991" />
     <dubbo:service interface="com.jd.bdp.service.inter.InterfaceB" ref="serviceB" >
     </dubbo:service>
-    <dubbo:registry file="b" />
+    <dubbo:registry file="logs/b" />
     <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false">
     </dubbo:reference>
 

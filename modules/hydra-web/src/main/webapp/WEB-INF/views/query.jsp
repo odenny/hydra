@@ -2,141 +2,14 @@
 <html lang="en">
 <head>
     <style type="text/css">
-            /*query*/
-        .queryDiv {
-            float: left;
-            height: auto;
-            width: 350px;
-            padding: 0 10 0 20;
-        }
 
-        .resultDiv {
-            float: left;
-            height: auto;
-            width: 75%;
-            margin: 15 10 0 20;
-            border: solid 1px #ddd;
-            -webkit-border-radius: 4px;
-        }
-
-        <!--
-        bootstrap-table
-
-        -->
-        div.dataTables_length label {
-            float: left;
-            text-align: left;
-        }
-
-        div.dataTables_length select {
-            width: 80px;
-        }
-
-        div.dataTables_filter label {
-            float: right;
-        }
-
-        div.dataTables_filter input {
-            height: 30px;
-        }
-
-        div.dataTables_info {
-            padding-top: 8px;
-        }
-
-        div.dataTables_paginate {
-            float: right;
-            margin: 0;
-        }
-
-        table {
-            margin: 1em 0;
-            clear: both;
-        }
-
-        table.dataTable th:active {
-            outline: none;
-        }
-
-        .sorting_1 {
-
-        }
-
-        .mySpan {
-            width: 95%;
-        }
-
-        .dataTables_info {
-            padding-left: 20px;
-        }
-
-        .dataTables_length {
-            padding-left: 20px;
-        }
-
-        #traceTable tr.even:hover td {
-            background-color: #DDFF75;
-        }
-
-        #traceTable tr.odd:hover td {
-            background-color: #E6FF99;
-        }
-
-            /*trace*/
-        rect.background {
-            fill: white;
-        }
-
-        .axis {
-            shape-rendering: crispEdges;
-        }
-
-        .axis path, .axis line {
-            fill: none;
-            stroke: #000;
-        }
-
-        .viewDiv {
-            display: inline-block;
-            height: auto;
-        }
-
-        .node rect {
-            cursor: pointer;
-            fill: #fff;
-            fill-opacity: .5;
-            stroke: #3182bd;
-            stroke-width: 1px;
-        }
-
-        .node text {
-            font: 10px sans-serif;
-            pointer-events: none;
-        }
-
-        path.link {
-            fill: none;
-            stroke: #9ecae1;
-            stroke-width: 1.5px;
-        }
-
-        .traceDiv {
-            height: auto;
-            width: 98%;
-            margin: 20 20 20 20;
-            border: solid 1px #ddd;
-        }
-
-        .myNavbar {
-            height: 18px;
-        }
 
     </style>
     <link href="/statics/lib/bootstrap/datetimepicker/css/datetimepicker.css" rel="stylesheet" media="screen">
     <link href="/statics/lib/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
-    <link href="/statics/lib/qTip2-2.0.1/dist/jquery.qtip.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="/statics/lib/d3/d3.js"></script>
-    <script src="/statics/lib/qTip2-2.0.1/dist/jquery.qtip.js" type="text/javascript"></script>
+    <link href="http://img.bdp.jd.com/jquery/plugins/qtip/2.0.1/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="http://img.bdp.jd.com/d3/v3/d3.v3.min.js"></script>
+    <script src="http://img.bdp.jd.com/jquery/plugins/qtip/2.0.1/jquery.qtip.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/plugin.js"></script>
     <script type="text/javascript"

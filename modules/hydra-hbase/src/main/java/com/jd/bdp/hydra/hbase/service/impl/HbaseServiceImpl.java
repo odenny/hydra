@@ -27,6 +27,7 @@ import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -121,7 +122,7 @@ public class HbaseServiceImpl extends HbaseUtils implements HbaseService {
         for (BinaryAnnotation b : span.getBinaryAnnotations()) {
             String rowkey = b.getHost().getServiceName() + ":" + System.currentTimeMillis() + ":" + b.getKey();
             Put put = new Put(rowkey.getBytes());
-            put.add(ann_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), "1".getBytes());
+            put.add(ann_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), b.getValue());
             putlist.add(put);
         }
 
@@ -159,7 +160,6 @@ public class HbaseServiceImpl extends HbaseUtils implements HbaseService {
                 HTableInterface htable = null;
                 try {
                     htable = POOL.getTable(duration_index);
-                    System.out.println(1);
                     htable.put(put);
                 } catch (IOException e) {
                     e.printStackTrace();

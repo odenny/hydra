@@ -11,7 +11,6 @@
 
 
 
-<link href="/statics/lib/qTip2-2.0.1/dist/jquery.qtip.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="http://img.bdp.jd.com/bootstrap/2.3.1/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/statics/css/app.css" />
 

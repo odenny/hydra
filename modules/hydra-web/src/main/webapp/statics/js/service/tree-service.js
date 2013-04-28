@@ -89,7 +89,7 @@ angular.module('hydra.services.tree', [])
                         .attr("dy", 3.5)
                         .attr("dx", 5.5)
                         .text(function (d) {
-                            return d.spanName;
+                            return d.serviceName + '|' + d.spanName;
                         });
 
                     // Transition nodes to their new position.

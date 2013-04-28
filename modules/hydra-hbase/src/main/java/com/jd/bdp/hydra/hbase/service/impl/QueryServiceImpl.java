@@ -77,9 +77,13 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
         try {
             table = POOL.getTable(duration_index);
             rs = table.getScanner(scan);
+            int resultSum = 0;
             for (Result res : rs) {
                 List<KeyValue> list = res.list();
                 for (KeyValue kv : list) {
+                    if (resultSum == sum){//因为每行有可能有多条数据，所以要手动过滤条数
+                        break;
+                    }
                     JSONObject obj = new JSONObject();
                     String[] key = new String(kv.getRow()).split(":");
                     obj.put("serviceId", key[0]);
@@ -87,6 +91,7 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
                     obj.put("duration", kv.getTimestamp());
                     obj.put("traceId", byteArray2Long(kv.getQualifier()));
                     array.add(obj);
+                    resultSum++;
                 }
             }
             return array;
@@ -113,17 +118,23 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
         HTableInterface table = null;
         ResultScanner rs = null;
         try {
-            table = POOL.getTable(duration_index);
+            table = POOL.getTable(ann_index);
             rs = table.getScanner(scan);
+            int resultSum = 0;
             for (Result res : rs) {
                 List<KeyValue> list = res.list();
                 for (KeyValue kv : list) {
+                    if (resultSum == sum){//因为每行有可能有多条数据，所以要手动过滤条数
+                        break;
+                    }
                     JSONObject obj = new JSONObject();
                     String[] key = new String(kv.getRow()).split(":");
                     obj.put("serviceId", key[0]);
                     obj.put("timestamp", Long.parseLong(key[1]));
                     obj.put("traceId", byteArray2Long(kv.getQualifier()));
+                    obj.put("exInfo", new String(kv.getValue()));
                     array.add(obj);
+                    resultSum++;
                 }
             }
             return array;
@@ -217,24 +228,24 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     }
 
 
-    public void setOneItem(String tableName, String familyColumnName, String rowkey, String columnName, byte[] valueParm) {
-        HTableInterface table = POOL.getTable(tableName);
-        table.setAutoFlush(true);//自动提交
-        try {
-            Put put = new Put(Bytes.toBytes(rowkey));
-            put.add(Bytes.toBytes(familyColumnName), Bytes.toBytes(columnName), valueParm);
-            table.put(put);
-//            table.flushCommits();//手动提交，最好每次close之前手动提交...
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                table.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    public void setOneItem(String tableName, String familyColumnName, String rowkey, String columnName, byte[] valueParm) {
+//        HTableInterface table = POOL.getTable(tableName);
+//        table.setAutoFlush(true);//自动提交
+//        try {
+//            Put put = new Put(Bytes.toBytes(rowkey));
+//            put.add(Bytes.toBytes(familyColumnName), Bytes.toBytes(columnName), valueParm);
+//            table.put(put);
+////            table.flushCommits();//手动提交，最好每次close之前手动提交...
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                table.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 //    /**
 //     * 删除指定表名的rowKey下某时间戳的数据。

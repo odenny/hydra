@@ -70,9 +70,9 @@ public class HydraFilter implements Filter {
             if (context.isConsumerSide()) {
                 Span span1 = tracer.getParentSpan();
                 if (span1 == null) { //为rootSpan
-                    span = tracer.newSpan(context.getMethodName(), endpoint);
+                    span = tracer.newSpan(context.getMethodName(), endpoint, this.serviceId);
                 } else {
-                    span = tracer.genSpan(span1.getTraceId(), span1.getId(), tracer.genSpanId(), context.getMethodName(), span1.isSample());
+                    span = tracer.genSpan(span1.getTraceId(), span1.getId(), tracer.genSpanId(), context.getMethodName(), span1.isSample(), this.serviceId);
                 }
             } else if (context.isProviderSide()) {
                 Long traceId, parentId, spanId;
@@ -80,7 +80,7 @@ public class HydraFilter implements Filter {
                 parentId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.PID));
                 spanId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.SID));
                 boolean isSample = (traceId != null);
-                span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample);
+                span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample, this.serviceId);
             }
             invokerBefore(invocation, span, endpoint, start);
             RpcInvocation invocation1 = (RpcInvocation) invocation;

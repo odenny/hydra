@@ -26,6 +26,29 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <!--jar 插件,排除一些打包资源-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>package-exclude-resources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <excludes>
+                                <exclude>log/</exclude>
+                                <exclude>scripts/</exclude>
+                                <exclude>*.xml</exclude>
+                                <exclude>*.properties</exclude>
+                            </excludes>
+                            <classifier>assemble</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- resource插件, 设定编码 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

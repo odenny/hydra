@@ -12,14 +12,12 @@ public class ServiceA implements InterfaceA {
 
     @Override
     public Object functionA(Object... objects) {
-        String myVoice = new String("Hello,Im ServiceA,you can call me SA");
-        String returnVoice = myVoice.toString();
+        String myVoice = "A";
+        String result = "";
         if (downService != null) {
-            Object result = downService.functionB(objects, myVoice);
-            returnVoice = returnVoice + "-><-" + result.toString();
+            result = downService.functionB(objects, myVoice).toString();
         }
-        returnVoice = "(" + returnVoice + ")";
-        return returnVoice;
+        return myVoice + result;
     }
 
     private InterfaceB downService;

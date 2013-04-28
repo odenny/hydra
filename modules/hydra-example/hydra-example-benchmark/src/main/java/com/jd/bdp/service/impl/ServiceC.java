@@ -10,9 +10,17 @@ import com.jd.bdp.service.inter.InterfaceC;
  */
 public class ServiceC implements InterfaceC {
 
+    static int mySwitch = 1;
+
     @Override
     public Object functionC(Object... objects) {
-        return "wa~ it seems all body come here";
+        mySwitch = -mySwitch;
+        if (mySwitch > 0) {
+            return "------------------>C";
+        } else {
+            Integer.valueOf("abc");
+            return "------------------>C(ex)";
+        }
     }
 }
 

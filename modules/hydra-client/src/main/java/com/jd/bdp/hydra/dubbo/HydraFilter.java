@@ -86,21 +86,28 @@ public class HydraFilter implements Filter {
             RpcInvocation invocation1 = (RpcInvocation) invocation;
             setAttachment(span, invocation1);
             Result result = invoker.invoke(invocation);
+            if (result.getException() != null){
+                catchException(result.getException(), endpoint);
+            }
             return result;
-        } catch (RpcException e) {
-            BinaryAnnotation exAnnotation = new BinaryAnnotation();
-            exAnnotation.setKey(TracerUtils.EXCEPTION);
-            exAnnotation.setValue(e.getMessage().getBytes());
-            exAnnotation.setType("string");
-            exAnnotation.setHost(endpoint);
-            tracer.addBinaryAnntation(exAnnotation);
+        }catch (RpcException e) {
+            catchException(e, endpoint);
             throw e;
-        } finally {
+        }finally {
             if (span != null) {
                 long end = System.currentTimeMillis();
                 invokerAfter(invocation, endpoint, span, end, isConsumerSide);
             }
         }
+    }
+
+    private void catchException(Throwable e, Endpoint endpoint) {
+        BinaryAnnotation exAnnotation = new BinaryAnnotation();
+        exAnnotation.setKey(TracerUtils.EXCEPTION);
+        exAnnotation.setValue(e.getMessage().getBytes());
+        exAnnotation.setType("string");
+        exAnnotation.setHost(endpoint);
+        tracer.addBinaryAnntation(exAnnotation);
     }
 
     private void setAttachment(Span span, RpcInvocation invocation) {

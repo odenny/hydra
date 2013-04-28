@@ -16,18 +16,15 @@ public class ServiceB implements InterfaceB {
     /*服务调用*/
     @Override
     public Object functionB(Object... objects) {
-        String myVoice = new String("Hello,Im ServiceB!");
-        String returnVoice = myVoice.toString();
+        String myVoice = "------------>B";
+        String result = "";
         if (downService != null) {
-            Object result = null;
             if (mySwitch > 0) {
-                result = downService.functionC(objects);
-                returnVoice = returnVoice + "-><-" + result.toString();
+                result = downService.functionC(objects).toString();
             }
             mySwitch = -mySwitch;
         }
-        returnVoice = "(" + returnVoice + ")";
-        return returnVoice;
+        return myVoice + result;
     }
 
 

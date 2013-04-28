@@ -7,13 +7,14 @@ package com.jd.bdp.hydra.benchmark.startBenchTest.support;
  *   http://code.google.com/p/nfs-rpc (c) 2011
  */
 
+import com.alibaba.dubbo.common.utils.ClassHelper;
+import com.jd.bdp.hydra.benchmark.startBenchTest.support.utils.PropertyUtils;
 import com.jd.bdp.hydra.benchmark.startTrigger.support.Trigger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -28,15 +29,6 @@ import java.util.concurrent.CyclicBarrier;
  */
 public abstract class AbstractBenchmarkClient {
 
-    public AbstractBenchmarkClient() {
-        try {
-
-            InputStream in = getClass().getResourceAsStream("/benchmark.properties");
-            properties.load(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private static long maxTPS = 0;
 
@@ -65,8 +57,9 @@ public abstract class AbstractBenchmarkClient {
     // > 1000
     private static long above1000sum;
 
-    protected static Properties properties = new Properties();
+    protected Properties properties = PropertyUtils.getProperties();
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static Logger logger = LoggerFactory.getLogger(PropertyUtils.class);
 
     public void run(String[] args) throws Exception {
         //----------------read messages from outer files-----------------------
@@ -74,8 +67,6 @@ public abstract class AbstractBenchmarkClient {
         final int serverPort = Integer.parseInt(properties.getProperty("serverport"));
         final int concurrents = Integer.parseInt(properties.getProperty("concurrents"));
         final int timeout = Integer.parseInt(properties.getProperty("timeout"));
-//        final int callCount = Integer.parseInt(properties.getProperty("callCount"));
-//        int waitTime = Integer.parseInt(properties.getProperty("waitTime"));
         runtime = Integer.parseInt(properties.getProperty("runtime"));
         final long endtime = System.nanoTime() / 1000L + runtime * 1000 * 1000L;
         final int clientNums = Integer.parseInt(properties.getProperty("connectionnums"));
@@ -189,9 +180,9 @@ public abstract class AbstractBenchmarkClient {
         }
         //------------------------------- 输出结果----------------------------------------------
         boolean isWriteResult = Boolean.parseBoolean(System.getProperty("write.statistics", "false"));
-        if (true&&isWriteResult) {
+        if (true && isWriteResult) {
             BufferedWriter writer = new BufferedWriter(new FileWriter("benchmark.all.results"));
-            System.out.println("-----------"+writer.toString());
+            System.out.println("-----------" + writer.toString());
             for (Map.Entry<String, Long[]> entry : times.entrySet()) {
                 writer.write(entry.getKey() + "," + entry.getValue()[0] + "," + entry.getValue()[1] + "\r\n");
             }

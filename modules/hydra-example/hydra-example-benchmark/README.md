@@ -40,3 +40,11 @@
         <td>errorResponseTimes</td>
     </tr>
 </table>
+
+### 使用说明
+        1:mvn package -Dmaven.test.skip=true
+        2:cd hydra-example-benchmark*
+        3:cd conf
+           config the benchmark.properties and dubbo.properties
+        4:cd bin
+        5:startABC.sh and startBenchmark.sh

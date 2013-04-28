@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.hydra.benchmark.startBenchTest.support;
+package com.jd.bdp.hydra.benchmark.startBenchTest.demo;
 
 import com.jd.bdp.hydra.benchmark.startBenchTest.support.AbstractClientRunnable;
 import com.jd.bdp.hydra.benchmark.startBenchTest.support.ServiceFactory;

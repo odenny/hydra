@@ -1,7 +1,7 @@
 #!/bin/bash
 #project directory
 
-MAINCLASSNAME=""
+MAINCLASSNAME="com.jd.bdp.hydra.benchmark.startBenchTest.BenchmarkClient"
 
 if [ -z "$BASE_DIR" ] ; then
   PRG="$0"

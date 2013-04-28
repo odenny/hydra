@@ -2,15 +2,13 @@
     <id>jd</id>
     <formats>
         <format>dir</format>
+        <format>tar.gz</format>
     </formats>
     <dependencySets>
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <useProjectAttachments>true</useProjectAttachments>
-            <excludes>
-                <exclude>*:sources</exclude>
-            </excludes>
         </dependencySet>
     </dependencySets>
     <fileSets>
@@ -36,19 +34,22 @@
             <directory>/src/main/resources/scripts/windows</directory>
             <outputDirectory>/bin</outputDirectory>
             <includes>
-                <include>startABC/*.*</include>
-                <include>*.*</include>
+                <include>startABC/*.bat</include>
+                <include>*.bat</include>
             </includes>
         </fileSet>
         <!--linux shell-->
-        <!--<fileSet>-->
-            <!--<directory>/src/main/resources/scripts/linux</directory>-->
-            <!--<outputDirectory>/bin/linux</outputDirectory>-->
-            <!--<includes>-->
-                <!--<include>startABC/*.*</include>-->
-                <!--<include>*.*</include>-->
-            <!--</includes>-->
-        <!--</fileSet>-->
+        <fileSet>
+            <directory>/src/main/resources/scripts/linux</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <lineEnding>unix</lineEnding>
+            <fileMode>0755</fileMode>
+
+            <includes>
+                <include>startABC/*.sh</include>
+                <include>*.sh</include>
+            </includes>
+        </fileSet>
         <fileSet>
             <directory>/src/main/resources/log</directory>
             <outputDirectory>/log</outputDirectory>

@@ -18,7 +18,7 @@
 angular.module('hydra.services.sequence', [])
     .factory('sequenceService', function(){
         return {
-            getMyTrace :function (trace) {
+            getMyTrace :function (trace, myScope) {
                 var span = trace.rootSpan;
                 var spanIndex = {index: 0}
                 getMySpan(span, spanIndex);
@@ -57,6 +57,7 @@ angular.module('hydra.services.sequence', [])
                         viewIndex: spanIndex.index,
                         type: 'wasted'
                     }
+                    span.serviceName = myScope.serviceMap[span.serviceId];
                     spanIndex.index++;
 
                     for (var i in span.children) {
@@ -93,6 +94,7 @@ angular.module('hydra.services.sequence', [])
                 view.color = {};
                 view.color.used = '#1AC8AF';
                 view.color.wasted = '#C3ECF2';
+                view.color.ex = '#FD6773';
 
 
                 view.hierarchy = d3.layout.partition()
@@ -237,8 +239,8 @@ angular.module('hydra.services.sequence', [])
                         var isUsed = $(this).attr('timetype')=='used'?true:false;
                         $(this).qtip({
                             style:{
-                                classes:'alert alert-block',
-                                width:150
+                                classes:'alert alert-success',
+                                width:300
                             },
                             position:{
                                 viewport: $(window)
@@ -250,7 +252,8 @@ angular.module('hydra.services.sequence', [])
                             content:function(){
                                 var html = '<div><table class="table table-condensed" style="width:150;font-family:Tahoma;">';
 
-                                html += '<tr><td>服务名:</td><td>'+spanModel.spanName+'</td></tr>';
+                                html += '<tr><td>服务名:</td><td style="font-size: small;">'+spanModel.serviceName+'</td></tr>';
+                                html += '<tr><td>方法名:</td><td>'+spanModel.spanName+'</td></tr>';
                                 if (isUsed){
                                     html += '<tr><td style="text-align:center;"><span class="label label-success">调用时长</span></td>';
                                 }else {

@@ -18,13 +18,13 @@ function QueryCtrl($scope,$filter,$location,//内置
                    queryService,sequenceService,treeService,//service
                    TraceList, TraceListEx, AppList, ServiceList, Trace) {//repository
 
-    queryService.initDate();
+    $scope.serviceMap = {};
     $scope.tableType = 'duration';
-
     var setting = queryService.getTableSetting($scope);
+
+    queryService.initDate();
     queryService.initTable(setting, $scope);
     queryService.initTableEx(setting, $scope);
-
     queryService.initAuto();
 
     var query = {
@@ -34,7 +34,7 @@ function QueryCtrl($scope,$filter,$location,//内置
                 if ($scope.query.exBtn.type){
                     return '出现异常';
                 }else {
-                    return '正常调用';
+                    return '忽略异常';
                 }
             },
             click:function(){
@@ -50,13 +50,12 @@ function QueryCtrl($scope,$filter,$location,//内置
         sum :500,
         submitQuery: function () {
             var serviceId;
-            var serviceName;
             for(var i in $scope.query.serviceList){
                 if ($scope.query.serviceList[i].name == $('#serviceName').val()){
                     serviceId = $scope.query.serviceList[i].id;
-                    serviceName = $scope.query.serviceList[i].name;
                 }
             }
+            $scope.serviceName = $scope.serviceMap[serviceId];
 
             var isValid = true;
             var validateMsg;
@@ -71,15 +70,14 @@ function QueryCtrl($scope,$filter,$location,//内置
             }
             showValidateMsg(isValid, validateMsg);
 
-            var startTime = $filter('dateToLong')($('#realTime').val());
-            var durationMin = $scope.query.durationMin || 0;
-            var durationMax = $scope.query.durationMax || 1000000;
-            $scope.serviceName = serviceName;
-
             function showValidateMsg(isValid, validateMsg){
                 $scope.query.invalid = !isValid;
                 $scope.query.validateMsg = validateMsg;
             }
+
+            var startTime = $filter('dateToLong')($('#realTime').val());
+            var durationMin = $scope.query.durationMin || 0;
+            var durationMax = $scope.query.durationMax || 1000000;
 
             //查询
             if (isValid){
@@ -118,7 +116,7 @@ function QueryCtrl($scope,$filter,$location,//内置
         }
 
         var trace = Trace.get({traceId:traceId},function(t){
-            sequenceService.getMyTrace(t);
+            sequenceService.getMyTrace(t, $scope);
             var spanMap = sequenceService.getSpanMap(t);
 
             sequenceService.createView(t);//生成时序图的svg

@@ -13,6 +13,7 @@ public class Span implements Serializable {
     private Long id;
     private Long parentId; //optional
     private String spanName;
+    private String serviceId;
     private List<Annotation> annotations;
     private List<BinaryAnnotation> binaryAnnotations;
     private boolean isSample;
@@ -99,5 +100,13 @@ public class Span implements Serializable {
                 ", binaryAnnotations=" + binaryAnnotations +
                 ", isSample=" + isSample +
                 '}';
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 }

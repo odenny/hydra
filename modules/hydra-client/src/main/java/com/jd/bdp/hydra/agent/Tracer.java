@@ -43,31 +43,33 @@ public class Tracer {
         spanThreadLocal.set(span);
     }
 
-    public Span genSpan(Long traceId, Long pid, Long id, String spanname, boolean isSample) {
+    public Span genSpan(Long traceId, Long pid, Long id, String spanname, boolean isSample, String serviceId) {
         Span span = new Span();
         span.setId(id);
         span.setParentId(pid);
         span.setSpanName(spanname);
         span.setSample(isSample);
         span.setTraceId(traceId);
+        span.setServiceId(serviceId);
         return span;
     }
 
-    public Span newSpan(String spanname, Endpoint endpoint) {
+    public Span newSpan(String spanname, Endpoint endpoint, String serviceId) {
         boolean s = isSample();
         Span span = new Span();
         span.setTraceId(s ? genTracerId() : null);
         span.setId(s ? genSpanId() : null);
         span.setSpanName(spanname);
+        span.setServiceId(serviceId);
         span.setSample(s);
-        if (s) {
-            BinaryAnnotation appname = new BinaryAnnotation();
-            appname.setKey("dubbo.applicationName");
-            appname.setValue(transfer.appName().getBytes());
-            appname.setType("string");
-            appname.setHost(endpoint);
-            span.addBinaryAnnotation(appname);
-        }
+//        if (s) {//应用名写入
+//            BinaryAnnotation appname = new BinaryAnnotation();
+//            appname.setKey("dubbo.applicationName");
+//            appname.setValue(transfer.appName().getBytes());
+//            appname.setType("string");
+//            appname.setHost(endpoint);
+//            span.addBinaryAnnotation(appname);
+//        }
         return span;
     }
 

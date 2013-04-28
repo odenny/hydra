@@ -21,6 +21,7 @@ angular.module('hydra.services.query', [])
             getTableSetting : function(myScope){
                 var setting = {
                     sDom: "<'row'<'mySpan'l>r>t<'row'<'mySpan'i><'mySpan'p>>",
+                    "bAutoWidth": false,
                     sInfo:"Showing _START_ to _END_ of _TOTAL_ entries",
                     sPaginationType: "bootstrap",
                     oLanguage: {
@@ -35,12 +36,7 @@ angular.module('hydra.services.query', [])
                     },
                     aLengthMenu: [[25, 50, 100, -1], [25, 50, 100, "全部"]],
                     iDisplayLength: 25,
-                    fnRowCallback: function( nRow, aData, iDisplayIndex ) {
-                        $('td:eq(0)', nRow).html(myScope.serviceName);
-                        $('td:eq(1)', nRow).html($filter('date')(aData['timestamp'], "yyyy-MM-dd HH:mm:ss"));
-                        var element = $compile('<button type="button" class="btn btn-info" ng-click="linkToDetail('+aData['traceId']+')">查看详细</button>')(myScope);
-                        $('td:eq(3)', nRow).html(element);
-                    }
+
                 }
                 return setting;
             },
@@ -51,6 +47,12 @@ angular.module('hydra.services.query', [])
                     { "mData": "duration" ,"sClass": "center"},
                     { "mData": "traceId" ,"sClass": "center"}
                 ];
+                setting.fnRowCallback = function( nRow, aData, iDisplayIndex ) {
+                    $('td:eq(0)', nRow).html(myScope.serviceName);
+                    $('td:eq(1)', nRow).html($filter('date')(aData['timestamp'], "yyyy-MM-dd HH:mm:ss"));
+                    var element = $compile('<button type="button" class="btn btn-info" ng-click="linkToDetail('+aData['traceId']+')">查看详细</button>')(myScope);
+                    $('td:eq(3)', nRow).html(element);
+                };
                 $('#traceTable').dataTable(setting);
             },
             initTableEx:function(setting, myScope){
@@ -60,6 +62,16 @@ angular.module('hydra.services.query', [])
                     { "mData": "exInfo" ,"sClass": "center"},
                     { "mData": "traceId" ,"sClass": "center"}
                 ];
+                setting.sScrollX = "100%";
+                setting.sScrollXInner = "110%";
+                setting.bScrollCollapse = true;
+                setting.fnRowCallback = function( nRow, aData, iDisplayIndex ) {
+                    $('td:eq(0)', nRow).html(myScope.serviceName);
+                    $('td:eq(1)', nRow).html($filter('date')(aData['timestamp'], "yyyy-MM-dd HH:mm:ss"));
+                    $('td:eq(2)', nRow).html(aData['exInfo'].substring(0, 30) + '...').attr('title', aData['exInfo']);
+                    var element = $compile('<button type="button" class="btn btn-info" ng-click="linkToDetail('+aData['traceId']+')">查看详细</button>')(myScope);
+                    $('td:eq(3)', nRow).html(element);
+                };
                 $('#traceExTable').dataTable(setting);
             },
             initDate : function(){
@@ -68,10 +80,14 @@ angular.module('hydra.services.query', [])
                     weekStart: 1,
                     todayBtn:  1,
                     autoclose: 1,
-                    todayHighlight: 1,
+                    todayHighlight: true,
                     startView: 2,
                     forceParse: 0,
-                    pickerReferer:'input'
+                    pickerReferer:'input',
+                    initialDate:function(){
+                        var date = new Date();
+                        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                    }()
                 });
             },
             initAuto: function(){
@@ -92,6 +108,7 @@ angular.module('hydra.services.query', [])
                         var serviceArray = [];
                         for (var i in serviceList) {
                             serviceArray.push(serviceList[i].name);
+                            myScope.serviceMap[myScope.query.serviceList[i].id] = myScope.query.serviceList[i].name;
                         }
                         $('#serviceName').data('typeahead').source = serviceArray;
                     });

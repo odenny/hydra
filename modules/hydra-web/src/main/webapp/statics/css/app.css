@@ -1,1 +1,132 @@
+/*query*/
+.queryDiv {
+    float: left;
+    height: auto;
+    width: 350px;
+    padding: 0 10 0 20;
+}
 
+.resultDiv {
+    float: left;
+    height: auto;
+    width: 75%;
+    margin: 15 10 0 20;
+    border: solid 1px #ddd;
+    -webkit-border-radius: 4px;
+}
+
+<!--
+bootstrap-table
+
+-->
+div.dataTables_length label {
+    float: left;
+    text-align: left;
+}
+
+div.dataTables_length select {
+    width: 80px;
+}
+
+div.dataTables_filter label {
+    float: right;
+}
+
+div.dataTables_filter input {
+    height: 30px;
+}
+
+div.dataTables_info {
+    padding-top: 8px;
+}
+
+div.dataTables_paginate {
+    float: right;
+    margin: 0;
+}
+
+table {
+    margin: 1em 0;
+    clear: both;
+}
+
+table.dataTable th:active {
+    outline: none;
+}
+
+.sorting_1 {
+
+}
+
+.mySpan {
+    width: 95%;
+}
+
+.dataTables_info {
+    padding-left: 20px;
+}
+
+.dataTables_length {
+    padding-left: 20px;
+}
+
+#traceTable tr.even:hover td {
+    background-color: #DDFF75;
+}
+
+#traceTable tr.odd:hover td {
+    background-color: #E6FF99;
+}
+
+td.exInfo{
+    width: 250px;
+}
+
+/*trace*/
+rect.background {
+    fill: white;
+}
+
+.axis {
+    shape-rendering: crispEdges;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+}
+
+.viewDiv {
+    display: inline-block;
+    height: auto;
+}
+
+.node rect {
+    cursor: pointer;
+    fill: #fff;
+    fill-opacity: .5;
+    stroke: #3182bd;
+    stroke-width: 1px;
+}
+
+.node text {
+    font: 10px sans-serif;
+    pointer-events: none;
+}
+
+path.link {
+    fill: none;
+    stroke: #9ecae1;
+    stroke-width: 1.5px;
+}
+
+.traceDiv {
+    height: auto;
+    width: 98%;
+    margin: 20 20 20 20;
+    border: solid 1px #ddd;
+}
+
+.myNavbar {
+    height: 18px;
+}

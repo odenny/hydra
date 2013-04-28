@@ -18,7 +18,6 @@ public class StartTrigger {
             Trigger trigger=(Trigger)context.getBean("trigger");
             // 每隔3s触发一次调用
             trigger.startWorkWithSleep(20,500);
-            Thread.sleep(999999999);
         } catch (Exception e) {
             e.printStackTrace();
         }

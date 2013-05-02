@@ -20,6 +20,7 @@ import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
 import com.alibaba.dubbo.container.Container;
 import com.alibaba.dubbo.container.spring.SpringContainer;
+import com.alibaba.dubbo.remoting.TimeoutException;
 import com.alibaba.dubbo.rpc.*;
 import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Endpoint;
@@ -91,7 +92,11 @@ public class HydraFilter implements Filter {
             }
             return result;
         }catch (RpcException e) {
-            catchException(e, endpoint);
+            if (e.getCause() != null && e.getCause() instanceof TimeoutException){
+                catchTimeoutException(e, endpoint);
+            }else {
+                catchException(e, endpoint);
+            }
             throw e;
         }finally {
             if (span != null) {
@@ -101,11 +106,20 @@ public class HydraFilter implements Filter {
         }
     }
 
+    private void catchTimeoutException(RpcException e, Endpoint endpoint) {
+        BinaryAnnotation exAnnotation = new BinaryAnnotation();
+        exAnnotation.setKey(TracerUtils.EXCEPTION);
+        exAnnotation.setValue(e.getMessage());
+        exAnnotation.setType("exTimeout");
+        exAnnotation.setHost(endpoint);
+        tracer.addBinaryAnntation(exAnnotation);
+    }
+
     private void catchException(Throwable e, Endpoint endpoint) {
         BinaryAnnotation exAnnotation = new BinaryAnnotation();
         exAnnotation.setKey(TracerUtils.EXCEPTION);
         exAnnotation.setValue(e.getMessage());
-        exAnnotation.setType("string");
+        exAnnotation.setType("ex");
         exAnnotation.setHost(endpoint);
         tracer.addBinaryAnntation(exAnnotation);
     }

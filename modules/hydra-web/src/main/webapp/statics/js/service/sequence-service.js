@@ -19,11 +19,13 @@ angular.module('hydra.services.sequence', [])
     .factory('sequenceService', function(){
         return {
             getMyTrace :function (trace, myScope) {
+                console.log(trace)
                 var span = trace.rootSpan;
                 var spanIndex = {index: 0}
                 getMySpan(span, spanIndex);
 
                 function getMySpan(span, spanIndex) {
+                    var ip;
                     var anMap = {};
                     for (var i in span.annotations) {
                         if (span.annotations[i]['value']=='cs') {
@@ -36,6 +38,7 @@ angular.module('hydra.services.sequence', [])
                         }
                         if (span.annotations[i]['value']=='sr') {
                             anMap['sr'] = span.annotations[i]['timestamp'];
+                            ip = span.annotations[i]['host']['ip'];
                             continue;
                         }
                         if (span.annotations[i]['value']=='cr') {
@@ -48,7 +51,9 @@ angular.module('hydra.services.sequence', [])
                         start: anMap['cs'],
                         duration: span.durationServer,
                         viewIndex: spanIndex.index,
-                        type: 'used'
+                        ip: ip,
+                        type: 'used',
+                        hasEx : span.exception?true:false
                     }
                     span.wasted = {
                         spanId: span.id,
@@ -154,7 +159,7 @@ angular.module('hydra.services.sequence', [])
                         return 'translate(' + view.x(time.start - rootSpan.used.start) + ',' + view.y * time.viewIndex * 1.2 + ')';
                     })
                     .style('fill', function (time) {
-                        return view.color[time.type];
+                        return view.color[time.hasEx?'ex':time.type];
                     });
 
                 //生成每一个span
@@ -236,7 +241,8 @@ angular.module('hydra.services.sequence', [])
                         var spanId = $(this).attr('span');
                         var spanModel = spanMap[spanId];
 
-                        var isUsed = $(this).attr('timetype')=='used'?true:false;
+                        var isUsed = $(this).attr('timetype')=='used' || $(this).attr('timetype')=='ex'?true:false;
+                        var isEx = spanModel.exception;
                         $(this).qtip({
                             style:{
                                 classes:'alert alert-success',
@@ -255,11 +261,17 @@ angular.module('hydra.services.sequence', [])
                                 html += '<tr><td>服务名:</td><td style="font-size: small;">'+spanModel.serviceName+'</td></tr>';
                                 html += '<tr><td>方法名:</td><td>'+spanModel.spanName+'</td></tr>';
                                 if (isUsed){
+                                    html += '<tr><td style="text-align:center;">ip</td>';
+                                    html += '<td>'+ spanModel.used.ip+'</td></tr>';
                                     html += '<tr><td style="text-align:center;"><span class="label label-success">调用时长</span></td>';
                                 }else {
                                     html += '<tr><td style="text-align:center;"><span class="label label-info">网络消耗</span></td>';
                                 }
                                 html += '<td>'+(isUsed?spanModel.used.duration:spanModel.wasted.duration)+'ms</td></tr>';
+                                if (isUsed && isEx){
+                                    html += '<tr><td style="text-align:center;"><span class="label label-warning">异常情况</span></td>';
+                                    html += '<td>'+spanModel.exception.value+'</td></tr>';
+                                }
                                 html += '</table></div>';
                                 return html;
                             }()

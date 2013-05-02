@@ -64,7 +64,7 @@ public class HydraFilter implements Filter {
         Endpoint endpoint = null;
         try {
             endpoint = tracer.newEndPoint();
-            endpoint.setServiceName(serviceId);
+//            endpoint.setServiceName(serviceId);
             endpoint.setIp(context.getLocalAddressString());
             endpoint.setPort(context.getLocalPort());
             if (context.isConsumerSide()) {
@@ -104,7 +104,7 @@ public class HydraFilter implements Filter {
     private void catchException(Throwable e, Endpoint endpoint) {
         BinaryAnnotation exAnnotation = new BinaryAnnotation();
         exAnnotation.setKey(TracerUtils.EXCEPTION);
-        exAnnotation.setValue(e.getMessage().getBytes());
+        exAnnotation.setValue(e.getMessage());
         exAnnotation.setType("string");
         exAnnotation.setHost(endpoint);
         tracer.addBinaryAnntation(exAnnotation);

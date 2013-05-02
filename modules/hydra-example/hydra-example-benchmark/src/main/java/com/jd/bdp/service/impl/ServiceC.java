@@ -19,6 +19,11 @@ public class ServiceC implements InterfaceC {
             return "------------------>C";
         } else {
             Integer.valueOf("abc");
+//            try {
+//                Thread.sleep(1500);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//            }
             return "------------------>C(ex)";
         }
     }

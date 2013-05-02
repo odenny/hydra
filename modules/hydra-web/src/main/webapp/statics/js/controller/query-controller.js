@@ -116,14 +116,16 @@ function QueryCtrl($scope,$filter,$location,//内置
         }
 
         var trace = Trace.get({traceId:traceId},function(t){
-            sequenceService.getMyTrace(t, $scope);
-            var spanMap = sequenceService.getSpanMap(t);
+            if (t.available){
+                sequenceService.getMyTrace(t, $scope);
+                var spanMap = sequenceService.getSpanMap(t);
 
-            sequenceService.createView(t);//生成时序图的svg
-            sequenceService.createSpanAndDetail(t, spanMap);//生成时序图的具体细节
+                sequenceService.createView(t);//生成时序图的svg
+                sequenceService.createSpanAndDetail(t, spanMap);//生成时序图的具体细节
 
-            treeService.createTree(t);//生成树的svg
-            treeService.createTreeDetail(t);//生成树的具体结构
+                treeService.createTree(t);//生成树的svg
+                treeService.createTreeDetail(t);//生成树的具体结构
+            }
         });
 
         $scope.trace = trace;

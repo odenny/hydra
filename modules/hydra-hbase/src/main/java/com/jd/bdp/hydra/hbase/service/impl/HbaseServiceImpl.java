@@ -120,9 +120,9 @@ public class HbaseServiceImpl extends HbaseUtils implements HbaseService {
 //        }
 
         for (BinaryAnnotation b : span.getBinaryAnnotations()) {
-            String rowkey = b.getHost().getServiceName() + ":" + System.currentTimeMillis() + ":" + b.getKey();
+            String rowkey = span.getServiceId() + ":" + System.currentTimeMillis() + ":" + b.getKey();
             Put put = new Put(rowkey.getBytes());
-            put.add(ann_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), b.getValue());
+            put.add(ann_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), Bytes.toBytes(b.getValue()));
             putlist.add(put);
         }
 
@@ -151,7 +151,7 @@ public class HbaseServiceImpl extends HbaseUtils implements HbaseService {
             Annotation cr = getCrAnnotation(alist);
             if (cs != null) {
                 long duration = cr.getTimestamp() - cs.getTimestamp();
-                String rowkey = cs.getHost().getServiceName() + ":" + cs.getTimestamp();
+                String rowkey = span.getServiceId() + ":" + cs.getTimestamp();
                 Put put = new Put(rowkey.getBytes());
                 //rowkey:serviceId:csTime
                 //每列的timestamp为duration

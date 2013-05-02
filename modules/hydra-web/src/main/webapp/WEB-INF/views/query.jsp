@@ -147,8 +147,9 @@
         </ul>
     </div>
     <div class="traceDiv">
-        <div id="treeDiv" class="viewDiv" style="width:25%;"></div>
-        <div id="sequenceDiv" class="viewDiv" style="width:74%;"></div>
+        <div ng-show="!trace.available" class="alert alert-block">当前跟踪数据未收集全，无法展示.</div>
+        <div id="treeDiv" class="viewDiv" style="width:25%;" ng-show="trace.available"></div>
+        <div id="sequenceDiv" class="viewDiv" style="width:74%;" ng-show="trace.available"></div>
     </div>
 </div>
 </body>

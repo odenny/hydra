@@ -120,6 +120,7 @@ public class HbaseServiceImpl extends HbaseUtils implements HbaseService {
 //        }
 
         for (BinaryAnnotation b : span.getBinaryAnnotations()) {
+            //todo 这个时间戳是否应该找个更准确的
             String rowkey = span.getServiceId() + ":" + System.currentTimeMillis() + ":" + b.getKey();
             Put put = new Put(rowkey.getBytes());
             put.add(ann_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), Bytes.toBytes(b.getValue()));

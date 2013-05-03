@@ -24,7 +24,7 @@ function QueryCtrl($scope, $filter, $location,//内置
             if (width == 1920) {
                 return '77%';
             } else if (width < 1920 && width >= 1366) {
-                return '65%';
+                return '68%';
             } else {
                 return '55%';
             }

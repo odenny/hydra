@@ -109,7 +109,7 @@
             </table>
         </form>
     </div>
-    <div id="result" class="resultDiv">
+    <div id="result" class="resultDiv" ng-style="env.queryDivStyle">
         <table cellpadding="0" cellspacing="0" border="0" class="bordered-table table-striped" id="traceTable"
                ng-show="tableType == 'duration'">
             <thead>

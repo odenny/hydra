@@ -165,6 +165,7 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
                     spanAleadyExist.put("durationServer", getDurationServer(content));
                 }
                 ((JSONArray) spanAleadyExist.get("annotations")).addAll((JSONArray) content.get("annotations"));
+                handleTheMinAndMaxTimestamp(trace, spanAleadyExist);
             } else {
                 spanAleadyExist = content;
                 if (isClientSpan(kv)) {
@@ -197,6 +198,28 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
         }
         trace.put("available", isAvailable);
         return trace;
+    }
+
+    private void handleTheMinAndMaxTimestamp(JSONObject trace, JSONObject span) {
+        for(Object obj : span.getJSONArray("annotations")){
+            long timestamp = Long.parseLong(((JSONObject)obj).get("timestamp").toString());
+            if (trace.containsKey("minTimestamp")){
+                long min = Long.parseLong(trace.get("minTimestamp").toString());
+                if (min > timestamp){
+                    trace.put("minTimestamp", timestamp);
+                }
+            }else {
+                trace.put("minTimestamp", timestamp);
+            }
+            if (trace.containsKey("maxTimestamp")){
+                long max = Long.parseLong(trace.get("maxTimestamp").toString());
+                if (max < timestamp){
+                    trace.put("maxTimestamp", timestamp);
+                }
+            }else {
+                trace.put("maxTimestamp", timestamp);
+            }
+        }
     }
 
     private boolean isSpanAvailable(JSONObject span) {

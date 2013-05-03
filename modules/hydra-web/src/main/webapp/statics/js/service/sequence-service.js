@@ -57,7 +57,16 @@ angular.module('hydra.services.sequence', [])
                     span.wasted = {
                         spanId: span.id,
                         start: parseInt(anMap['cs']) + parseInt(span.durationServer),
-                        duration: parseInt(span.durationClient) - parseInt(span.durationServer),
+                        duration: function(){
+                            if (parseInt(span.durationServer) < parseInt(span.durationClient)){
+                                //正常情况下考虑到网络消耗，客户端时长要长于服务端时长
+                                return parseInt(span.durationClient) - parseInt(span.durationServer);
+                            }else {
+                                //如果出现服务端时长大于客户端时长的情况，有可能是因为服务端调用超时了
+                                //既然超时了，就不再考虑网络消耗
+                                return 0;
+                            }
+                        }(),
                         viewIndex: spanIndex.index,
                         type: 'wasted'
                     }
@@ -135,9 +144,9 @@ angular.module('hydra.services.sequence', [])
 
                 var rootSpan = trace.rootSpan;
                 var view = trace.view;
-                if (!rootSpan.children) return;
-
-                view.x.domain([0, rootSpan.durationClient]).nice();
+//                if (!rootSpan.children) return;
+                var mainDuration = parseInt(trace['maxTimestamp']) - parseInt(trace['minTimestamp']);
+                view.x.domain([0, mainDuration]).nice();
 
                 var enter = bar(rootSpan, spanMap)
                     .attr("transform", stack(0))
@@ -259,9 +268,11 @@ angular.module('hydra.services.sequence', [])
 
                                 html += '<tr><td>服务名:</td><td style="font-size: small;">'+spanModel.serviceName+'</td></tr>';
                                 html += '<tr><td>方法名:</td><td>'+spanModel.spanName+'</td></tr>';
+
                                 if (isUsed){
                                     html += '<tr><td style="text-align:center;">ip</td>';
                                     html += '<td>'+ spanModel.used.ip+'</td></tr>';
+                                    html += '<tr><td style="text-align:center;"><span class="label label-success">开始时间</span></td><td>'+spanModel.used.start+'(long)</td></tr>'
                                     html += '<tr><td style="text-align:center;"><span class="label label-success">调用时长</span></td>';
                                 }else {
                                     html += '<tr><td style="text-align:center;"><span class="label label-info">网络消耗</span></td>';

@@ -44,7 +44,7 @@ angular.module('hydra.services.tree', [])
                     .attr("transform", "translate(20,15)");
                 trace.treeView = view
             },
-            createTreeDetail: function (trace) {
+            createTreeDetail: function (trace, myScope) {
                 var view = trace.treeView;
                 var root = trace.rootSpan;
                 root.x0 = 0;
@@ -85,12 +85,30 @@ angular.module('hydra.services.tree', [])
                         .style("fill", color)
                         .on("click", click);
 
+
                     nodeEnter.append("svg:text")
                         .attr("dy", 3.5)
                         .attr("dx", 5.5)
                         .text(function (d) {
-                            return d.serviceName + '|' + d.spanName;
+                            var length = (d.serviceName + '|' + d.spanName).length;
+                            var lengthMax = function(){
+                                var width = myScope.env.windowWidth;
+                                if (width == 1920) {
+                                    return 55;
+                                } else if (width < 1920 && width >= 1366) {
+                                    return 30;
+                                } else {
+                                    return 25;
+                                }
+                            }();
+                            if (length > lengthMax){
+                                return '...' + (d.serviceName + '|' + d.spanName).substring(length - 30, length);
+                            }else {
+                                return d.serviceName + '|' + d.spanName;
+                            }
                         });
+
+
 
                     // Transition nodes to their new position.
                     nodeEnter.transition()

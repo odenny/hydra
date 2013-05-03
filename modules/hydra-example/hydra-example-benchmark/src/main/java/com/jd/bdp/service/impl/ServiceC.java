@@ -18,7 +18,12 @@ public class ServiceC implements InterfaceC {
         if (mySwitch > 0) {
             return "------------------>C";
         } else {
-            Integer.valueOf("abc");//制造业务异常
+//            Integer.valueOf("abc");//制造业务异常
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
             return "------------------>C(ex)";
         }
     }

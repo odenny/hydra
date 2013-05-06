@@ -40,6 +40,7 @@ public class HbaseUtils {
     public static final String ann_index_family_column = "trace";
     public static final String TR_T = "trace";
     public static final String trace_family_column = "span";
+    public static final String DUBBO_EXCEPTION = "dubbo.exception";
 
     static {
         conf.set("hbase.zookeeper.quorum", "boss,emp1,emp2");

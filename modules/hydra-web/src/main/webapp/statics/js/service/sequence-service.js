@@ -24,6 +24,7 @@ angular.module('hydra.services.sequence', [])
                 getMySpan(span, spanIndex);
 
                 function getMySpan(span, spanIndex) {
+                    var ip;
                     var anMap = {};
                     for (var i in span.annotations) {
                         if (span.annotations[i]['value']=='cs') {
@@ -36,6 +37,7 @@ angular.module('hydra.services.sequence', [])
                         }
                         if (span.annotations[i]['value']=='sr') {
                             anMap['sr'] = span.annotations[i]['timestamp'];
+                            ip = span.annotations[i]['host']['ip'];
                             continue;
                         }
                         if (span.annotations[i]['value']=='cr') {
@@ -45,15 +47,26 @@ angular.module('hydra.services.sequence', [])
                     }
                     span.used = {
                         spanId: span.id,
-                        start: anMap['cs'],
-                        duration: span.durationServer,
+                        start: parseInt(anMap['cs']),
+                        duration: parseInt(span.durationServer),
                         viewIndex: spanIndex.index,
-                        type: 'used'
+                        ip: ip,
+                        type: 'used',
+                        hasEx : span.exception?true:false
                     }
                     span.wasted = {
                         spanId: span.id,
                         start: parseInt(anMap['cs']) + parseInt(span.durationServer),
-                        duration: parseInt(span.durationClient) - parseInt(span.durationServer),
+                        duration: function(){
+                            if (parseInt(span.durationServer) < parseInt(span.durationClient)){
+                                //正常情况下考虑到网络消耗，客户端时长要长于服务端时长
+                                return parseInt(span.durationClient) - parseInt(span.durationServer);
+                            }else {
+                                //如果出现服务端时长大于客户端时长的情况，有可能是因为服务端调用超时了
+                                //既然超时了，就不再考虑网络消耗
+                                return 0;
+                            }
+                        }(),
                         viewIndex: spanIndex.index,
                         type: 'wasted'
                     }
@@ -131,9 +144,9 @@ angular.module('hydra.services.sequence', [])
 
                 var rootSpan = trace.rootSpan;
                 var view = trace.view;
-                if (!rootSpan.children) return;
-
-                view.x.domain([0, rootSpan.durationClient]).nice();
+//                if (!rootSpan.children) return;
+                var mainDuration = parseInt(trace['maxTimestamp']) - parseInt(trace['minTimestamp']);
+                view.x.domain([0, mainDuration]).nice();
 
                 var enter = bar(rootSpan, spanMap)
                     .attr("transform", stack(0))
@@ -154,7 +167,7 @@ angular.module('hydra.services.sequence', [])
                         return 'translate(' + view.x(time.start - rootSpan.used.start) + ',' + view.y * time.viewIndex * 1.2 + ')';
                     })
                     .style('fill', function (time) {
-                        return view.color[time.type];
+                        return view.color[time.hasEx?'ex':time.type];
                     });
 
                 //生成每一个span
@@ -236,7 +249,8 @@ angular.module('hydra.services.sequence', [])
                         var spanId = $(this).attr('span');
                         var spanModel = spanMap[spanId];
 
-                        var isUsed = $(this).attr('timetype')=='used'?true:false;
+                        var isUsed = $(this).attr('timetype')=='used' || $(this).attr('timetype')=='ex'?true:false;
+                        var isEx = spanModel.exception;
                         $(this).qtip({
                             style:{
                                 classes:'alert alert-success',
@@ -254,12 +268,20 @@ angular.module('hydra.services.sequence', [])
 
                                 html += '<tr><td>服务名:</td><td style="font-size: small;">'+spanModel.serviceName+'</td></tr>';
                                 html += '<tr><td>方法名:</td><td>'+spanModel.spanName+'</td></tr>';
+
                                 if (isUsed){
+                                    html += '<tr><td style="text-align:center;">ip</td>';
+                                    html += '<td>'+ spanModel.used.ip+'</td></tr>';
+                                    html += '<tr><td style="text-align:center;"><span class="label label-success">开始时间</span></td><td>'+spanModel.used.start+'(long)</td></tr>'
                                     html += '<tr><td style="text-align:center;"><span class="label label-success">调用时长</span></td>';
                                 }else {
                                     html += '<tr><td style="text-align:center;"><span class="label label-info">网络消耗</span></td>';
                                 }
                                 html += '<td>'+(isUsed?spanModel.used.duration:spanModel.wasted.duration)+'ms</td></tr>';
+                                if (isUsed && isEx){
+                                    html += '<tr><td style="text-align:center;"><span class="label label-warning">异常情况</span></td>';
+                                    html += '<td>'+spanModel.exception.value+'</td></tr>';
+                                }
                                 html += '</table></div>';
                                 return html;
                             }()

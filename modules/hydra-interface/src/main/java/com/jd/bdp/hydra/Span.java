@@ -95,6 +95,7 @@ public class Span implements Serializable {
                 "traceId=" + traceId +
                 ", id=" + id +
                 ", parentId=" + parentId +
+                ", serviceId=" + serviceId +
                 ", spanName='" + spanName + '\'' +
                 ", annotations=" + annotations +
                 ", binaryAnnotations=" + binaryAnnotations +

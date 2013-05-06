@@ -34,7 +34,7 @@ public class HbaseServiceTest {
             if(i%2 == 0){
                 Span span = new Span();
                 Endpoint endpoint = new Endpoint();
-                endpoint.setServiceName("22001");
+//                endpoint.setServiceName("22001");
                 endpoint.setPort(1234);
                 endpoint.setIp("127.0.0."+i);
                 Annotation cs = new Annotation();
@@ -62,7 +62,7 @@ public class HbaseServiceTest {
             }else{
                 Span span = new Span();
                 Endpoint endpoint = new Endpoint();
-                endpoint.setServiceName("22001");
+//                endpoint.setServiceName("22001");
                 endpoint.setPort(4321);
                 endpoint.setIp("127.0.0."+i);
                 Annotation sr = new Annotation();

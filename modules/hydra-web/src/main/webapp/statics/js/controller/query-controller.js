@@ -14,10 +14,21 @@
  *    limitations under the License.
  */
 'use strict';
-function QueryCtrl($scope,$filter,$location,//内置
-                   queryService,sequenceService,treeService,//service
+function QueryCtrl($scope, $filter, $location,//内置
+                   queryService, sequenceService, treeService,//service
                    TraceList, TraceListEx, AppList, ServiceList, Trace) {//repository
-
+    $scope.env = {
+        windowWidth : window.screen.width,
+        queryDivStyle: {width: function () {
+            var width = window.screen.width;
+            if (width == 1920) {
+                return '77%';
+            } else if (width < 1920 && width >= 1366) {
+                return '68%';
+            } else {
+                return '55%';
+            }
+        }()}};
     $scope.serviceMap = {};
     $scope.tableType = 'duration';
     var setting = queryService.getTableSetting($scope);
@@ -28,30 +39,30 @@ function QueryCtrl($scope,$filter,$location,//内置
     queryService.initAuto();
 
     var query = {
-        exBtn:{
-            type:false,
-            name:function(){
-                if ($scope.query.exBtn.type){
+        exBtn: {
+            type: false,
+            name: function () {
+                if ($scope.query.exBtn.type) {
                     return '出现异常';
-                }else {
+                } else {
                     return '忽略异常';
                 }
             },
-            click:function(){
-                $scope.query.exBtn.type = $scope.query.exBtn.type?false:true;
-                if ($scope.query.exBtn.type){
+            click: function () {
+                $scope.query.exBtn.type = $scope.query.exBtn.type ? false : true;
+                if ($scope.query.exBtn.type) {
                     delete $scope.query.durationMin;
                     delete $scope.query.durationMax;
                 }
             }
         },
-        appList : AppList.getAll(),
-        serviceList:[],
-        sum :500,
+        appList: AppList.getAll(),
+        serviceList: [],
+        sum: 500,
         submitQuery: function () {
             var serviceId;
-            for(var i in $scope.query.serviceList){
-                if ($scope.query.serviceList[i].name == $('#serviceName').val()){
+            for (var i in $scope.query.serviceList) {
+                if ($scope.query.serviceList[i].name == $('#serviceName').val()) {
                     serviceId = $scope.query.serviceList[i].id;
                 }
             }
@@ -60,17 +71,17 @@ function QueryCtrl($scope,$filter,$location,//内置
             var isValid = true;
             var validateMsg;
             //验证
-            if (isValid && !serviceId ){
+            if (isValid && !serviceId) {
                 validateMsg = "服务名不正确！";
                 isValid = false;
             }
-            if (isValid && $('#realTime').val() == ""){
+            if (isValid && $('#realTime').val() == "") {
                 validateMsg = "请输入开始时间！";
                 isValid = false;
             }
             showValidateMsg(isValid, validateMsg);
 
-            function showValidateMsg(isValid, validateMsg){
+            function showValidateMsg(isValid, validateMsg) {
                 $scope.query.invalid = !isValid;
                 $scope.query.validateMsg = validateMsg;
             }
@@ -80,50 +91,52 @@ function QueryCtrl($scope,$filter,$location,//内置
             var durationMax = $scope.query.durationMax || 1000000;
 
             //查询
-            if (isValid){
-                if ($scope.query.exBtn.type){//如果查询所有异常trace
+            if (isValid) {
+                if ($scope.query.exBtn.type) {//如果查询所有异常trace
                     $scope.tableType = 'ex';
-                    $scope.traceListEx = TraceListEx.getTraceList({serviceId: serviceId, startTime: startTime, sum: $scope.query.sum},function(traceList){
-                        queryService.loadTableData($('#traceExTable').dataTable(),traceList);
+                    $scope.traceListEx = TraceListEx.getTraceList({serviceId: serviceId, startTime: startTime, sum: $scope.query.sum}, function (traceList) {
+                        queryService.loadTableData($('#traceExTable').dataTable(), traceList);
                     });
-                }else{//如果是查duration
+                } else {//如果是查duration
                     $scope.tableType = 'duration';
-                    $scope.traceList = TraceList.getTraceList({serviceId: serviceId, startTime: startTime, durationMin: durationMin, durationMax: durationMax, sum: $scope.query.sum},function(traceList){
-                        queryService.loadTableData($('#traceTable').dataTable(),traceList);
+                    $scope.traceList = TraceList.getTraceList({serviceId: serviceId, startTime: startTime, durationMin: durationMin, durationMax: durationMax, sum: $scope.query.sum}, function (traceList) {
+                        queryService.loadTableData($('#traceTable').dataTable(), traceList);
                     });
                 }
             }
         },
-        appChange : function(){
+        appChange: function () {
             queryService.appChange($scope);
         },
-        durationChange : function(){
+        durationChange: function () {
             $scope.query.exBtn.type = false;
             $('#ex').removeClass('active');
         },
-        invalid:false
+        invalid: false
     };
 
-    $scope.linkToDetail = function(traceId){
+    $scope.linkToDetail = function (traceId) {
         $scope.showType = 'trace';
 
 
-        $scope.returnToQuery = function(){
+        $scope.returnToQuery = function () {
             $scope.showType = 'query';
             $('#treeDiv').empty();
             $('#sequenceDiv').empty();
             delete $scope.trace;
         }
 
-        var trace = Trace.get({traceId:traceId},function(t){
-            sequenceService.getMyTrace(t, $scope);
-            var spanMap = sequenceService.getSpanMap(t);
+        var trace = Trace.get({traceId: traceId}, function (t) {
+            if (t.available) {
+                sequenceService.getMyTrace(t, $scope);
+                var spanMap = sequenceService.getSpanMap(t);
 
-            sequenceService.createView(t);//生成时序图的svg
-            sequenceService.createSpanAndDetail(t, spanMap);//生成时序图的具体细节
+                sequenceService.createView(t);//生成时序图的svg
+                sequenceService.createSpanAndDetail(t, spanMap);//生成时序图的具体细节
 
-            treeService.createTree(t);//生成树的svg
-            treeService.createTreeDetail(t);//生成树的具体结构
+                treeService.createTree(t);//生成树的svg
+                treeService.createTreeDetail(t, $scope);//生成树的具体结构
+            }
         });
 
         $scope.trace = trace;

@@ -54,11 +54,11 @@ public class TracerTest extends TestCase {
         Endpoint clientEndPoint = new Endpoint();
         clientEndPoint.setIp("127.0.1.1");
         clientEndPoint.setPort(1234);
-        clientEndPoint.setServiceName("app1");
+//        clientEndPoint.setServiceName("app1");
         Endpoint serverEndPoint = new Endpoint();
         serverEndPoint.setIp("127.0.0.1");
         serverEndPoint.setPort(1235);
-        serverEndPoint.setServiceName("app1");
+//        serverEndPoint.setServiceName("app1");
         Long id = null;
 
         for (int i = 0; i < length; i++) {

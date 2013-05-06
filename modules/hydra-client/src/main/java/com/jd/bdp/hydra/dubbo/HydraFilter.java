@@ -20,6 +20,7 @@ import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
 import com.alibaba.dubbo.container.Container;
 import com.alibaba.dubbo.container.spring.SpringContainer;
+import com.alibaba.dubbo.remoting.TimeoutException;
 import com.alibaba.dubbo.rpc.*;
 import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Endpoint;
@@ -64,7 +65,7 @@ public class HydraFilter implements Filter {
         Endpoint endpoint = null;
         try {
             endpoint = tracer.newEndPoint();
-            endpoint.setServiceName(serviceId);
+//            endpoint.setServiceName(serviceId);
             endpoint.setIp(context.getLocalAddressString());
             endpoint.setPort(context.getLocalPort());
             if (context.isConsumerSide()) {
@@ -86,21 +87,41 @@ public class HydraFilter implements Filter {
             RpcInvocation invocation1 = (RpcInvocation) invocation;
             setAttachment(span, invocation1);
             Result result = invoker.invoke(invocation);
+            if (result.getException() != null){
+                catchException(result.getException(), endpoint);
+            }
             return result;
-        } catch (RpcException e) {
-            BinaryAnnotation exAnnotation = new BinaryAnnotation();
-            exAnnotation.setKey(TracerUtils.EXCEPTION);
-            exAnnotation.setValue(e.getMessage().getBytes());
-            exAnnotation.setType("string");
-            exAnnotation.setHost(endpoint);
-            tracer.addBinaryAnntation(exAnnotation);
+        }catch (RpcException e) {
+            if (e.getCause() != null && e.getCause() instanceof TimeoutException){
+                catchTimeoutException(e, endpoint);
+            }else {
+                catchException(e, endpoint);
+            }
             throw e;
-        } finally {
+        }finally {
             if (span != null) {
                 long end = System.currentTimeMillis();
                 invokerAfter(invocation, endpoint, span, end, isConsumerSide);
             }
         }
+    }
+
+    private void catchTimeoutException(RpcException e, Endpoint endpoint) {
+        BinaryAnnotation exAnnotation = new BinaryAnnotation();
+        exAnnotation.setKey(TracerUtils.EXCEPTION);
+        exAnnotation.setValue(e.getMessage());
+        exAnnotation.setType("exTimeout");
+        exAnnotation.setHost(endpoint);
+        tracer.addBinaryAnntation(exAnnotation);
+    }
+
+    private void catchException(Throwable e, Endpoint endpoint) {
+        BinaryAnnotation exAnnotation = new BinaryAnnotation();
+        exAnnotation.setKey(TracerUtils.EXCEPTION);
+        exAnnotation.setValue(e.getMessage());
+        exAnnotation.setType("ex");
+        exAnnotation.setHost(endpoint);
+        tracer.addBinaryAnntation(exAnnotation);
     }
 
     private void setAttachment(Span span, RpcInvocation invocation) {

@@ -10,7 +10,7 @@ import java.util.Arrays;
  */
 public class BinaryAnnotation implements Serializable {
     private String key;
-    private byte[] value;
+    private String value;
     private String type;
     private Integer duration;
     private Endpoint host;
@@ -27,7 +27,7 @@ public class BinaryAnnotation implements Serializable {
     public String toString() {
         return "BinaryAnnotation{" +
                 "key='" + key + '\'' +
-                ", value=" + Arrays.toString(value) +
+                ", value=" + value +
                 ", type='" + type + '\'' +
                 ", duration=" + duration +
                 ", endpoint=" + host +
@@ -42,11 +42,11 @@ public class BinaryAnnotation implements Serializable {
         this.key = key;
     }
 
-    public byte[] getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(byte[] value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

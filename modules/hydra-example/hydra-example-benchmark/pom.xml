@@ -8,14 +8,18 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>hydra-example-benchmark</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>HYDRA EXAMPLE BENCHMARK</name>
-
+    <modules>
+        <module>../../hydra-client</module>
+        <module>../../hydra-manager</module>
+        <module>../../hydra-collector</module>
+        <module>../../hydra-collector-service</module>
+        <module>../../hydra-web</module>
+    </modules>
     <build>
-
-        <!--不打包到jar中-->
         <plugins>
             <!-- compiler插件, 设定JDK版本 -->
             <plugin>
@@ -49,13 +53,12 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- resource插件, 设定编码 -->
+            <!-- assembly, 设定编码 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2.1</version>
+                <version>2.4</version>
                 <configuration>
-
                     <descriptors>
                         <descriptor>src/main/assembly/assembly.xml</descriptor>
                     </descriptors>
@@ -72,5 +75,34 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <!--windows版本-->
+        <profile>
+            <id>runtime-env-windows</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>runtime-env</name>
+                    <value>windows</value>
+                </property>
+            </activation>
+            <properties>
+                <runtime-env>windows</runtime-env>
+            </properties>
+        </profile>
+        <!--linux版-->
+        <profile>
+            <id>runtime-env-linux</id>
+            <activation>
+                <property>
+                    <name>runtime-env</name>
+                    <value>linux</value>
+                </property>
+            </activation>
+            <properties>
+                <runtime>linux</runtime>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

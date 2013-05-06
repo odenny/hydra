@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <assembly>
     <id>jd</id>
     <formats>
         <format>dir</format>
-        <format>tar.gz</format>
     </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+
     <dependencySets>
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
-            <useProjectArtifact>false</useProjectArtifact>
-            <useProjectAttachments>true</useProjectAttachments>
+            <useTransitiveDependencies>true</useTransitiveDependencies>
         </dependencySet>
     </dependencySets>
     <fileSets>
@@ -31,25 +32,14 @@
         </fileSet>
         <!--windows bat-->
         <fileSet>
-            <directory>/src/main/resources/scripts/windows</directory>
+            <directory>/src/main/resources/scripts/${runtime-env}</directory>
             <outputDirectory>/bin</outputDirectory>
             <includes>
-                <include>startABC/*.bat</include>
-                <include>*.bat</include>
+                <include>startABC/*.*</include>
+                <include>*.*</include>
             </includes>
         </fileSet>
-        <!--linux shell-->
-        <fileSet>
-            <directory>/src/main/resources/scripts/linux</directory>
-            <outputDirectory>/bin</outputDirectory>
-            <lineEnding>unix</lineEnding>
-            <fileMode>0755</fileMode>
 
-            <includes>
-                <include>startABC/*.sh</include>
-                <include>*.sh</include>
-            </includes>
-        </fileSet>
         <fileSet>
             <directory>/src/main/resources/log</directory>
             <outputDirectory>/log</outputDirectory>

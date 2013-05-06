@@ -1,0 +1,1766 @@
+Apache Maven 3.0.4 (r1232337; 2012-01-17 16:44:56+0800)
+Maven home: D:\apache-maven-3.0.4
+Java version: 1.6.0_02, vendor: Sun Microsystems Inc.
+Java home: C:\Program Files (x86)\Java\jdk1.6.0_02\jre
+Default locale: zh_CN, platform encoding: GBK
+OS name: "windows vista", version: "6.1", arch: "x86", family: "windows"
+[INFO] Error stacktraces are turned on.
+[DEBUG] Reading global settings from D:\apache-maven-3.0.4\conf\settings.xml
+[DEBUG] Reading user settings from C:\Users\Administrator\.m2\settings.xml
+[DEBUG] Using local repository at E:\RepositryCenter\repository
+[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10 for E:\RepositryCenter\repository
+[INFO] Scanning for projects...
+[DEBUG] Extension realms for project com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT: (none)
+[DEBUG] Looking up lifecyle mappings for packaging jar from ClassRealm[plexus.core, parent: null]
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT
+[WARNING] 'dependencyManagement.dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: javax.servlet:servlet-api:jar -> duplicate declaration of version ${servlet.version} @ com.jd.bdp:hydra:1.0-SNAPSHOT, E:\hydra_workspace\hydra\pom.xml, line 213, column 25
+[WARNING] 'dependencyManagement.dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.codehaus.jackson:jackson-mapper-asl:jar -> duplicate declaration of version ${jackson.version} @ com.jd.bdp:hydra:1.0-SNAPSHOT, E:\hydra_workspace\hydra\pom.xml, line 239, column 25
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 21, column 21
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-jar-plugin is missing. @ line 30, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[DEBUG] === REACTOR BUILD PLAN ================================================
+[DEBUG] Project: com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT
+[DEBUG] Tasks:   [package]
+[DEBUG] Style:   Regular
+[DEBUG] =======================================================================
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building HYDRA EXAMPLE BENCHMARK 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[DEBUG] Resolving plugin version for org.apache.maven.plugins:maven-war-plugin
+[DEBUG] Could not find metadata org.apache.maven.plugins:maven-war-plugin/maven-metadata.xml in local (E:\RepositryCenter\repository)
+[DEBUG] Skipped remote update check for org.apache.maven.plugins:maven-war-plugin/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for org.apache.maven.plugins:maven-war-plugin/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Resolved plugin version for org.apache.maven.plugins:maven-war-plugin to 2.2 from repository central (http://artifactory.360buy-develop.com/plugins-releases, releases)
+[DEBUG] Resolving plugin version for org.apache.maven.plugins:maven-source-plugin
+[DEBUG] Could not find metadata org.apache.maven.plugins:maven-source-plugin/maven-metadata.xml in local (E:\RepositryCenter\repository)
+[DEBUG] Skipped remote update check for org.apache.maven.plugins:maven-source-plugin/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for org.apache.maven.plugins:maven-source-plugin/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Resolved plugin version for org.apache.maven.plugins:maven-source-plugin to 2.2 from repository central (http://artifactory.360buy-develop.com/plugins-releases, releases)
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] === PROJECT BUILD PLAN ================================================
+[DEBUG] Project:       com.jd.bdp:hydra-example-benchmark:1.0-SNAPSHOT
+[DEBUG] Dependencies (collect): []
+[DEBUG] Dependencies (resolve): [compile, runtime, test]
+[DEBUG] Repositories (dependencies): [central (http://artifactory.360buy-develop.com/libs-releases, releases), snapshots (http://artifactory.360buy-develop.com/libs-snapshots, releases+snapshots)]
+[DEBUG] Repositories (plugins)     : [central (http://artifactory.360buy-develop.com/plugins-releases, releases), snapshots (http://artifactory.360buy-develop.com/plugins-snapshots, releases+snapshots)]
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-enforcer-plugin:1.0:enforce (enforce-maven)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <fail default-value="true">${enforcer.fail}</fail>
+  <failFast default-value="false">${enforcer.failFast}</failFast>
+  <ignoreCache default-value="false">${enforcer.ignoreCache}</ignoreCache>
+  <project>${project}</project>
+  <rules>
+    <requireMavenVersion>
+      <version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
+      <message>Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums respectively.</message>
+    </requireMavenVersion>
+  </rules>
+  <session>${session}</session>
+  <skip default-value="false">${enforcer.skip}</skip>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-resources-plugin:2.5:resources (default-resources)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <buildFilters default-value="${project.build.filters}"/>
+  <encoding default-value="${project.build.sourceEncoding}">UTF-8</encoding>
+  <escapeString>${maven.resources.escapeString}</escapeString>
+  <escapeWindowsPaths default-value="true">${maven.resources.escapeWindowsPaths}</escapeWindowsPaths>
+  <includeEmptyDirs default-value="false">${maven.resources.includeEmptyDirs}</includeEmptyDirs>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <overwrite default-value="false">${maven.resources.overwrite}</overwrite>
+  <project default-value="${project}"/>
+  <resources default-value="${project.resources}"/>
+  <session default-value="${session}"/>
+  <supportMultiLineFiltering default-value="false">${maven.resources.supportMultiLineFiltering}</supportMultiLineFiltering>
+  <useBuildFilters default-value="true"/>
+  <useDefaultDelimiters default-value="true"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile (default-compile)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <basedir default-value="${basedir}"/>
+  <buildDirectory default-value="${project.build.directory}"/>
+  <classpathElements default-value="${project.compileClasspathElements}"/>
+  <compileSourceRoots default-value="${project.compileSourceRoots}"/>
+  <compilerId default-value="javac">${maven.compiler.compilerId}</compilerId>
+  <compilerVersion>${maven.compiler.compilerVersion}</compilerVersion>
+  <debug default-value="true">${maven.compiler.debug}</debug>
+  <debuglevel>${maven.compiler.debuglevel}</debuglevel>
+  <encoding default-value="${project.build.sourceEncoding}">UTF-8</encoding>
+  <executable>${maven.compiler.executable}</executable>
+  <failOnError default-value="true">${maven.compiler.failOnError}</failOnError>
+  <fork default-value="false">${maven.compiler.fork}</fork>
+  <generatedSourcesDirectory default-value="${project.build.directory}/generated-sources/annotations"/>
+  <maxmem>${maven.compiler.maxmem}</maxmem>
+  <meminitial>${maven.compiler.meminitial}</meminitial>
+  <optimize default-value="false">${maven.compiler.optimize}</optimize>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <outputFileName>${project.build.finalName}</outputFileName>
+  <projectArtifact default-value="${project.artifact}"/>
+  <session default-value="${session}"/>
+  <showDeprecation default-value="false">${maven.compiler.showDeprecation}</showDeprecation>
+  <showWarnings default-value="false">${maven.compiler.showWarnings}</showWarnings>
+  <source default-value="1.5">1.6</source>
+  <staleMillis default-value="0">${lastModGranularityMs}</staleMillis>
+  <target default-value="1.5">1.6</target>
+  <verbose default-value="false">${maven.compiler.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-resources-plugin:2.5:testResources (default-testResources)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <buildFilters default-value="${project.build.filters}"/>
+  <encoding default-value="${project.build.sourceEncoding}">UTF-8</encoding>
+  <escapeString>${maven.resources.escapeString}</escapeString>
+  <escapeWindowsPaths default-value="true">${maven.resources.escapeWindowsPaths}</escapeWindowsPaths>
+  <includeEmptyDirs default-value="false">${maven.resources.includeEmptyDirs}</includeEmptyDirs>
+  <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+  <overwrite default-value="false">${maven.resources.overwrite}</overwrite>
+  <project default-value="${project}"/>
+  <resources>${project.testResources}</resources>
+  <session default-value="${session}"/>
+  <supportMultiLineFiltering default-value="false">${maven.resources.supportMultiLineFiltering}</supportMultiLineFiltering>
+  <useBuildFilters default-value="true"/>
+  <useDefaultDelimiters default-value="true"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile (default-testCompile)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <basedir default-value="${basedir}"/>
+  <buildDirectory default-value="${project.build.directory}"/>
+  <classpathElements default-value="${project.testClasspathElements}"/>
+  <compileSourceRoots default-value="${project.testCompileSourceRoots}"/>
+  <compilerId default-value="javac">${maven.compiler.compilerId}</compilerId>
+  <compilerVersion>${maven.compiler.compilerVersion}</compilerVersion>
+  <debug default-value="true">${maven.compiler.debug}</debug>
+  <debuglevel>${maven.compiler.debuglevel}</debuglevel>
+  <encoding default-value="${project.build.sourceEncoding}">UTF-8</encoding>
+  <executable>${maven.compiler.executable}</executable>
+  <failOnError default-value="true">${maven.compiler.failOnError}</failOnError>
+  <fork default-value="false">${maven.compiler.fork}</fork>
+  <generatedTestSourcesDirectory default-value="${project.build.directory}/generated-sources/test-annotations"/>
+  <maxmem>${maven.compiler.maxmem}</maxmem>
+  <meminitial>${maven.compiler.meminitial}</meminitial>
+  <optimize default-value="false">${maven.compiler.optimize}</optimize>
+  <outputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <outputFileName>${project.build.finalName}</outputFileName>
+  <session default-value="${session}"/>
+  <showDeprecation default-value="false">${maven.compiler.showDeprecation}</showDeprecation>
+  <showWarnings default-value="false">${maven.compiler.showWarnings}</showWarnings>
+  <skip>${maven.test.skip}</skip>
+  <source default-value="1.5">1.6</source>
+  <staleMillis default-value="0">${lastModGranularityMs}</staleMillis>
+  <target default-value="1.5">1.6</target>
+  <testSource>${maven.compiler.testSource}</testSource>
+  <testTarget>${maven.compiler.testTarget}</testTarget>
+  <verbose default-value="false">${maven.compiler.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-surefire-plugin:2.10:test (default-test)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <argLine>${argLine}</argLine>
+  <basedir default-value="${basedir}"/>
+  <childDelegation default-value="false">${childDelegation}</childDelegation>
+  <classesDirectory default-value="${project.build.outputDirectory}"/>
+  <debugForkedProcess>${maven.surefire.debug}</debugForkedProcess>
+  <disableXmlReport default-value="false">${disableXmlReport}</disableXmlReport>
+  <enableAssertions default-value="true">${enableAssertions}</enableAssertions>
+  <excludedGroups>${excludedGroups}</excludedGroups>
+  <failIfNoTests>false</failIfNoTests>
+  <forkMode default-value="once">${forkMode}</forkMode>
+  <forkedProcessTimeoutInSeconds>${surefire.timeout}</forkedProcessTimeoutInSeconds>
+  <groups>${groups}</groups>
+  <includes>
+    <include>**/*Test.java</include>
+  </includes>
+  <junitArtifactName default-value="junit:junit">${junitArtifactName}</junitArtifactName>
+  <jvm>${jvm}</jvm>
+  <localRepository>${localRepository}</localRepository>
+  <objectFactory>${objectFactory}</objectFactory>
+  <parallel>${parallel}</parallel>
+  <parallelMavenExecution default-value="${session.parallel}"/>
+  <perCoreThreadCount default-value="true">${perCoreThreadCount}</perCoreThreadCount>
+  <pluginArtifactMap>${plugin.artifactMap}</pluginArtifactMap>
+  <printSummary default-value="true">${surefire.printSummary}</printSummary>
+  <project default-value="${project}"/>
+  <projectArtifactMap>${project.artifactMap}</projectArtifactMap>
+  <redirectTestOutputToFile default-value="false">${maven.test.redirectTestOutputToFile}</redirectTestOutputToFile>
+  <remoteRepositories>${project.pluginArtifactRepositories}</remoteRepositories>
+  <reportFormat default-value="brief">${surefire.reportFormat}</reportFormat>
+  <reportNameSuffix default-value="">${surefire.reportNameSuffix}</reportNameSuffix>
+  <reportsDirectory default-value="${project.build.directory}/surefire-reports"/>
+  <runOrder default-value="filesystem"/>
+  <session>${session}</session>
+  <skip default-value="false">${maven.test.skip}</skip>
+  <skipExec>${maven.test.skip.exec}</skipExec>
+  <skipTests default-value="false">${skipTests}</skipTests>
+  <test>${test}</test>
+  <testClassesDirectory default-value="${project.build.testOutputDirectory}"/>
+  <testFailureIgnore default-value="false">${maven.test.failure.ignore}</testFailureIgnore>
+  <testNGArtifactName default-value="org.testng:testng">${testNGArtifactName}</testNGArtifactName>
+  <testSourceDirectory default-value="${project.build.testSourceDirectory}"/>
+  <threadCount>${threadCount}</threadCount>
+  <trimStackTrace default-value="true">${trimStackTrace}</trimStackTrace>
+  <useFile default-value="true">${surefire.useFile}</useFile>
+  <useManifestOnlyJar default-value="true">${surefire.useManifestOnlyJar}</useManifestOnlyJar>
+  <useSystemClassLoader default-value="true">${surefire.useSystemClassLoader}</useSystemClassLoader>
+  <useUnlimitedThreads default-value="false">${useUnlimitedThreads}</useUnlimitedThreads>
+  <workingDirectory>${basedir}</workingDirectory>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-jar-plugin:2.3.2:jar (default-jar)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <archive>
+    <manifest>
+      <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+      <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+    </manifest>
+  </archive>
+  <classesDirectory default-value="${project.build.outputDirectory}"/>
+  <defaultManifestFile default-value="${project.build.outputDirectory}/META-INF/MANIFEST.MF"/>
+  <finalName default-value="${project.build.finalName}">${jar.finalName}</finalName>
+  <forceCreation default-value="false">${jar.forceCreation}</forceCreation>
+  <outputDirectory default-value="${project.build.directory}"/>
+  <project default-value="${project}"/>
+  <useDefaultManifestFile default-value="false">${jar.useDefaultManifestFile}</useDefaultManifestFile>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-jar-plugin:2.3.2:jar (package-exclude-resources)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <archive>
+    <manifest>
+      <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+      <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+    </manifest>
+  </archive>
+  <classesDirectory default-value="${project.build.outputDirectory}"/>
+  <classifier>assemble</classifier>
+  <defaultManifestFile default-value="${project.build.outputDirectory}/META-INF/MANIFEST.MF"/>
+  <excludes>
+    <exclude>log/</exclude>
+    <exclude>scripts/</exclude>
+    <exclude>*.xml</exclude>
+    <exclude>*.properties</exclude>
+  </excludes>
+  <finalName default-value="${project.build.finalName}">${jar.finalName}</finalName>
+  <forceCreation default-value="false">${jar.forceCreation}</forceCreation>
+  <outputDirectory default-value="${project.build.directory}"/>
+  <project default-value="${project}"/>
+  <useDefaultManifestFile default-value="false">${jar.useDefaultManifestFile}</useDefaultManifestFile>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-assembly-plugin:2.4:single (make-assembly)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appendAssemblyId default-value="true">${assembly.appendAssemblyId}</appendAssemblyId>
+  <attach default-value="true">${assembly.attach}</attach>
+  <basedir default-value="${project.basedir}"/>
+  <classifier>${classifier}</classifier>
+  <descriptor>${descriptor}</descriptor>
+  <descriptorId>${descriptorId}</descriptorId>
+  <descriptors>
+    <descriptor>src/main/assembly/assembly.xml</descriptor>
+  </descriptors>
+  <dryRun default-value="false">${assembly.dryRun}</dryRun>
+  <encoding default-value="${project.build.sourceEncoding}">${encoding}</encoding>
+  <escapeString>${assembly.escapeString}</escapeString>
+  <finalName default-value="${project.build.finalName}"/>
+  <ignoreDirFormatExtensions default-value="true"/>
+  <ignoreMissingDescriptor default-value="false">${assembly.ignoreMissingDescriptor}</ignoreMissingDescriptor>
+  <ignorePermissions default-value="false">${assembly.ignorePermissions}</ignorePermissions>
+  <includeSite default-value="false">${includeSite}</includeSite>
+  <localRepository default-value="${localRepository}"/>
+  <outputDirectory default-value="${project.build.directory}"/>
+  <reactorProjects default-value="${reactorProjects}"/>
+  <recompressZippedFiles default-value="false"/>
+  <remoteRepositories default-value="${project.remoteArtifactRepositories}"/>
+  <runOnlyAtExecutionRoot default-value="false">${assembly.runOnlyAtExecutionRoot}</runOnlyAtExecutionRoot>
+  <siteDirectory default-value="${project.reporting.outputDirectory}"/>
+  <skipAssembly default-value="false">${assembly.skipAssembly}</skipAssembly>
+  <tarLongFileMode default-value="warn">${assembly.tarLongFileMode}</tarLongFileMode>
+  <tempRoot default-value="${project.build.directory}/archive-tmp"/>
+  <updateOnly default-value="false">${assembly.updateOnly}</updateOnly>
+  <useJvmChmod default-value="false">${assembly.useJvmChmod}</useJvmChmod>
+  <workDirectory default-value="${project.build.directory}/assembly/work"/>
+  <mavenSession default-value="${session}"/>
+  <project default-value="${project}"/>
+</configuration>
+[DEBUG] =======================================================================
+[DEBUG] Failure to find com.jd.bdp:hydra-client:1.0-SNAPSHOT/maven-metadata.xml in http://artifactory.360buy-develop.com/libs-snapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Failure to find com.jd.bdp:hydra-client:1.0-SNAPSHOT/maven-metadata.xml in http://artifactory.360buy-develop.com/libs-snapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Failure to find com.jd.bdp:hydra:1.0-SNAPSHOT/maven-metadata.xml in http://artifactory.360buy-develop.com/libs-snapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Failure to find com.jd.bdp:hydra-interface:1.0-SNAPSHOT/maven-metadata.xml in http://artifactory.360buy-develop.com/libs-snapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Failure to find com.jd.bdp:hydra-interface:1.0-SNAPSHOT/maven-metadata.xml in http://artifactory.360buy-develop.com/libs-snapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Could not find metadata com.alibaba:dubbo:2.4.8-SNAPSHOT/maven-metadata.xml in local (E:\RepositryCenter\repository)
+[DEBUG] Skipped remote update check for com.alibaba:dubbo:2.4.8-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Could not find metadata com.alibaba:dubbo:2.4.8-SNAPSHOT/maven-metadata.xml in local (E:\RepositryCenter\repository)
+[DEBUG] Skipped remote update check for com.alibaba:dubbo:2.4.8-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Skipped remote update check for com.jd.bdp:hydra-manager:1.0-SNAPSHOT/maven-metadata.xml, locally installed metadata up-to-date.
+[DEBUG] Skipped remote update check for com.jd.bdp:hydra-manager:1.0-SNAPSHOT/maven-metadata.xml, locally installed metadata up-to-date.
+[WARNING] The POM for com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model for com.jd.bdp:hydra-manager:1.0-SNAPSHOT
+[ERROR] 'dependencies.dependency.version' for com.jd.bdp:hydra-mysql:jar is missing. @ 
+
+[DEBUG] Skipped remote update check for com.jd.bdp:hydra-collector:1.0-SNAPSHOT/maven-metadata.xml, locally installed metadata up-to-date.
+[DEBUG] Skipped remote update check for com.jd.bdp:hydra-collector:1.0-SNAPSHOT/maven-metadata.xml, locally installed metadata up-to-date.
+[DEBUG] Could not find metadata com.jd.dd:glowworm:1.0-SNAPSHOT/maven-metadata.xml in local (E:\RepositryCenter\repository)
+[DEBUG] Skipped remote update check for com.jd.dd:glowworm:1.0-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Could not find metadata com.jd.dd:glowworm:1.0-SNAPSHOT/maven-metadata.xml in local (E:\RepositryCenter\repository)
+[DEBUG] Skipped remote update check for com.jd.dd:glowworm:1.0-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Could not find metadata com.jd.dd:dd-parent:1.0-SNAPSHOT/maven-metadata.xml in local (E:\RepositryCenter\repository)
+[DEBUG] Skipped remote update check for com.jd.dd:dd-parent:1.0-SNAPSHOT/maven-metadata.xml, locally cached metadata up-to-date.
+[DEBUG] Failure to find com.jd.bdp:hydra-collector-service:1.0-SNAPSHOT/maven-metadata.xml in http://artifactory.360buy-develop.com/libs-snapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[DEBUG] Failure to find com.jd.bdp:hydra-collector-service:1.0-SNAPSHOT/maven-metadata.xml in http://artifactory.360buy-develop.com/libs-snapshots was cached in the local repository, resolution will not be reattempted until the update interval of snapshots has elapsed or updates are forced
+[WARNING] The POM for com.jd.bdp:hydra-collector-service:jar:1.0-SNAPSHOT is invalid, transitive dependencies (if any) will not be available: 1 problem was encountered while building the effective model for com.jd.bdp:hydra-collector-service:1.0-SNAPSHOT
+[ERROR] 'dependencies.dependency.version' for com.jd.bdp:hydra-hbase:jar is missing. @ 
+
+[DEBUG] com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT
+[DEBUG]    com.jd.bdp:hydra-client:jar:1.0-SNAPSHOT:compile
+[DEBUG]       com.jd.bdp:hydra-interface:jar:1.0-SNAPSHOT:compile
+[DEBUG]       ch.qos.logback:logback-classic:jar:1.0.7:compile
+[DEBUG]          ch.qos.logback:logback-core:jar:1.0.7:compile
+[DEBUG]       javax.validation:validation-api:jar:1.0.0.GA:compile
+[DEBUG]       com.alibaba:dubbo:jar:2.4.8-SNAPSHOT:compile
+[DEBUG]          org.springframework:spring:jar:2.5.6.SEC03:compile
+[DEBUG]          org.javassist:javassist:jar:3.15.0-GA:compile
+[DEBUG]          org.jboss.netty:netty:jar:3.2.5.Final:compile
+[DEBUG]    com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT:compile
+[DEBUG]    com.jd.bdp:hydra-collector:jar:1.0-SNAPSHOT:compile
+[DEBUG]       com.taobao.metamorphosis:metamorphosis-client:jar:1.4.3:compile
+[DEBUG]          com.taobao.metamorphosis:metamorphosis-commons:jar:1.4.3:compile
+[DEBUG]             com.taobao.gecko:gecko:jar:1.1.1:compile
+[DEBUG]             commons-lang:commons-lang:jar:2.6:compile
+[DEBUG]             org.codehaus.jackson:jackson-core-lgpl:jar:1.9.10:compile (version managed from 1.4.0 by com.jd.bdp:hydra:1.0-SNAPSHOT)
+[DEBUG]             org.codehaus.jackson:jackson-mapper-lgpl:jar:1.9.10:compile (version managed from 1.4.0 by com.jd.bdp:hydra:1.0-SNAPSHOT)
+[DEBUG]          commons-logging:commons-logging:jar:1.1:compile
+[DEBUG]             logkit:logkit:jar:1.0.1:compile
+[DEBUG]             avalon-framework:avalon-framework:jar:4.1.3:compile
+[DEBUG]             javax.servlet:servlet-api:jar:2.5:compile (version managed from 2.3 by com.jd.bdp:hydra:1.0-SNAPSHOT)
+[DEBUG]       com.taobao.metamorphosis:metamorphosis-tools:jar:1.4.3:compile
+[DEBUG]          com.taobao.metamorphosis:metamorphosis-server:jar:1.4.3:compile
+[DEBUG]             org.slf4j:slf4j-log4j12:jar:1.6.2:compile
+[DEBUG]             org.quartz-scheduler:quartz:jar:2.1.4:compile
+[DEBUG]                c3p0:c3p0:jar:0.9.1.1:compile
+[DEBUG]             com.google.protobuf:protobuf-java:jar:2.3.0:compile
+[DEBUG]             com.googlecode.aviator:aviator:jar:2.2.1:compile
+[DEBUG]                commons-beanutils:commons-beanutils:jar:1.8.2:compile
+[DEBUG]          org.ini4j:ini4j:jar:0.5.1:compile
+[DEBUG]          commons-cli:commons-cli:jar:1.2:compile
+[DEBUG]          commons-io:commons-io:jar:2.1:compile
+[DEBUG]          mysql:mysql-connector-java:jar:5.1.22:compile (version managed from 5.1.6 by com.jd.bdp:hydra:1.0-SNAPSHOT)
+[DEBUG]          joda-time:joda-time:jar:1.6.2:compile
+[DEBUG]          ch.ethz.ganymed:ganymed-ssh2:jar:build210:compile
+[DEBUG]       com.googlecode.disruptor:disruptor:jar:2.10.3:compile
+[DEBUG]       com.jd.dd:glowworm:jar:1.0-SNAPSHOT:compile
+[DEBUG]       org.slf4j:slf4j-api:jar:1.6.4:compile
+[DEBUG]       com.caucho:hessian:jar:3.2.2:compile
+[DEBUG]    com.jd.bdp:hydra-collector-service:jar:1.0-SNAPSHOT:compile
+[DEBUG]    org.springframework:spring-test:jar:3.1.2.RELEASE:test
+[DEBUG]    org.springframework:spring-context:jar:3.1.2.RELEASE:compile
+[DEBUG]       org.springframework:spring-aop:jar:3.1.2.RELEASE:compile
+[DEBUG]          aopalliance:aopalliance:jar:1.0:compile
+[DEBUG]       org.springframework:spring-beans:jar:3.1.2.RELEASE:compile
+[DEBUG]       org.springframework:spring-core:jar:3.1.2.RELEASE:compile
+[DEBUG]       org.springframework:spring-expression:jar:3.1.2.RELEASE:compile
+[DEBUG]       org.springframework:spring-asm:jar:3.1.2.RELEASE:compile
+[DEBUG]    com.github.sgroschupf:zkclient:jar:0.1:compile
+[DEBUG]       org.apache.zookeeper:zookeeper:jar:3.3.3:compile
+[DEBUG]          jline:jline:jar:0.9.94:compile
+[DEBUG]       log4j:log4j:jar:1.2.14:compile
+[DEBUG]    junit:junit:jar:4.9:compile
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ hydra-example-benchmark ---
+[DEBUG] Created new class realm maven.api
+[DEBUG] Importing foreign packages into class realm maven.api
+[DEBUG]   Imported: org.apache.maven.wagon.events < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.transfer < plexus.core
+[DEBUG]   Imported: org.apache.maven.exception < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.metadata < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.Xpp3Dom < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.collection < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.version < plexus.core
+[DEBUG]   Imported: org.apache.maven.monitor < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.resource < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.logging < plexus.core
+[DEBUG]   Imported: org.apache.maven.profiles < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.classrealm < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.artifact < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.spi < plexus.core
+[DEBUG]   Imported: org.apache.maven.reporting < plexus.core
+[DEBUG]   Imported: org.apache.maven.usability < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.container < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.component < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlSerializer < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authentication < plexus.core
+[DEBUG]   Imported: org.apache.maven.lifecycle < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.classworlds < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.graph < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.settings < plexus.core
+[DEBUG]   Imported: org.codehaus.classworlds < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.impl < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.toolchain < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.deployment < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.observers < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParserException < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParser < plexus.core
+[DEBUG]   Imported: org.apache.maven.configuration < plexus.core
+[DEBUG]   Imported: org.apache.maven.cli < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.installation < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.context < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authorization < plexus.core
+[DEBUG]   Imported: org.apache.maven.project < plexus.core
+[DEBUG]   Imported: org.apache.maven.rtinfo < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.lifecycle < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.configuration < plexus.core
+[DEBUG]   Imported: org.apache.maven.artifact < plexus.core
+[DEBUG]   Imported: org.apache.maven.model < plexus.core
+[DEBUG]   Imported: org.apache.maven.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.proxy < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.resolution < plexus.core
+[DEBUG]   Imported: org.apache.maven.plugin < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.* < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.personality < plexus.core
+[DEBUG] Populating class realm maven.api
+[DEBUG] org.apache.maven.plugins:maven-enforcer-plugin:jar:1.0:
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.9:compile
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.9:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-model:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.9:compile
+[DEBUG]       org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]          junit:junit:jar:3.8.2:test (scope managed from compile) (version managed from 3.8.1)
+[DEBUG]    org.apache.maven:maven-core:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.9:compile
+[DEBUG]       org.apache.maven.reporting:maven-reporting-api:jar:2.0.9:compile
+[DEBUG]          org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-10:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.0.9:compile
+[DEBUG]       commons-cli:commons-cli:jar:1.0:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.0.9:compile
+[DEBUG]       org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4:compile
+[DEBUG]       org.apache.maven:maven-monitor:jar:2.0.9:compile
+[DEBUG]       classworlds:classworlds:jar:1.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:1.5.8:compile
+[DEBUG]    commons-lang:commons-lang:jar:2.3:compile
+[DEBUG]    org.apache.maven.enforcer:enforcer-api:jar:1.0:compile
+[DEBUG]    org.apache.maven.enforcer:enforcer-rules:jar:1.0:compile
+[DEBUG]       org.apache.maven.shared:maven-common-artifact-filters:jar:1.2:compile
+[DEBUG]          org.apache.maven.shared:maven-plugin-testing-harness:jar:1.1:test (scope managed from compile)
+[DEBUG]             org.codehaus.plexus:plexus-archiver:jar:1.0-alpha-7:test
+[DEBUG]       org.beanshell:bsh:jar:2.0b4:compile
+[DEBUG]       org.apache.maven.shared:maven-dependency-tree:jar:1.2:compile
+[DEBUG]       org.codehaus.plexus:plexus-i18n:jar:1.0-beta-6:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-enforcer-plugin:1.0
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-enforcer-plugin:1.0
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-enforcer-plugin:1.0
+[DEBUG]   Included: org.apache.maven.plugins:maven-enforcer-plugin:jar:1.0
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:2.0.9
+[DEBUG]   Included: org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-10
+[DEBUG]   Included: commons-cli:commons-cli:jar:1.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:1.5.8
+[DEBUG]   Included: commons-lang:commons-lang:jar:2.3
+[DEBUG]   Included: org.apache.maven.enforcer:enforcer-api:jar:1.0
+[DEBUG]   Included: org.apache.maven.enforcer:enforcer-rules:jar:1.0
+[DEBUG]   Included: org.apache.maven.shared:maven-common-artifact-filters:jar:1.2
+[DEBUG]   Included: org.beanshell:bsh:jar:2.0b4
+[DEBUG]   Included: org.apache.maven.shared:maven-dependency-tree:jar:1.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-i18n:jar:1.0-beta-6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.9
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG]   Excluded: junit:junit:jar:3.8.2
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-error-diagnostics:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-descriptor:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-monitor:jar:2.0.9
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1
+[DEBUG]   Excluded: org.apache.maven.shared:maven-plugin-testing-harness:jar:1.1
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-archiver:jar:1.0-alpha-7
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-enforcer-plugin:1.0:enforce from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-enforcer-plugin:1.0, parent: sun.misc.Launcher$AppClassLoader@18d107f]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-enforcer-plugin:1.0:enforce' with basic configurator -->
+[DEBUG]   (s) fail = true
+[DEBUG]   (s) failFast = false
+[DEBUG]   (f) ignoreCache = false
+[DEBUG]   (s) project = MavenProject: com.jd.bdp:hydra-example-benchmark:1.0-SNAPSHOT @ E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\pom.xml
+[DEBUG]   (s) version = (,2.1.0),(2.1.0,2.2.0),(2.2.0,)
+[DEBUG]   (f) message = Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums respectively.
+[DEBUG]   (s) rules = [org.apache.maven.plugins.enforcer.RequireMavenVersion@9ab0]
+[DEBUG]   (s) session = org.apache.maven.execution.MavenSession@796e1c
+[DEBUG]   (s) skip = false
+[DEBUG] -- end configuration --
+[DEBUG] Executing rule: org.apache.maven.plugins.enforcer.RequireMavenVersion
+[DEBUG] Rule org.apache.maven.plugins.enforcer.RequireMavenVersion is cacheable.
+[DEBUG] Detected Maven Version: 3.0.4
+[DEBUG] Detected Maven Version: 3.0.4 is allowed in the range (,2.1.0),(2.1.0,2.2.0),(2.2.0,).
+[INFO] 
+[INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ hydra-example-benchmark ---
+[DEBUG] org.apache.maven.plugins:maven-resources-plugin:jar:2.5:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-core:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.6:compile
+[DEBUG]       org.apache.maven.reporting:maven-reporting-api:jar:2.0.6:compile
+[DEBUG]          org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-7:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.0.6:compile
+[DEBUG]       commons-cli:commons-cli:jar:1.0:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.0.6:compile
+[DEBUG]       org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4:compile
+[DEBUG]       classworlds:classworlds:jar:1.1:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-settings:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-model:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-monitor:jar:2.0.6:compile
+[DEBUG]    org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]       junit:junit:jar:3.8.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:2.0.5:compile
+[DEBUG]    org.apache.maven.shared:maven-filtering:jar:1.0:compile
+[DEBUG]       org.sonatype.plexus:plexus-build-api:jar:0.0.4:compile
+[DEBUG]    org.codehaus.plexus:plexus-interpolation:jar:1.13:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-resources-plugin:2.5
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-resources-plugin:2.5
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-resources-plugin:2.5
+[DEBUG]   Included: org.apache.maven.plugins:maven-resources-plugin:jar:2.5
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:2.0.6
+[DEBUG]   Included: org.apache.maven.doxia:doxia-sink-api:jar:1.0-alpha-7
+[DEBUG]   Included: commons-cli:commons-cli:jar:1.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:2.0.5
+[DEBUG]   Included: org.apache.maven.shared:maven-filtering:jar:1.0
+[DEBUG]   Included: org.sonatype.plexus:plexus-build-api:jar:0.0.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.13
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-error-diagnostics:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-descriptor:jar:2.0.6
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-monitor:jar:2.0.6
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-resources-plugin:2.5:resources from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-resources-plugin:2.5, parent: sun.misc.Launcher$AppClassLoader@18d107f]
+[debug] execute contextualize
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-resources-plugin:2.5:resources' with basic configurator -->
+[DEBUG]   (f) buildFilters = []
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) escapeWindowsPaths = true
+[DEBUG]   (s) includeEmptyDirs = false
+[DEBUG]   (s) outputDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes
+[DEBUG]   (s) overwrite = false
+[DEBUG]   (f) project = MavenProject: com.jd.bdp:hydra-example-benchmark:1.0-SNAPSHOT @ E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\pom.xml
+[DEBUG]   (s) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@796e1c
+[DEBUG]   (f) supportMultiLineFiltering = false
+[DEBUG]   (f) useBuildFilters = true
+[DEBUG]   (s) useDefaultDelimiters = true
+[DEBUG] -- end configuration --
+[DEBUG] properties used {java.vendor=Sun Microsystems Inc., env.SYSTEMROOT=C:\Windows, mybatis.version=3.0.6, sun.java.launcher=SUN_STANDARD, sun.management.compiler=HotSpot Client Compiler, fastjson.version=1.1.28, slf4j-api.version=1.6.4, glowworm.version=1.0-SNAPSHOT, os.name=Windows Vista, env.FP_NO_HOST_CHECK=NO, sun.boot.class.path=C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\resources.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\rt.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\sunrsasign.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\jsse.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\jce.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\charsets.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\classes, env.COMPUTERNAME=BJXX-XIANGKUI, env.PWD=/home/xiangkui/hydra_workspace/hydra/modules/hydra-example/hydra-example-benchmark, env.ALLUSERSPROFILE=C:\ProgramData, sun.desktop=windows, env.LANG=zh_CN.UTF-8@cjknarrow, java.vm.specification.vendor=Sun Microsystems Inc., java.runtime.version=1.6.0_02-b06, mysql-connector-java.version=5.1.22, env.HOMEPATH=\Users\Administrator, project.build.sourceEncoding=UTF-8, springframework-version=3.1.2.RELEASE, user.name=xiangkui, maven.build.version=Apache Maven 3.0.4 (r1232337; 2012-01-17 16:44:56+0800), env.USER=xiangkui, hadoop-common.version=bdp-2.0.0-cdh4.1.1, env.SHELL=/bin/bash, logback-classic.version=1.0.7, env.PATH=D:\Program Files (x86)\cygwin\usr\local\bin;D:\Program Files (x86)\cygwin\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Java\jdk1.6.0_02\bin;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\bin;D:\apache-maven-3.0.4\bin;D:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\scala-2.10.0\bin;C:\Program Files (x86)\sbt-0.7.7;D:\twitter\zipkin\apache-cassandra-1.2.1\bin;D:\Program Files (x86)\gradle-1.4\bin;D:\Program Files (x86)\apache-ant-1.9.0\bin, user.language=zh, google-collections.version=1.0, env.WINDIR=C:\Windows, sun.boot.library.path=C:\Program Files (x86)\Java\jdk1.6.0_02\jre\bin, classworlds.conf=D:\apache-maven-3.0.4/bin/m2.conf, java.version=1.6.0_02, env.PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 42 Stepping 7, GenuineIntel, user.timezone=Asia/Shanghai, validation-api.version=1.0.0.GA, env.TEMP=D:\Program Files (x86)\cygwin\tmp, sun.arch.data.model=32, disruptor.version=2.10.3, java.endorsed.dirs=C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\endorsed, env.PROCESSOR_ARCHITEW6432=AMD64, sun.cpu.isalist=pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86, env.HOMEDRIVE=C:, sun.jnu.encoding=GBK, file.encoding.pkg=sun.io, env.SHLVL=1, env.SYSTEMDRIVE=C:, file.separator=\, env.HOSTNAME=BJXX-XIANGKUI, java.specification.name=Java Platform API Specification, java.class.version=50.0, user.country=CN, env.PRINTER=发送至 OneNote 2010, env.GRADLE_HOME=D:\Program Files (x86)\gradle-1.4, java.home=C:\Program Files (x86)\Java\jdk1.6.0_02\jre, env.APPDATA=C:\Users\Administrator\AppData\Roaming, env.CONFIGSETROOT=C:\Windows\ConfigSetRoot, env.PUBLIC=C:\Users\Public, java.vm.info=mixed mode, env.OS=Windows_NT, jsp-api.version=2.1, os.version=6.1, hessian.version=3.2.2, env.=::=::\, project.reporting.outputEncoding=UTF-8, path.separator=;, java.vm.version=1.6.0_02-b06, servlet.version=2.5, env.USERPROFILE=C:\Users\Administrator, user.variant=, env.JAVA_HOME=C:\Program Files (x86)\Java\jdk1.6.0_02, commons-configuration.version=1.9, java.awt.printerjob=sun.awt.windows.WPrinterJob, env.TERM=xterm, env.TMP=D:\Program Files (x86)\cygwin\tmp, env.PROGRAMFILES=C:\Program Files (x86), sun.io.unicode.encoding=UnicodeLittle, awt.toolkit=sun.awt.windows.WToolkit, env.MANPATH=/usr/local/man:/usr/share/man:/usr/man::/usr/ssl/man, env.TZ=Asia/Shanghai, env.JDEPEND_HOME=D:\Program Files (x86)\jdepend-2.9.1, user.home=C:\Users\Administrator, env.COMMONPROGRAMFILES=C:\Program Files (x86)\Common Files, jstl-api.version=1.2, env.SESSIONNAME=Console, java.specification.vendor=Sun Microsystems Inc., env.CLASSPATH=.;C:\Program Files (x86)\Java\jdk1.6.0_02\lib\dt.jat;C:\Program Files (x86)\Java\jdk1.6.0_02\lib\tools.jar;D:\Program Files (x86)\jdepend-2.9.1\lib\jdepend-2.9.1.jar;D:\Program Files (x86)\apache-ant-1.9.0\lib, env.M2_HOME=D:\apache-maven-3.0.4, java.library.path=C:\Program Files (x86)\Java\jdk1.6.0_02\bin;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\Program Files (x86)\cygwin\usr\local\bin;D:\Program Files (x86)\cygwin\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Java\jdk1.6.0_02\bin;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\bin;D:\apache-maven-3.0.4\bin;D:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\scala-2.10.0\bin;C:\Program Files (x86)\sbt-0.7.7;D:\twitter\zipkin\apache-cassandra-1.2.1\bin;D:\Program Files (x86)\gradle-1.4\bin;D:\Program Files (x86)\apache-ant-1.9.0\bin, env.NUMBER_OF_PROCESSORS=4, java.vendor.url=http://java.sun.com/, env.COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files, env.USERDNSDOMAIN=360BUYAD.LOCAL, env.PSMODULEPATH=C:\Windows\system32\WindowsPowerShell\v1.0\Modules\, java.vm.vendor=Sun Microsystems Inc., maven.home=D:\apache-maven-3.0.4, java.runtime.name=Java(TM) SE Runtime Environment, java.class.path=D:\apache-maven-3.0.4/boot/plexus-classworlds-2.4.jar, sonatypeOssDistMgmtSnapshotsUrl=https://oss.sonatype.org/content/repositories/snapshots/, env.PROGRAMW6432=C:\Program Files, maven.test.skip=true, dubbo.version=2.4.8-SNAPSHOT, maven.version=3.0.4, env.PROGRAMFILES(X86)=C:\Program Files (x86), java.vm.specification.name=Java Virtual Machine Specification, hbase.version=bdp-0.92.1-cdh4.1.1, env.LOGONSERVER=\\BCDC05, java.vm.specification.version=1.0, env.PROCESSOR_ARCHITECTURE=x86, env.COMMONPROGRAMW6432=C:\Program Files\Common Files, sun.cpu.endian=little, sun.os.patch.level=Service Pack 1, env.HOME=D:\Program Files (x86)\cygwin\home\xiangkui, env.ANT_HOME=D:\Program Files (x86)\apache-ant-1.9.0, java.io.tmpdir=D:\Program Files (x86)\cygwin\tmp\, env.UATDATA=C:\Windows\CCM\UATData\D9F8C395-CAB8-491d-B8AC-179A1FE1BE77, env.PROCESSOR_REVISION=2a07, env.VBOX_INSTALL_PATH=D:\Program Files (x86)\Oracle\VirtualBox\, mybatis-spring=1.0.0, java.vendor.url.bug=http://java.sun.com/cgi-bin/bugreport.cgi, env.PROGRAMDATA=C:\ProgramData, env.COMSPEC=C:\Windows\system32\cmd.exe, os.arch=x86, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, java.ext.dirs=C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\ext;C:\Windows\Sun\Java\lib\ext, user.dir=E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark, env.LOCALAPPDATA=C:\Users\Administrator\AppData\Local, env.INFOPATH=/usr/local/info:/usr/share/info:/usr/info:, zkclient.version=0.1, line.separator=
+, java.vm.name=Java HotSpot(TM) Client VM, env.PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC, metamorphosis.version=1.4.3, env.USERNAME=xiangkui, jackson.version=1.9.10, file.encoding=GBK, env.USERDOMAIN=360BUYAD, java.specification.version=1.6, junit.version=4.9, env.PROCESSOR_LEVEL=6}
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[DEBUG] resource with targetPath null
+directory E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources
+excludes []
+includes []
+[DEBUG] ignoreDelta true
+[INFO] Copying 20 resources
+[DEBUG] file benchmark.properties has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\benchmark.properties to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\benchmark.properties
+[DEBUG] file dubbo-service-A.xml has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\dubbo-service-A.xml to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\dubbo-service-A.xml
+[DEBUG] file dubbo-service-B.xml has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\dubbo-service-B.xml to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\dubbo-service-B.xml
+[DEBUG] file dubbo-service-C.xml has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\dubbo-service-C.xml to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\dubbo-service-C.xml
+[DEBUG] file dubbo.properties has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\dubbo.properties to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\dubbo.properties
+[DEBUG] file log4j.xml has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\log4j.xml to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\log4j.xml
+[DEBUG] file env.sh has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\linux\env.sh to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\linux\env.sh
+[DEBUG] file startA.sh has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\linux\startABC\startA.sh to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\linux\startABC\startA.sh
+[DEBUG] file startB.sh has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\linux\startABC\startB.sh to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\linux\startABC\startB.sh
+[DEBUG] file startC.sh has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\linux\startABC\startC.sh to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\linux\startABC\startC.sh
+[DEBUG] file startABC.sh has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\linux\startABC.sh to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\linux\startABC.sh
+[DEBUG] file startBenchTest.sh has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\linux\startBenchTest.sh to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\linux\startBenchTest.sh
+[DEBUG] file startA.bat has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows\startABC\startA.bat to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\windows\startABC\startA.bat
+[DEBUG] file startB.bat has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows\startABC\startB.bat to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\windows\startABC\startB.bat
+[DEBUG] file startC.bat has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows\startABC\startC.bat to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\windows\startABC\startC.bat
+[DEBUG] file startABC.bat has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows\startABC.bat to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\windows\startABC.bat
+[DEBUG] file startBenchTest.bat has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows\startBenchTest.bat to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\windows\startBenchTest.bat
+[DEBUG] file startMamager.bat has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows\startMamager.bat to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\windows\startMamager.bat
+[DEBUG] file startTrigger.bat has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows\startTrigger.bat to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\scripts\windows\startTrigger.bat
+[DEBUG] file trigger-context.xml has a filtered file extension
+[DEBUG] copy E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\trigger-context.xml to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\trigger-context.xml
+[DEBUG] no use filter components
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ hydra-example-benchmark ---
+[DEBUG] org.apache.maven.plugins:maven-compiler-plugin:jar:2.3.2:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-core:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-model:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-project:jar:2.0.6:compile
+[DEBUG]          org.apache.maven:maven-plugin-registry:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-monitor:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-toolchain:jar:1.0:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:2.0.5:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-api:jar:1.8.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-manager:jar:1.8.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-compiler-javac:jar:1.8.1:runtime
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:2.3.2
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:2.3.2
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-compiler-plugin:2.3.2
+[DEBUG]   Included: org.apache.maven.plugins:maven-compiler-plugin:jar:2.3.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:2.0.5
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-api:jar:1.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-manager:jar:1.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-compiler-javac:jar:1.8.1
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-error-diagnostics:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-descriptor:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-monitor:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-toolchain:jar:1.0
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-compiler-plugin:2.3.2, parent: sun.misc.Launcher$AppClassLoader@18d107f]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile' with basic configurator -->
+[DEBUG]   (f) basedir = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark
+[DEBUG]   (f) buildDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target
+[DEBUG]   (f) classpathElements = [E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes, E:\RepositryCenter\repository\com\jd\bdp\hydra-client\1.0-SNAPSHOT\hydra-client-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\com\jd\bdp\hydra-interface\1.0-SNAPSHOT\hydra-interface-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\ch\qos\logback\logback-classic\1.0.7\logback-classic-1.0.7.jar, E:\RepositryCenter\repository\ch\qos\logback\logback-core\1.0.7\logback-core-1.0.7.jar, E:\RepositryCenter\repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA.jar, E:\RepositryCenter\repository\com\alibaba\dubbo\2.4.8-SNAPSHOT\dubbo-2.4.8-SNAPSHOT.jar, E:\RepositryCenter\repository\org\springframework\spring\2.5.6.SEC03\spring-2.5.6.SEC03.jar, E:\RepositryCenter\repository\org\javassist\javassist\3.15.0-GA\javassist-3.15.0-GA.jar, E:\RepositryCenter\repository\org\jboss\netty\netty\3.2.5.Final\netty-3.2.5.Final.jar, E:\RepositryCenter\repository\com\jd\bdp\hydra-manager\1.0-SNAPSHOT\hydra-manager-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\com\jd\bdp\hydra-collector\1.0-SNAPSHOT\hydra-collector-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-client\1.4.3\metamorphosis-client-1.4.3.jar, E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-commons\1.4.3\metamorphosis-commons-1.4.3.jar, E:\RepositryCenter\repository\com\taobao\gecko\gecko\1.1.1\gecko-1.1.1.jar, E:\RepositryCenter\repository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar, E:\RepositryCenter\repository\org\codehaus\jackson\jackson-core-lgpl\1.9.10\jackson-core-lgpl-1.9.10.jar, E:\RepositryCenter\repository\org\codehaus\jackson\jackson-mapper-lgpl\1.9.10\jackson-mapper-lgpl-1.9.10.jar, E:\RepositryCenter\repository\commons-logging\commons-logging\1.1\commons-logging-1.1.jar, E:\RepositryCenter\repository\logkit\logkit\1.0.1\logkit-1.0.1.jar, E:\RepositryCenter\repository\avalon-framework\avalon-framework\4.1.3\avalon-framework-4.1.3.jar, E:\RepositryCenter\repository\javax\servlet\servlet-api\2.5\servlet-api-2.5.jar, E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-tools\1.4.3\metamorphosis-tools-1.4.3.jar, E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-server\1.4.3\metamorphosis-server-1.4.3.jar, E:\RepositryCenter\repository\org\slf4j\slf4j-log4j12\1.6.2\slf4j-log4j12-1.6.2.jar, E:\RepositryCenter\repository\org\quartz-scheduler\quartz\2.1.4\quartz-2.1.4.jar, E:\RepositryCenter\repository\c3p0\c3p0\0.9.1.1\c3p0-0.9.1.1.jar, E:\RepositryCenter\repository\com\google\protobuf\protobuf-java\2.3.0\protobuf-java-2.3.0.jar, E:\RepositryCenter\repository\com\googlecode\aviator\aviator\2.2.1\aviator-2.2.1.jar, E:\RepositryCenter\repository\commons-beanutils\commons-beanutils\1.8.2\commons-beanutils-1.8.2.jar, E:\RepositryCenter\repository\org\ini4j\ini4j\0.5.1\ini4j-0.5.1.jar, E:\RepositryCenter\repository\commons-cli\commons-cli\1.2\commons-cli-1.2.jar, E:\RepositryCenter\repository\commons-io\commons-io\2.1\commons-io-2.1.jar, E:\RepositryCenter\repository\mysql\mysql-connector-java\5.1.22\mysql-connector-java-5.1.22.jar, E:\RepositryCenter\repository\joda-time\joda-time\1.6.2\joda-time-1.6.2.jar, E:\RepositryCenter\repository\ch\ethz\ganymed\ganymed-ssh2\build210\ganymed-ssh2-build210.jar, E:\RepositryCenter\repository\com\googlecode\disruptor\disruptor\2.10.3\disruptor-2.10.3.jar, E:\RepositryCenter\repository\com\jd\dd\glowworm\1.0-SNAPSHOT\glowworm-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\org\slf4j\slf4j-api\1.6.4\slf4j-api-1.6.4.jar, E:\RepositryCenter\repository\com\caucho\hessian\3.2.2\hessian-3.2.2.jar, E:\RepositryCenter\repository\com\jd\bdp\hydra-collector-service\1.0-SNAPSHOT\hydra-collector-service-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\org\springframework\spring-context\3.1.2.RELEASE\spring-context-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\org\springframework\spring-aop\3.1.2.RELEASE\spring-aop-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar, E:\RepositryCenter\repository\org\springframework\spring-beans\3.1.2.RELEASE\spring-beans-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\org\springframework\spring-core\3.1.2.RELEASE\spring-core-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\org\springframework\spring-expression\3.1.2.RELEASE\spring-expression-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\org\springframework\spring-asm\3.1.2.RELEASE\spring-asm-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\com\github\sgroschupf\zkclient\0.1\zkclient-0.1.jar, E:\RepositryCenter\repository\org\apache\zookeeper\zookeeper\3.3.3\zookeeper-3.3.3.jar, E:\RepositryCenter\repository\jline\jline\0.9.94\jline-0.9.94.jar, E:\RepositryCenter\repository\log4j\log4j\1.2.14\log4j-1.2.14.jar, E:\RepositryCenter\repository\junit\junit\4.9\junit-4.9.jar]
+[DEBUG]   (f) compileSourceRoots = [E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\java]
+[DEBUG]   (f) compilerId = javac
+[DEBUG]   (f) debug = true
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) fork = false
+[DEBUG]   (f) generatedSourcesDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\generated-sources\annotations
+[DEBUG]   (f) optimize = false
+[DEBUG]   (f) outputDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes
+[DEBUG]   (f) outputFileName = hydra-example-benchmark-1.0-SNAPSHOT
+[DEBUG]   (f) projectArtifact = com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@796e1c
+[DEBUG]   (f) showDeprecation = false
+[DEBUG]   (f) showWarnings = false
+[DEBUG]   (f) source = 1.6
+[DEBUG]   (f) staleMillis = 0
+[DEBUG]   (f) target = 1.6
+[DEBUG]   (f) verbose = false
+[DEBUG] -- end configuration --
+[DEBUG] Using compiler 'javac'.
+[DEBUG] Source directories: [E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\java]
+[DEBUG] Classpath: [E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes
+ E:\RepositryCenter\repository\com\jd\bdp\hydra-client\1.0-SNAPSHOT\hydra-client-1.0-SNAPSHOT.jar
+ E:\RepositryCenter\repository\com\jd\bdp\hydra-interface\1.0-SNAPSHOT\hydra-interface-1.0-SNAPSHOT.jar
+ E:\RepositryCenter\repository\ch\qos\logback\logback-classic\1.0.7\logback-classic-1.0.7.jar
+ E:\RepositryCenter\repository\ch\qos\logback\logback-core\1.0.7\logback-core-1.0.7.jar
+ E:\RepositryCenter\repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA.jar
+ E:\RepositryCenter\repository\com\alibaba\dubbo\2.4.8-SNAPSHOT\dubbo-2.4.8-SNAPSHOT.jar
+ E:\RepositryCenter\repository\org\springframework\spring\2.5.6.SEC03\spring-2.5.6.SEC03.jar
+ E:\RepositryCenter\repository\org\javassist\javassist\3.15.0-GA\javassist-3.15.0-GA.jar
+ E:\RepositryCenter\repository\org\jboss\netty\netty\3.2.5.Final\netty-3.2.5.Final.jar
+ E:\RepositryCenter\repository\com\jd\bdp\hydra-manager\1.0-SNAPSHOT\hydra-manager-1.0-SNAPSHOT.jar
+ E:\RepositryCenter\repository\com\jd\bdp\hydra-collector\1.0-SNAPSHOT\hydra-collector-1.0-SNAPSHOT.jar
+ E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-client\1.4.3\metamorphosis-client-1.4.3.jar
+ E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-commons\1.4.3\metamorphosis-commons-1.4.3.jar
+ E:\RepositryCenter\repository\com\taobao\gecko\gecko\1.1.1\gecko-1.1.1.jar
+ E:\RepositryCenter\repository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar
+ E:\RepositryCenter\repository\org\codehaus\jackson\jackson-core-lgpl\1.9.10\jackson-core-lgpl-1.9.10.jar
+ E:\RepositryCenter\repository\org\codehaus\jackson\jackson-mapper-lgpl\1.9.10\jackson-mapper-lgpl-1.9.10.jar
+ E:\RepositryCenter\repository\commons-logging\commons-logging\1.1\commons-logging-1.1.jar
+ E:\RepositryCenter\repository\logkit\logkit\1.0.1\logkit-1.0.1.jar
+ E:\RepositryCenter\repository\avalon-framework\avalon-framework\4.1.3\avalon-framework-4.1.3.jar
+ E:\RepositryCenter\repository\javax\servlet\servlet-api\2.5\servlet-api-2.5.jar
+ E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-tools\1.4.3\metamorphosis-tools-1.4.3.jar
+ E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-server\1.4.3\metamorphosis-server-1.4.3.jar
+ E:\RepositryCenter\repository\org\slf4j\slf4j-log4j12\1.6.2\slf4j-log4j12-1.6.2.jar
+ E:\RepositryCenter\repository\org\quartz-scheduler\quartz\2.1.4\quartz-2.1.4.jar
+ E:\RepositryCenter\repository\c3p0\c3p0\0.9.1.1\c3p0-0.9.1.1.jar
+ E:\RepositryCenter\repository\com\google\protobuf\protobuf-java\2.3.0\protobuf-java-2.3.0.jar
+ E:\RepositryCenter\repository\com\googlecode\aviator\aviator\2.2.1\aviator-2.2.1.jar
+ E:\RepositryCenter\repository\commons-beanutils\commons-beanutils\1.8.2\commons-beanutils-1.8.2.jar
+ E:\RepositryCenter\repository\org\ini4j\ini4j\0.5.1\ini4j-0.5.1.jar
+ E:\RepositryCenter\repository\commons-cli\commons-cli\1.2\commons-cli-1.2.jar
+ E:\RepositryCenter\repository\commons-io\commons-io\2.1\commons-io-2.1.jar
+ E:\RepositryCenter\repository\mysql\mysql-connector-java\5.1.22\mysql-connector-java-5.1.22.jar
+ E:\RepositryCenter\repository\joda-time\joda-time\1.6.2\joda-time-1.6.2.jar
+ E:\RepositryCenter\repository\ch\ethz\ganymed\ganymed-ssh2\build210\ganymed-ssh2-build210.jar
+ E:\RepositryCenter\repository\com\googlecode\disruptor\disruptor\2.10.3\disruptor-2.10.3.jar
+ E:\RepositryCenter\repository\com\jd\dd\glowworm\1.0-SNAPSHOT\glowworm-1.0-SNAPSHOT.jar
+ E:\RepositryCenter\repository\org\slf4j\slf4j-api\1.6.4\slf4j-api-1.6.4.jar
+ E:\RepositryCenter\repository\com\caucho\hessian\3.2.2\hessian-3.2.2.jar
+ E:\RepositryCenter\repository\com\jd\bdp\hydra-collector-service\1.0-SNAPSHOT\hydra-collector-service-1.0-SNAPSHOT.jar
+ E:\RepositryCenter\repository\org\springframework\spring-context\3.1.2.RELEASE\spring-context-3.1.2.RELEASE.jar
+ E:\RepositryCenter\repository\org\springframework\spring-aop\3.1.2.RELEASE\spring-aop-3.1.2.RELEASE.jar
+ E:\RepositryCenter\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar
+ E:\RepositryCenter\repository\org\springframework\spring-beans\3.1.2.RELEASE\spring-beans-3.1.2.RELEASE.jar
+ E:\RepositryCenter\repository\org\springframework\spring-core\3.1.2.RELEASE\spring-core-3.1.2.RELEASE.jar
+ E:\RepositryCenter\repository\org\springframework\spring-expression\3.1.2.RELEASE\spring-expression-3.1.2.RELEASE.jar
+ E:\RepositryCenter\repository\org\springframework\spring-asm\3.1.2.RELEASE\spring-asm-3.1.2.RELEASE.jar
+ E:\RepositryCenter\repository\com\github\sgroschupf\zkclient\0.1\zkclient-0.1.jar
+ E:\RepositryCenter\repository\org\apache\zookeeper\zookeeper\3.3.3\zookeeper-3.3.3.jar
+ E:\RepositryCenter\repository\jline\jline\0.9.94\jline-0.9.94.jar
+ E:\RepositryCenter\repository\log4j\log4j\1.2.14\log4j-1.2.14.jar
+ E:\RepositryCenter\repository\junit\junit\4.9\junit-4.9.jar]
+[DEBUG] Output directory: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.5:testResources (default-testResources) @ hydra-example-benchmark ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-resources-plugin:2.5:testResources from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-resources-plugin:2.5, parent: sun.misc.Launcher$AppClassLoader@18d107f]
+[debug] execute contextualize
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-resources-plugin:2.5:testResources' with basic configurator -->
+[DEBUG]   (f) buildFilters = []
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) escapeWindowsPaths = true
+[DEBUG]   (s) includeEmptyDirs = false
+[DEBUG]   (s) outputDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\test-classes
+[DEBUG]   (s) overwrite = false
+[DEBUG]   (f) project = MavenProject: com.jd.bdp:hydra-example-benchmark:1.0-SNAPSHOT @ E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\pom.xml
+[DEBUG]   (s) resources = [Resource {targetPath: null, filtering: false, FileSet {directory: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\test\resources, PatternSet [includes: {}, excludes: {}]}}]
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@796e1c
+[DEBUG]   (f) supportMultiLineFiltering = false
+[DEBUG]   (f) useBuildFilters = true
+[DEBUG]   (s) useDefaultDelimiters = true
+[DEBUG] -- end configuration --
+[DEBUG] properties used {java.vendor=Sun Microsystems Inc., env.SYSTEMROOT=C:\Windows, mybatis.version=3.0.6, sun.java.launcher=SUN_STANDARD, sun.management.compiler=HotSpot Client Compiler, fastjson.version=1.1.28, slf4j-api.version=1.6.4, glowworm.version=1.0-SNAPSHOT, os.name=Windows Vista, env.FP_NO_HOST_CHECK=NO, sun.boot.class.path=C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\resources.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\rt.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\sunrsasign.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\jsse.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\jce.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\charsets.jar;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\classes, env.COMPUTERNAME=BJXX-XIANGKUI, env.PWD=/home/xiangkui/hydra_workspace/hydra/modules/hydra-example/hydra-example-benchmark, env.ALLUSERSPROFILE=C:\ProgramData, sun.desktop=windows, env.LANG=zh_CN.UTF-8@cjknarrow, java.vm.specification.vendor=Sun Microsystems Inc., java.runtime.version=1.6.0_02-b06, mysql-connector-java.version=5.1.22, env.HOMEPATH=\Users\Administrator, project.build.sourceEncoding=UTF-8, springframework-version=3.1.2.RELEASE, user.name=xiangkui, maven.build.version=Apache Maven 3.0.4 (r1232337; 2012-01-17 16:44:56+0800), env.USER=xiangkui, hadoop-common.version=bdp-2.0.0-cdh4.1.1, env.SHELL=/bin/bash, logback-classic.version=1.0.7, env.PATH=D:\Program Files (x86)\cygwin\usr\local\bin;D:\Program Files (x86)\cygwin\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Java\jdk1.6.0_02\bin;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\bin;D:\apache-maven-3.0.4\bin;D:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\scala-2.10.0\bin;C:\Program Files (x86)\sbt-0.7.7;D:\twitter\zipkin\apache-cassandra-1.2.1\bin;D:\Program Files (x86)\gradle-1.4\bin;D:\Program Files (x86)\apache-ant-1.9.0\bin, user.language=zh, google-collections.version=1.0, env.WINDIR=C:\Windows, sun.boot.library.path=C:\Program Files (x86)\Java\jdk1.6.0_02\jre\bin, classworlds.conf=D:\apache-maven-3.0.4/bin/m2.conf, java.version=1.6.0_02, env.PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 42 Stepping 7, GenuineIntel, user.timezone=Asia/Shanghai, validation-api.version=1.0.0.GA, env.TEMP=D:\Program Files (x86)\cygwin\tmp, sun.arch.data.model=32, disruptor.version=2.10.3, java.endorsed.dirs=C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\endorsed, env.PROCESSOR_ARCHITEW6432=AMD64, sun.cpu.isalist=pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86, env.HOMEDRIVE=C:, sun.jnu.encoding=GBK, file.encoding.pkg=sun.io, env.SHLVL=1, env.SYSTEMDRIVE=C:, file.separator=\, env.HOSTNAME=BJXX-XIANGKUI, java.specification.name=Java Platform API Specification, java.class.version=50.0, user.country=CN, env.PRINTER=发送至 OneNote 2010, env.GRADLE_HOME=D:\Program Files (x86)\gradle-1.4, java.home=C:\Program Files (x86)\Java\jdk1.6.0_02\jre, env.APPDATA=C:\Users\Administrator\AppData\Roaming, env.CONFIGSETROOT=C:\Windows\ConfigSetRoot, env.PUBLIC=C:\Users\Public, java.vm.info=mixed mode, env.OS=Windows_NT, jsp-api.version=2.1, os.version=6.1, hessian.version=3.2.2, env.=::=::\, project.reporting.outputEncoding=UTF-8, path.separator=;, java.vm.version=1.6.0_02-b06, servlet.version=2.5, env.USERPROFILE=C:\Users\Administrator, user.variant=, env.JAVA_HOME=C:\Program Files (x86)\Java\jdk1.6.0_02, commons-configuration.version=1.9, java.awt.printerjob=sun.awt.windows.WPrinterJob, env.TERM=xterm, env.TMP=D:\Program Files (x86)\cygwin\tmp, env.PROGRAMFILES=C:\Program Files (x86), sun.io.unicode.encoding=UnicodeLittle, awt.toolkit=sun.awt.windows.WToolkit, env.MANPATH=/usr/local/man:/usr/share/man:/usr/man::/usr/ssl/man, env.TZ=Asia/Shanghai, env.JDEPEND_HOME=D:\Program Files (x86)\jdepend-2.9.1, user.home=C:\Users\Administrator, env.COMMONPROGRAMFILES=C:\Program Files (x86)\Common Files, jstl-api.version=1.2, env.SESSIONNAME=Console, java.specification.vendor=Sun Microsystems Inc., env.CLASSPATH=.;C:\Program Files (x86)\Java\jdk1.6.0_02\lib\dt.jat;C:\Program Files (x86)\Java\jdk1.6.0_02\lib\tools.jar;D:\Program Files (x86)\jdepend-2.9.1\lib\jdepend-2.9.1.jar;D:\Program Files (x86)\apache-ant-1.9.0\lib, env.M2_HOME=D:\apache-maven-3.0.4, java.library.path=C:\Program Files (x86)\Java\jdk1.6.0_02\bin;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\Program Files (x86)\cygwin\usr\local\bin;D:\Program Files (x86)\cygwin\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Java\jdk1.6.0_02\bin;C:\Program Files (x86)\Java\jdk1.6.0_02\jre\bin;D:\apache-maven-3.0.4\bin;D:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\scala-2.10.0\bin;C:\Program Files (x86)\sbt-0.7.7;D:\twitter\zipkin\apache-cassandra-1.2.1\bin;D:\Program Files (x86)\gradle-1.4\bin;D:\Program Files (x86)\apache-ant-1.9.0\bin, env.NUMBER_OF_PROCESSORS=4, java.vendor.url=http://java.sun.com/, env.COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files, env.USERDNSDOMAIN=360BUYAD.LOCAL, env.PSMODULEPATH=C:\Windows\system32\WindowsPowerShell\v1.0\Modules\, java.vm.vendor=Sun Microsystems Inc., maven.home=D:\apache-maven-3.0.4, java.runtime.name=Java(TM) SE Runtime Environment, java.class.path=D:\apache-maven-3.0.4/boot/plexus-classworlds-2.4.jar, sonatypeOssDistMgmtSnapshotsUrl=https://oss.sonatype.org/content/repositories/snapshots/, env.PROGRAMW6432=C:\Program Files, maven.test.skip=true, dubbo.version=2.4.8-SNAPSHOT, maven.version=3.0.4, env.PROGRAMFILES(X86)=C:\Program Files (x86), java.vm.specification.name=Java Virtual Machine Specification, hbase.version=bdp-0.92.1-cdh4.1.1, env.LOGONSERVER=\\BCDC05, java.vm.specification.version=1.0, env.PROCESSOR_ARCHITECTURE=x86, env.COMMONPROGRAMW6432=C:\Program Files\Common Files, sun.cpu.endian=little, sun.os.patch.level=Service Pack 1, env.HOME=D:\Program Files (x86)\cygwin\home\xiangkui, env.ANT_HOME=D:\Program Files (x86)\apache-ant-1.9.0, java.io.tmpdir=D:\Program Files (x86)\cygwin\tmp\, env.UATDATA=C:\Windows\CCM\UATData\D9F8C395-CAB8-491d-B8AC-179A1FE1BE77, env.PROCESSOR_REVISION=2a07, env.VBOX_INSTALL_PATH=D:\Program Files (x86)\Oracle\VirtualBox\, mybatis-spring=1.0.0, java.vendor.url.bug=http://java.sun.com/cgi-bin/bugreport.cgi, env.PROGRAMDATA=C:\ProgramData, env.COMSPEC=C:\Windows\system32\cmd.exe, os.arch=x86, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, java.ext.dirs=C:\Program Files (x86)\Java\jdk1.6.0_02\jre\lib\ext;C:\Windows\Sun\Java\lib\ext, user.dir=E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark, env.LOCALAPPDATA=C:\Users\Administrator\AppData\Local, env.INFOPATH=/usr/local/info:/usr/share/info:/usr/info:, zkclient.version=0.1, line.separator=
+, java.vm.name=Java HotSpot(TM) Client VM, env.PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC, metamorphosis.version=1.4.3, env.USERNAME=xiangkui, jackson.version=1.9.10, file.encoding=GBK, env.USERDOMAIN=360BUYAD, java.specification.version=1.6, junit.version=4.9, env.PROCESSOR_LEVEL=6}
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[DEBUG] resource with targetPath null
+directory E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\test\resources
+excludes []
+includes []
+[INFO] skip non existing resourceDirectory E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\test\resources
+[DEBUG] no use filter components
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ hydra-example-benchmark ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-compiler-plugin:2.3.2, parent: sun.misc.Launcher$AppClassLoader@18d107f]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-compiler-plugin:2.3.2:testCompile' with basic configurator -->
+[DEBUG]   (f) basedir = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark
+[DEBUG]   (f) buildDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target
+[DEBUG]   (f) classpathElements = [E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\test-classes, E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes, E:\RepositryCenter\repository\com\jd\bdp\hydra-client\1.0-SNAPSHOT\hydra-client-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\com\jd\bdp\hydra-interface\1.0-SNAPSHOT\hydra-interface-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\ch\qos\logback\logback-classic\1.0.7\logback-classic-1.0.7.jar, E:\RepositryCenter\repository\ch\qos\logback\logback-core\1.0.7\logback-core-1.0.7.jar, E:\RepositryCenter\repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA.jar, E:\RepositryCenter\repository\com\alibaba\dubbo\2.4.8-SNAPSHOT\dubbo-2.4.8-SNAPSHOT.jar, E:\RepositryCenter\repository\org\springframework\spring\2.5.6.SEC03\spring-2.5.6.SEC03.jar, E:\RepositryCenter\repository\org\javassist\javassist\3.15.0-GA\javassist-3.15.0-GA.jar, E:\RepositryCenter\repository\org\jboss\netty\netty\3.2.5.Final\netty-3.2.5.Final.jar, E:\RepositryCenter\repository\com\jd\bdp\hydra-manager\1.0-SNAPSHOT\hydra-manager-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\com\jd\bdp\hydra-collector\1.0-SNAPSHOT\hydra-collector-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-client\1.4.3\metamorphosis-client-1.4.3.jar, E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-commons\1.4.3\metamorphosis-commons-1.4.3.jar, E:\RepositryCenter\repository\com\taobao\gecko\gecko\1.1.1\gecko-1.1.1.jar, E:\RepositryCenter\repository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar, E:\RepositryCenter\repository\org\codehaus\jackson\jackson-core-lgpl\1.9.10\jackson-core-lgpl-1.9.10.jar, E:\RepositryCenter\repository\org\codehaus\jackson\jackson-mapper-lgpl\1.9.10\jackson-mapper-lgpl-1.9.10.jar, E:\RepositryCenter\repository\commons-logging\commons-logging\1.1\commons-logging-1.1.jar, E:\RepositryCenter\repository\logkit\logkit\1.0.1\logkit-1.0.1.jar, E:\RepositryCenter\repository\avalon-framework\avalon-framework\4.1.3\avalon-framework-4.1.3.jar, E:\RepositryCenter\repository\javax\servlet\servlet-api\2.5\servlet-api-2.5.jar, E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-tools\1.4.3\metamorphosis-tools-1.4.3.jar, E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-server\1.4.3\metamorphosis-server-1.4.3.jar, E:\RepositryCenter\repository\org\slf4j\slf4j-log4j12\1.6.2\slf4j-log4j12-1.6.2.jar, E:\RepositryCenter\repository\org\quartz-scheduler\quartz\2.1.4\quartz-2.1.4.jar, E:\RepositryCenter\repository\c3p0\c3p0\0.9.1.1\c3p0-0.9.1.1.jar, E:\RepositryCenter\repository\com\google\protobuf\protobuf-java\2.3.0\protobuf-java-2.3.0.jar, E:\RepositryCenter\repository\com\googlecode\aviator\aviator\2.2.1\aviator-2.2.1.jar, E:\RepositryCenter\repository\commons-beanutils\commons-beanutils\1.8.2\commons-beanutils-1.8.2.jar, E:\RepositryCenter\repository\org\ini4j\ini4j\0.5.1\ini4j-0.5.1.jar, E:\RepositryCenter\repository\commons-cli\commons-cli\1.2\commons-cli-1.2.jar, E:\RepositryCenter\repository\commons-io\commons-io\2.1\commons-io-2.1.jar, E:\RepositryCenter\repository\mysql\mysql-connector-java\5.1.22\mysql-connector-java-5.1.22.jar, E:\RepositryCenter\repository\joda-time\joda-time\1.6.2\joda-time-1.6.2.jar, E:\RepositryCenter\repository\ch\ethz\ganymed\ganymed-ssh2\build210\ganymed-ssh2-build210.jar, E:\RepositryCenter\repository\com\googlecode\disruptor\disruptor\2.10.3\disruptor-2.10.3.jar, E:\RepositryCenter\repository\com\jd\dd\glowworm\1.0-SNAPSHOT\glowworm-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\org\slf4j\slf4j-api\1.6.4\slf4j-api-1.6.4.jar, E:\RepositryCenter\repository\com\caucho\hessian\3.2.2\hessian-3.2.2.jar, E:\RepositryCenter\repository\com\jd\bdp\hydra-collector-service\1.0-SNAPSHOT\hydra-collector-service-1.0-SNAPSHOT.jar, E:\RepositryCenter\repository\org\springframework\spring-test\3.1.2.RELEASE\spring-test-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\org\springframework\spring-context\3.1.2.RELEASE\spring-context-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\org\springframework\spring-aop\3.1.2.RELEASE\spring-aop-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar, E:\RepositryCenter\repository\org\springframework\spring-beans\3.1.2.RELEASE\spring-beans-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\org\springframework\spring-core\3.1.2.RELEASE\spring-core-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\org\springframework\spring-expression\3.1.2.RELEASE\spring-expression-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\org\springframework\spring-asm\3.1.2.RELEASE\spring-asm-3.1.2.RELEASE.jar, E:\RepositryCenter\repository\com\github\sgroschupf\zkclient\0.1\zkclient-0.1.jar, E:\RepositryCenter\repository\org\apache\zookeeper\zookeeper\3.3.3\zookeeper-3.3.3.jar, E:\RepositryCenter\repository\jline\jline\0.9.94\jline-0.9.94.jar, E:\RepositryCenter\repository\log4j\log4j\1.2.14\log4j-1.2.14.jar, E:\RepositryCenter\repository\junit\junit\4.9\junit-4.9.jar]
+[DEBUG]   (f) compileSourceRoots = [E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\test\java]
+[DEBUG]   (f) compilerId = javac
+[DEBUG]   (f) debug = true
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) fork = false
+[DEBUG]   (f) generatedTestSourcesDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\generated-sources\test-annotations
+[DEBUG]   (f) optimize = false
+[DEBUG]   (f) outputDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\test-classes
+[DEBUG]   (f) outputFileName = hydra-example-benchmark-1.0-SNAPSHOT
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@796e1c
+[DEBUG]   (f) showDeprecation = false
+[DEBUG]   (f) showWarnings = false
+[DEBUG]   (f) skip = true
+[DEBUG]   (f) source = 1.6
+[DEBUG]   (f) staleMillis = 0
+[DEBUG]   (f) target = 1.6
+[DEBUG]   (f) verbose = false
+[DEBUG] -- end configuration --
+[INFO] Not compiling test sources
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.10:test (default-test) @ hydra-example-benchmark ---
+[DEBUG] org.apache.maven.plugins:maven-surefire-plugin:jar:2.10:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.9:compile
+[DEBUG]    org.apache.maven.surefire:surefire-booter:jar:2.10:compile
+[DEBUG]       org.apache.maven.surefire:surefire-api:jar:2.10:compile
+[DEBUG]    org.apache.maven.surefire:maven-surefire-common:jar:2.10:compile
+[DEBUG]       org.apache.maven.shared:maven-common-artifact-filters:jar:1.3:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:2.1:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.9:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-model:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.9:compile
+[DEBUG]       org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]          junit:junit:jar:3.8.1:test (scope managed from compile)
+[DEBUG]    org.apache.maven:maven-core:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.9:compile
+[DEBUG]       org.apache.maven.reporting:maven-reporting-api:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.0.9:compile
+[DEBUG]       org.apache.maven:maven-monitor:jar:2.0.9:compile
+[DEBUG]       classworlds:classworlds:jar:1.1:compile
+[DEBUG]    org.apache.maven:maven-toolchain:jar:2.0.9:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-surefire-plugin:2.10
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-surefire-plugin:2.10
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-surefire-plugin:2.10
+[DEBUG]   Included: org.apache.maven.plugins:maven-surefire-plugin:jar:2.10
+[DEBUG]   Included: org.apache.maven.surefire:surefire-booter:jar:2.10
+[DEBUG]   Included: org.apache.maven.surefire:surefire-api:jar:2.10
+[DEBUG]   Included: org.apache.maven.surefire:maven-surefire-common:jar:2.10
+[DEBUG]   Included: org.apache.maven.shared:maven-common-artifact-filters:jar:1.3
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:2.1
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.9
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG]   Excluded: junit:junit:jar:3.8.1
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-parameter-documenter:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-error-diagnostics:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-descriptor:jar:2.0.9
+[DEBUG]   Excluded: org.apache.maven:maven-monitor:jar:2.0.9
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1
+[DEBUG]   Excluded: org.apache.maven:maven-toolchain:jar:2.0.9
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-surefire-plugin:2.10:test from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-surefire-plugin:2.10, parent: sun.misc.Launcher$AppClassLoader@18d107f]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-surefire-plugin:2.10:test' with basic configurator -->
+[DEBUG]   (s) basedir = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark
+[DEBUG]   (s) childDelegation = false
+[DEBUG]   (s) classesDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes
+[DEBUG]   (s) disableXmlReport = false
+[DEBUG]   (s) enableAssertions = true
+[DEBUG]   (s) failIfNoTests = false
+[DEBUG]   (s) forkMode = once
+[DEBUG]   (s) includes = [**/*Test.java]
+[DEBUG]   (s) junitArtifactName = junit:junit
+[DEBUG]   (s) localRepository =        id: local
+      url: file:///E:/RepositryCenter/repository/
+   layout: none
+
+[DEBUG]   (f) parallelMavenExecution = false
+[DEBUG]   (s) perCoreThreadCount = true
+[DEBUG]   (s) pluginArtifactMap = {org.apache.maven.plugins:maven-surefire-plugin=org.apache.maven.plugins:maven-surefire-plugin:maven-plugin:2.10:, org.apache.maven.surefire:surefire-booter=org.apache.maven.surefire:surefire-booter:jar:2.10:compile, org.apache.maven.surefire:surefire-api=org.apache.maven.surefire:surefire-api:jar:2.10:compile, org.apache.maven.surefire:maven-surefire-common=org.apache.maven.surefire:maven-surefire-common:jar:2.10:compile, org.apache.maven.shared:maven-common-artifact-filters=org.apache.maven.shared:maven-common-artifact-filters:jar:1.3:compile, org.codehaus.plexus:plexus-utils=org.codehaus.plexus:plexus-utils:jar:2.1:compile, org.apache.maven.reporting:maven-reporting-api=org.apache.maven.reporting:maven-reporting-api:jar:2.0.9:compile}
+[DEBUG]   (s) printSummary = true
+[DEBUG]   (s) project = MavenProject: com.jd.bdp:hydra-example-benchmark:1.0-SNAPSHOT @ E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\pom.xml
+[DEBUG]   (s) projectArtifactMap = {com.jd.bdp:hydra-client=com.jd.bdp:hydra-client:jar:1.0-SNAPSHOT:compile, com.jd.bdp:hydra-interface=com.jd.bdp:hydra-interface:jar:1.0-SNAPSHOT:compile, ch.qos.logback:logback-classic=ch.qos.logback:logback-classic:jar:1.0.7:compile, ch.qos.logback:logback-core=ch.qos.logback:logback-core:jar:1.0.7:compile, javax.validation:validation-api=javax.validation:validation-api:jar:1.0.0.GA:compile, com.alibaba:dubbo=com.alibaba:dubbo:jar:2.4.8-SNAPSHOT:compile, org.springframework:spring=org.springframework:spring:jar:2.5.6.SEC03:compile, org.javassist:javassist=org.javassist:javassist:jar:3.15.0-GA:compile, org.jboss.netty:netty=org.jboss.netty:netty:jar:3.2.5.Final:compile, com.jd.bdp:hydra-manager=com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT:compile, com.jd.bdp:hydra-collector=com.jd.bdp:hydra-collector:jar:1.0-SNAPSHOT:compile, com.taobao.metamorphosis:metamorphosis-client=com.taobao.metamorphosis:metamorphosis-client:jar:1.4.3:compile, com.taobao.metamorphosis:metamorphosis-commons=com.taobao.metamorphosis:metamorphosis-commons:jar:1.4.3:compile, com.taobao.gecko:gecko=com.taobao.gecko:gecko:jar:1.1.1:compile, commons-lang:commons-lang=commons-lang:commons-lang:jar:2.6:compile, org.codehaus.jackson:jackson-core-lgpl=org.codehaus.jackson:jackson-core-lgpl:jar:1.9.10:compile, org.codehaus.jackson:jackson-mapper-lgpl=org.codehaus.jackson:jackson-mapper-lgpl:jar:1.9.10:compile, commons-logging:commons-logging=commons-logging:commons-logging:jar:1.1:compile, logkit:logkit=logkit:logkit:jar:1.0.1:compile, avalon-framework:avalon-framework=avalon-framework:avalon-framework:jar:4.1.3:compile, javax.servlet:servlet-api=javax.servlet:servlet-api:jar:2.5:compile, com.taobao.metamorphosis:metamorphosis-tools=com.taobao.metamorphosis:metamorphosis-tools:jar:1.4.3:compile, com.taobao.metamorphosis:metamorphosis-server=com.taobao.metamorphosis:metamorphosis-server:jar:1.4.3:compile, org.slf4j:slf4j-log4j12=org.slf4j:slf4j-log4j12:jar:1.6.2:compile, org.quartz-scheduler:quartz=org.quartz-scheduler:quartz:jar:2.1.4:compile, c3p0:c3p0=c3p0:c3p0:jar:0.9.1.1:compile, com.google.protobuf:protobuf-java=com.google.protobuf:protobuf-java:jar:2.3.0:compile, com.googlecode.aviator:aviator=com.googlecode.aviator:aviator:jar:2.2.1:compile, commons-beanutils:commons-beanutils=commons-beanutils:commons-beanutils:jar:1.8.2:compile, org.ini4j:ini4j=org.ini4j:ini4j:jar:0.5.1:compile, commons-cli:commons-cli=commons-cli:commons-cli:jar:1.2:compile, commons-io:commons-io=commons-io:commons-io:jar:2.1:compile, mysql:mysql-connector-java=mysql:mysql-connector-java:jar:5.1.22:compile, joda-time:joda-time=joda-time:joda-time:jar:1.6.2:compile, ch.ethz.ganymed:ganymed-ssh2=ch.ethz.ganymed:ganymed-ssh2:jar:build210:compile, com.googlecode.disruptor:disruptor=com.googlecode.disruptor:disruptor:jar:2.10.3:compile, com.jd.dd:glowworm=com.jd.dd:glowworm:jar:1.0-SNAPSHOT:compile, org.slf4j:slf4j-api=org.slf4j:slf4j-api:jar:1.6.4:compile, com.caucho:hessian=com.caucho:hessian:jar:3.2.2:compile, com.jd.bdp:hydra-collector-service=com.jd.bdp:hydra-collector-service:jar:1.0-SNAPSHOT:compile, org.springframework:spring-test=org.springframework:spring-test:jar:3.1.2.RELEASE:test, org.springframework:spring-context=org.springframework:spring-context:jar:3.1.2.RELEASE:compile, org.springframework:spring-aop=org.springframework:spring-aop:jar:3.1.2.RELEASE:compile, aopalliance:aopalliance=aopalliance:aopalliance:jar:1.0:compile, org.springframework:spring-beans=org.springframework:spring-beans:jar:3.1.2.RELEASE:compile, org.springframework:spring-core=org.springframework:spring-core:jar:3.1.2.RELEASE:compile, org.springframework:spring-expression=org.springframework:spring-expression:jar:3.1.2.RELEASE:compile, org.springframework:spring-asm=org.springframework:spring-asm:jar:3.1.2.RELEASE:compile, com.github.sgroschupf:zkclient=com.github.sgroschupf:zkclient:jar:0.1:compile, org.apache.zookeeper:zookeeper=org.apache.zookeeper:zookeeper:jar:3.3.3:compile, jline:jline=jline:jline:jar:0.9.94:compile, log4j:log4j=log4j:log4j:jar:1.2.14:compile, junit:junit=junit:junit:jar:4.9:compile}
+[DEBUG]   (s) redirectTestOutputToFile = false
+[DEBUG]   (s) remoteRepositories = [       id: central
+      url: http://artifactory.360buy-develop.com/plugins-releases
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+,        id: snapshots
+      url: http://artifactory.360buy-develop.com/plugins-snapshots
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => true, update => daily]
+]
+[DEBUG]   (s) reportFormat = brief
+[DEBUG]   (s) reportsDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\surefire-reports
+[DEBUG]   (s) runOrder = filesystem
+[DEBUG]   (s) session = org.apache.maven.execution.MavenSession@796e1c
+[DEBUG]   (s) skip = true
+[DEBUG]   (s) skipTests = false
+[DEBUG]   (s) testClassesDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\test-classes
+[DEBUG]   (s) testFailureIgnore = false
+[DEBUG]   (s) testNGArtifactName = org.testng:testng
+[DEBUG]   (s) testSourceDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\test\java
+[DEBUG]   (s) trimStackTrace = true
+[DEBUG]   (s) useFile = true
+[DEBUG]   (s) useManifestOnlyJar = true
+[DEBUG]   (s) useSystemClassLoader = true
+[DEBUG]   (s) useUnlimitedThreads = false
+[DEBUG]   (s) workingDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark
+[DEBUG] -- end configuration --
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.3.2:jar (default-jar) @ hydra-example-benchmark ---
+[DEBUG] org.apache.maven.plugins:maven-jar-plugin:jar:2.3.2:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.6:compile
+[DEBUG]          org.apache.maven:maven-repository-metadata:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.6:compile
+[DEBUG]       org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]          junit:junit:jar:3.8.1:compile
+[DEBUG]          classworlds:classworlds:jar:1.1-alpha-2:compile
+[DEBUG]    org.apache.maven:maven-model:jar:2.0.6:runtime
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-archiver:jar:2.4.2:compile
+[DEBUG]       org.codehaus.plexus:plexus-interpolation:jar:1.13:compile
+[DEBUG]    org.codehaus.plexus:plexus-archiver:jar:2.0.1:compile
+[DEBUG]       org.codehaus.plexus:plexus-io:jar:2.0.1:compile
+[DEBUG]    commons-lang:commons-lang:jar:2.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.0:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-jar-plugin:2.3.2
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-jar-plugin:2.3.2
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-jar-plugin:2.3.2
+[DEBUG]   Included: org.apache.maven.plugins:maven-jar-plugin:jar:2.3.2
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.apache.maven:maven-archiver:jar:2.4.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.13
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:2.0.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.0.1
+[DEBUG]   Included: commons-lang:commons-lang:jar:2.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.6
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1-alpha-2
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.6
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-jar-plugin:2.3.2:jar from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-jar-plugin:2.3.2, parent: sun.misc.Launcher$AppClassLoader@18d107f]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-jar-plugin:2.3.2:jar' with basic configurator -->
+[DEBUG]   (s) addDefaultImplementationEntries = true
+[DEBUG]   (s) addDefaultSpecificationEntries = true
+[DEBUG]   (s) manifest = org.apache.maven.archiver.ManifestConfiguration@1e58565
+[DEBUG]   (f) archive = org.apache.maven.archiver.MavenArchiveConfiguration@198dc19
+[DEBUG]   (f) classesDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes
+[DEBUG]   (f) defaultManifestFile = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\META-INF\MANIFEST.MF
+[DEBUG]   (f) finalName = hydra-example-benchmark-1.0-SNAPSHOT
+[DEBUG]   (f) forceCreation = false
+[DEBUG]   (f) outputDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target
+[DEBUG]   (f) project = MavenProject: com.jd.bdp:hydra-example-benchmark:1.0-SNAPSHOT @ E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\pom.xml
+[DEBUG]   (f) useDefaultManifestFile = false
+[DEBUG] -- end configuration --
+[DEBUG] isUp2date: true
+[DEBUG] Archive E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\hydra-example-benchmark-1.0-SNAPSHOT.jar is uptodate.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.3.2:jar (package-exclude-resources) @ hydra-example-benchmark ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-jar-plugin:2.3.2:jar from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-jar-plugin:2.3.2, parent: sun.misc.Launcher$AppClassLoader@18d107f]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-jar-plugin:2.3.2:jar' with basic configurator -->
+[DEBUG]   (s) addDefaultImplementationEntries = true
+[DEBUG]   (s) addDefaultSpecificationEntries = true
+[DEBUG]   (s) manifest = org.apache.maven.archiver.ManifestConfiguration@856447
+[DEBUG]   (f) archive = org.apache.maven.archiver.MavenArchiveConfiguration@17a7de4
+[DEBUG]   (f) classesDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes
+[DEBUG]   (f) classifier = assemble
+[DEBUG]   (f) defaultManifestFile = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\classes\META-INF\MANIFEST.MF
+[DEBUG]   (f) excludes = [log/, scripts/, *.xml, *.properties]
+[DEBUG]   (f) finalName = hydra-example-benchmark-1.0-SNAPSHOT
+[DEBUG]   (f) forceCreation = false
+[DEBUG]   (f) outputDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target
+[DEBUG]   (f) project = MavenProject: com.jd.bdp:hydra-example-benchmark:1.0-SNAPSHOT @ E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\pom.xml
+[DEBUG]   (f) useDefaultManifestFile = false
+[DEBUG] -- end configuration --
+[DEBUG] isUp2date: true
+[DEBUG] Archive E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\hydra-example-benchmark-1.0-SNAPSHOT-assemble.jar is uptodate.
+[INFO] 
+[INFO] --- maven-assembly-plugin:2.4:single (make-assembly) @ hydra-example-benchmark ---
+[DEBUG] org.apache.maven.plugins:maven-assembly-plugin:jar:2.4:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.2.1:compile
+[DEBUG]    org.apache.maven:maven-core:jar:2.2.1:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.2.1:compile
+[DEBUG]       org.apache.maven:maven-plugin-parameter-documenter:jar:2.2.1:compile
+[DEBUG]       org.slf4j:slf4j-jdk14:jar:1.5.6:runtime
+[DEBUG]          org.slf4j:slf4j-api:jar:1.5.6:runtime
+[DEBUG]       org.slf4j:jcl-over-slf4j:jar:1.5.6:runtime
+[DEBUG]       org.apache.maven.reporting:maven-reporting-api:jar:2.2.1:compile
+[DEBUG]          org.apache.maven.doxia:doxia-sink-api:jar:1.1:compile
+[DEBUG]          org.apache.maven.doxia:doxia-logging-api:jar:1.1:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.2.1:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.2.1:compile
+[DEBUG]       org.apache.maven:maven-error-diagnostics:jar:2.2.1:compile
+[DEBUG]       commons-cli:commons-cli:jar:1.2:compile
+[DEBUG]       org.apache.maven:maven-plugin-descriptor:jar:2.2.1:compile
+[DEBUG]       org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.2.1:compile
+[DEBUG]          backport-util-concurrent:backport-util-concurrent:jar:3.1:compile
+[DEBUG]       org.apache.maven:maven-monitor:jar:2.2.1:compile
+[DEBUG]       classworlds:classworlds:jar:1.1:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.2.1:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.2.1:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.2.1:compile
+[DEBUG]    org.apache.maven:maven-model:jar:2.2.1:compile
+[DEBUG]    org.apache.maven.shared:maven-common-artifact-filters:jar:1.4:compile
+[DEBUG]    org.codehaus.plexus:plexus-interpolation:jar:1.15:compile
+[DEBUG]    org.codehaus.plexus:plexus-archiver:jar:2.2:compile
+[DEBUG]    org.apache.maven.shared:file-management:jar:1.1:compile
+[DEBUG]    org.apache.maven.shared:maven-shared-io:jar:1.1:compile
+[DEBUG]       org.apache.maven.wagon:wagon-provider-api:jar:1.0-alpha-6:compile
+[DEBUG]    org.apache.maven.shared:maven-filtering:jar:1.1:compile
+[DEBUG]       org.sonatype.plexus:plexus-build-api:jar:0.0.4:compile
+[DEBUG]    org.codehaus.plexus:plexus-io:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-archiver:jar:2.5:compile
+[DEBUG]    org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]       junit:junit:jar:3.8.1:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.0.8:compile
+[DEBUG]    org.apache.maven.shared:maven-repository-builder:jar:1.0-alpha-2:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-assembly-plugin:2.4
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-assembly-plugin:2.4
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-assembly-plugin:2.4
+[DEBUG]   Included: org.apache.maven.plugins:maven-assembly-plugin:jar:2.4
+[DEBUG]   Included: org.slf4j:slf4j-jdk14:jar:1.5.6
+[DEBUG]   Included: org.slf4j:slf4j-api:jar:1.5.6
+[DEBUG]   Included: org.slf4j:jcl-over-slf4j:jar:1.5.6
+[DEBUG]   Included: org.apache.maven.reporting:maven-reporting-api:jar:2.2.1
+[DEBUG]   Included: org.apache.maven.doxia:doxia-sink-api:jar:1.1
+[DEBUG]   Included: org.apache.maven.doxia:doxia-logging-api:jar:1.1
+[DEBUG]   Included: commons-cli:commons-cli:jar:1.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-interactivity-api:jar:1.0-alpha-4
+[DEBUG]   Included: backport-util-concurrent:backport-util-concurrent:jar:3.1
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.apache.maven.shared:maven-common-artifact-filters:jar:1.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.15
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:2.2
+[DEBUG]   Included: org.apache.maven.shared:file-management:jar:1.1
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-io:jar:1.1
+[DEBUG]   Included: org.apache.maven.shared:maven-filtering:jar:1.1
+[DEBUG]   Included: org.sonatype.plexus:plexus-build-api:jar:0.0.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.0.6
+[DEBUG]   Included: org.apache.maven:maven-archiver:jar:2.5
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.8
+[DEBUG]   Included: org.apache.maven.shared:maven-repository-builder:jar:1.0-alpha-2
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-parameter-documenter:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-error-diagnostics:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-descriptor:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-monitor:jar:2.2.1
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.2.1
+[DEBUG]   Excluded: org.apache.maven.wagon:wagon-provider-api:jar:1.0-alpha-6
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-assembly-plugin:2.4:single from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-assembly-plugin:2.4, parent: sun.misc.Launcher$AppClassLoader@18d107f]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-assembly-plugin:2.4:single' with basic configurator -->
+[DEBUG]   (s) appendAssemblyId = true
+[DEBUG]   (f) attach = true
+[DEBUG]   (s) basedir = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark
+[DEBUG]   (s) descriptors = [src/main/assembly/assembly.xml]
+[DEBUG]   (f) dryRun = false
+[DEBUG]   (f) encoding = UTF-8
+[DEBUG]   (s) finalName = hydra-example-benchmark-1.0-SNAPSHOT
+[DEBUG]   (f) ignoreDirFormatExtensions = true
+[DEBUG]   (s) ignoreMissingDescriptor = false
+[DEBUG]   (f) ignorePermissions = false
+[DEBUG]   (s) includeSite = false
+[DEBUG]   (s) localRepository =        id: local
+      url: file:///E:/RepositryCenter/repository/
+   layout: none
+
+[DEBUG]   (s) outputDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target
+[DEBUG]   (s) reactorProjects = [MavenProject: com.jd.bdp:hydra-example-benchmark:1.0-SNAPSHOT @ E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\pom.xml]
+[DEBUG]   (f) recompressZippedFiles = false
+[DEBUG]   (f) remoteRepositories = [       id: central
+      url: http://artifactory.360buy-develop.com/libs-releases
+   layout: default
+snapshots: [enabled => false, update => daily]
+ releases: [enabled => true, update => daily]
+,        id: snapshots
+      url: http://artifactory.360buy-develop.com/libs-snapshots
+   layout: default
+snapshots: [enabled => true, update => daily]
+ releases: [enabled => true, update => daily]
+]
+[DEBUG]   (f) runOnlyAtExecutionRoot = false
+[DEBUG]   (s) siteDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\site
+[DEBUG]   (f) skipAssembly = false
+[DEBUG]   (s) tarLongFileMode = warn
+[DEBUG]   (s) tempRoot = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\archive-tmp
+[DEBUG]   (f) updateOnly = false
+[DEBUG]   (f) useJvmChmod = false
+[DEBUG]   (s) workDirectory = E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\assembly\work
+[DEBUG]   (f) mavenSession = org.apache.maven.execution.MavenSession@796e1c
+[DEBUG]   (f) project = MavenProject: com.jd.bdp:hydra-example-benchmark:1.0-SNAPSHOT @ E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\pom.xml
+[DEBUG] -- end configuration --
+[INFO] Reading assembly descriptor: src/main/assembly/assembly.xml
+[DEBUG] Before assembly is interpolated:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd"
+    xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>jd</id>
+  <formats>
+    <format>dir</format>
+  </formats>
+  <moduleSets>
+    <moduleSet>
+      <useAllReactorProjects>true</useAllReactorProjects>
+      <includes>
+        <include>com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT</include>
+        <include>com.jd.bdp:hydra-mysql:jar:1.0-SNAPSHOT</include>
+      </includes>
+      <sources>
+        <outputDirectory>sources/${artifactId}</outputDirectory>
+      </sources>
+      <binaries>
+        <dependencySets>
+          <dependencySet>
+            <outputDirectory>modules/${artifactId}</outputDirectory>
+          </dependencySet>
+        </dependencySets>
+      </binaries>
+    </moduleSet>
+  </moduleSets>
+  <fileSets>
+    <fileSet>
+      <outputDirectory>/</outputDirectory>
+      <includes>
+        <include>README.md</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <outputDirectory>/conf</outputDirectory>
+      <includes>
+        <include>**.**</include>
+      </includes>
+      <excludes>
+        <exclude>/scripts</exclude>
+      </excludes>
+      <fileMode>0755</fileMode>
+      <directory>/src/main/resources</directory>
+    </fileSet>
+    <fileSet>
+      <outputDirectory>/bin</outputDirectory>
+      <includes>
+        <include>startABC/*.bat</include>
+        <include>*.bat</include>
+      </includes>
+      <directory>/src/main/resources/scripts/windows</directory>
+    </fileSet>
+    <fileSet>
+      <outputDirectory>/bin</outputDirectory>
+      <includes>
+        <include>startABC/*.sh</include>
+        <include>*.sh</include>
+      </includes>
+      <fileMode>0755</fileMode>
+      <directory>/src/main/resources/scripts/linux</directory>
+      <lineEnding>unix</lineEnding>
+    </fileSet>
+    <fileSet>
+      <outputDirectory>/log</outputDirectory>
+      <directory>/src/main/resources/log</directory>
+    </fileSet>
+  </fileSets>
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>lib</outputDirectory>
+      <useProjectAttachments>true</useProjectAttachments>
+    </dependencySet>
+  </dependencySets>
+</assembly>
+
+
+
+[DEBUG] After assembly is interpolated:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd"
+    xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>jd</id>
+  <formats>
+    <format>dir</format>
+  </formats>
+  <moduleSets>
+    <moduleSet>
+      <useAllReactorProjects>true</useAllReactorProjects>
+      <includes>
+        <include>com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT</include>
+        <include>com.jd.bdp:hydra-mysql:jar:1.0-SNAPSHOT</include>
+      </includes>
+      <sources>
+        <outputDirectory>sources/${artifactId}</outputDirectory>
+      </sources>
+      <binaries>
+        <dependencySets>
+          <dependencySet>
+            <outputDirectory>modules/${artifactId}</outputDirectory>
+          </dependencySet>
+        </dependencySets>
+      </binaries>
+    </moduleSet>
+  </moduleSets>
+  <fileSets>
+    <fileSet>
+      <outputDirectory>/</outputDirectory>
+      <includes>
+        <include>README.md</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <outputDirectory>/conf</outputDirectory>
+      <includes>
+        <include>**.**</include>
+      </includes>
+      <excludes>
+        <exclude>/scripts</exclude>
+      </excludes>
+      <fileMode>0755</fileMode>
+      <directory>/src/main/resources</directory>
+    </fileSet>
+    <fileSet>
+      <outputDirectory>/bin</outputDirectory>
+      <includes>
+        <include>startABC/*.bat</include>
+        <include>*.bat</include>
+      </includes>
+      <directory>/src/main/resources/scripts/windows</directory>
+    </fileSet>
+    <fileSet>
+      <outputDirectory>/bin</outputDirectory>
+      <includes>
+        <include>startABC/*.sh</include>
+        <include>*.sh</include>
+      </includes>
+      <fileMode>0755</fileMode>
+      <directory>/src/main/resources/scripts/linux</directory>
+      <lineEnding>unix</lineEnding>
+    </fileSet>
+    <fileSet>
+      <outputDirectory>/log</outputDirectory>
+      <directory>/src/main/resources/log</directory>
+    </fileSet>
+  </fileSets>
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>lib</outputDirectory>
+      <useProjectAttachments>true</useProjectAttachments>
+    </dependencySet>
+  </dependencySets>
+</assembly>
+
+
+
+[DEBUG] All known ContainerDescriptorHandler components: [metaInf-spring, metaInf-services, plexus, file-aggregator]
+[DEBUG] Dependencies for project: com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT are:
+com.jd.bdp:hydra-client:jar:1.0-SNAPSHOT:compile
+com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT:compile
+com.jd.bdp:hydra-collector:jar:1.0-SNAPSHOT:compile
+com.jd.bdp:hydra-collector-service:jar:1.0-SNAPSHOT:compile
+org.springframework:spring-test:jar:3.1.2.RELEASE:test
+org.springframework:spring-context:jar:3.1.2.RELEASE:compile
+com.github.sgroschupf:zkclient:jar:0.1:compile
+junit:junit:jar:4.9:compile
+[WARNING] The following patterns were never triggered in this artifact inclusion filter:
+o  'com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT'
+o  'com.jd.bdp:hydra-mysql:jar:1.0-SNAPSHOT'
+
+[DEBUG] Resolving project dependencies transitively.
+[DEBUG] com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT (selected for null)
+[DEBUG]   com.jd.bdp:hydra-client:jar:1.0-SNAPSHOT:compile (selected for compile)
+[DEBUG]     com.jd.bdp:hydra-interface:jar:1.0-SNAPSHOT:compile (selected for compile)
+[DEBUG]     ch.qos.logback:logback-classic:jar:1.0.7:compile (selected for compile)
+[DEBUG]       ch.qos.logback:logback-core:jar:1.0.7:compile (selected for compile)
+[DEBUG]       org.slf4j:slf4j-api:jar:1.6.6:compile (applying version: 1.6.4)
+[DEBUG]       org.slf4j:slf4j-api:jar:1.6.4:compile (selected for compile)
+[DEBUG]     junit:junit:jar:4.5:compile (applying version: 4.9)
+[DEBUG]     junit:junit:jar:4.9:compile (selected for compile)
+[DEBUG]     javax.validation:validation-api:jar:1.0.0.GA:compile (selected for compile)
+[DEBUG]     org.springframework:spring-context:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]       org.springframework:spring-aop:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]         aopalliance:aopalliance:jar:1.0:compile (selected for compile)
+[DEBUG]         org.springframework:spring-asm:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]         org.springframework:spring-beans:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]           org.springframework:spring-core:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]             commons-logging:commons-logging:jar:1.1.1:compile (selected for compile)
+[DEBUG]         org.springframework:spring-core:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]           commons-logging:commons-logging:jar:1.1.1:compile (selected for compile)
+[DEBUG]       org.springframework:spring-beans:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]       org.springframework:spring-core:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]         commons-logging:commons-logging:jar:1.1.1:compile (selected for compile)
+[DEBUG]       org.springframework:spring-expression:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]       org.springframework:spring-asm:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]     com.alibaba:dubbo:jar:2.4.8-SNAPSHOT:compile (selected for compile)
+[DEBUG]       org.springframework:spring:jar:2.5.6.SEC03:compile (selected for compile)
+[DEBUG]       org.javassist:javassist:jar:3.15.0-GA:compile (selected for compile)
+[DEBUG]       org.jboss.netty:netty:jar:3.2.5.Final:compile (selected for compile)
+[DEBUG]     com.github.sgroschupf:zkclient:jar:0.1:compile (selected for compile)
+[DEBUG]       org.apache.zookeeper:zookeeper:jar:3.3.3:compile (selected for compile)
+[DEBUG]         log4j:log4j:jar:1.2.15:compile (selected for compile)
+[DEBUG]           javax.mail:mail:jar:1.4:compile (selected for compile)
+[DEBUG]           javax.jms:jms:jar:1.1:compile (selected for compile)
+[DEBUG]           com.sun.jdmk:jmxtools:jar:1.2.1:compile (selected for compile)
+[DEBUG]           com.sun.jmx:jmxri:jar:1.2.1:compile (selected for compile)
+[DEBUG]         jline:jline:jar:0.9.94:compile (selected for compile)
+[DEBUG]           junit:junit:jar:3.8.1:compile (applying version: 4.9)
+[DEBUG]       log4j:log4j:jar:1.2.15:compile (removed - nearer found: 1.2.14)
+[DEBUG]       log4j:log4j:jar:1.2.14:compile (selected for compile)
+[WARNING] Invalid POM for com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT, transitive dependencies (if any) will not be available, enable debug logging for more details: Some problems were encountered while processing the POMs:
+[ERROR] 'dependencies.dependency.version' for com.jd.bdp:hydra-mysql:jar is missing. @ line 21, column 21
+
+[DEBUG]   com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT:compile (selected for compile)
+[DEBUG]   com.jd.bdp:hydra-collector:jar:1.0-SNAPSHOT:compile (selected for compile)
+[DEBUG]     com.taobao.metamorphosis:metamorphosis-client:jar:1.4.3:compile (selected for compile)
+[DEBUG]       com.taobao.metamorphosis:metamorphosis-commons:jar:1.4.3:compile (selected for compile)
+[DEBUG]         com.taobao.gecko:gecko:jar:1.1.1:compile (selected for compile)
+[DEBUG]           commons-logging:commons-logging:jar:1.1:compile (removed - nearer found: 1.1.1)
+[DEBUG]         commons-logging:commons-logging:jar:1.1:compile (removed - nearer found: 1.1.1)
+[DEBUG]         org.apache.zookeeper:zookeeper:jar:3.4.3:compile (removed - nearer found: 3.3.3)
+[DEBUG]         commons-lang:commons-lang:jar:2.6:compile (selected for compile)
+[DEBUG]         org.codehaus.jackson:jackson-core-lgpl:jar:1.4.0:compile (applying version: 1.9.10)
+[DEBUG]         org.codehaus.jackson:jackson-core-lgpl:jar:1.9.10:compile (selected for compile)
+[DEBUG]         org.codehaus.jackson:jackson-mapper-lgpl:jar:1.4.0:compile (applying version: 1.9.10)
+[DEBUG]         org.codehaus.jackson:jackson-mapper-lgpl:jar:1.9.10:compile (selected for compile)
+[DEBUG]         com.caucho:hessian:jar:3.1.5:compile (applying version: 3.2.2)
+[DEBUG]         com.caucho:hessian:jar:3.2.2:compile (selected for compile)
+[DEBUG]       commons-logging:commons-logging:jar:1.1.1:compile (removed - nearer found: 1.1)
+[DEBUG]       commons-logging:commons-logging:jar:1.1:compile (selected for compile)
+[DEBUG]         log4j:log4j:jar:1.2.12:compile (removed - nearer found: 1.2.14)
+[DEBUG]         logkit:logkit:jar:1.0.1:compile (selected for compile)
+[DEBUG]         avalon-framework:avalon-framework:jar:4.1.3:compile (selected for compile)
+[DEBUG]         javax.servlet:servlet-api:jar:2.3:compile (applying version: 2.5)
+[DEBUG]         javax.servlet:servlet-api:jar:2.5:compile (selected for compile)
+[DEBUG]     com.taobao.metamorphosis:metamorphosis-tools:jar:1.4.3:compile (selected for compile)
+[DEBUG]       com.taobao.metamorphosis:metamorphosis-server:jar:1.4.3:compile (selected for compile)
+[DEBUG]         commons-io:commons-io:jar:2.1:compile (selected for compile)
+[DEBUG]         commons-cli:commons-cli:jar:1.2:compile (selected for compile)
+[DEBUG]         org.slf4j:slf4j-api:jar:1.6.2:compile (applying version: 1.6.4)
+[DEBUG]         org.slf4j:slf4j-log4j12:jar:1.6.2:compile (selected for compile)
+[DEBUG]           org.slf4j:slf4j-api:jar:1.6.2:compile (applying version: 1.6.4)
+[DEBUG]           log4j:log4j:jar:1.2.16:compile (removed - nearer found: 1.2.14)
+[DEBUG]         org.quartz-scheduler:quartz:jar:2.1.4:compile (selected for compile)
+[DEBUG]           c3p0:c3p0:jar:0.9.1.1:compile (selected for compile)
+[DEBUG]         org.ini4j:ini4j:jar:0.5.1:compile (selected for compile)
+[DEBUG]         com.google.protobuf:protobuf-java:jar:2.3.0:compile (selected for compile)
+[DEBUG]         com.googlecode.aviator:aviator:jar:2.2.1:compile (selected for compile)
+[DEBUG]           commons-beanutils:commons-beanutils:jar:1.8.2:compile (selected for compile)
+[DEBUG]             commons-logging:commons-logging:jar:1.1.1:compile (removed - nearer found: 1.1)
+[DEBUG]       org.ini4j:ini4j:jar:0.5.1:compile (selected for compile)
+[DEBUG]       commons-cli:commons-cli:jar:1.2:compile (selected for compile)
+[DEBUG]       commons-io:commons-io:jar:2.1:compile (selected for compile)
+[DEBUG]       mysql:mysql-connector-java:jar:5.1.6:compile (applying version: 5.1.22)
+[DEBUG]       mysql:mysql-connector-java:jar:5.1.22:compile (selected for compile)
+[DEBUG]       joda-time:joda-time:jar:1.6.2:compile (selected for compile)
+[DEBUG]       ch.ethz.ganymed:ganymed-ssh2:jar:build210:compile (selected for compile)
+[DEBUG]     com.googlecode.disruptor:disruptor:jar:2.10.3:compile (selected for compile)
+[DEBUG]     com.jd.dd:glowworm:jar:1.0-SNAPSHOT:compile (selected for compile)
+[DEBUG]     org.slf4j:slf4j-api:jar:1.6.4:compile (selected for compile)
+[DEBUG]     com.caucho:hessian:jar:3.2.2:compile (selected for compile)
+[WARNING] Invalid POM for com.jd.bdp:hydra-collector-service:jar:1.0-SNAPSHOT, transitive dependencies (if any) will not be available, enable debug logging for more details: Some problems were encountered while processing the POMs:
+[ERROR] 'dependencies.dependency.version' for com.jd.bdp:hydra-hbase:jar is missing. @ line 19, column 21
+
+[DEBUG]   com.jd.bdp:hydra-collector-service:jar:1.0-SNAPSHOT:compile (selected for compile)
+[DEBUG]   org.springframework:spring-test:jar:3.1.2.RELEASE:test (selected for test)
+[DEBUG]   org.springframework:spring-context:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]     org.springframework:spring-aop:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]       aopalliance:aopalliance:jar:1.0:compile (selected for compile)
+[DEBUG]       org.springframework:spring-asm:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]       org.springframework:spring-beans:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]         org.springframework:spring-core:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]           commons-logging:commons-logging:jar:1.1.1:compile (removed - nearer found: 1.1)
+[DEBUG]       org.springframework:spring-core:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]         commons-logging:commons-logging:jar:1.1.1:compile (removed - nearer found: 1.1)
+[DEBUG]     org.springframework:spring-beans:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]     org.springframework:spring-core:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]       commons-logging:commons-logging:jar:1.1.1:compile (removed - nearer found: 1.1)
+[DEBUG]     org.springframework:spring-expression:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]     org.springframework:spring-asm:jar:3.1.2.RELEASE:compile (selected for compile)
+[DEBUG]   com.github.sgroschupf:zkclient:jar:0.1:compile (selected for compile)
+[DEBUG]     org.apache.zookeeper:zookeeper:jar:3.3.3:compile (selected for compile)
+[DEBUG]       log4j:log4j:jar:1.2.15:compile (selected for compile)
+[DEBUG]         javax.mail:mail:jar:1.4:compile (selected for compile)
+[DEBUG]         javax.jms:jms:jar:1.1:compile (selected for compile)
+[DEBUG]         com.sun.jdmk:jmxtools:jar:1.2.1:compile (selected for compile)
+[DEBUG]         com.sun.jmx:jmxri:jar:1.2.1:compile (selected for compile)
+[DEBUG]       jline:jline:jar:0.9.94:compile (selected for compile)
+[DEBUG]         junit:junit:jar:3.8.1:compile (applying version: 4.9)
+[DEBUG]     log4j:log4j:jar:1.2.15:compile (removed - nearer found: 1.2.14)
+[DEBUG]     log4j:log4j:jar:1.2.14:compile (selected for compile)
+[DEBUG]   junit:junit:jar:4.9:compile (selected for compile)
+[DEBUG] While resolving dependencies of com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT:
+[DEBUG] Statistics for Scope filter [null-scope=true, compile=true, runtime=true, test=false, provided=false, system=false]
+
+[DEBUG] The following scope filters were not used: 
+o Runtime
+o Provided
+o System
+[DEBUG] The following artifacts were removed by this filter: 
+org.springframework:spring-test:jar:3.1.2.RELEASE
+[WARNING] [DEPRECATION] Use of <moduleSources/> as a file-set is deprecated. Please use the <fileSets/> sub-element of <moduleSources/> instead.
+[WARNING] The following patterns were never triggered in this artifact inclusion filter:
+o  'com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT'
+o  'com.jd.bdp:hydra-mysql:jar:1.0-SNAPSHOT'
+
+[WARNING] NOTE: Currently, inclusion of module dependencies may produce unpredictable results if a version conflict occurs.
+[DEBUG] Processing DependencySet (output=lib)
+[DEBUG] Filtering dependency artifacts WITHOUT transitive dependency path information.
+[DEBUG] Adding 54 dependency artifacts.
+[DEBUG] Adding dependency artifact com.jd.bdp:hydra-client:jar:1.0-SNAPSHOT.
+[DEBUG] Adding artifact: com.jd.bdp:hydra-client:jar:1.0-SNAPSHOT with file: E:\RepositryCenter\repository\com\jd\bdp\hydra-client\1.0-SNAPSHOT\hydra-client-1.0-SNAPSHOT.jar to assembly location: lib/hydra-client-1.0-SNAPSHOT.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\jd\bdp\hydra-client\1.0-SNAPSHOT\hydra-client-1.0-SNAPSHOT.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/hydra-client-1.0-SNAPSHOT.jar
+[DEBUG] Adding dependency artifact com.jd.bdp:hydra-interface:jar:1.0-SNAPSHOT.
+[DEBUG] Adding artifact: com.jd.bdp:hydra-interface:jar:1.0-SNAPSHOT with file: E:\RepositryCenter\repository\com\jd\bdp\hydra-interface\1.0-SNAPSHOT\hydra-interface-1.0-SNAPSHOT.jar to assembly location: lib/hydra-interface-1.0-SNAPSHOT.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\jd\bdp\hydra-interface\1.0-SNAPSHOT\hydra-interface-1.0-SNAPSHOT.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/hydra-interface-1.0-SNAPSHOT.jar
+[DEBUG] Adding dependency artifact ch.qos.logback:logback-classic:jar:1.0.7.
+[DEBUG] Adding artifact: ch.qos.logback:logback-classic:jar:1.0.7 with file: E:\RepositryCenter\repository\ch\qos\logback\logback-classic\1.0.7\logback-classic-1.0.7.jar to assembly location: lib/logback-classic-1.0.7.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\ch\qos\logback\logback-classic\1.0.7\logback-classic-1.0.7.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/logback-classic-1.0.7.jar
+[DEBUG] Adding dependency artifact ch.qos.logback:logback-core:jar:1.0.7.
+[DEBUG] Adding artifact: ch.qos.logback:logback-core:jar:1.0.7 with file: E:\RepositryCenter\repository\ch\qos\logback\logback-core\1.0.7\logback-core-1.0.7.jar to assembly location: lib/logback-core-1.0.7.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\ch\qos\logback\logback-core\1.0.7\logback-core-1.0.7.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/logback-core-1.0.7.jar
+[DEBUG] Adding dependency artifact org.slf4j:slf4j-api:jar:1.6.4.
+[DEBUG] Adding artifact: org.slf4j:slf4j-api:jar:1.6.4 with file: E:\RepositryCenter\repository\org\slf4j\slf4j-api\1.6.4\slf4j-api-1.6.4.jar to assembly location: lib/slf4j-api-1.6.4.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\slf4j\slf4j-api\1.6.4\slf4j-api-1.6.4.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/slf4j-api-1.6.4.jar
+[DEBUG] Adding dependency artifact junit:junit:jar:4.9.
+[DEBUG] Adding artifact: junit:junit:jar:4.9 with file: E:\RepositryCenter\repository\junit\junit\4.9\junit-4.9.jar to assembly location: lib/junit-4.9.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\junit\junit\4.9\junit-4.9.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/junit-4.9.jar
+[DEBUG] Adding dependency artifact javax.validation:validation-api:jar:1.0.0.GA.
+[DEBUG] Adding artifact: javax.validation:validation-api:jar:1.0.0.GA with file: E:\RepositryCenter\repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA.jar to assembly location: lib/validation-api-1.0.0.GA.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\javax\validation\validation-api\1.0.0.GA\validation-api-1.0.0.GA.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/validation-api-1.0.0.GA.jar
+[DEBUG] Adding dependency artifact org.springframework:spring-context:jar:3.1.2.RELEASE.
+[DEBUG] Adding artifact: org.springframework:spring-context:jar:3.1.2.RELEASE with file: E:\RepositryCenter\repository\org\springframework\spring-context\3.1.2.RELEASE\spring-context-3.1.2.RELEASE.jar to assembly location: lib/spring-context-3.1.2.RELEASE.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\springframework\spring-context\3.1.2.RELEASE\spring-context-3.1.2.RELEASE.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/spring-context-3.1.2.RELEASE.jar
+[DEBUG] Adding dependency artifact org.springframework:spring-aop:jar:3.1.2.RELEASE.
+[DEBUG] Adding artifact: org.springframework:spring-aop:jar:3.1.2.RELEASE with file: E:\RepositryCenter\repository\org\springframework\spring-aop\3.1.2.RELEASE\spring-aop-3.1.2.RELEASE.jar to assembly location: lib/spring-aop-3.1.2.RELEASE.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\springframework\spring-aop\3.1.2.RELEASE\spring-aop-3.1.2.RELEASE.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/spring-aop-3.1.2.RELEASE.jar
+[DEBUG] Adding dependency artifact aopalliance:aopalliance:jar:1.0.
+[DEBUG] Adding artifact: aopalliance:aopalliance:jar:1.0 with file: E:\RepositryCenter\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar to assembly location: lib/aopalliance-1.0.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/aopalliance-1.0.jar
+[DEBUG] Adding dependency artifact org.springframework:spring-asm:jar:3.1.2.RELEASE.
+[DEBUG] Adding artifact: org.springframework:spring-asm:jar:3.1.2.RELEASE with file: E:\RepositryCenter\repository\org\springframework\spring-asm\3.1.2.RELEASE\spring-asm-3.1.2.RELEASE.jar to assembly location: lib/spring-asm-3.1.2.RELEASE.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\springframework\spring-asm\3.1.2.RELEASE\spring-asm-3.1.2.RELEASE.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/spring-asm-3.1.2.RELEASE.jar
+[DEBUG] Adding dependency artifact org.springframework:spring-beans:jar:3.1.2.RELEASE.
+[DEBUG] Adding artifact: org.springframework:spring-beans:jar:3.1.2.RELEASE with file: E:\RepositryCenter\repository\org\springframework\spring-beans\3.1.2.RELEASE\spring-beans-3.1.2.RELEASE.jar to assembly location: lib/spring-beans-3.1.2.RELEASE.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\springframework\spring-beans\3.1.2.RELEASE\spring-beans-3.1.2.RELEASE.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/spring-beans-3.1.2.RELEASE.jar
+[DEBUG] Adding dependency artifact org.springframework:spring-core:jar:3.1.2.RELEASE.
+[DEBUG] Adding artifact: org.springframework:spring-core:jar:3.1.2.RELEASE with file: E:\RepositryCenter\repository\org\springframework\spring-core\3.1.2.RELEASE\spring-core-3.1.2.RELEASE.jar to assembly location: lib/spring-core-3.1.2.RELEASE.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\springframework\spring-core\3.1.2.RELEASE\spring-core-3.1.2.RELEASE.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/spring-core-3.1.2.RELEASE.jar
+[DEBUG] Adding dependency artifact commons-logging:commons-logging:jar:1.1.
+[DEBUG] Adding artifact: commons-logging:commons-logging:jar:1.1 with file: E:\RepositryCenter\repository\commons-logging\commons-logging\1.1\commons-logging-1.1.jar to assembly location: lib/commons-logging-1.1.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\commons-logging\commons-logging\1.1\commons-logging-1.1.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/commons-logging-1.1.jar
+[DEBUG] Adding dependency artifact org.springframework:spring-expression:jar:3.1.2.RELEASE.
+[DEBUG] Adding artifact: org.springframework:spring-expression:jar:3.1.2.RELEASE with file: E:\RepositryCenter\repository\org\springframework\spring-expression\3.1.2.RELEASE\spring-expression-3.1.2.RELEASE.jar to assembly location: lib/spring-expression-3.1.2.RELEASE.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\springframework\spring-expression\3.1.2.RELEASE\spring-expression-3.1.2.RELEASE.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/spring-expression-3.1.2.RELEASE.jar
+[DEBUG] Adding dependency artifact com.alibaba:dubbo:jar:2.4.8-SNAPSHOT.
+[DEBUG] Adding artifact: com.alibaba:dubbo:jar:2.4.8-SNAPSHOT with file: E:\RepositryCenter\repository\com\alibaba\dubbo\2.4.8-SNAPSHOT\dubbo-2.4.8-SNAPSHOT.jar to assembly location: lib/dubbo-2.4.8-SNAPSHOT.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\alibaba\dubbo\2.4.8-SNAPSHOT\dubbo-2.4.8-SNAPSHOT.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/dubbo-2.4.8-SNAPSHOT.jar
+[DEBUG] Adding dependency artifact org.springframework:spring:jar:2.5.6.SEC03.
+[DEBUG] Adding artifact: org.springframework:spring:jar:2.5.6.SEC03 with file: E:\RepositryCenter\repository\org\springframework\spring\2.5.6.SEC03\spring-2.5.6.SEC03.jar to assembly location: lib/spring-2.5.6.SEC03.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\springframework\spring\2.5.6.SEC03\spring-2.5.6.SEC03.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/spring-2.5.6.SEC03.jar
+[DEBUG] Adding dependency artifact org.javassist:javassist:jar:3.15.0-GA.
+[DEBUG] Adding artifact: org.javassist:javassist:jar:3.15.0-GA with file: E:\RepositryCenter\repository\org\javassist\javassist\3.15.0-GA\javassist-3.15.0-GA.jar to assembly location: lib/javassist-3.15.0-GA.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\javassist\javassist\3.15.0-GA\javassist-3.15.0-GA.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/javassist-3.15.0-GA.jar
+[DEBUG] Adding dependency artifact org.jboss.netty:netty:jar:3.2.5.Final.
+[DEBUG] Adding artifact: org.jboss.netty:netty:jar:3.2.5.Final with file: E:\RepositryCenter\repository\org\jboss\netty\netty\3.2.5.Final\netty-3.2.5.Final.jar to assembly location: lib/netty-3.2.5.Final.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\jboss\netty\netty\3.2.5.Final\netty-3.2.5.Final.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/netty-3.2.5.Final.jar
+[DEBUG] Adding dependency artifact com.github.sgroschupf:zkclient:jar:0.1.
+[DEBUG] Adding artifact: com.github.sgroschupf:zkclient:jar:0.1 with file: E:\RepositryCenter\repository\com\github\sgroschupf\zkclient\0.1\zkclient-0.1.jar to assembly location: lib/zkclient-0.1.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\github\sgroschupf\zkclient\0.1\zkclient-0.1.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/zkclient-0.1.jar
+[DEBUG] Adding dependency artifact org.apache.zookeeper:zookeeper:jar:3.3.3.
+[DEBUG] Adding artifact: org.apache.zookeeper:zookeeper:jar:3.3.3 with file: E:\RepositryCenter\repository\org\apache\zookeeper\zookeeper\3.3.3\zookeeper-3.3.3.jar to assembly location: lib/zookeeper-3.3.3.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\apache\zookeeper\zookeeper\3.3.3\zookeeper-3.3.3.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/zookeeper-3.3.3.jar
+[DEBUG] Adding dependency artifact log4j:log4j:jar:1.2.14.
+[DEBUG] Adding artifact: log4j:log4j:jar:1.2.14 with file: E:\RepositryCenter\repository\log4j\log4j\1.2.14\log4j-1.2.14.jar to assembly location: lib/log4j-1.2.14.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\log4j\log4j\1.2.14\log4j-1.2.14.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/log4j-1.2.14.jar
+[DEBUG] Adding dependency artifact jline:jline:jar:0.9.94.
+[DEBUG] Adding artifact: jline:jline:jar:0.9.94 with file: E:\RepositryCenter\repository\jline\jline\0.9.94\jline-0.9.94.jar to assembly location: lib/jline-0.9.94.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\jline\jline\0.9.94\jline-0.9.94.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/jline-0.9.94.jar
+[DEBUG] Error retrieving POM of module-dependency: com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT; Reason: Some problems were encountered while processing the POMs:
+[ERROR] 'dependencies.dependency.version' for com.jd.bdp:hydra-mysql:jar is missing. @ line 21, column 21
+ for project 
+
+Building stub project instance.
+[DEBUG] Adding dependency artifact com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT.
+[DEBUG] Adding artifact: com.jd.bdp:hydra-manager:jar:1.0-SNAPSHOT with file: E:\RepositryCenter\repository\com\jd\bdp\hydra-manager\1.0-SNAPSHOT\hydra-manager-1.0-SNAPSHOT.jar to assembly location: lib/hydra-manager-1.0-SNAPSHOT.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\jd\bdp\hydra-manager\1.0-SNAPSHOT\hydra-manager-1.0-SNAPSHOT.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/hydra-manager-1.0-SNAPSHOT.jar
+[DEBUG] Adding dependency artifact com.jd.bdp:hydra-collector:jar:1.0-SNAPSHOT.
+[DEBUG] Adding artifact: com.jd.bdp:hydra-collector:jar:1.0-SNAPSHOT with file: E:\RepositryCenter\repository\com\jd\bdp\hydra-collector\1.0-SNAPSHOT\hydra-collector-1.0-SNAPSHOT.jar to assembly location: lib/hydra-collector-1.0-SNAPSHOT.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\jd\bdp\hydra-collector\1.0-SNAPSHOT\hydra-collector-1.0-SNAPSHOT.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/hydra-collector-1.0-SNAPSHOT.jar
+[DEBUG] Adding dependency artifact com.taobao.metamorphosis:metamorphosis-client:jar:1.4.3.
+[DEBUG] Adding artifact: com.taobao.metamorphosis:metamorphosis-client:jar:1.4.3 with file: E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-client\1.4.3\metamorphosis-client-1.4.3.jar to assembly location: lib/metamorphosis-client-1.4.3.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-client\1.4.3\metamorphosis-client-1.4.3.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/metamorphosis-client-1.4.3.jar
+[DEBUG] Adding dependency artifact com.taobao.metamorphosis:metamorphosis-commons:jar:1.4.3.
+[DEBUG] Adding artifact: com.taobao.metamorphosis:metamorphosis-commons:jar:1.4.3 with file: E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-commons\1.4.3\metamorphosis-commons-1.4.3.jar to assembly location: lib/metamorphosis-commons-1.4.3.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-commons\1.4.3\metamorphosis-commons-1.4.3.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/metamorphosis-commons-1.4.3.jar
+[DEBUG] Adding dependency artifact com.taobao.gecko:gecko:jar:1.1.1.
+[DEBUG] Adding artifact: com.taobao.gecko:gecko:jar:1.1.1 with file: E:\RepositryCenter\repository\com\taobao\gecko\gecko\1.1.1\gecko-1.1.1.jar to assembly location: lib/gecko-1.1.1.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\taobao\gecko\gecko\1.1.1\gecko-1.1.1.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/gecko-1.1.1.jar
+[DEBUG] Adding dependency artifact commons-lang:commons-lang:jar:2.6.
+[DEBUG] Adding artifact: commons-lang:commons-lang:jar:2.6 with file: E:\RepositryCenter\repository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar to assembly location: lib/commons-lang-2.6.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/commons-lang-2.6.jar
+[DEBUG] Adding dependency artifact org.codehaus.jackson:jackson-core-lgpl:jar:1.9.10.
+[DEBUG] Adding artifact: org.codehaus.jackson:jackson-core-lgpl:jar:1.9.10 with file: E:\RepositryCenter\repository\org\codehaus\jackson\jackson-core-lgpl\1.9.10\jackson-core-lgpl-1.9.10.jar to assembly location: lib/jackson-core-lgpl-1.9.10.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\codehaus\jackson\jackson-core-lgpl\1.9.10\jackson-core-lgpl-1.9.10.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/jackson-core-lgpl-1.9.10.jar
+[DEBUG] Adding dependency artifact org.codehaus.jackson:jackson-mapper-lgpl:jar:1.9.10.
+[DEBUG] Adding artifact: org.codehaus.jackson:jackson-mapper-lgpl:jar:1.9.10 with file: E:\RepositryCenter\repository\org\codehaus\jackson\jackson-mapper-lgpl\1.9.10\jackson-mapper-lgpl-1.9.10.jar to assembly location: lib/jackson-mapper-lgpl-1.9.10.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\codehaus\jackson\jackson-mapper-lgpl\1.9.10\jackson-mapper-lgpl-1.9.10.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/jackson-mapper-lgpl-1.9.10.jar
+[DEBUG] Adding dependency artifact com.caucho:hessian:jar:3.2.2.
+[DEBUG] Adding artifact: com.caucho:hessian:jar:3.2.2 with file: E:\RepositryCenter\repository\com\caucho\hessian\3.2.2\hessian-3.2.2.jar to assembly location: lib/hessian-3.2.2.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\caucho\hessian\3.2.2\hessian-3.2.2.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/hessian-3.2.2.jar
+[DEBUG] Adding dependency artifact logkit:logkit:jar:1.0.1.
+[DEBUG] Adding artifact: logkit:logkit:jar:1.0.1 with file: E:\RepositryCenter\repository\logkit\logkit\1.0.1\logkit-1.0.1.jar to assembly location: lib/logkit-1.0.1.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\logkit\logkit\1.0.1\logkit-1.0.1.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/logkit-1.0.1.jar
+[DEBUG] Adding dependency artifact avalon-framework:avalon-framework:jar:4.1.3.
+[DEBUG] Adding artifact: avalon-framework:avalon-framework:jar:4.1.3 with file: E:\RepositryCenter\repository\avalon-framework\avalon-framework\4.1.3\avalon-framework-4.1.3.jar to assembly location: lib/avalon-framework-4.1.3.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\avalon-framework\avalon-framework\4.1.3\avalon-framework-4.1.3.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/avalon-framework-4.1.3.jar
+[DEBUG] Adding dependency artifact javax.servlet:servlet-api:jar:2.5.
+[DEBUG] Adding artifact: javax.servlet:servlet-api:jar:2.5 with file: E:\RepositryCenter\repository\javax\servlet\servlet-api\2.5\servlet-api-2.5.jar to assembly location: lib/servlet-api-2.5.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\javax\servlet\servlet-api\2.5\servlet-api-2.5.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/servlet-api-2.5.jar
+[DEBUG] Adding dependency artifact com.taobao.metamorphosis:metamorphosis-tools:jar:1.4.3.
+[DEBUG] Adding artifact: com.taobao.metamorphosis:metamorphosis-tools:jar:1.4.3 with file: E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-tools\1.4.3\metamorphosis-tools-1.4.3.jar to assembly location: lib/metamorphosis-tools-1.4.3.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-tools\1.4.3\metamorphosis-tools-1.4.3.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/metamorphosis-tools-1.4.3.jar
+[DEBUG] Adding dependency artifact com.taobao.metamorphosis:metamorphosis-server:jar:1.4.3.
+[DEBUG] Adding artifact: com.taobao.metamorphosis:metamorphosis-server:jar:1.4.3 with file: E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-server\1.4.3\metamorphosis-server-1.4.3.jar to assembly location: lib/metamorphosis-server-1.4.3.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\taobao\metamorphosis\metamorphosis-server\1.4.3\metamorphosis-server-1.4.3.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/metamorphosis-server-1.4.3.jar
+[DEBUG] Adding dependency artifact commons-io:commons-io:jar:2.1.
+[DEBUG] Adding artifact: commons-io:commons-io:jar:2.1 with file: E:\RepositryCenter\repository\commons-io\commons-io\2.1\commons-io-2.1.jar to assembly location: lib/commons-io-2.1.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\commons-io\commons-io\2.1\commons-io-2.1.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/commons-io-2.1.jar
+[DEBUG] Adding dependency artifact commons-cli:commons-cli:jar:1.2.
+[DEBUG] Adding artifact: commons-cli:commons-cli:jar:1.2 with file: E:\RepositryCenter\repository\commons-cli\commons-cli\1.2\commons-cli-1.2.jar to assembly location: lib/commons-cli-1.2.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\commons-cli\commons-cli\1.2\commons-cli-1.2.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/commons-cli-1.2.jar
+[DEBUG] Adding dependency artifact org.slf4j:slf4j-log4j12:jar:1.6.2.
+[DEBUG] Adding artifact: org.slf4j:slf4j-log4j12:jar:1.6.2 with file: E:\RepositryCenter\repository\org\slf4j\slf4j-log4j12\1.6.2\slf4j-log4j12-1.6.2.jar to assembly location: lib/slf4j-log4j12-1.6.2.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\slf4j\slf4j-log4j12\1.6.2\slf4j-log4j12-1.6.2.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/slf4j-log4j12-1.6.2.jar
+[DEBUG] Adding dependency artifact org.quartz-scheduler:quartz:jar:2.1.4.
+[DEBUG] Adding artifact: org.quartz-scheduler:quartz:jar:2.1.4 with file: E:\RepositryCenter\repository\org\quartz-scheduler\quartz\2.1.4\quartz-2.1.4.jar to assembly location: lib/quartz-2.1.4.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\quartz-scheduler\quartz\2.1.4\quartz-2.1.4.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/quartz-2.1.4.jar
+[DEBUG] Adding dependency artifact c3p0:c3p0:jar:0.9.1.1.
+[DEBUG] Adding artifact: c3p0:c3p0:jar:0.9.1.1 with file: E:\RepositryCenter\repository\c3p0\c3p0\0.9.1.1\c3p0-0.9.1.1.jar to assembly location: lib/c3p0-0.9.1.1.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\c3p0\c3p0\0.9.1.1\c3p0-0.9.1.1.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/c3p0-0.9.1.1.jar
+[DEBUG] Adding dependency artifact org.ini4j:ini4j:jar:0.5.1.
+[DEBUG] Adding artifact: org.ini4j:ini4j:jar:0.5.1 with file: E:\RepositryCenter\repository\org\ini4j\ini4j\0.5.1\ini4j-0.5.1.jar to assembly location: lib/ini4j-0.5.1.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\org\ini4j\ini4j\0.5.1\ini4j-0.5.1.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/ini4j-0.5.1.jar
+[DEBUG] Adding dependency artifact com.google.protobuf:protobuf-java:jar:2.3.0.
+[DEBUG] Adding artifact: com.google.protobuf:protobuf-java:jar:2.3.0 with file: E:\RepositryCenter\repository\com\google\protobuf\protobuf-java\2.3.0\protobuf-java-2.3.0.jar to assembly location: lib/protobuf-java-2.3.0.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\google\protobuf\protobuf-java\2.3.0\protobuf-java-2.3.0.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/protobuf-java-2.3.0.jar
+[DEBUG] Adding dependency artifact com.googlecode.aviator:aviator:jar:2.2.1.
+[DEBUG] Adding artifact: com.googlecode.aviator:aviator:jar:2.2.1 with file: E:\RepositryCenter\repository\com\googlecode\aviator\aviator\2.2.1\aviator-2.2.1.jar to assembly location: lib/aviator-2.2.1.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\googlecode\aviator\aviator\2.2.1\aviator-2.2.1.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/aviator-2.2.1.jar
+[DEBUG] Adding dependency artifact commons-beanutils:commons-beanutils:jar:1.8.2.
+[DEBUG] Adding artifact: commons-beanutils:commons-beanutils:jar:1.8.2 with file: E:\RepositryCenter\repository\commons-beanutils\commons-beanutils\1.8.2\commons-beanutils-1.8.2.jar to assembly location: lib/commons-beanutils-1.8.2.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\commons-beanutils\commons-beanutils\1.8.2\commons-beanutils-1.8.2.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/commons-beanutils-1.8.2.jar
+[DEBUG] Adding dependency artifact mysql:mysql-connector-java:jar:5.1.22.
+[DEBUG] Adding artifact: mysql:mysql-connector-java:jar:5.1.22 with file: E:\RepositryCenter\repository\mysql\mysql-connector-java\5.1.22\mysql-connector-java-5.1.22.jar to assembly location: lib/mysql-connector-java-5.1.22.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\mysql\mysql-connector-java\5.1.22\mysql-connector-java-5.1.22.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/mysql-connector-java-5.1.22.jar
+[DEBUG] Adding dependency artifact joda-time:joda-time:jar:1.6.2.
+[DEBUG] Adding artifact: joda-time:joda-time:jar:1.6.2 with file: E:\RepositryCenter\repository\joda-time\joda-time\1.6.2\joda-time-1.6.2.jar to assembly location: lib/joda-time-1.6.2.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\joda-time\joda-time\1.6.2\joda-time-1.6.2.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/joda-time-1.6.2.jar
+[DEBUG] Adding dependency artifact ch.ethz.ganymed:ganymed-ssh2:jar:build210.
+[DEBUG] Adding artifact: ch.ethz.ganymed:ganymed-ssh2:jar:build210 with file: E:\RepositryCenter\repository\ch\ethz\ganymed\ganymed-ssh2\build210\ganymed-ssh2-build210.jar to assembly location: lib/ganymed-ssh2-build210.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\ch\ethz\ganymed\ganymed-ssh2\build210\ganymed-ssh2-build210.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/ganymed-ssh2-build210.jar
+[DEBUG] Adding dependency artifact com.googlecode.disruptor:disruptor:jar:2.10.3.
+[DEBUG] Adding artifact: com.googlecode.disruptor:disruptor:jar:2.10.3 with file: E:\RepositryCenter\repository\com\googlecode\disruptor\disruptor\2.10.3\disruptor-2.10.3.jar to assembly location: lib/disruptor-2.10.3.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\googlecode\disruptor\disruptor\2.10.3\disruptor-2.10.3.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/disruptor-2.10.3.jar
+[DEBUG] Adding dependency artifact com.jd.dd:glowworm:jar:1.0-SNAPSHOT.
+[DEBUG] Adding artifact: com.jd.dd:glowworm:jar:1.0-SNAPSHOT with file: E:\RepositryCenter\repository\com\jd\dd\glowworm\1.0-SNAPSHOT\glowworm-1.0-SNAPSHOT.jar to assembly location: lib/glowworm-1.0-SNAPSHOT.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\jd\dd\glowworm\1.0-SNAPSHOT\glowworm-1.0-SNAPSHOT.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/glowworm-1.0-SNAPSHOT.jar
+[DEBUG] Error retrieving POM of module-dependency: com.jd.bdp:hydra-collector-service:jar:1.0-SNAPSHOT; Reason: Some problems were encountered while processing the POMs:
+[ERROR] 'dependencies.dependency.version' for com.jd.bdp:hydra-hbase:jar is missing. @ line 19, column 21
+ for project 
+
+Building stub project instance.
+[DEBUG] Adding dependency artifact com.jd.bdp:hydra-collector-service:jar:1.0-SNAPSHOT.
+[DEBUG] Adding artifact: com.jd.bdp:hydra-collector-service:jar:1.0-SNAPSHOT with file: E:\RepositryCenter\repository\com\jd\bdp\hydra-collector-service\1.0-SNAPSHOT\hydra-collector-service-1.0-SNAPSHOT.jar to assembly location: lib/hydra-collector-service-1.0-SNAPSHOT.jar.
+[DEBUG] Adding file: E:\RepositryCenter\repository\com\jd\bdp\hydra-collector-service\1.0-SNAPSHOT\hydra-collector-service-1.0-SNAPSHOT.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/hydra-collector-service-1.0-SNAPSHOT.jar
+[DEBUG] Adding dependency artifact com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT.
+[DEBUG] Adding artifact: com.jd.bdp:hydra-example-benchmark:jar:1.0-SNAPSHOT with file: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\hydra-example-benchmark-1.0-SNAPSHOT.jar to assembly location: lib/hydra-example-benchmark-1.0-SNAPSHOT.jar.
+[DEBUG] Adding file: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\hydra-example-benchmark-1.0-SNAPSHOT.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/hydra-example-benchmark-1.0-SNAPSHOT.jar
+[DEBUG] Adding dependency artifact com.jd.bdp:hydra-example-benchmark:jar:assemble:1.0-SNAPSHOT.
+[DEBUG] Adding artifact: com.jd.bdp:hydra-example-benchmark:jar:assemble:1.0-SNAPSHOT with file: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\hydra-example-benchmark-1.0-SNAPSHOT-assemble.jar to assembly location: lib/hydra-example-benchmark-1.0-SNAPSHOT-assemble.jar.
+[DEBUG] Adding file: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\hydra-example-benchmark-1.0-SNAPSHOT-assemble.jar to archive location: hydra-example-benchmark-1.0-SNAPSHOT/lib/hydra-example-benchmark-1.0-SNAPSHOT-assemble.jar
+[DEBUG] FileSet[] dir perms: -1 file perms: -1
+[DEBUG] The archive base directory is 'null'
+[DEBUG] NOT reformatting any files in E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark
+[DEBUG] Adding file-set from directory: 'E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark'
+assembly output directory is: ''
+[DEBUG] Adding file-set in: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark to archive location: hydra-example-benchmark-1.0-SNAPSHOT/
+[DEBUG] Adding exclude for assembly working-directory: target/assembly/work
+File-Set source directory: E:/hydra_workspace/hydra/modules/hydra-example/hydra-example-benchmark
+[DEBUG] FileSet[conf/] dir perms: -1 file perms: -1
+[DEBUG] The archive base directory is 'null'
+[DEBUG] NOT reformatting any files in E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources
+[DEBUG] Adding file-set from directory: 'E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources'
+assembly output directory is: 'conf/'
+[DEBUG] Adding file-set in: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources to archive location: hydra-example-benchmark-1.0-SNAPSHOT/conf/
+[DEBUG] FileSet[bin/] dir perms: -1 file perms: -1
+[DEBUG] The archive base directory is 'null'
+[DEBUG] NOT reformatting any files in E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows
+[DEBUG] Adding file-set from directory: 'E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows'
+assembly output directory is: 'bin/'
+[DEBUG] Adding file-set in: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\windows to archive location: hydra-example-benchmark-1.0-SNAPSHOT/bin/
+[DEBUG] FileSet[bin/] dir perms: -1 file perms: -1 lineEndings: unix
+[DEBUG] The archive base directory is 'null'
+[DEBUG] Filtering files from: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\scripts\linux into temp dir: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\archive-tmp\fileSetFormatter.1082868757.tmp
+[DEBUG] Filtering: env.sh
+[DEBUG] Filtering: startABC\startA.sh
+[DEBUG] Filtering: startABC\startB.sh
+[DEBUG] Filtering: startABC\startC.sh
+[DEBUG] Filtering: startABC.sh
+[DEBUG] Filtering: startBenchTest.sh
+[DEBUG] Adding file-set from directory: 'E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\archive-tmp\fileSetFormatter.1082868757.tmp'
+assembly output directory is: 'bin/'
+[DEBUG] Adding file-set in: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\archive-tmp\fileSetFormatter.1082868757.tmp to archive location: hydra-example-benchmark-1.0-SNAPSHOT/bin/
+[DEBUG] FileSet[log/] dir perms: -1 file perms: -1
+[DEBUG] The archive base directory is 'null'
+[DEBUG] NOT reformatting any files in E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\log
+[DEBUG] Adding file-set from directory: 'E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\log'
+assembly output directory is: 'log/'
+[DEBUG] Adding file-set in: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\src\main\resources\log to archive location: hydra-example-benchmark-1.0-SNAPSHOT/log/
+[DEBUG] Cannot find ArtifactResolver with hint: project-cache-aware
+org.codehaus.plexus.component.repository.exception.ComponentLookupException: java.util.NoSuchElementException
+      role: org.apache.maven.artifact.resolver.ArtifactResolver
+  roleHint: project-cache-aware
+	at org.codehaus.plexus.DefaultPlexusContainer.lookup(DefaultPlexusContainer.java:257)
+	at org.codehaus.plexus.DefaultPlexusContainer.lookup(DefaultPlexusContainer.java:233)
+	at org.apache.maven.shared.repository.DefaultRepositoryAssembler.contextualize(DefaultRepositoryAssembler.java:721)
+	at org.sonatype.guice.plexus.lifecycles.PlexusLifecycleManager.contextualize(PlexusLifecycleManager.java:317)
+	at org.sonatype.guice.plexus.lifecycles.PlexusLifecycleManager.manageLifecycle(PlexusLifecycleManager.java:292)
+	at org.sonatype.guice.plexus.lifecycles.PlexusLifecycleManager.onProvision(PlexusLifecycleManager.java:148)
+	at com.google.inject.internal.ProvisionListenerStackCallback$Provision.provision(ProvisionListenerStackCallback.java:108)
+	at com.google.inject.internal.ProvisionListenerStackCallback.provision(ProvisionListenerStackCallback.java:55)
+	at com.google.inject.internal.ProviderInternalFactory.circularGet(ProviderInternalFactory.java:68)
+	at com.google.inject.internal.InternalFactoryToInitializableAdapter.get(InternalFactoryToInitializableAdapter.java:45)
+	at com.google.inject.internal.ProviderToInternalFactoryAdapter$1.call(ProviderToInternalFactoryAdapter.java:46)
+	at com.google.inject.internal.InjectorImpl.callInContext(InjectorImpl.java:1018)
+	at com.google.inject.internal.ProviderToInternalFactoryAdapter.get(ProviderToInternalFactoryAdapter.java:40)
+	at com.google.inject.Scopes$1$1.get(Scopes.java:59)
+	at com.google.inject.internal.InternalFactoryToProviderAdapter.get(InternalFactoryToProviderAdapter.java:41)
+	at com.google.inject.internal.InjectorImpl$3$1.call(InjectorImpl.java:965)
+	at com.google.inject.internal.InjectorImpl.callInContext(InjectorImpl.java:1011)
+	at com.google.inject.internal.InjectorImpl$3.get(InjectorImpl.java:961)
+	at org.sonatype.guice.bean.locators.LazyBeanEntry.getValue(LazyBeanEntry.java:83)
+	at org.sonatype.guice.plexus.locators.LazyPlexusBean.getValue(LazyPlexusBean.java:49)
+	at org.sonatype.guice.bean.locators.EntryListAdapter$ValueIterator.next(EntryListAdapter.java:112)
+	at org.apache.maven.plugin.assembly.archive.DefaultAssemblyArchiver.createArchive(DefaultAssemblyArchiver.java:181)
+	at org.apache.maven.plugin.assembly.mojos.AbstractAssemblyMojo.execute(AbstractAssemblyMojo.java:436)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:101)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:209)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:84)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:59)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.singleThreadedBuild(LifecycleStarter.java:183)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:161)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:320)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:156)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:537)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:196)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:141)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:290)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:230)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:409)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:352)
+Caused by: java.util.NoSuchElementException
+	at java.util.Collections$EmptySet$1.next(Collections.java:2912)
+	at org.codehaus.plexus.DefaultPlexusContainer.lookup(DefaultPlexusContainer.java:253)
+	... 43 more
+[INFO] Copying files to E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\hydra-example-benchmark-1.0-SNAPSHOT-jd
+[WARNING] Assembly file: E:\hydra_workspace\hydra\modules\hydra-example\hydra-example-benchmark\target\hydra-example-benchmark-1.0-SNAPSHOT-jd is not a regular file (it may be a directory). It cannot be attached to the project build for installation or deployment.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 3.277s
+[INFO] Finished at: Sun Apr 28 18:36:44 CST 2013
+[INFO] Final Memory: 8M/15M
+[INFO] ------------------------------------------------------------------------

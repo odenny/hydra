@@ -44,4 +44,8 @@
     <bean id="traceMapper" class="com.jd.bdp.hydra.mysql.persistent.dao.impl.TraceMapperImpl">
         <property name="sqlSession" ref="sqlSessionTemplate"/>
     </bean>
+
+    <bean id="spanMapper" class="com.jd.bdp.hydra.mysql.persistent.dao.impl.SpanMapperImpl">
+        <property name="sqlSession" ref="sqlSessionTemplate"/>
+    </bean>
 </beans>

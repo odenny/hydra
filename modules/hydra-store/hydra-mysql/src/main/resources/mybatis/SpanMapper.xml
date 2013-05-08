@@ -15,17 +15,13 @@
   ~    limitations under the License.
   -->
 
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-    <settings>
-        <setting name="lazyLoadingEnabled" value="false" />
-    </settings>
-    <typeAliases>
-        <typeAlias alias="TraceEntity" type="com.jd.bdp.hydra.mysql.persistent.entity.Trace" />
-        <typeAlias alias="SpanEntity" type="com.jd.bdp.hydra.Span" />
-    </typeAliases>
-    <mappers>
-        <mapper resource="mybatis/TraceMapper.xml"/>
-        <mapper resource="mybatis/SpanMapper.xml"/>
-    </mappers>
-</configuration>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper">
+
+    <resultMap id="SpanResultMap" type="SpanEntity">
+
+    </resultMap>
+
+
+</mapper>

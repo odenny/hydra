@@ -16,17 +16,10 @@
 
 package com.jd.bdp.hydra.mysql.persistent.dao;
 
-import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
-
-import java.util.List;
-
 /**
  * User: biandi
  * Date: 13-5-8
- * Time: 下午3:29
+ * Time: 下午4:53
  */
-public interface TraceMapper {
-
-    List<Trace> findTrace(Long startTime, int num);
-
+public interface SpanMapper {
 }

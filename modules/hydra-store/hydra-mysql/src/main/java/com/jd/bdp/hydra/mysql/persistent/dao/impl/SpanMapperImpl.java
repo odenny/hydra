@@ -16,29 +16,15 @@
 
 package com.jd.bdp.hydra.mysql.persistent.dao.impl;
 
-import com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper;
-import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
+import com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper;
 import org.mybatis.spring.SqlSessionTemplate;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * User: biandi
  * Date: 13-5-8
- * Time: 下午3:29
+ * Time: 下午4:54
  */
-public class TraceMapperImpl implements TraceMapper{
-
-    public List<Trace> findTrace(Long startTime, int num){
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("startTime", startTime);
-        map.put("num", num);
-        return (List<Trace>) sqlSession.selectList("findTrace", map);
-    }
-
-
+public class SpanMapperImpl implements SpanMapper{
 
     private SqlSessionTemplate sqlSession;
 

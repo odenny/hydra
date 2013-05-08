@@ -41,7 +41,7 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
     @Test
     public void testFindTraces(){
         List<Trace> list = traceMapper.findTrace(1368002575499L, 1);
-        assertEquals(1, list.size());
+        assertEquals(3, list.size());
     }
 
     private TraceMapper traceMapper;

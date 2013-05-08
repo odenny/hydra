@@ -14,19 +14,20 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.hydra.mysql.persistent.dao;
+package dao;
 
-import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
-
-import java.util.List;
+import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
 /**
  * User: biandi
  * Date: 13-5-8
- * Time: 下午3:29
+ * Time: 下午4:55
  */
-public interface TraceMapper {
+public class SpanMapperTest extends AbstractDependencyInjectionSpringContextTests {
 
-    List<Trace> findTrace(Long startTime, int num);
-
+    @Override
+    protected String[] getConfigLocations() {
+        String[] location = {"classpath:hydra-mysql.xml"};
+        return location;
+    }
 }

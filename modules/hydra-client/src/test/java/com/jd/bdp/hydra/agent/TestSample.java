@@ -46,8 +46,6 @@ public class TestSample extends TestCase {
         }
     }
 
-
-    @Test
     public void testHashSampler(){
         long start = System.currentTimeMillis();
         long tc = 0L;
@@ -71,7 +69,7 @@ public class TestSample extends TestCase {
         System.out.println("discard count :" + fc);
     }
 
-    @Test
+
     public void testConcurrentHashSampler() {
         long start = System.currentTimeMillis();
         for (int i = 0; i < threads; i++) {
@@ -89,7 +87,7 @@ public class TestSample extends TestCase {
         System.out.println("discard count :" + falseCount.longValue());
     }
 
-    @Test
+
     public void testSampleMod(){
         long n = 178;
         //while(true){

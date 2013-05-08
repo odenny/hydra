@@ -103,8 +103,10 @@ public class Tracer {
 
     public void addBinaryAnntation(BinaryAnnotation b) {
         Span span = spanThreadLocal.get();
+        System.out.println("111---"+span.getSpanName());
         if (span != null) {
             span.addBinaryAnnotation(b);
+            System.out.println("222---"+span.getSpanName());
         }
     }
 

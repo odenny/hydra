@@ -19,7 +19,7 @@ import java.util.concurrent.CyclicBarrier;
 @ContextConfiguration(locations = {
         "/hydra-config-test.xml"
 })
-public class TracerTest extends TestCase {
+public class TestTracer extends TestCase {
     @Autowired
     private Tracer tracer;
     private int threads = 20;
@@ -40,7 +40,6 @@ public class TracerTest extends TestCase {
         }
     }
 
-    @Test
     public void testTracer() throws Exception {
         for(int k = 0 ; k < threads ; k++){
             Thread t = new TestTask();

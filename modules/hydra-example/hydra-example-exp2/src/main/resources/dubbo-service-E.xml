@@ -6,10 +6,11 @@
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-    <bean id="serviceC" class="com.jd.bdp.ServiceC">
+
+    <bean id="serviceE" class="com.jd.bdp.service.impl.ServiceE">
     </bean>
     <!--服务暴露-开机-->
-    <dubbo:protocol name="dubbo" port="20992" />
-    <dubbo:service interface="com.jd.bdp.InterfaceC1" ref="serviceC" >
+    <dubbo:protocol name="dubbo" port="21996" />
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceE" ref="serviceE" >
     </dubbo:service>
 </beans>

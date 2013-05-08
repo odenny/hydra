@@ -8,15 +8,15 @@
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!--服务关联关系-->
-    <bean id="serviceA" class="com.jd.bdp.ServiceA">
+    <bean id="serviceA" class="com.jd.bdp.service.impl.ServiceA">
         <property name="downService" ref="referenceB"></property>
     </bean>
     <!--服务暴露-开机-->
-    <dubbo:protocol name="dubbo" port="20990" />
-    <dubbo:service interface="com.jd.bdp.InterfaceA" ref="serviceA">
+    <dubbo:protocol name="dubbo" port="21990" />
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceA" ref="serviceA">
     </dubbo:service>
     <!--服务引用-->
-    <dubbo:reference id="referenceB" interface="com.jd.bdp.InterfaceB" check="false">
+    <dubbo:reference id="referenceB" interface="com.jd.bdp.service.inter.InterfaceB" check="false">
     </dubbo:reference>
 
 </beans>

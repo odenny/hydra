@@ -16,11 +16,6 @@ public class ServiceE implements InterfaceE {
         String myVoice = new String("E");
         String returnVoice = myVoice.toString();
         returnVoice = "(" + returnVoice + ")";
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
         return returnVoice;
     }
 }

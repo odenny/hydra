@@ -9,6 +9,7 @@ import com.taobao.metamorphosis.client.MessageSessionFactory;
 import com.taobao.metamorphosis.client.MetaClientConfig;
 import com.taobao.metamorphosis.client.MetaMessageSessionFactory;
 import com.taobao.metamorphosis.client.producer.MessageProducer;
+import com.taobao.metamorphosis.client.producer.SendResult;
 import com.taobao.metamorphosis.exception.MetaClientException;
 import com.taobao.metamorphosis.utils.ZkUtils;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class HydraServiceImpl implements HydraService {
     private static final Logger log = LoggerFactory.getLogger(HydraServiceImpl.class);
@@ -56,8 +58,10 @@ public class HydraServiceImpl implements HydraService {
         if(span != null){
             byte[] b = PB.toPBBytes(span);
             try {
-                messageProducer.sendMessage(new Message(topic,b));
-                rs = true;
+                SendResult sendResult = messageProducer.sendMessage(new Message(topic,b));
+                if (sendResult.isSuccess()){
+                    rs = true;
+                }
             } catch (MetaClientException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             } catch (InterruptedException e) {

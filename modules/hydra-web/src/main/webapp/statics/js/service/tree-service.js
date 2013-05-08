@@ -20,15 +20,13 @@ angular.module('hydra.services.tree', [])
         return {
             createTree: function (trace) {
                 var view = {};
-                var margin = {top: 20, right: 20, bottom: 20, left: 5};
-                $('#treeDiv').append('<div style="margin-top:' + margin.top + '"></div>')
+                var margin = {top: 20, right: 20, bottom: 0, left: 5};
                 view.w = $('#treeDiv').width();
-                view.h = 600 - margin.top;
                 view.i = 0;
                 view.barHeight = 20 * 1.2;
                 view.barWidth = view.w * 0.5;
                 view.duration = 400;
-                view.root;
+                view.h = trace.spanLength * view.barHeight;
 
                 view.tree = d3.layout.tree().size([view.h, 100]);
 
@@ -37,11 +35,11 @@ angular.module('hydra.services.tree', [])
                         return [d.y, d.x];
                     });
 
-                view.vis = d3.select("#treeDiv div").append("svg:svg")
+                view.vis = d3.select("#treeDiv").append("svg:svg")
                     .attr("width", view.w)
                     .attr("height", view.h)
                     .append("svg:g")
-                    .attr("transform", "translate(20,15)");
+                    .attr("transform", "translate(20,35)");
                 trace.treeView = view
             },
             createTreeDetail: function (trace, myScope) {

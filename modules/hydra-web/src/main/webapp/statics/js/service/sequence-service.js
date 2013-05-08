@@ -19,6 +19,7 @@ angular.module('hydra.services.sequence', [])
     .factory('sequenceService', function(){
         return {
             getMyTrace :function (trace, myScope) {
+                console.log(trace)
                 var span = trace.rootSpan;
                 var spanIndex = {index: 0}
                 getMySpan(span, spanIndex);
@@ -77,6 +78,7 @@ angular.module('hydra.services.sequence', [])
                         getMySpan(span.children[i], spanIndex);
                     }
                 }
+                trace.spanLength = spanIndex.index + 1;
             },
             getSpanMap:function(trace){
                 var spanMap = {};
@@ -93,14 +95,14 @@ angular.module('hydra.services.sequence', [])
             },
             createView:function (trace) {
                 var view = {};
-                var margin = {top: 20, right: 40, bottom: 20, left: 5};
+                var margin = {top: 20, right: 40, bottom:0, left: 5};
                 view.width = $('#sequenceDiv').width() - margin.right - margin.left;
-                view.height = 600 - margin.top - margin.bottom;
+                view.y = 20; // bar height
+
+                view.height = trace.spanLength * view.y * 1.2 - margin.top - margin.bottom;
 
                 view.x = d3.scale.linear()
                     .range([0, view.width]);
-
-                view.y = 20; // bar height
 
                 view.duration = 750;
                 view.delay = 25;
@@ -254,7 +256,8 @@ angular.module('hydra.services.sequence', [])
                         $(this).qtip({
                             style:{
                                 classes:'alert alert-success',
-                                width:300
+                                width:300,
+                                height:'auto'
                             },
                             position:{
                                 viewport: $(window)

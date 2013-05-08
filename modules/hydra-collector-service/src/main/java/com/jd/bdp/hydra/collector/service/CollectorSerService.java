@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * User: yfliuyu
@@ -27,7 +26,6 @@ public class CollectorSerService {
     private MessageConsumer consumer;
     private HbaseService hbaseService;
     private ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-    private AtomicLong c = new AtomicLong(0L);
 
     public void setConsumer(MessageConsumer consumer) {
         this.consumer = consumer;

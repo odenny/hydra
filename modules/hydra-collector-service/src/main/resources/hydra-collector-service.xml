@@ -57,7 +57,7 @@
         <constructor-arg>
             <bean class="com.taobao.metamorphosis.client.consumer.ConsumerConfig">
                 <!--  group name -->
-                <constructor-arg type="java.lang.String" value="meta-example"/>
+                <constructor-arg type="java.lang.String" value="meta-example1"/>
                 <!--  other options -->
                 <property name="maxDelayFetchTimeInMills" value="100"/>
             </bean>

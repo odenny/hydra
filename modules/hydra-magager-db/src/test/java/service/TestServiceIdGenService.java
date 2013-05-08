@@ -30,7 +30,7 @@ import java.util.Map;
  * Date: 13-4-16
  * Time: 上午11:05
  */
-public class ServiceIdGenServiceTest extends AbstractDependencyInjectionSpringContextTests {
+public class TestServiceIdGenService extends AbstractDependencyInjectionSpringContextTests {
 
     @Test
     public void testGetNewId(){

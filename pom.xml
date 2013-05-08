@@ -78,7 +78,6 @@
         <module>modules/hydra-collector-service</module>
         <module>modules/hydra-store</module>
         <module>modules/hydra-magager-db</module>
-        <module>modules/hydra-store</module>
     </modules>
 
     <properties>

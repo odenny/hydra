@@ -32,4 +32,6 @@ public interface TraceMapper {
     List<Trace> findTracesByDuration(String serviceId, Date startTime, int durationMin, int durationMax, int num);
     List<Trace> findTracesEx(String serviceId, Date startTime, int num);
 
+    public void addTrace(Trace t);
+
 }

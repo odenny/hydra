@@ -61,6 +61,10 @@ public class TraceMapperImpl implements TraceMapper{
         return (List<Trace>) sqlSession.selectList("findTracesEx", map);
     }
 
+    public void addTrace(Trace t) {
+        sqlSession.insert("addTrace",t);
+    }
+
     private SqlSessionTemplate sqlSession;
 
     public void setSqlSession(SqlSessionTemplate sqlSession) {

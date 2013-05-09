@@ -16,23 +16,23 @@
 
 package com.jd.bdp.hydra.mysql.persistent.dao.impl;
 
-import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper;
+import com.jd.bdp.hydra.mysql.persistent.dao.AnnotationMapper;
+import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
 import org.mybatis.spring.SqlSessionTemplate;
 
 /**
  * User: biandi
  * Date: 13-5-8
- * Time: 下午4:54
+ * Time: 下午3:29
  */
-public class SpanMapperImpl implements SpanMapper{
-
-    private SqlSessionTemplate sqlSession;
+public class AnnotationMapperImpl implements AnnotationMapper{
 
     @Override
-    public void addSpan(Span span) {
-        sqlSession.insert("addSpan",span);
+    public void addAnnotation(Absannotation absannotation) throws Exception {
+        sqlSession.insert("addAnnotation",absannotation);
     }
+
+    private SqlSessionTemplate sqlSession;
 
     public void setSqlSession(SqlSessionTemplate sqlSession) {
         this.sqlSession = sqlSession;

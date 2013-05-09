@@ -19,6 +19,10 @@ public class Absannotation {
     private String spanId;
     private String traceId;
 
+    public Absannotation(){
+
+    }
+
     public Absannotation(BinaryAnnotation binaryAnnotation){
         this.key = binaryAnnotation.getKey();
         this.ip = binaryAnnotation.getHost().getIp();

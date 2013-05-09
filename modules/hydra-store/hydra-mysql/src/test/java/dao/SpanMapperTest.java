@@ -16,7 +16,12 @@
 
 package dao;
 
+import com.jd.bdp.hydra.Span;
+import com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper;
+import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
+
+import java.util.List;
 
 /**
  * User: biandi
@@ -29,5 +34,17 @@ public class SpanMapperTest extends AbstractDependencyInjectionSpringContextTest
     protected String[] getConfigLocations() {
         String[] location = {"classpath:hydra-mysql.xml"};
         return location;
+    }
+
+    @Test
+    public void testFindSpanByTraceId(){
+        List<Span> list = spanMapper.findSpanByTraceId("161148");
+        assertEquals(1, list.size());
+    }
+
+    private SpanMapper spanMapper;
+
+    public void setSpanMapper(SpanMapper spanMapper) {
+        this.spanMapper = spanMapper;
     }
 }

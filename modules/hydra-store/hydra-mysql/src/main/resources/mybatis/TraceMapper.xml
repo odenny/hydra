@@ -35,7 +35,7 @@
         SELECT t.*, a.value FROM annotation a left join trace t on t.service=#{serviceId} and t.traceId = a.traceId and a.k='dubbo.exception' and <![CDATA[ date_format(t.time, '%Y-%m-%d %H-%i-%S') > #{startTime}]]> limit #{num}
     </select>
 
-    <insert id="addTrace" parameterType="TraceResultMap" >
+    <insert id="addTrace" parameterType="TraceEntity" >
         INSERT INTO trace (time,traceId,duration,service)
         VALUES(#{time}#{traceId},#{duration},#{service})
     </insert>

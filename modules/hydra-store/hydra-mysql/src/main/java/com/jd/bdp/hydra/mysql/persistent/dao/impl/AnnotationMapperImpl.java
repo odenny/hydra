@@ -16,20 +16,32 @@
 
 package com.jd.bdp.hydra.mysql.persistent.dao.impl;
 
+import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.mysql.persistent.dao.AnnotationMapper;
 import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
 import org.mybatis.spring.SqlSessionTemplate;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: biandi
  * Date: 13-5-8
  * Time: 下午3:29
  */
-public class AnnotationMapperImpl implements AnnotationMapper{
+public class AnnotationMapperImpl implements AnnotationMapper {
 
     @Override
     public void addAnnotation(Absannotation absannotation) throws Exception {
-        sqlSession.insert("addAnnotation",absannotation);
+        sqlSession.insert("addAnnotation", absannotation);
+    }
+
+    @Override
+    public List<Absannotation> getAnnotations(List<Span> list) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("spans", list);
+        return (List<Absannotation>)sqlSession.selectList("getAnnotations", map);
     }
 
     private SqlSessionTemplate sqlSession;

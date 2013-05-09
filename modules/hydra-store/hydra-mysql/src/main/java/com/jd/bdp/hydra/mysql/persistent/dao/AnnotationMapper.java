@@ -16,7 +16,10 @@
 
 package com.jd.bdp.hydra.mysql.persistent.dao;
 
+import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
+
+import java.util.List;
 
 /**
  * User: biandi
@@ -25,4 +28,5 @@ import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
  */
 public interface AnnotationMapper {
     public void addAnnotation(Absannotation absannotation)throws Exception;
+    List<Absannotation> getAnnotations(List<Span> list);
 }

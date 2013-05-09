@@ -48,4 +48,8 @@
     <bean id="spanMapper" class="com.jd.bdp.hydra.mysql.persistent.dao.impl.SpanMapperImpl">
         <property name="sqlSession" ref="sqlSessionTemplate"/>
     </bean>
+
+    <bean id="annotationMapper" class="com.jd.bdp.hydra.mysql.persistent.dao.impl.AnnotationMapperImpl">
+        <property name="sqlSession" ref="sqlSessionTemplate"/>
+    </bean>
 </beans>

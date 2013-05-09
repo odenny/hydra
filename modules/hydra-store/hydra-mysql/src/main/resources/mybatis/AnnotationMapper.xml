@@ -22,9 +22,15 @@
     <resultMap id="AnnResultMap" type="AnnEntity">
     </resultMap>
 
-    <insert id="addAnnotation" parameterType="AnnResultMap" >
+    <insert id="addAnnotation" parameterType="AnnEntity" >
         INSERT INTO annotation (k,value,ip,port,service,timestamp,duration,spanId,traceId)
         VALUES(#{key},#{value},#{ip},#{port},#{service},#{timestamp},#{duration},#{spanId},#{traceId})
     </insert>
 
+    <select id="getAnnotations" parameterType="Map" resultMap="AnnResultMap">
+        SELECT * FROM annotation WHERE spanId in
+        <foreach item="item" index="index" collection="spans" open="(" separator="," close=")" >
+            #{item.id}
+        </foreach>
+    </select>
 </mapper>

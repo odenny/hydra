@@ -20,13 +20,16 @@
 <mapper namespace="com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper">
 
     <resultMap id="SpanResultMap" type="SpanEntity">
-
+        <result property="serviceId" column="service" />
     </resultMap>
 
-    <insert id="addSpan" parameterType="SpanResultMap" >
+    <insert id="addSpan" parameterType="SpanEntity" >
         INSERT INTO span (name,traceId,parentId,spanId,service)
         VALUES(#{name},#{traceId},#{parentId},#{spanId},#{service})
     </insert>
 
+    <select id="findSpanByTraceId" parameterType="String" resultMap="SpanResultMap">
+        SELECT * FROM span WHERE traceId = #{traceId}
+    </select>
 
 </mapper>

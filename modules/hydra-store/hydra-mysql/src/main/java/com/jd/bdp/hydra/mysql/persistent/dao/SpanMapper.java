@@ -18,6 +18,8 @@ package com.jd.bdp.hydra.mysql.persistent.dao;
 
 import com.jd.bdp.hydra.Span;
 
+import java.util.List;
+
 /**
  * User: biandi
  * Date: 13-5-8
@@ -25,4 +27,5 @@ import com.jd.bdp.hydra.Span;
  */
 public interface SpanMapper {
     public void addSpan(Span span);
+    List<Span> findSpanByTraceId(String traceId);
 }

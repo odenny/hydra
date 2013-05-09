@@ -31,6 +31,9 @@ public class Trace {
     private Integer duration;
     private String service;
 
+    //查询用
+    private String annValue;
+
     public Integer getId() {
         return id;
     }
@@ -69,5 +72,13 @@ public class Trace {
 
     public void setService(String service) {
         this.service = service;
+    }
+
+    public String getAnnValue() {
+        return annValue;
+    }
+
+    public void setAnnValue(String annValue) {
+        this.annValue = annValue;
     }
 }

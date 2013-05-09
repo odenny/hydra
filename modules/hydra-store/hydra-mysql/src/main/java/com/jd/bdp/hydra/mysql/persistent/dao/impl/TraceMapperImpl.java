@@ -20,6 +20,7 @@ import com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper;
 import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
 import org.mybatis.spring.SqlSessionTemplate;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +32,34 @@ import java.util.Map;
  */
 public class TraceMapperImpl implements TraceMapper{
 
-    public List<Trace> findTrace(Long startTime, int num){
+    @Override
+    public List<Trace> findTraces(String serviceId, Date startTime, int num){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("startTime", startTime);
         map.put("num", num);
-        return (List<Trace>) sqlSession.selectList("findTrace", map);
+        map.put("serviceId", serviceId);
+        return (List<Trace>) sqlSession.selectList("findTraces", map);
     }
 
+    @Override
+    public List<Trace> findTracesByDuration(String serviceId, Date startTime, int durationMin, int durationMax, int num){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("serviceId", serviceId);
+        map.put("startTime", startTime);
+        map.put("num", num);
+        map.put("durationMin", durationMin);
+        map.put("durationMax", durationMax);
+        return (List<Trace>) sqlSession.selectList("findTracesByDuration", map);
+    }
 
+    @Override
+    public List<Trace> findTracesEx(String serviceId, Date startTime, int num) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startTime", startTime);
+        map.put("num", num);
+        map.put("serviceId", serviceId);
+        return (List<Trace>) sqlSession.selectList("findTracesEx", map);
+    }
 
     private SqlSessionTemplate sqlSession;
 

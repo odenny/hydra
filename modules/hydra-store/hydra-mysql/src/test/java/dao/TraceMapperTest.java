@@ -40,8 +40,20 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
 
     @Test
     public void testFindTraces(){
-        List<Trace> list = traceMapper.findTrace(1368002575499L, 1);
-        assertEquals(3, list.size());
+        List<Trace> list = traceMapper.findTraces("161148", new Date(1368002575499L), 3);
+        assertEquals(1, list.size());
+    }
+
+    @Test
+    public void testFindTracesByDuration(){
+        List<Trace> list = traceMapper.findTracesByDuration("161148", new Date(1368002575499L), 10, 20, 1);
+        assertEquals(1, list.size());
+    }
+
+    @Test
+    public void testFindTracesEx(){
+        List<Trace> list = traceMapper.findTracesEx("161148", new Date(1368002575499L), 3);
+        assertEquals(1, list.size());
     }
 
     private TraceMapper traceMapper;
@@ -49,5 +61,6 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
     public void setTraceMapper(TraceMapper traceMapper) {
         this.traceMapper = traceMapper;
     }
+
 
 }

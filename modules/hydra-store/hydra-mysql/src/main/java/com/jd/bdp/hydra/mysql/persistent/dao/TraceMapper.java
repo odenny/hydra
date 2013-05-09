@@ -18,6 +18,7 @@ package com.jd.bdp.hydra.mysql.persistent.dao;
 
 import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +28,8 @@ import java.util.List;
  */
 public interface TraceMapper {
 
-    List<Trace> findTrace(Long startTime, int num);
+    List<Trace> findTraces(String serviceId, Date startTime, int num);
+    List<Trace> findTracesByDuration(String serviceId, Date startTime, int durationMin, int durationMax, int num);
+    List<Trace> findTracesEx(String serviceId, Date startTime, int num);
 
 }

@@ -20,10 +20,18 @@
 <mapper namespace="com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper">
 
     <resultMap id="TraceResultMap" type="TraceEntity">
-
+        <result property="annValue" column="value" />
     </resultMap>
 
-    <select id="findTrace" parameterType="map" resultMap="TraceResultMap">
-        SELECT * FROM trace WHERE time >=#{startTime} limit #{num}
+    <select id="findTraces" parameterType="map" resultMap="TraceResultMap">
+        SELECT * FROM trace where service=#{serviceId} and <![CDATA[ date_format(time, '%Y-%m-%d %H-%i-%S') > #{startTime}]]> limit #{num}
+    </select>
+
+    <select id="findTracesByDuration" parameterType="map" resultMap="TraceResultMap">
+        SELECT * FROM trace WHERE service=#{serviceId} and <![CDATA[ date_format(time, '%Y-%m-%d %H-%i-%S') > #{startTime} and duration <= #{durationMax} and duration >= #{durationMin}]]> limit #{num}
+    </select>
+
+    <select id="findTracesEx" parameterType="map" resultMap="TraceResultMap">
+        SELECT t.*, a.value FROM annotation a left join trace t on t.service=#{serviceId} and t.traceId = a.traceId and a.k='dubbo.exception' and <![CDATA[ date_format(t.time, '%Y-%m-%d %H-%i-%S') > #{startTime}]]> limit #{num}
     </select>
 </mapper>

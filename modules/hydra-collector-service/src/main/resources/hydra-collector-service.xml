@@ -21,7 +21,6 @@
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
         default-autowire="byName">
 
-    <bean id="hbaseService" class="com.jd.bdp.hydra.hbase.service.impl.HbaseServiceImpl"/>
     <bean id="collectorSerService" class="com.jd.bdp.hydra.collector.service.CollectorSerService" >
         <property name="topic" value="hydra_test"></property>
     </bean>

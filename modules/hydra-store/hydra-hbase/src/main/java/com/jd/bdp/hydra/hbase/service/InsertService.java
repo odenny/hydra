@@ -25,7 +25,7 @@ import java.io.IOException;
  * Date: 13-4-16
  * Time: 上午11:04
   */
-public interface HbaseService {
+public interface InsertService {
     public void addSpan(Span span)throws IOException;
     public void annotationIndex(Span span)throws IOException;
     public void durationIndex(Span span)throws  IOException;

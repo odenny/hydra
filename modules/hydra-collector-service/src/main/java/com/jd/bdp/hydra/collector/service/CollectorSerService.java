@@ -1,7 +1,7 @@
 package com.jd.bdp.hydra.collector.service;
 
 import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.hbase.service.HbaseService;
+import com.jd.bdp.hydra.hbase.service.InsertService;
 import com.jd.dd.glowworm.PB;
 import com.taobao.metamorphosis.Message;
 import com.taobao.metamorphosis.client.consumer.MessageConsumer;
@@ -24,15 +24,15 @@ public class CollectorSerService {
     private static final Logger log = LoggerFactory.getLogger(CollectorSerService.class);
     private String topic;
     private MessageConsumer consumer;
-    private HbaseService hbaseService;
+    private InsertService insertService;
     private ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     public void setConsumer(MessageConsumer consumer) {
         this.consumer = consumer;
     }
 
-    public void setHbaseService(HbaseService hbaseService) {
-        this.hbaseService = hbaseService;
+    public void setInsertService(InsertService insertService) {
+        this.insertService = insertService;
     }
 
     public void setTopic(String topic) {
@@ -65,9 +65,9 @@ public class CollectorSerService {
         }
         try{
           for(Span s : spanList){
-              hbaseService.addSpan(s);
-              hbaseService.annotationIndex(s);
-              hbaseService.durationIndex(s);
+              insertService.addSpan(s);
+              insertService.annotationIndex(s);
+              insertService.durationIndex(s);
           }
         }catch (Exception e){
             log.error(e.getMessage());

@@ -20,7 +20,7 @@ import com.alibaba.fastjson.JSON;
 import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.hbase.service.HbaseService;
+import com.jd.bdp.hydra.hbase.service.InsertService;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.client.*;
@@ -55,7 +55,7 @@ Qualifier:{
 	traceId
 }
  */
-public class HbaseServiceImpl extends HbaseUtils implements HbaseService {
+public class InsertServiceImpl extends HbaseUtils implements InsertService {
 
     public void createTable() {
         try {

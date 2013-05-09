@@ -19,7 +19,7 @@ package com.jd.bdp.hydra.hbase.service;
 import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.Endpoint;
 import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.hbase.service.impl.HbaseServiceImpl;
+import com.jd.bdp.hydra.hbase.service.impl.InsertServiceImpl;
 
 /**
  * User: biandi
@@ -29,7 +29,7 @@ import com.jd.bdp.hydra.hbase.service.impl.HbaseServiceImpl;
 public class HbaseServiceTest {
 
     public static void main(String[] args){
-        HbaseServiceImpl hbaseService = new HbaseServiceImpl();
+        InsertServiceImpl hbaseService = new InsertServiceImpl();
         for(int i = 0 ; i < 100;i++){
             if(i%2 == 0){
                 Span span = new Span();

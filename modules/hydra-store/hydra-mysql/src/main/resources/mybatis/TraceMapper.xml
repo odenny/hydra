@@ -26,4 +26,11 @@
     <select id="findTrace" parameterType="map" resultMap="TraceResultMap">
         SELECT * FROM trace WHERE time >=#{startTime} limit #{num}
     </select>
+
+    <insert id="addTrace" parameterType="TraceResultMap" >
+        INSERT INTO trace (time,traceId,duration,service)
+        VALUES(#{time}#{traceId},#{duration},#{service})
+    </insert>
+
+
 </mapper>

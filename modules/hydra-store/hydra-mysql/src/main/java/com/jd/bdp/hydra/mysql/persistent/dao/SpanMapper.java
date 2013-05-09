@@ -16,10 +16,13 @@
 
 package com.jd.bdp.hydra.mysql.persistent.dao;
 
+import com.jd.bdp.hydra.Span;
+
 /**
  * User: biandi
  * Date: 13-5-8
  * Time: 下午4:53
  */
 public interface SpanMapper {
+    public void addSpan(Span span);
 }

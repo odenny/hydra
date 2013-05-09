@@ -29,4 +29,6 @@ public interface TraceMapper {
 
     List<Trace> findTrace(Long startTime, int num);
 
+    public void addTrace(Trace t);
+
 }

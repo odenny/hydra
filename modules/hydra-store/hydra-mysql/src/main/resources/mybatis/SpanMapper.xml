@@ -23,5 +23,10 @@
 
     </resultMap>
 
+    <insert id="addSpan" parameterType="SpanResultMap" >
+        INSERT INTO span (name,traceId,parentId,spanId,service)
+        VALUES(#{name},#{traceId},#{parentId},#{spanId},#{service})
+    </insert>
+
 
 </mapper>

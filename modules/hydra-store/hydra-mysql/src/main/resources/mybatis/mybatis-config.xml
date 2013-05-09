@@ -23,9 +23,11 @@
     <typeAliases>
         <typeAlias alias="TraceEntity" type="com.jd.bdp.hydra.mysql.persistent.entity.Trace" />
         <typeAlias alias="SpanEntity" type="com.jd.bdp.hydra.Span" />
+        <typeAlias alias="AnnEntity" type="com.jd.bdp.hydra.mysql.persistent.entity.Absannotation" />
     </typeAliases>
     <mappers>
         <mapper resource="mybatis/TraceMapper.xml"/>
         <mapper resource="mybatis/SpanMapper.xml"/>
+        <mapper resource="mybatis/AnnotationMapper.xml"/>
     </mappers>
 </configuration>

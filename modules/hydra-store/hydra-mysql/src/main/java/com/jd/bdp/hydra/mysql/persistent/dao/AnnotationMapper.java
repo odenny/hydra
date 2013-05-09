@@ -14,27 +14,15 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.hydra.mysql.persistent.dao.impl;
+package com.jd.bdp.hydra.mysql.persistent.dao;
 
-import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper;
-import org.mybatis.spring.SqlSessionTemplate;
+import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
 
 /**
  * User: biandi
  * Date: 13-5-8
- * Time: 下午4:54
+ * Time: 下午3:29
  */
-public class SpanMapperImpl implements SpanMapper{
-
-    private SqlSessionTemplate sqlSession;
-
-    @Override
-    public void addSpan(Span span) {
-        sqlSession.insert("addSpan",span);
-    }
-
-    public void setSqlSession(SqlSessionTemplate sqlSession) {
-        this.sqlSession = sqlSession;
-    }
+public interface AnnotationMapper {
+    public void addAnnotation(Absannotation absannotation)throws Exception;
 }

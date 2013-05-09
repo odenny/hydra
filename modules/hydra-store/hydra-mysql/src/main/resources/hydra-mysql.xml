@@ -52,4 +52,7 @@
     <bean id="annotationMapper" class="com.jd.bdp.hydra.mysql.persistent.dao.impl.AnnotationMapperImpl">
         <property name="sqlSession" ref="sqlSessionTemplate"/>
     </bean>
+
+    <bean id="insertService" class="com.jd.bdp.hydra.mysql.service.impl.InsertServiceImpl" />
+    <bean id="queryService" class="com.jd.bdp.hydra.mysql.service.impl.QueryServiceImpl" />
 </beans>

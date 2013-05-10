@@ -14,51 +14,16 @@
     <packaging>pom</packaging>
     <name>HYDRA EXAMPLE</name>
     <modules>
+        <module>hydra-example-exp1</module>
         <module>hydra-example-exp2</module>
-        <module>hydra-example-benchmark</module>
-        <module>hydra-example-test</module>
     </modules>
-    <dependencies>
-        <!--测试hydra-client-->
-        <dependency>
-            <groupId>com.jd.bdp</groupId>
-            <artifactId>hydra-client</artifactId>
-        </dependency>
-        <!--测试hydra-manager-->
-        <dependency>
-            <groupId>com.jd.bdp</groupId>
-            <artifactId>hydra-manager</artifactId>
-        </dependency>
-        <!--测试hydra-collector-->
-        <dependency>
-            <groupId>com.jd.bdp</groupId>
-            <artifactId>hydra-collector</artifactId>
-        </dependency>
-        <!-- 测试hydra-collector-service -->
-        <dependency>
-            <groupId>com.jd.bdp</groupId>
-            <artifactId>hydra-collector-service</artifactId>
-        </dependency>
 
+    <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.sgroschupf</groupId>
-            <artifactId>zkclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <!-- compiler插件, 设定JDK版本 -->

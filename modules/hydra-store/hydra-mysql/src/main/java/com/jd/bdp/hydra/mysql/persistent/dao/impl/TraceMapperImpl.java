@@ -65,6 +65,11 @@ public class TraceMapperImpl implements TraceMapper{
         sqlSession.insert("addTrace",t);
     }
 
+    @Override
+    public void deleteAllTraces(){
+        sqlSession.delete("deleteAllTraces");
+    }
+
     private SqlSessionTemplate sqlSession;
 
     public void setSqlSession(SqlSessionTemplate sqlSession) {

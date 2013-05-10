@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:dubbo-global.properties"/>
+    <!--application配置-->
+    <dubbo:application name="${dubbo.application.name}" owner="${dubbo.application.owner}"/>
+    <!--registry配置-->
+    <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}"/>
+
+    <bean id="serviceB" class="com.jd.bdp.service.impl.ServiceB">
+        <property name="downService" ref="referenceC"></property>
+    </bean>
+    <dubbo:registry file="b" />
+    <dubbo:protocol name="dubbo" port="20991" />
+    <dubbo:service interface="com.jd.bdp.service.inter.InterfaceB" ref="serviceB" >
+    </dubbo:service>
+    <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false">
+    </dubbo:reference>
+
+</beans>

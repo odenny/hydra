@@ -33,7 +33,7 @@ public class ServiceMapperTest extends AbstractDependencyInjectionSpringContextT
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"classpath:/hydra-manager-db.xml"};
+        String[] location = {"classpath:/hydra-manager-db-test.xml"};
         return location;
     }
 

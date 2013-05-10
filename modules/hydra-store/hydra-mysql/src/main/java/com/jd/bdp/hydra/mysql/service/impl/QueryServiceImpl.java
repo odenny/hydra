@@ -1,5 +1,6 @@
 package com.jd.bdp.hydra.mysql.service.impl;
 
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -163,7 +164,7 @@ public class QueryServiceImpl implements QueryService {
         for (Trace trace : list) {
             JSONObject obj = new JSONObject();
             obj.put("serviceId", trace.getService());
-            obj.put("timestamp", trace.getTime().getTime());
+            obj.put("timestamp", trace.getTime());
             obj.put("duration", trace.getDuration());
             obj.put("traceId", trace.getTraceId());
             array.add(obj);
@@ -178,7 +179,7 @@ public class QueryServiceImpl implements QueryService {
         for (Trace trace : list) {
             JSONObject obj = new JSONObject();
             obj.put("serviceId", trace.getService());
-            obj.put("timestamp", trace.getTime().getTime());
+            obj.put("timestamp", trace.getTime());
             obj.put("exInfo", trace.getAnnValue());
             obj.put("traceId", trace.getTraceId());
             array.add(obj);

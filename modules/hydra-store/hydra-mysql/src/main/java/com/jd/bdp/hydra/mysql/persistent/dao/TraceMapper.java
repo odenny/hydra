@@ -33,5 +33,6 @@ public interface TraceMapper {
     List<Trace> findTracesEx(String serviceId, Date startTime, int num);
 
     public void addTrace(Trace t);
+    void deleteAllTraces();//只用于测试
 
 }

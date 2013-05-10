@@ -22,6 +22,10 @@
             <artifactId>hydra-interface</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-mysql</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
         </dependency>

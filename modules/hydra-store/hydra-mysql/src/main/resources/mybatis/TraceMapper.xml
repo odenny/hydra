@@ -40,5 +40,7 @@
         VALUES(#{time}#{traceId},#{duration},#{service})
     </insert>
 
-
+    <delete id="deleteAllTraces">
+        delete from trace
+    </delete>
 </mapper>

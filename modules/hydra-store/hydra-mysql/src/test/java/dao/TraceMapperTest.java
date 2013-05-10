@@ -34,7 +34,7 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"classpath:hydra-mysql.xml"};
+        String[] location = {"classpath:hydra-mysql-test.xml"};
         return location;
     }
 
@@ -54,6 +54,11 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
     public void testFindTracesEx(){
         List<Trace> list = traceMapper.findTracesEx("161148", new Date(1368002575499L), 3);
         assertEquals(1, list.size());
+    }
+
+    private void prepareTestTraces(){
+        Trace t1 = new Trace();
+        t1.set
     }
 
     private TraceMapper traceMapper;

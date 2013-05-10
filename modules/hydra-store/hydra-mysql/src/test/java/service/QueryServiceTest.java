@@ -30,7 +30,7 @@ public class QueryServiceTest extends AbstractDependencyInjectionSpringContextTe
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"classpath:hydra-mysql.xml"};
+        String[] location = {"classpath:hydra-mysql-test.xml"};
         return location;
     }
 

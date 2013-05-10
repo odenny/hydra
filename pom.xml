@@ -78,6 +78,7 @@
         <module>modules/hydra-collector-service</module>
         <module>modules/hydra-store</module>
         <module>modules/hydra-manager-db</module>
+        <module>modules/hydra-test</module>
     </modules>
 
     <properties>
@@ -106,6 +107,7 @@
         <hadoop-common.version>bdp-2.0.0-cdh4.1.1</hadoop-common.version>
         <hbase.version>bdp-0.92.1-cdh4.1.1</hbase.version>
         <commons-configuration.version>1.9</commons-configuration.version>
+        <commons-lang.version>2.6</commons-lang.version>
     </properties>
 
 
@@ -271,6 +273,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!-- log -->
             <dependency>
@@ -360,6 +368,12 @@
                 <artifactId>google-collections</artifactId>
                 <version>${google-collections.version}</version>
             </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

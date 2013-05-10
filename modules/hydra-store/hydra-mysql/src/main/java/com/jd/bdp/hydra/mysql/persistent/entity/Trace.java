@@ -16,8 +16,6 @@
 
 package com.jd.bdp.hydra.mysql.persistent.entity;
 
-import java.sql.Timestamp;
-
 /**
  * User: biandi
  * Date: 13-5-8
@@ -26,7 +24,7 @@ import java.sql.Timestamp;
 public class Trace {
 
     private Integer id;
-    private Timestamp time;
+    private Long time;
     private Long traceId;
     private Integer duration;
     private String service;
@@ -42,11 +40,11 @@ public class Trace {
         this.id = id;
     }
 
-    public Timestamp getTime() {
+    public Long getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 

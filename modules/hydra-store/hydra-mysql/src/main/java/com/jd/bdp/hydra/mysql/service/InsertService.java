@@ -12,6 +12,6 @@ import java.io.IOException;
 public interface InsertService {
 
     public void addSpan(Span span)throws IOException;
-    public void annotationIndex(Span span)throws IOException;
-    public void durationIndex(Span span)throws  IOException;
+    public void addTrace(Span span)throws IOException;
+    public void addAnnotation(Span span)throws  IOException;
 }

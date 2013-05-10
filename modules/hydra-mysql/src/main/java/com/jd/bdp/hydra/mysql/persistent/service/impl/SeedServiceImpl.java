@@ -55,7 +55,8 @@ public class SeedServiceImpl implements SeedService {
                 result = insertData.getValue().longValue();
             }
         } catch (Exception e) {
-            log.error("seed persistent into the database occur error,will use default seed", e);
+            log.error("seed persistent into the database occur error,will use default seed");
+            result=0L;
         }
         if (result != null && result >= MAX_STEP) {
             log.warn("seed has bean used over! please insure the stability of the system~");

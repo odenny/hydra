@@ -78,6 +78,7 @@
         <module>modules/hydra-collector-service</module>
         <module>modules/hydra-hbase</module>
         <module>modules/hydra-mysql</module>
+        <module>modules/hydra-test</module>
     </modules>
 
     <properties>
@@ -155,6 +156,11 @@
             <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-mysql</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-example</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- test -->
@@ -266,13 +272,14 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!-- log -->
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback-classic.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>

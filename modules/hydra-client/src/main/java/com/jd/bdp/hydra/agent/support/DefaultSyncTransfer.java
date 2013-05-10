@@ -102,6 +102,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
                     }
 
                 } catch (Throwable e) {
+                    e.printStackTrace();
                     logger.info(e.getMessage());
                 }
             }
@@ -164,7 +165,6 @@ public class DefaultSyncTransfer implements SyncTransfer {
     public Long getTraceId() {
         return generateTraceId.getTraceId();
     }
-
     @Override
     public Long getSpanId() {
         return generateTraceId.getTraceId();//fixme:getSpanId

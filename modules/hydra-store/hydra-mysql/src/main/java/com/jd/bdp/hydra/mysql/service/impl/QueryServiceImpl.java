@@ -1,6 +1,6 @@
 package com.jd.bdp.hydra.mysql.service.impl;
 
-import com.alibaba.dubbo.common.json.JSONArray;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jd.bdp.hydra.mysql.service.QueryService;
 

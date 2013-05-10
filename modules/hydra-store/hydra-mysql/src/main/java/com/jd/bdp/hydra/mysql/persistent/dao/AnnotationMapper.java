@@ -27,6 +27,6 @@ import java.util.List;
  * Time: 下午3:29
  */
 public interface AnnotationMapper {
-    public void addAnnotation(Absannotation absannotation)throws Exception;
+    public void addAnnotation(Absannotation absannotation);
     List<Absannotation> getAnnotations(List<Span> list);
 }

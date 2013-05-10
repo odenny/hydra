@@ -24,7 +24,7 @@
     </resultMap>
 
     <select id="findTraces" parameterType="map" resultMap="TraceResultMap">
-        SELECT * FROM trace where service=#{serviceId} and <![CDATA[ date_format(time, '%Y-%m-%d %H-%i-%S') > #{startTime}]]> limit #{num}
+        SELECT * FROM trace where service=#{serviceId} and <![CDATA[ time>= #{startTime}]]> limit #{num}
     </select>
 
     <select id="findTracesByDuration" parameterType="map" resultMap="TraceResultMap">
@@ -37,7 +37,7 @@
 
     <insert id="addTrace" parameterType="TraceEntity" >
         INSERT INTO trace (time,traceId,duration,service)
-        VALUES(#{time}#{traceId},#{duration},#{service})
+        VALUES(#{time}, #{traceId},#{duration},#{service})
     </insert>
 
     <delete id="deleteAllTraces">

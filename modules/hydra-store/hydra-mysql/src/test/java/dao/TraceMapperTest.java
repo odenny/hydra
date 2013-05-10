@@ -40,8 +40,19 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
 
     @Test
     public void testFindTraces(){
-        List<Trace> list = traceMapper.findTraces("161148", new Date(1368002575499L), 3);
-        assertEquals(1, list.size());
+        try {
+            prepareTestTraces();
+            List<Trace> list = traceMapper.findTraces("161148", 1368002575490L, 3);
+            assertEquals(3, list.size());
+            for (int i = 0; i < list.size(); i++) {
+                assertEquals("161148", list.get(i).getService());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            traceMapper.deleteAllTraces();
+        }
+
     }
 
     @Test
@@ -58,7 +69,40 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
 
     private void prepareTestTraces(){
         Trace t1 = new Trace();
-        t1.set
+        t1.setTraceId(1368002575499L);
+        t1.setDuration(10);
+        t1.setService("161148");
+        t1.setTime(1368002575499L);
+
+        Trace t2 = new Trace();
+        t2.setTraceId(1368002575498L);
+        t2.setDuration(15);
+        t2.setService("161148");
+        t2.setTime(1368002575499L);
+
+        Trace t3 = new Trace();
+        t3.setTraceId(1368002575497L);
+        t3.setDuration(15);
+        t3.setService("161149");
+        t3.setTime(1368002575499L);
+
+        Trace t4 = new Trace();
+        t4.setTraceId(1368002575496L);
+        t4.setDuration(15);
+        t4.setService("161149");
+        t4.setTime(1368002575499L);
+
+        Trace t5 = new Trace();
+        t5.setTraceId(1368002575495L);
+        t5.setDuration(20);
+        t5.setService("161148");
+        t5.setTime(1368002575499L);
+
+        traceMapper.addTrace(t1);
+        traceMapper.addTrace(t2);
+        traceMapper.addTrace(t3);
+        traceMapper.addTrace(t4);
+        traceMapper.addTrace(t5);
     }
 
     private TraceMapper traceMapper;

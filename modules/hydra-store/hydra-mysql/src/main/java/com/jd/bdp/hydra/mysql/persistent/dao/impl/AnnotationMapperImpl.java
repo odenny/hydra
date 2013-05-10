@@ -33,7 +33,7 @@ import java.util.Map;
 public class AnnotationMapperImpl implements AnnotationMapper {
 
     @Override
-    public void addAnnotation(Absannotation absannotation) throws Exception {
+    public void addAnnotation(Absannotation absannotation){
         sqlSession.insert("addAnnotation", absannotation);
     }
 

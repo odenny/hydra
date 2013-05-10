@@ -33,7 +33,7 @@ import java.util.Map;
 public class TraceMapperImpl implements TraceMapper{
 
     @Override
-    public List<Trace> findTraces(String serviceId, Date startTime, int num){
+    public List<Trace> findTraces(String serviceId, Long startTime, int num){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("startTime", startTime);
         map.put("num", num);

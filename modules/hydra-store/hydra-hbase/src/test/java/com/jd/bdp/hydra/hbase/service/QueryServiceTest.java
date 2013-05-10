@@ -29,6 +29,7 @@ public class QueryServiceTest {
 
     public void testPutAndGet() {
         QueryServiceImpl queryService = new QueryServiceImpl();
+        queryService.getTraceInfo(123L);
 //        Date date1 = new Date(1366264570484L);
 //        System.out.println(date1);
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd   HH:00:00");

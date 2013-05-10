@@ -153,56 +153,57 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     }
 
     private JSONObject assembleTrace(List<KeyValue> list) {
-        int annNum = 0;
         JSONObject trace = new JSONObject();
         Map<String, JSONObject> map = new HashMap<String, JSONObject>();
-        for (KeyValue kv : list) {
-            JSONObject content = JSON.parseObject(new String(kv.getValue()));
-            annNum = annNum + content.getJSONArray("annotations").size();
-            JSONObject spanAleadyExist;
-            if (map.containsKey(content.get("id").toString())) {//凑齐第二个半个span后
-                spanAleadyExist = map.get(content.get("id").toString());
-                if (!spanAleadyExist.containsKey("serviceId")) {
-                    spanAleadyExist.put("serviceId", content.get("serviceId"));
-                }
-                if (isClientSpan(kv)) {
-                    spanAleadyExist.put("durationClient", getDurationClient(content));
+        if (list != null){
+            for (KeyValue kv : list) {
+                JSONObject content = JSON.parseObject(new String(kv.getValue()));
+                JSONObject spanAleadyExist;
+                if (map.containsKey(content.get("id").toString())) {//凑齐第二个半个span后
+                    spanAleadyExist = map.get(content.get("id").toString());
+                    if (!spanAleadyExist.containsKey("serviceId")) {
+                        spanAleadyExist.put("serviceId", content.get("serviceId"));
+                    }
+                    if (isClientSpan(kv)) {
+                        spanAleadyExist.put("durationClient", getDurationClient(content));
+                    } else {
+                        spanAleadyExist.put("durationServer", getDurationServer(content));
+                    }
+                    ((JSONArray) spanAleadyExist.get("annotations")).addAll((JSONArray) content.get("annotations"));
+                    handleTheMinAndMaxTimestamp(trace, spanAleadyExist);
                 } else {
-                    spanAleadyExist.put("durationServer", getDurationServer(content));
+                    spanAleadyExist = content;
+                    if (isClientSpan(kv)) {
+                        spanAleadyExist.put("durationClient", getDurationClient(content));
+                    } else {
+                        spanAleadyExist.put("durationServer", getDurationServer(content));
+                    }
+                    map.put(content.get("id").toString(), spanAleadyExist);
                 }
-                ((JSONArray) spanAleadyExist.get("annotations")).addAll((JSONArray) content.get("annotations"));
-                handleTheMinAndMaxTimestamp(trace, spanAleadyExist);
-            } else {
-                spanAleadyExist = content;
-                if (isClientSpan(kv)) {
-                    spanAleadyExist.put("durationClient", getDurationClient(content));
+                if (!spanAleadyExist.containsKey("exception")) {
+                    handleException(spanAleadyExist, content);
+                }
+            }
+            boolean isAvailable = true;
+            for (Map.Entry<String, JSONObject> entry : map.entrySet()) {
+                JSONObject mySpan = entry.getValue();
+                if (!mySpan.containsKey("parentId")) {
+                    trace.put("rootSpan", mySpan);
+                    trace.put("traceId", mySpan.get("traceId"));
                 } else {
-                    spanAleadyExist.put("durationServer", getDurationServer(content));
+                    JSONObject myFather = map.get(mySpan.get("parentId").toString());
+                    if (myFather.containsKey("children")) {
+                        ((JSONArray) myFather.get("children")).add(mySpan);
+                    } else {
+                        JSONArray children = new JSONArray();
+                        children.add(mySpan);
+                        myFather.put("children", children);
+                    }
                 }
-                map.put(content.get("id").toString(), spanAleadyExist);
+                isAvailable = isAvailable && isSpanAvailable(mySpan);
             }
-            if (!spanAleadyExist.containsKey("exception")) {
-                handleException(spanAleadyExist, content);
-            }
+            trace.put("available", isAvailable);
         }
-        boolean isAvailable = true;
-        for (Map.Entry<String, JSONObject> entry : map.entrySet()) {
-            if (!entry.getValue().containsKey("parentId")) {
-                trace.put("rootSpan", entry.getValue());
-                trace.put("traceId", entry.getValue().get("traceId"));
-            } else {
-                JSONObject myFather = map.get(entry.getValue().get("parentId").toString());
-                if (myFather.containsKey("children")) {
-                    ((JSONArray) myFather.get("children")).add(entry.getValue());
-                } else {
-                    JSONArray children = new JSONArray();
-                    children.add(entry.getValue());
-                    myFather.put("children", children);
-                }
-            }
-            isAvailable = isAvailable && isSpanAvailable(entry.getValue());
-        }
-        trace.put("available", isAvailable);
         return trace;
     }
 

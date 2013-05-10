@@ -20,6 +20,7 @@
 <mapper namespace="com.jd.bdp.hydra.mysql.persistent.dao.Annotation">
 
     <resultMap id="AnnResultMap" type="AnnEntity">
+        <result property="key" column="k" />
     </resultMap>
 
     <insert id="addAnnotation" parameterType="AnnEntity" >

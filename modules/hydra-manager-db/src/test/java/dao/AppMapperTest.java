@@ -31,7 +31,7 @@ public class AppMapperTest extends AbstractDependencyInjectionSpringContextTests
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"classpath:hydra-mysql.xml"};
+        String[] location = {"classpath:hydra-manager-db.xml"};
         return location;
     }
 

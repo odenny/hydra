@@ -1,0 +1,10 @@
+<configuration>
+    <property>
+        <name>hbase.client.retries.number</name>
+        <value>3</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>boss,emp1,emp2</value>
+    </property>
+</configuration>

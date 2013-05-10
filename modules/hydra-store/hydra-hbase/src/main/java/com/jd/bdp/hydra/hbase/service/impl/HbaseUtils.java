@@ -43,10 +43,12 @@ public class HbaseUtils {
     public static final String DUBBO_EXCEPTION = "dubbo.exception";
 
     static {
-        conf.set("hbase.zookeeper.quorum", "boss,emp1,emp2");
-        conf.set("hbase.client.retries.number", "3");
+//        conf.set("hbase.zookeeper.quorum", "boss,emp1,emp2");
+//        conf.set("hbase.client.retries.number", "3");
         POOL = new HTablePool(conf, 2);
     }
+
+
 
     Annotation getSsAnnotation(List<Annotation> alist){
         for(Annotation a : alist){

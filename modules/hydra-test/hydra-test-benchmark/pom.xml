@@ -20,8 +20,7 @@
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api-1.5.8</artifactId>
-            <version>1.5.8</version>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>

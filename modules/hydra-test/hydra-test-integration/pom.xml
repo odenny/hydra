@@ -124,6 +124,7 @@
         <profile>
             <id>runtime-env-windows</id>
             <activation>
+                <activeByDefault>true</activeByDefault>
                 <property>
                     <name>runtime-env</name>
                     <value>windows</value>
@@ -137,7 +138,6 @@
         <profile>
             <id>runtime-env-linux</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
                 <property>
                     <name>runtime-env</name>
                     <value>linux</value>

@@ -13,13 +13,19 @@ public class ServiceC2 implements InterfaceC2 {
     public Object functionC2(Object... objects) {
         String myVoice = new String("C2");
         String returnVoice = myVoice.toString();
-
+        if(serviceD1!=null){
+            Object result=serviceD1.functionD1(objects,myVoice);
+            returnVoice = returnVoice + "" + result.toString();
+        }
+        if(serviceD2!=null){
+            Object result=serviceD2.functionD2(objects,myVoice);
+            returnVoice = returnVoice + "," + result.toString();
+        }
         returnVoice = "(" + returnVoice + ")";
         return returnVoice;
     }
 
 
-    //并发调用D1和D2
     private InterfaceD1 serviceD1;
     private InterfaceD2 serviceD2;
 

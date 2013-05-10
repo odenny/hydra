@@ -26,7 +26,8 @@ public class ServiceC1 implements InterfaceC1 {
 
     private InterfaceE serviceE;
 
-    public InterfaceE getServiceE() {
-        return serviceE;
+
+    public void setServiceE(InterfaceE serviceE) {
+        this.serviceE = serviceE;
     }
 }

@@ -76,8 +76,8 @@
         <module>modules/hydra-manager</module>
         <module>modules/hydra-collector</module>
         <module>modules/hydra-collector-service</module>
-        <module>modules/hydra-hbase</module>
-        <module>modules/hydra-mysql</module>
+        <module>modules/hydra-store</module>
+        <module>modules/hydra-manager-db</module>
         <module>modules/hydra-test</module>
     </modules>
 
@@ -160,7 +160,7 @@
             </dependency>
             <dependency>
                 <groupId>com.jd.bdp</groupId>
-                <artifactId>hydra-example</artifactId>
+                <artifactId>hydra-manager-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- test -->
@@ -280,6 +280,11 @@
                 </exclusions>
             </dependency>
             <!-- log -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>

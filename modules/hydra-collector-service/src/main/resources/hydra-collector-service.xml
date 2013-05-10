@@ -21,7 +21,6 @@
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
         default-autowire="byName">
 
-    <bean id="hbaseService" class="com.jd.bdp.hydra.hbase.service.impl.HbaseServiceImpl"/>
     <bean id="collectorSerService" class="com.jd.bdp.hydra.collector.service.CollectorSerService" >
         <property name="topic" value="hydra_test"></property>
     </bean>
@@ -57,7 +56,7 @@
         <constructor-arg>
             <bean class="com.taobao.metamorphosis.client.consumer.ConsumerConfig">
                 <!--  group name -->
-                <constructor-arg type="java.lang.String" value="meta-example"/>
+                <constructor-arg type="java.lang.String" value="meta-example1"/>
                 <!--  other options -->
                 <property name="maxDelayFetchTimeInMills" value="100"/>
             </bean>

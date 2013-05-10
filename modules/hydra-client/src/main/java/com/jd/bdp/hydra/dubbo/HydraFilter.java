@@ -47,6 +47,10 @@ public class HydraFilter implements Filter {
 
     private Tracer tracer = null;
 
+    public HydraFilter(){
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    }
+
     // 调用过程拦截
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         if (serviceId == null) {
@@ -60,6 +64,7 @@ public class HydraFilter implements Filter {
         }
         long start = System.currentTimeMillis();
         RpcContext context = RpcContext.getContext();
+        System.out.println((context.isConsumerSide()?"C":"S") + "----"+this.serviceId + "---" + context.getMethodName() + "---" + RpcContext.getContext().getUrl().getServiceInterface());
         boolean isConsumerSide = context.isConsumerSide();
         Span span = null;
         Endpoint endpoint = null;
@@ -73,7 +78,7 @@ public class HydraFilter implements Filter {
                 if (span1 == null) { //为rootSpan
                     span = tracer.newSpan(context.getMethodName(), endpoint, this.serviceId);
                 } else {
-                    span = tracer.genSpan(span1.getTraceId(), span1.getId(), tracer.genSpanId(), context.getMethodName(), span1.isSample(), this.serviceId);
+                    span = tracer.genSpan(span1.getTraceId(), span1.getId(), tracer.genSpanId(), context.getMethodName(), span1.isSample(), null);
                 }
             } else if (context.isProviderSide()) {
                 Long traceId, parentId, spanId;
@@ -82,19 +87,23 @@ public class HydraFilter implements Filter {
                 spanId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.SID));
                 boolean isSample = (traceId != null);
                 span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample, this.serviceId);
+                System.out.println(this.serviceId + "-----" + context.getMethodName());
             }
             invokerBefore(invocation, span, endpoint, start);
             RpcInvocation invocation1 = (RpcInvocation) invocation;
             setAttachment(span, invocation1);
             Result result = invoker.invoke(invocation);
             if (result.getException() != null){
+                System.out.println("EEE1----" + context.getMethodName());
                 catchException(result.getException(), endpoint);
             }
             return result;
         }catch (RpcException e) {
             if (e.getCause() != null && e.getCause() instanceof TimeoutException){
+                System.out.println("EEE2----" + context.getMethodName());
                 catchTimeoutException(e, endpoint);
             }else {
+                System.out.println("EEE3----" + context.getMethodName());
                 catchException(e, endpoint);
             }
             throw e;

@@ -17,6 +17,12 @@
 package service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jd.bdp.hydra.Span;
+import com.jd.bdp.hydra.mysql.persistent.dao.AnnotationMapper;
+import com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper;
+import com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper;
+import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
+import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
 import com.jd.bdp.hydra.mysql.service.QueryService;
 import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
@@ -34,16 +40,187 @@ public class QueryServiceTest extends AbstractDependencyInjectionSpringContextTe
         return location;
     }
 
-
     @Test
     public void testGetTraceInfo(){
-        JSONObject obj = queryService.getTraceInfo(13661784465389L);
-        System.out.println(obj.toString());
+        try {
+            spanMapper.deleteAllSpans();
+            annotationMapper.deleteAllAnnotation();
+            prepareAllTestData();
+            JSONObject obj = queryService.getTraceInfo(1368002575495L);
+            assertEquals("1368002575495", obj.getString("traceId"));
+            assertEquals("1368002575495", obj.getString("minTimestamp"));
+            assertEquals("1368002575590", obj.getString("maxTimestamp"));
+            assertTrue( obj.getBoolean("available"));
+            assertNotNull(obj.get("rootSpan"));
+            JSONObject rootSpan = obj.getJSONObject("rootSpan");
+            assertEquals("1368002575600", rootSpan.getString("id"));
+            assertEquals("95", rootSpan.getString("durationClient"));
+            assertEquals("70", rootSpan.getString("durationServer"));
+            assertEquals(2, rootSpan.getJSONArray("children").size());
+            JSONObject span1 = null;
+            JSONObject span2 = null;
+            for(Object temp : rootSpan.getJSONArray("children")){
+                if (((JSONObject)temp).getString("id").equals("1368002575601")){
+                    span1 = (JSONObject) temp;
+                }
+                if (((JSONObject)temp).getString("id").equals("1368002575602")){
+                    span2 = (JSONObject) temp;
+                }
+            }
+            assertNotNull(span1);
+            assertNotNull(span2);
+            assertEquals("30", span1.getString("durationClient"));
+            assertEquals("15", span1.getString("durationServer"));
+            assertEquals("25", span2.getString("durationClient"));
+            assertEquals("15", span2.getString("durationServer"));
+            assertNotNull(span2.get("exception"));
+            JSONObject e = span2.getJSONObject("exception");
+            assertEquals("dubbo.exception", e.getString("key"));
+            assertEquals("abc", e.getString("value"));
+        }catch (Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }finally {
+            spanMapper.deleteAllSpans();
+            annotationMapper.deleteAllAnnotation();
+        }
+    }
+
+    private void prepareAllTestData() {
+        Span s1 = new Span();
+        s1.setSpanName("span1");
+        s1.setServiceId("10001");
+        s1.setTraceId(1368002575495L);
+        s1.setId(1368002575600L);
+
+        Span s2 = new Span();
+        s2.setSpanName("span2");
+        s2.setServiceId("10002");
+        s2.setTraceId(1368002575495L);
+        s2.setParentId(s1.getId());
+        s2.setId(1368002575601L);
+
+        Span s3 = new Span();
+        s3.setSpanName("span3");
+        s3.setServiceId("10002");
+        s3.setTraceId(1368002575495L);
+        s3.setParentId(s1.getId());
+        s3.setId(1368002575602L);
+
+        spanMapper.addSpan(s1);
+        spanMapper.addSpan(s2);
+        spanMapper.addSpan(s3);
+
+
+        Absannotation ann1 = new Absannotation();
+        ann1.setKey("cs");
+        ann1.setValue(String.valueOf(1368002575495L));
+        ann1.setSpanId(1368002575600L);
+        ann1.setTraceId(1368002575495L);
+
+        Absannotation ann2 = new Absannotation();
+        ann2.setKey("cr");
+        ann2.setValue(String.valueOf(1368002575590L));
+        ann2.setSpanId(1368002575600L);
+        ann2.setTraceId(1368002575495L);
+
+        Absannotation ann3 = new Absannotation();
+        ann3.setKey("sr");
+        ann3.setValue(String.valueOf(1368002575510L));
+        ann3.setSpanId(1368002575600L);
+        ann3.setTraceId(1368002575495L);
+
+        Absannotation ann4 = new Absannotation();
+        ann4.setKey("ss");
+        ann4.setValue(String.valueOf(1368002575580L));
+        ann4.setSpanId(1368002575600L);
+        ann4.setTraceId(1368002575495L);
+
+
+        Absannotation ann5 = new Absannotation();
+        ann5.setKey("cs");
+        ann5.setValue(String.valueOf(1368002575520L));
+        ann5.setSpanId(1368002575601L);
+        ann5.setTraceId(1368002575495L);
+
+
+        Absannotation ann6 = new Absannotation();
+        ann6.setKey("cr");
+        ann6.setValue(String.valueOf(1368002575550L));
+        ann6.setSpanId(1368002575601L);
+        ann6.setTraceId(1368002575495L);
+
+
+        Absannotation ann7 = new Absannotation();
+        ann7.setKey("sr");
+        ann7.setValue(String.valueOf(1368002575525L));
+        ann7.setSpanId(1368002575601L);
+        ann7.setTraceId(1368002575495L);
+
+        Absannotation ann8 = new Absannotation();
+        ann8.setKey("ss");
+        ann8.setValue(String.valueOf(1368002575540L));
+        ann8.setSpanId(1368002575601L);
+        ann8.setTraceId(1368002575495L);
+
+        Absannotation ann9 = new Absannotation();
+        ann9.setKey("cs");
+        ann9.setValue(String.valueOf(1368002575555L));
+        ann9.setSpanId(1368002575602L);
+        ann9.setTraceId(1368002575495L);
+
+        Absannotation ann10 = new Absannotation();
+        ann10.setKey("cr");
+        ann10.setValue(String.valueOf(1368002575580L));
+        ann10.setSpanId(1368002575602L);
+        ann10.setTraceId(1368002575495L);
+
+        Absannotation ann11 = new Absannotation();
+        ann11.setKey("sr");
+        ann11.setValue(String.valueOf(1368002575560L));
+        ann11.setSpanId(1368002575602L);
+        ann11.setTraceId(1368002575495L);
+
+        Absannotation ann12 = new Absannotation();
+        ann12.setKey("ss");
+        ann12.setValue(String.valueOf(1368002575575L));
+        ann12.setSpanId(1368002575602L);
+        ann12.setTraceId(1368002575495L);
+
+        Absannotation annEx = new Absannotation();
+        annEx.setKey("dubbo.exception");
+        annEx.setValue("abc");
+        annEx.setSpanId(1368002575602L);
+        annEx.setTraceId(1368002575495L);
+
+        annotationMapper.addAnnotation(ann1);
+        annotationMapper.addAnnotation(ann2);
+        annotationMapper.addAnnotation(ann3);
+        annotationMapper.addAnnotation(ann4);
+        annotationMapper.addAnnotation(ann5);
+        annotationMapper.addAnnotation(ann6);
+        annotationMapper.addAnnotation(ann7);
+        annotationMapper.addAnnotation(ann8);
+        annotationMapper.addAnnotation(ann9);
+        annotationMapper.addAnnotation(ann10);
+        annotationMapper.addAnnotation(ann11);
+        annotationMapper.addAnnotation(ann12);
+        annotationMapper.addAnnotation(annEx);
     }
 
     private QueryService queryService;
+    private SpanMapper spanMapper;
+    private AnnotationMapper annotationMapper;
 
     public void setQueryService(QueryService queryService) {
         this.queryService = queryService;
+    }
+
+    public void setSpanMapper(SpanMapper spanMapper) {
+        this.spanMapper = spanMapper;
+    }
+
+    public void setAnnotationMapper(AnnotationMapper annotationMapper) {
+        this.annotationMapper = annotationMapper;
     }
 }

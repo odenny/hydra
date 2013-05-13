@@ -27,7 +27,7 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONObject getTraceInfo(Long traceId) {
-        List<Span> spans = spanMapper.findSpanByTraceId(traceId.toString());
+        List<Span> spans = spanMapper.findSpanByTraceId(traceId);
         List<Absannotation> annotations = annotationMapper.getAnnotations(spans);
         return assembleTrace(spans, annotations);
     }
@@ -41,7 +41,7 @@ public class QueryServiceImpl implements QueryService {
         }
 
         for (Absannotation annotation : annotations) {
-            Long spanId = Long.parseLong(annotation.getSpanId());
+            Long spanId = annotation.getSpanId();
             JSONObject mySpan = spanMap.get(spanId);
             if (isExceptionAnn(annotation)) {
                 mySpan.put("exception", createException(annotation));
@@ -63,7 +63,7 @@ public class QueryServiceImpl implements QueryService {
                 trace.put("rootSpan", mySpan);
                 trace.put("traceId", mySpan.get("traceId"));
             } else {
-                JSONObject myFather = spanMap.get(mySpan.get("parentId").toString());
+                JSONObject myFather = spanMap.get(mySpan.get("parentId"));
                 if (myFather.containsKey("children")) {
                     ((JSONArray) myFather.get("children")).add(mySpan);
                 } else {
@@ -159,7 +159,7 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax) {
-        List<Trace> list = traceMapper.findTracesByDuration(serviceId, new Date(start), durationMin, durationMax, sum);
+        List<Trace> list = traceMapper.findTracesByDuration(serviceId, start, durationMin, durationMax, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {
             JSONObject obj = new JSONObject();
@@ -174,7 +174,7 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONArray getTracesByEx(String serviceId, long startTime, int sum) {
-        List<Trace> list = traceMapper.findTracesEx(serviceId, new Date(startTime), sum);
+        List<Trace> list = traceMapper.findTracesEx(serviceId, startTime, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {
             JSONObject obj = new JSONObject();

@@ -10,7 +10,7 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
  * Date: 13-4-10
  * Time: 下午6:59
  */
-public class RegistryClientTest extends AbstractDependencyInjectionSpringContextTests {
+public class TestRegistryClient extends AbstractDependencyInjectionSpringContextTests {
 
     @Override
     protected String[] getConfigLocations() {

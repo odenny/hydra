@@ -126,11 +126,13 @@ public class Absannotation {
         this.spanId = spanId;
     }
 
-    public Long getTraceId() {
-        return traceId;
+    public Long getTraceId(){
+        return this.traceId;
     }
 
     public void setTraceId(Long traceId) {
         this.traceId = traceId;
     }
+
+
 }

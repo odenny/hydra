@@ -27,11 +27,15 @@
 
     <insert id="addSpan" parameterType="SpanEntity" >
         INSERT INTO span (name,traceId,parentId,spanId,service)
-        VALUES(#{name},#{traceId},#{parentId},#{spanId},#{service})
+        VALUES(#{spanName},#{traceId},#{parentId},#{id},#{serviceId})
     </insert>
 
-    <select id="findSpanByTraceId" parameterType="String" resultMap="SpanResultMap">
+    <select id="findSpanByTraceId" parameterType="Long" resultMap="SpanResultMap">
         SELECT * FROM span WHERE traceId = #{traceId}
     </select>
+
+    <delete id="deleteAllSpan">
+        delete from span
+    </delete>
 
 </mapper>

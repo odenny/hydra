@@ -31,7 +31,7 @@ import java.util.Map;
  * Date: 13-4-10
  * Time: 下午2:44
  */
-public class SendingTest extends AbstractDependencyInjectionSpringContextTests {
+public class TestSending extends AbstractDependencyInjectionSpringContextTests {
 
     @Override
     protected String[] getConfigLocations() {

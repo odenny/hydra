@@ -24,7 +24,7 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
  * Date: 13-4-1
  * Time: 下午1:27
  */
-public class MockTest extends AbstractDependencyInjectionSpringContextTests {
+public class TestMock extends AbstractDependencyInjectionSpringContextTests {
     private Trigger trigger;
     @Override
     protected String[] getConfigLocations() {

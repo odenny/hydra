@@ -24,16 +24,56 @@ public class AnnotationMapperTest extends AbstractDependencyInjectionSpringConte
 
     @Test
     public void testGetAnnotations(){
-        List<Span> spans = new ArrayList<Span>();
-        Span span1 = new Span();
-        span1.setId(1L);
-        spans.add(span1);
-        Span span2 = new Span();
-        span2.setId(2L);
-        spans.add(span2);
-        List<Absannotation> list = annotationMapper.getAnnotations(spans);
-        assertEquals(2, list.size());
+        try {
+            annotationMapper.deleteAllAnnotation();
+            prepareTestAnnotations();
+            List<Span> spans = new ArrayList<Span>();
+            Span span1 = new Span();
+            span1.setId(1368002575600L);
+            spans.add(span1);
+            Span span2 = new Span();
+            span2.setId(1368002575601L);
+            spans.add(span2);
+            List<Absannotation> list = annotationMapper.getAnnotations(spans);
+            assertEquals(2, list.size());
+            boolean f1 = false;
+            boolean f2 = false;
+            for(Absannotation ann : list){
+                if (ann.getKey().equalsIgnoreCase("cs") &&  ann.getValue().equalsIgnoreCase(String.valueOf(1368002575495L))){
+                    f1 = true;
+                    continue;
+                }
+                if (ann.getKey().equalsIgnoreCase("dubbo.exception") && ann.getValue().equalsIgnoreCase("abc")){
+                    f2 = true;
+                    continue;
+                }
+            }
+            assertTrue(f1);
+            assertTrue(f2);
+        }catch (Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }finally {
+            annotationMapper.deleteAllAnnotation();
+        }
+
     }
+
+    private void prepareTestAnnotations() {
+        Absannotation ann1 = new Absannotation();
+        ann1.setKey("cs");
+        ann1.setValue(String.valueOf(1368002575495L));
+        ann1.setSpanId(1368002575600L);
+
+        Absannotation ann2 = new Absannotation();
+        ann2.setKey("dubbo.exception");
+        ann2.setValue("abc");
+        ann2.setSpanId(1368002575601L);
+
+        annotationMapper.addAnnotation(ann1);
+        annotationMapper.addAnnotation(ann2);
+    }
+
 
     private AnnotationMapper annotationMapper;
 

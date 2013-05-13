@@ -29,8 +29,8 @@ import java.util.List;
 public interface TraceMapper {
 
     List<Trace> findTraces(String serviceId, Long startTime, int num);
-    List<Trace> findTracesByDuration(String serviceId, Date startTime, int durationMin, int durationMax, int num);
-    List<Trace> findTracesEx(String serviceId, Date startTime, int num);
+    List<Trace> findTracesByDuration(String serviceId, Long startTime, int durationMin, int durationMax, int num);
+    List<Trace> findTracesEx(String serviceId, Long startTime, int num);
 
     public void addTrace(Trace t);
     void deleteAllTraces();//只用于测试

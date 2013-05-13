@@ -37,8 +37,13 @@ public class SpanMapperImpl implements SpanMapper{
     }
 
     @Override
-    public List<Span> findSpanByTraceId(String traceId) {
+    public List<Span> findSpanByTraceId(Long traceId) {
         return (List<Span>)sqlSession.selectList("findSpanByTraceId", traceId);
+    }
+
+    @Override
+    public void deleteAllSpans() {
+        sqlSession.delete("deleteAllSpan");
     }
 
     public void setSqlSession(SqlSessionTemplate sqlSession) {

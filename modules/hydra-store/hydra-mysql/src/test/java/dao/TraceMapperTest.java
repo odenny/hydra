@@ -16,7 +16,9 @@
 
 package dao;
 
+import com.jd.bdp.hydra.mysql.persistent.dao.AnnotationMapper;
 import com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper;
+import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
 import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,29 +44,56 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
     public void testFindTraces(){
         try {
             prepareTestTraces();
-            List<Trace> list = traceMapper.findTraces("161148", 1368002575490L, 3);
-            assertEquals(3, list.size());
-            for (int i = 0; i < list.size(); i++) {
-                assertEquals("161148", list.get(i).getService());
+            List<Trace> list = traceMapper.findTraces("161148", 1368002575490L, 2);
+            assertEquals(2, list.size());
+            for (Trace trace : list) {
+                assertEquals("161148", trace.getService());
             }
         }catch (Exception e){
             e.printStackTrace();
+            assertTrue(false);
         }finally {
             traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
         }
 
     }
 
     @Test
     public void testFindTracesByDuration(){
-        List<Trace> list = traceMapper.findTracesByDuration("161148", new Date(1368002575499L), 10, 20, 1);
-        assertEquals(1, list.size());
+        try {
+            prepareTestTraces();
+            List<Trace> list = traceMapper.findTracesByDuration("161148", 1368002575499L, 10, 20, 2);
+            assertEquals(2, list.size());
+            for(Trace trace : list){
+                assertEquals("161148", trace.getService());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }finally {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
+        }
     }
 
     @Test
     public void testFindTracesEx(){
-        List<Trace> list = traceMapper.findTracesEx("161148", new Date(1368002575499L), 3);
-        assertEquals(1, list.size());
+        try {
+            prepareTestTraces();
+            List<Trace> list = traceMapper.findTracesEx("161148", 1368002575495L, 3);
+            assertEquals(1, list.size());
+            for(Trace trace : list){
+                assertEquals("161148", trace.getService());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }finally {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
+        }
+
     }
 
     private void prepareTestTraces(){
@@ -103,13 +132,26 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
         traceMapper.addTrace(t3);
         traceMapper.addTrace(t4);
         traceMapper.addTrace(t5);
+
+        Absannotation annotation = new Absannotation();
+        annotation.setIp("192.168.0.1");
+        annotation.setPort(88);
+        annotation.setKey("dubbo.exception");
+        annotation.setValue("abc");
+        annotation.setTraceId(1368002575495L);
+        annotationMapper.addAnnotation(annotation);
     }
 
     private TraceMapper traceMapper;
+
+    private AnnotationMapper annotationMapper;
 
     public void setTraceMapper(TraceMapper traceMapper) {
         this.traceMapper = traceMapper;
     }
 
 
+    public void setAnnotationMapper(AnnotationMapper annotationMapper) {
+        this.annotationMapper = annotationMapper;
+    }
 }

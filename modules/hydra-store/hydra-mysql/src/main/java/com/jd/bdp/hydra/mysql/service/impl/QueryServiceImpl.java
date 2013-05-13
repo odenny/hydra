@@ -27,7 +27,7 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONObject getTraceInfo(Long traceId) {
-        List<Span> spans = spanMapper.findSpanByTraceId(traceId.toString());
+        List<Span> spans = spanMapper.findSpanByTraceId(traceId);
         List<Absannotation> annotations = annotationMapper.getAnnotations(spans);
         return assembleTrace(spans, annotations);
     }
@@ -159,7 +159,7 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax) {
-        List<Trace> list = traceMapper.findTracesByDuration(serviceId, new Date(start), durationMin, durationMax, sum);
+        List<Trace> list = traceMapper.findTracesByDuration(serviceId, start, durationMin, durationMax, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {
             JSONObject obj = new JSONObject();
@@ -174,7 +174,7 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONArray getTracesByEx(String serviceId, long startTime, int sum) {
-        List<Trace> list = traceMapper.findTracesEx(serviceId, new Date(startTime), sum);
+        List<Trace> list = traceMapper.findTracesEx(serviceId, startTime, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {
             JSONObject obj = new JSONObject();

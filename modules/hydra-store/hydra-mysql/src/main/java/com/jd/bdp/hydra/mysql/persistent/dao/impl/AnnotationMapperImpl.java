@@ -44,6 +44,11 @@ public class AnnotationMapperImpl implements AnnotationMapper {
         return (List<Absannotation>)sqlSession.selectList("getAnnotations", map);
     }
 
+    @Override
+    public void deleteAllAnnotation() {
+        sqlSession.delete("deleteAllAnnotation");
+    }
+
     private SqlSessionTemplate sqlSession;
 
     public void setSqlSession(SqlSessionTemplate sqlSession) {

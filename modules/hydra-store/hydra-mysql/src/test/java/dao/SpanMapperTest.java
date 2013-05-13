@@ -39,6 +39,7 @@ public class SpanMapperTest extends AbstractDependencyInjectionSpringContextTest
     @Test
     public void testFindSpanByTraceId(){
         try {
+            spanMapper.deleteAllSpans();
             prepareTestSpans();
             List<Span> list = spanMapper.findSpanByTraceId(1368002575495L);
             assertEquals(3, list.size());

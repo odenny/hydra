@@ -41,7 +41,7 @@ public class QueryServiceImpl implements QueryService {
         }
 
         for (Absannotation annotation : annotations) {
-            Long spanId = Long.parseLong(annotation.getSpanId());
+            Long spanId = annotation.getSpanId();
             JSONObject mySpan = spanMap.get(spanId);
             if (isExceptionAnn(annotation)) {
                 mySpan.put("exception", createException(annotation));
@@ -63,7 +63,7 @@ public class QueryServiceImpl implements QueryService {
                 trace.put("rootSpan", mySpan);
                 trace.put("traceId", mySpan.get("traceId"));
             } else {
-                JSONObject myFather = spanMap.get(mySpan.get("parentId").toString());
+                JSONObject myFather = spanMap.get(mySpan.get("parentId"));
                 if (myFather.containsKey("children")) {
                     ((JSONArray) myFather.get("children")).add(mySpan);
                 } else {

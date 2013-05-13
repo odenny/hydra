@@ -16,7 +16,7 @@ public class Absannotation {
     private String service;
     private String timestamp;
     private Integer duration;
-    private String spanId;
+    private Long spanId;
     private Long traceId;
 
     public Absannotation(){
@@ -118,11 +118,11 @@ public class Absannotation {
         this.duration = duration;
     }
 
-    public String getSpanId() {
+    public Long getSpanId() {
         return spanId;
     }
 
-    public void setSpanId(String spanId) {
+    public void setSpanId(Long spanId) {
         this.spanId = spanId;
     }
 

@@ -43,6 +43,8 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
     @Test
     public void testFindTraces(){
         try {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
             prepareTestTraces();
             List<Trace> list = traceMapper.findTraces("161148", 1368002575490L, 2);
             assertEquals(2, list.size());
@@ -62,6 +64,8 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
     @Test
     public void testFindTracesByDuration(){
         try {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
             prepareTestTraces();
             List<Trace> list = traceMapper.findTracesByDuration("161148", 1368002575499L, 10, 20, 2);
             assertEquals(2, list.size());
@@ -80,6 +84,8 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
     @Test
     public void testFindTracesEx(){
         try {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
             prepareTestTraces();
             List<Trace> list = traceMapper.findTracesEx("161148", 1368002575495L, 3);
             assertEquals(1, list.size());

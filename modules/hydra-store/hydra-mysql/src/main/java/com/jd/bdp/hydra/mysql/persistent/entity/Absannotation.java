@@ -14,7 +14,7 @@ public class Absannotation {
     private String ip;
     private Integer port;
     private String service;
-    private String timestamp;
+    private Long timestamp;
     private Integer duration;
     private Long spanId;
     private Long traceId;
@@ -102,11 +102,11 @@ public class Absannotation {
         this.service = service;
     }
 
-    public String getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 

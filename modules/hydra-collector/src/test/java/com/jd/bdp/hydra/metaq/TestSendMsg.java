@@ -16,7 +16,7 @@ import java.util.Properties;
  * Date: 13-4-27
  * Time: 上午10:43
  */
-public class SendMsgTest {
+public class TestSendMsg {
     private MessageProducer messageProducer = null;
     private String topic;
 
@@ -50,7 +50,7 @@ public class SendMsgTest {
 
     @Test
     public void testSendMsg() throws Exception {
-        SendMsgTest sender = new SendMsgTest();
+        TestSendMsg sender = new TestSendMsg();
         sender.createMessageProducer();
         MessageProducer myproducer = sender.getMessageProducer();
 

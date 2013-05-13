@@ -11,5 +11,11 @@
 
     <artifactId>hydra-example-exp2</artifactId>
     <name>HYDRA EXAMPLE EXP2</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

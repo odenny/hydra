@@ -32,7 +32,7 @@ public class Absannotation {
 
     public Absannotation(Annotation annotation){
         this.key = annotation.getValue();
-        this.timestamp = String.valueOf(annotation.getTimestamp());
+        this.timestamp = annotation.getTimestamp();
         this.duration = annotation.getDuration();
         this.ip = annotation.getHost().getIp();
         this.port = annotation.getHost().getPort();

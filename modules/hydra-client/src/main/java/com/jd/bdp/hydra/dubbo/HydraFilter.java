@@ -52,15 +52,12 @@ public class HydraFilter implements Filter {
 
     // 调用过程拦截
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+        this.serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
         if (serviceId == null) {
             Tracer.startTraceWork();
-            this.serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
-            //有可能为null
-            if (serviceId == null) {
-                // logger.debug("serviceId is null,will not trace until service registy successfully");
-                return invoker.invoke(invocation);
-            }
+            return invoker.invoke(invocation);
         }
+        
         long start = System.currentTimeMillis();
         RpcContext context = RpcContext.getContext();
 //        System.out.println((context.isConsumerSide()?"C":"S") + "----"+this.serviceId + "---" + context.getMethodName() + "---" + RpcContext.getContext().getUrl().getServiceInterface());

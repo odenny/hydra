@@ -14,10 +14,10 @@ public class Absannotation {
     private String ip;
     private Integer port;
     private String service;
-    private String timestamp;
+    private Long timestamp;
     private Integer duration;
-    private String spanId;
-    private String traceId;
+    private Long spanId;
+    private Long traceId;
 
     public Absannotation(){
 
@@ -32,7 +32,7 @@ public class Absannotation {
 
     public Absannotation(Annotation annotation){
         this.key = annotation.getValue();
-        this.timestamp = String.valueOf(annotation.getTimestamp());
+        this.timestamp = annotation.getTimestamp();
         this.duration = annotation.getDuration();
         this.ip = annotation.getHost().getIp();
         this.port = annotation.getHost().getPort();
@@ -102,11 +102,11 @@ public class Absannotation {
         this.service = service;
     }
 
-    public String getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -118,19 +118,21 @@ public class Absannotation {
         this.duration = duration;
     }
 
-    public String getSpanId() {
+    public Long getSpanId() {
         return spanId;
     }
 
-    public void setSpanId(String spanId) {
+    public void setSpanId(Long spanId) {
         this.spanId = spanId;
     }
 
-    public String getTraceId() {
-        return traceId;
+    public Long getTraceId(){
+        return this.traceId;
     }
 
-    public void setTraceId(String traceId) {
+    public void setTraceId(Long traceId) {
         this.traceId = traceId;
     }
+
+
 }

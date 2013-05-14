@@ -33,7 +33,7 @@ import java.util.Map;
 public class AnnotationMapperImpl implements AnnotationMapper {
 
     @Override
-    public void addAnnotation(Absannotation absannotation) throws Exception {
+    public void addAnnotation(Absannotation absannotation){
         sqlSession.insert("addAnnotation", absannotation);
     }
 
@@ -42,6 +42,11 @@ public class AnnotationMapperImpl implements AnnotationMapper {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("spans", list);
         return (List<Absannotation>)sqlSession.selectList("getAnnotations", map);
+    }
+
+    @Override
+    public void deleteAllAnnotation() {
+        sqlSession.delete("deleteAllAnnotation");
     }
 
     private SqlSessionTemplate sqlSession;

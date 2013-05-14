@@ -16,7 +16,9 @@
 
 package dao;
 
+import com.jd.bdp.hydra.mysql.persistent.dao.AnnotationMapper;
 import com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper;
+import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
 import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,33 +36,128 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"classpath:hydra-mysql.xml"};
+        String[] location = {"classpath:hydra-mysql-test.xml"};
         return location;
     }
 
     @Test
     public void testFindTraces(){
-        List<Trace> list = traceMapper.findTraces("161148", new Date(1368002575499L), 3);
-        assertEquals(1, list.size());
+        try {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
+            prepareTestTraces();
+            List<Trace> list = traceMapper.findTraces("161148", 1368002575490L, 2);
+            assertEquals(2, list.size());
+            for (Trace trace : list) {
+                assertEquals("161148", trace.getService());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }finally {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
+        }
+
     }
 
     @Test
     public void testFindTracesByDuration(){
-        List<Trace> list = traceMapper.findTracesByDuration("161148", new Date(1368002575499L), 10, 20, 1);
-        assertEquals(1, list.size());
+        try {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
+            prepareTestTraces();
+            List<Trace> list = traceMapper.findTracesByDuration("161148", 1368002575499L, 10, 20, 2);
+            assertEquals(2, list.size());
+            for(Trace trace : list){
+                assertEquals("161148", trace.getService());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }finally {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
+        }
     }
 
     @Test
     public void testFindTracesEx(){
-        List<Trace> list = traceMapper.findTracesEx("161148", new Date(1368002575499L), 3);
-        assertEquals(1, list.size());
+        try {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
+            prepareTestTraces();
+            List<Trace> list = traceMapper.findTracesEx("161148", 1368002575495L, 3);
+            assertEquals(1, list.size());
+            for(Trace trace : list){
+                assertEquals("161148", trace.getService());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }finally {
+            traceMapper.deleteAllTraces();
+            annotationMapper.deleteAllAnnotation();
+        }
+
+    }
+
+    private void prepareTestTraces(){
+        Trace t1 = new Trace();
+        t1.setTraceId(1368002575499L);
+        t1.setDuration(10);
+        t1.setService("161148");
+        t1.setTime(1368002575499L);
+
+        Trace t2 = new Trace();
+        t2.setTraceId(1368002575498L);
+        t2.setDuration(15);
+        t2.setService("161148");
+        t2.setTime(1368002575499L);
+
+        Trace t3 = new Trace();
+        t3.setTraceId(1368002575497L);
+        t3.setDuration(15);
+        t3.setService("161149");
+        t3.setTime(1368002575499L);
+
+        Trace t4 = new Trace();
+        t4.setTraceId(1368002575496L);
+        t4.setDuration(15);
+        t4.setService("161149");
+        t4.setTime(1368002575499L);
+
+        Trace t5 = new Trace();
+        t5.setTraceId(1368002575495L);
+        t5.setDuration(20);
+        t5.setService("161148");
+        t5.setTime(1368002575499L);
+
+        traceMapper.addTrace(t1);
+        traceMapper.addTrace(t2);
+        traceMapper.addTrace(t3);
+        traceMapper.addTrace(t4);
+        traceMapper.addTrace(t5);
+
+        Absannotation annotation = new Absannotation();
+        annotation.setIp("192.168.0.1");
+        annotation.setPort(88);
+        annotation.setKey("dubbo.exception");
+        annotation.setValue("abc");
+        annotation.setTraceId(1368002575495L);
+        annotationMapper.addAnnotation(annotation);
     }
 
     private TraceMapper traceMapper;
+
+    private AnnotationMapper annotationMapper;
 
     public void setTraceMapper(TraceMapper traceMapper) {
         this.traceMapper = traceMapper;
     }
 
 
+    public void setAnnotationMapper(AnnotationMapper annotationMapper) {
+        this.annotationMapper = annotationMapper;
+    }
 }

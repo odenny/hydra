@@ -27,6 +27,7 @@ import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,38 +108,46 @@ public class InsertServiceImpl extends HbaseUtils implements InsertService {
 
 
     public void annotationIndex(Span span) {
-        List<Annotation> alist = span.getAnnotations();
-        List<Put> putlist = new ArrayList<Put>();
-//        for (Annotation a : alist) {
-//            String rowkey = a.getHost().getServiceName() + ":" + System.currentTimeMillis() + ":" + a.getValue();
-//            Put put = new Put(rowkey.getBytes());
-//            put.add(ann_index_family_column.getBytes(), "traceId".getBytes(), long2ByteArray(span.getTraceId()));
-//            putlist.add(put);
-//        }
-
-        for (BinaryAnnotation b : span.getBinaryAnnotations()) {
-            //todo 这个时间戳是否应该找个更准确的
-            String rowkey = span.getServiceId() + ":" + System.currentTimeMillis() + ":" + b.getKey();
-            Put put = new Put(rowkey.getBytes());
-            put.add(ann_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), Bytes.toBytes(b.getValue()));
-            putlist.add(put);
-        }
-
-        HTableInterface htable = null;
-        try {
-            htable = POOL.getTable(ann_index);
-            htable.put(putlist);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if(htable != null){
-                try {
-                    htable.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        Long baTimeStamp;
+        if (span.getBinaryAnnotations() != null && span.getBinaryAnnotations().size() > 0){
+            List<Put> putlist = new ArrayList<Put>();
+            baTimeStamp = getBinaryAnnotationsTimestamp(span.getAnnotations());
+            for (BinaryAnnotation b : span.getBinaryAnnotations()) {
+                String rowkey = span.getServiceId() + ":" + baTimeStamp + ":" + b.getKey();
+                Put put = new Put(rowkey.getBytes());
+                put.add(ann_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), Bytes.toBytes(b.getValue()));
+                putlist.add(put);
+            }
+            HTableInterface htable = null;
+            try {
+                htable = POOL.getTable(ann_index);
+                htable.put(putlist);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                if(htable != null){
+                    try {
+                        htable.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
+    }
+
+    private Long getBinaryAnnotationsTimestamp(List<Annotation> alist) {
+        Long baTimestamp = null;
+        for(Annotation a : alist){
+            if (a.getValue().equalsIgnoreCase("cs") || a.getValue().equalsIgnoreCase("sr")){
+                baTimestamp = a.getTimestamp();
+                break;
+            }
+        }
+        if (baTimestamp == null){
+            baTimestamp = System.currentTimeMillis();
+        }
+        return baTimestamp;
     }
 
 

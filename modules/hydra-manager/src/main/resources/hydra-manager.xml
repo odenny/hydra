@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-    <import resource="classpath*:hydra-mysql.xml" />
+    <import resource="classpath*:hydra-manager-db.xml" />
 
     <dubbo:application name="hydra-manager"/>
     <dubbo:registry protocol="zookeeper" address="192.168.227.48:2181"/>

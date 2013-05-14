@@ -51,7 +51,7 @@ public class ServiceIdGenMapperTest extends AbstractDependencyInjectionSpringCon
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"classpath:hydra-mysql.xml"};
+        String[] location = {"classpath:hydra-manager-db-test.xml"};
         return location;
     }
 

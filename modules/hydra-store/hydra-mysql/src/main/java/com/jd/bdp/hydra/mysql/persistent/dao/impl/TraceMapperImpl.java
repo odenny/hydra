@@ -33,7 +33,7 @@ import java.util.Map;
 public class TraceMapperImpl implements TraceMapper{
 
     @Override
-    public List<Trace> findTraces(String serviceId, Date startTime, int num){
+    public List<Trace> findTraces(String serviceId, Long startTime, int num){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("startTime", startTime);
         map.put("num", num);
@@ -42,7 +42,7 @@ public class TraceMapperImpl implements TraceMapper{
     }
 
     @Override
-    public List<Trace> findTracesByDuration(String serviceId, Date startTime, int durationMin, int durationMax, int num){
+    public List<Trace> findTracesByDuration(String serviceId, Long startTime, int durationMin, int durationMax, int num){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("serviceId", serviceId);
         map.put("startTime", startTime);
@@ -53,7 +53,7 @@ public class TraceMapperImpl implements TraceMapper{
     }
 
     @Override
-    public List<Trace> findTracesEx(String serviceId, Date startTime, int num) {
+    public List<Trace> findTracesEx(String serviceId, Long startTime, int num) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("startTime", startTime);
         map.put("num", num);
@@ -63,6 +63,11 @@ public class TraceMapperImpl implements TraceMapper{
 
     public void addTrace(Trace t) {
         sqlSession.insert("addTrace",t);
+    }
+
+    @Override
+    public void deleteAllTraces(){
+        sqlSession.delete("deleteAllTraces");
     }
 
     private SqlSessionTemplate sqlSession;

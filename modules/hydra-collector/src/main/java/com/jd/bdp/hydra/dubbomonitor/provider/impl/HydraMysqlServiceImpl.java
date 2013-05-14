@@ -1,74 +1,59 @@
 package com.jd.bdp.hydra.dubbomonitor.provider.impl;
 
 import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.dubbomonitor.HydraDubbeConfig;
 import com.jd.bdp.hydra.dubbomonitor.HydraService;
-import com.jd.dd.glowworm.PB;
-import com.taobao.metamorphosis.Message;
-import com.taobao.metamorphosis.client.MessageSessionFactory;
-import com.taobao.metamorphosis.client.MetaClientConfig;
-import com.taobao.metamorphosis.client.MetaMessageSessionFactory;
-import com.taobao.metamorphosis.client.producer.MessageProducer;
-import com.taobao.metamorphosis.client.producer.SendResult;
-import com.taobao.metamorphosis.exception.MetaClientException;
-import com.taobao.metamorphosis.utils.ZkUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.jd.bdp.hydra.mysql.service.InsertService;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class HydraMysqlServiceImpl implements HydraService {
-    private static final Logger log = LoggerFactory.getLogger(HydraMysqlServiceImpl.class);
-    private MessageProducer messageProducer = null;
-    private String topic;
-    private final int bufferSize = 1024;
-    private Properties config = loadConfig();
+    private InsertService insertService;
+    private ArrayBlockingQueue<List<Span>> queue = new ArrayBlockingQueue<List<Span>>(Integer.MAX_VALUE);
+    private ExecutorService executors = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-    private void createMessageProducer() throws Exception {
-        final MetaClientConfig metaClientConfig = new MetaClientConfig();
-        final ZkUtils.ZKConfig zkConfig = new ZkUtils.ZKConfig();
-        //设置zookeeper地址
-        zkConfig.zkConnect = config.getProperty("metaq.zk");
-        zkConfig.zkRoot = config.getProperty("metaq.zk.root");
-        metaClientConfig.setZkConfig(zkConfig);
-
-        // New session factory,强烈建议使用单例
-        MessageSessionFactory sessionFactory = new MetaMessageSessionFactory(metaClientConfig);
-        // create producer,强烈建议使用单例
-        messageProducer = sessionFactory.createProducer();
-        this.topic = config.getProperty("metaq.topic");
-        messageProducer.setDefaultTopic(topic);
-        // publish topic
-        messageProducer.publish(topic);
+    public InsertService getInsertService() {
+        return insertService;
     }
 
-    private Properties loadConfig() {
-        return HydraDubbeConfig.loadConfig("metaq.prop");
+    public HydraMysqlServiceImpl(){
+        for(int i = 0;i < 3 ;i++){
+            executors.execute(new InsertTask());
+        }
     }
 
-    public HydraMysqlServiceImpl() throws Exception {
-        createMessageProducer();
+    public void setInsertService(InsertService insertService) {
+        this.insertService = insertService;
+    }
+
+    class InsertTask implements Runnable{
+        @Override
+        public void run() {
+            while(true){
+                try {
+                    List<Span> span = queue.take();
+                    if(span != null){
+                        for(Span s : span){
+                            insertService.addSpan(s);
+                            insertService.addTrace(s);
+                            insertService.addAnnotation(s);
+                        }
+                    }
+                } catch (InterruptedException e) {
+                    //ig
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
 
     @Override
-    public boolean push(List<Span> span) {
-        boolean rs = false;
-        if(span != null){
-            byte[] b = PB.toPBBytes(span);
-            try {
-                SendResult sendResult = messageProducer.sendMessage(new Message(topic,b));
-                if (sendResult.isSuccess()){
-                    rs = true;
-                }
-            } catch (MetaClientException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } catch (InterruptedException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } finally {
-
-            }
-        }
-        return rs;
+    public boolean push(List<Span> span) throws IOException {
+        return queue.add(span);
     }
 }

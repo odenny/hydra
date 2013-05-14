@@ -16,6 +16,10 @@
         <!--引入场景一进行测试-->
         <dependency>
             <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-example-exp1</artifactId>
         </dependency>
         <dependency>
@@ -33,7 +37,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>3.1.2.RELEASE</version>
         </dependency>
     </dependencies>
 

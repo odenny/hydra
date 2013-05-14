@@ -20,11 +20,12 @@
 <mapper namespace="com.jd.bdp.hydra.mysql.persistent.dao.Annotation">
 
     <resultMap id="AnnResultMap" type="AnnEntity">
+        <result property="key" column="k" />
     </resultMap>
 
     <insert id="addAnnotation" parameterType="AnnEntity" >
-        INSERT INTO annotation (k,value,ip,port,service,timestamp,duration,spanId,traceId)
-        VALUES(#{key},#{value},#{ip},#{port},#{service},#{timestamp},#{duration},#{spanId},#{traceId})
+        INSERT INTO annotation (k,value,ip,port,timestamp,duration,spanId,traceId)
+        VALUES(#{key},#{value},#{ip},#{port},#{timestamp},#{duration},#{spanId},#{traceId})
     </insert>
 
     <select id="getAnnotations" parameterType="Map" resultMap="AnnResultMap">
@@ -33,4 +34,8 @@
             #{item.id}
         </foreach>
     </select>
+
+    <delete id="deleteAllAnnotation">
+        delete from annotation
+    </delete>
 </mapper>

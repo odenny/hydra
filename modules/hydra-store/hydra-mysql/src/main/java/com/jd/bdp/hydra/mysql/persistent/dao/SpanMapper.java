@@ -27,5 +27,8 @@ import java.util.List;
  */
 public interface SpanMapper {
     public void addSpan(Span span);
-    List<Span> findSpanByTraceId(String traceId);
+    List<Span> findSpanByTraceId(Long traceId);
+
+    //测试用
+    void deleteAllSpans();
 }

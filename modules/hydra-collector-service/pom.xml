@@ -18,6 +18,10 @@
     <dependencies>
         <dependency>
             <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-store-interface</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-hbase</artifactId>
         </dependency>
         <dependency>

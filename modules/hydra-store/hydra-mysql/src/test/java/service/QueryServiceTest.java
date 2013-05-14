@@ -20,10 +20,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.mysql.persistent.dao.AnnotationMapper;
 import com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper;
-import com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper;
 import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
-import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
-import com.jd.bdp.hydra.mysql.service.QueryService;
+import com.jd.bdp.hydra.store.inter.QueryService;
 import org.junit.Test;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 

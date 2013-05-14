@@ -23,6 +23,8 @@ import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Endpoint;
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.hbase.service.impl.HbaseUtils;
+import com.jd.bdp.hydra.store.inter.InsertService;
+import com.jd.bdp.hydra.store.inter.QueryService;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
@@ -197,12 +199,12 @@ public class QueryServiceTest extends AbstractDependencyInjectionSpringContextTe
         baList.add(ba);
         spanD3.setBinaryAnnotations(baList);
 
-        insertService.durationIndex(spanD1);
-        insertService.annotationIndex(spanD1);
-        insertService.durationIndex(spanD2);
-        insertService.annotationIndex(spanD2);
-        insertService.durationIndex(spanD3);
-        insertService.annotationIndex(spanD3);
+        insertService.addTrace(spanD1);
+        insertService.addAnnotation(spanD1);
+        insertService.addTrace(spanD2);
+        insertService.addAnnotation(spanD2);
+        insertService.addTrace(spanD3);
+        insertService.addAnnotation(spanD3);
 
         //以下是一个完整trace
 //        traceId = 1366178446534
@@ -260,10 +262,10 @@ public class QueryServiceTest extends AbstractDependencyInjectionSpringContextTe
 
         insertService.addSpan(span1c);
         insertService.addSpan(span1s);
-        insertService.annotationIndex(span1c);
-        insertService.annotationIndex(span1s);
-        insertService.durationIndex(span1c);
-        insertService.durationIndex(span1s);
+        insertService.addAnnotation(span1c);
+        insertService.addAnnotation(span1s);
+        insertService.addTrace(span1c);
+        insertService.addTrace(span1s);
 
         Endpoint endpointAc = new Endpoint();
         endpointAc.setIp("127.0.0.1");
@@ -317,10 +319,10 @@ public class QueryServiceTest extends AbstractDependencyInjectionSpringContextTe
 
         insertService.addSpan(spanAc);
         insertService.addSpan(spanAs);
-        insertService.annotationIndex(spanAc);
-        insertService.annotationIndex(spanAs);
-        insertService.durationIndex(spanAc);
-        insertService.durationIndex(spanAs);
+        insertService.addAnnotation(spanAc);
+        insertService.addAnnotation(spanAs);
+        insertService.addTrace(spanAc);
+        insertService.addTrace(spanAs);
 
         //spanBc
         Endpoint endpointBc = new Endpoint();
@@ -384,10 +386,10 @@ public class QueryServiceTest extends AbstractDependencyInjectionSpringContextTe
 
         insertService.addSpan(spanBc);
         insertService.addSpan(spanBs);
-        insertService.annotationIndex(spanAc);
-        insertService.annotationIndex(spanAs);
-        insertService.durationIndex(spanAc);
-        insertService.durationIndex(spanAs);
+        insertService.addAnnotation(spanAc);
+        insertService.addAnnotation(spanAs);
+        insertService.addTrace(spanAc);
+        insertService.addTrace(spanAs);
     }
 
     private void truncateAllTables() throws IOException {

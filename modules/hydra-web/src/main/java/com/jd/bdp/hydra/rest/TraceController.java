@@ -2,7 +2,7 @@ package com.jd.bdp.hydra.rest;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.jd.bdp.hydra.hbase.service.QueryService;
+import com.jd.bdp.hydra.store.inter.QueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

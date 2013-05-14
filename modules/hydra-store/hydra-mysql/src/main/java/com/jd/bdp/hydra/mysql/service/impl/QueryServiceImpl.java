@@ -11,9 +11,8 @@ import com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper;
 import com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper;
 import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
 import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
-import com.jd.bdp.hydra.mysql.service.QueryService;
+import com.jd.bdp.hydra.store.inter.QueryService;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

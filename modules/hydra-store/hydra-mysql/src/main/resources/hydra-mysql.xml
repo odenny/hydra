@@ -22,34 +22,34 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byName">
     <!--数据库层-->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
-        <property name="url" value="${jdbc.url}"></property>
-        <property name="username" value="${jdbc.username}"></property>
-        <property name="password" value="${jdbc.password}"></property>
+    <bean id="dataSourceStoreMysql" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://192.168.227.48:3306/hydra-config"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="transactionManagerStoreMysql" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSourceStoreMysql"/>
     </bean>
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+    <bean id="sqlSessionFactoryStoreMysql" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceStoreMysql"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config-store-mysql.xml"/>
     </bean>
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    <bean id="sqlSessionTemplateStoreMysql" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactoryStoreMysql"/>
     </bean>
 
     <bean id="traceMapper" class="com.jd.bdp.hydra.mysql.persistent.dao.impl.TraceMapperImpl">
-        <property name="sqlSession" ref="sqlSessionTemplate"/>
+        <property name="sqlSession" ref="sqlSessionTemplateStoreMysql"/>
     </bean>
 
     <bean id="spanMapper" class="com.jd.bdp.hydra.mysql.persistent.dao.impl.SpanMapperImpl">
-        <property name="sqlSession" ref="sqlSessionTemplate"/>
+        <property name="sqlSession" ref="sqlSessionTemplateStoreMysql"/>
     </bean>
 
     <bean id="annotationMapper" class="com.jd.bdp.hydra.mysql.persistent.dao.impl.AnnotationMapperImpl">
-        <property name="sqlSession" ref="sqlSessionTemplate"/>
+        <property name="sqlSession" ref="sqlSessionTemplateStoreMysql"/>
     </bean>
 
     <bean id="insertService" class="com.jd.bdp.hydra.mysql.service.impl.InsertServiceImpl" />

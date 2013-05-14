@@ -31,11 +31,11 @@ public class ServiceD2 implements InterfaceD2 {
         String myVoice = new String("D2");
         String returnVoice = myVoice.toString();
         returnVoice = "(" + returnVoice + ")";
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+//        try {
+//            Thread.sleep(1500);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
         return returnVoice;
     }
 }

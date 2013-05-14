@@ -14,19 +14,21 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.hydra.hbase.service;
+package com.jd.bdp.hydra.store.inter;
 
-import com.jd.bdp.hydra.Span;
-
-import java.io.IOException;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 /**
-  * User: yfliuyu
+ * User: yfliuyu
  * Date: 13-4-16
- * Time: 上午11:04
-  */
-public interface InsertService {
-    public void addSpan(Span span)throws IOException;
-    public void annotationIndex(Span span)throws IOException;
-    public void durationIndex(Span span)throws  IOException;
+ * Time: 上午11:02
+ */
+public interface QueryService {
+
+    JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax);
+
+    JSONArray getTracesByEx(String serviceId, long startTime, int sum);
+
+    JSONObject getTraceInfo(Long traceId);
 }

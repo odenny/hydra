@@ -22,9 +22,9 @@
         default-autowire="byName">
 
     <!-- 选择存储方式为hbase -->
-    <import resource="classpath*:hydra-hbase.xml" />
+    <!--<import resource="classpath*:hydra-hbase.xml" />-->
     <!-- 选择存储方式为mysql -->
-    <!--<import resource="classpath*:hydra-mysql.xml" />-->
+    <import resource="classpath*:hydra-mysql.xml" />
 
 
     <bean id="collectorSerService" class="com.jd.bdp.hydra.collector.service.CollectorSerService" >

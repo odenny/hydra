@@ -15,6 +15,7 @@
     <modules>
         <module>hydra-hbase</module>
         <module>hydra-mysql</module>
+        <module>hydra-store-interface</module>
     </modules>
 
     <properties>

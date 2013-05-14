@@ -20,14 +20,12 @@ import com.alibaba.fastjson.JSON;
 import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.BinaryAnnotation;
 import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.hbase.service.InsertService;
-import org.apache.hadoop.hbase.HColumnDescriptor;
-import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.client.*;
+import com.jd.bdp.hydra.store.inter.InsertService;
+import org.apache.hadoop.hbase.client.HTableInterface;
+import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,31 +56,32 @@ Qualifier:{
  */
 public class InsertServiceImpl extends HbaseUtils implements InsertService {
 
-    public void createTable() {
-        try {
-            HBaseAdmin hBaseAdmin = new HBaseAdmin(conf);
-            if (!hBaseAdmin.tableExists(duration_index)) {
-                HTableDescriptor hTableDescriptor = new HTableDescriptor(duration_index);
-                hTableDescriptor.addFamily(new HColumnDescriptor(duration_index_family_column));
-                hBaseAdmin.createTable(hTableDescriptor);
-            }
-            if (!hBaseAdmin.tableExists(TR_T)) {
-                HTableDescriptor hTableDescriptor = new HTableDescriptor(TR_T);
-                hTableDescriptor.addFamily(new HColumnDescriptor());
-                hBaseAdmin.createTable(hTableDescriptor);
-            }
-            if (!hBaseAdmin.tableExists(ann_index)) {
-                HTableDescriptor hTableDescriptor = new HTableDescriptor(trace_family_column);
-                hTableDescriptor.addFamily(new HColumnDescriptor(ann_index_family_column));
-                hBaseAdmin.createTable(hTableDescriptor);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void createTable() {
+//        try {
+//            HBaseAdmin hBaseAdmin = new HBaseAdmin(conf);
+//            if (!hBaseAdmin.tableExists(duration_index)) {
+//                HTableDescriptor hTableDescriptor = new HTableDescriptor(duration_index);
+//                hTableDescriptor.addFamily(new HColumnDescriptor(duration_index_family_column));
+//                hBaseAdmin.createTable(hTableDescriptor);
+//            }
+//            if (!hBaseAdmin.tableExists(TR_T)) {
+//                HTableDescriptor hTableDescriptor = new HTableDescriptor(TR_T);
+//                hTableDescriptor.addFamily(new HColumnDescriptor());
+//                hBaseAdmin.createTable(hTableDescriptor);
+//            }
+//            if (!hBaseAdmin.tableExists(ann_index)) {
+//                HTableDescriptor hTableDescriptor = new HTableDescriptor(trace_family_column);
+//                hTableDescriptor.addFamily(new HColumnDescriptor(ann_index_family_column));
+//                hBaseAdmin.createTable(hTableDescriptor);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
-    public void addSpan(Span span) throws IOException {
+    @Override
+    public void addSpan(Span span){
         String rowkey = String.valueOf(span.getTraceId());
         Put put = new Put(rowkey.getBytes());
         String jsonValue = JSON.toJSONString(span);
@@ -99,17 +98,21 @@ public class InsertServiceImpl extends HbaseUtils implements InsertService {
             htable.put(put);
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if(htable != null){
-                htable.close();
+        } finally {
+            if (htable != null) {
+                try {
+                    htable.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-
-    public void annotationIndex(Span span) {
+    @Override
+    public void addAnnotation(Span span) {
         Long baTimeStamp;
-        if (span.getBinaryAnnotations() != null && span.getBinaryAnnotations().size() > 0){
+        if (span.getBinaryAnnotations() != null && span.getBinaryAnnotations().size() > 0) {
             List<Put> putlist = new ArrayList<Put>();
             baTimeStamp = getBinaryAnnotationsTimestamp(span.getAnnotations());
             for (BinaryAnnotation b : span.getBinaryAnnotations()) {
@@ -124,8 +127,8 @@ public class InsertServiceImpl extends HbaseUtils implements InsertService {
                 htable.put(putlist);
             } catch (IOException e) {
                 e.printStackTrace();
-            }finally {
-                if(htable != null){
+            } finally {
+                if (htable != null) {
                     try {
                         htable.close();
                     } catch (IOException e) {
@@ -138,20 +141,20 @@ public class InsertServiceImpl extends HbaseUtils implements InsertService {
 
     private Long getBinaryAnnotationsTimestamp(List<Annotation> alist) {
         Long baTimestamp = null;
-        for(Annotation a : alist){
-            if (a.getValue().equalsIgnoreCase("cs") || a.getValue().equalsIgnoreCase("sr")){
+        for (Annotation a : alist) {
+            if (a.getValue().equalsIgnoreCase("cs") || a.getValue().equalsIgnoreCase("sr")) {
                 baTimestamp = a.getTimestamp();
                 break;
             }
         }
-        if (baTimestamp == null){
+        if (baTimestamp == null) {
             baTimestamp = System.currentTimeMillis();
         }
         return baTimestamp;
     }
 
-
-    public void durationIndex(Span span) {
+    @Override
+    public void addTrace(Span span) {
         if (isRootSpan(span)) {
             List<Annotation> alist = span.getAnnotations();
             Annotation cs = getCsAnnotation(alist);
@@ -163,17 +166,17 @@ public class InsertServiceImpl extends HbaseUtils implements InsertService {
                 //rowkey:serviceId:csTime
                 //每列的timestamp为duration
                 //每列列名为traceId，值为1（用来区分1ms内的跟踪）
-                put.add(duration_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), duration,  "1".getBytes());
+                put.add(duration_index_family_column.getBytes(), long2ByteArray(span.getTraceId()), duration, "1".getBytes());
                 HTableInterface htable = null;
                 try {
                     htable = POOL.getTable(duration_index);
                     htable.put(put);
                 } catch (IOException e) {
                     e.printStackTrace();
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                }finally {
-                    if(htable != null){
+                } finally {
+                    if (htable != null) {
                         try {
                             htable.close();
                         } catch (IOException e) {

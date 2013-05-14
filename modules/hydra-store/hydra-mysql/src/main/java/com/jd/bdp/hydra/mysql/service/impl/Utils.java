@@ -41,4 +41,8 @@ public class Utils {
         }
         return null;
     }
+
+    public static boolean isRoot(Span span) {
+        return span.getParentId() == null;
+    }
 }

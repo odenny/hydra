@@ -151,6 +151,11 @@
             </dependency>
             <dependency>
                 <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-store-interface</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-hbase</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -162,6 +167,21 @@
             <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-manager-db</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-test-benchmark</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-example-exp1</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-example-exp2</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- test -->

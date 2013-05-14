@@ -3,15 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>hydra-test</artifactId>
+        <artifactId>hydra</artifactId>
         <groupId>com.jd.bdp</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>hydra-test-integration</artifactId>
     <name>HYDRA TEST INTEGRATION</name>
     <packaging>jar</packaging>
+
 
     <!--用于集成测试打包-->
     <dependencies>
@@ -36,6 +38,11 @@
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-example-exp1</artifactId>
         </dependency>
+        <!--引入场景二进行集成测试-->
+        <dependency>
+            <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-example-exp2</artifactId>
+        </dependency>
         <!--顺便做一下基准测试(压力测试)-->
         <dependency>
             <groupId>com.jd.bdp</groupId>
@@ -53,27 +60,27 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
-            <!--to package jar with only *.java files-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>package-only-java-resources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <phase>package</phase>
-                        <configuration>
-                            <includes>
-                                <include>**/*.class</include>
-                                <include>trigger-context.xml</include>
-                            </includes>
-                            <classifier>assemble</classifier>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+                <!--to package jar with only *.java files-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>package-only-java-resources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <phase>package</phase>
+                            <configuration>
+                                <includes>
+                                    <include>**/*.class</include>
+                                    <include>trigger-context.xml</include>
+                                </includes>
+                                <classifier>assemble</classifier>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -115,7 +122,6 @@
             </plugin>
         </plugins>
     </build>
-
     <profiles>
         <!--windows版本-->
         <profile>
@@ -145,6 +151,4 @@
             </properties>
         </profile>
     </profiles>
-
-
 </project>

@@ -2,7 +2,7 @@ package com.jd.bdp.hydra.dubbomonitor.provider.impl;
 
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.dubbomonitor.HydraService;
-import com.jd.bdp.hydra.mysql.service.InsertService;
+import com.jd.bdp.hydra.store.inter.InsertService;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,22 +11,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class HydraMysqlServiceImpl implements HydraService {
-    private InsertService insertService;
+
     private ArrayBlockingQueue<List<Span>> queue = new ArrayBlockingQueue<List<Span>>(1024);
     private ExecutorService executors = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-    public InsertService getInsertService() {
-        return insertService;
-    }
 
     public HydraMysqlServiceImpl(){
         for(int i = 0;i < 3 ;i++){
             executors.execute(new InsertTask());
         }
-    }
-
-    public void setInsertService(InsertService insertService) {
-        this.insertService = insertService;
     }
 
     class InsertTask implements Runnable{
@@ -56,4 +49,10 @@ public class HydraMysqlServiceImpl implements HydraService {
     public boolean push(List<Span> span) throws IOException {
         return queue.add(span);
     }
+
+    private InsertService insertService;
+    public void setInsertService(InsertService insertService) {
+        this.insertService = insertService;
+    }
+
 }

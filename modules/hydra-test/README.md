@@ -43,23 +43,23 @@ Hydra 测试
         hydra-test-benchmark 提供基准测试框架，集成测试中完成具体性能测试
 
 ##接入Hydra前
-----------Benchmark Statistics--------------
- Concurrents: 10
- ClientNums: 1
- Runtime: 50 seconds
- Benchmark Time: 11
- Requests: 48872 Success: 100% (48872) Error: 0% (0)
- Avg TPS: 2398 Max TPS: 2639 Min TPS: 2182
- Avg RT: 4.166ms
- RT <= 0: 0% 417/48872
- RT (0,1]: 13% 6419/48872
- RT (1,5]: 76% 37171/48872
- RT (5,10]: 4% 2204/48872
- RT (10,50]: 5% 2644/48872
- RT (50,100]: 0% 17/48872
- RT (100,500]: 0% 0/48872
- RT (500,1000]: 0% 0/48872
- RT > 1000: 0% 0/48872
+        ----------Benchmark Statistics--------------
+         Concurrents: 10
+         ClientNums: 1
+         Runtime: 50 seconds
+         Benchmark Time: 11
+         Requests: 48872 Success: 100% (48872) Error: 0% (0)
+         Avg TPS: 2398 Max TPS: 2639 Min TPS: 2182
+         Avg RT: 4.166ms
+         RT <= 0: 0% 417/48872
+         RT (0,1]: 13% 6419/48872
+         RT (1,5]: 76% 37171/48872
+         RT (5,10]: 4% 2204/48872
+         RT (10,50]: 5% 2644/48872
+         RT (50,100]: 0% 17/48872
+         RT (100,500]: 0% 0/48872
+         RT (500,1000]: 0% 0/48872
+         RT > 1000: 0% 0/48872
 
 ##接入Hydra后
        ----------Benchmark Statistics--------------

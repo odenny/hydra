@@ -48,10 +48,10 @@ public class TraceService implements RegisterService, CollectorService {
         try {
             this.registerInfo = leaderService.registerClient(name, services);
         } catch (Exception e) {
-            logger.warn("client global config-info cannot regist into the hydra system");
+            logger.warn("[Hydra] Client global config-info cannot regist into the hydra system");
         }
         if (registerInfo != null) {
-            logger.info("Global registry option is ok!");
+            logger.info("[Hydra] Global registry option is ok!");
             isRegister = true;
         }
         return isRegister;

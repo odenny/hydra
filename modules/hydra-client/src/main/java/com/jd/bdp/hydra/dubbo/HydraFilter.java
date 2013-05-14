@@ -48,7 +48,6 @@ public class HydraFilter implements Filter {
     private Tracer tracer = null;
 
     public HydraFilter(){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     // 调用过程拦截
@@ -64,7 +63,7 @@ public class HydraFilter implements Filter {
         }
         long start = System.currentTimeMillis();
         RpcContext context = RpcContext.getContext();
-        System.out.println((context.isConsumerSide()?"C":"S") + "----"+this.serviceId + "---" + context.getMethodName() + "---" + RpcContext.getContext().getUrl().getServiceInterface());
+//        System.out.println((context.isConsumerSide()?"C":"S") + "----"+this.serviceId + "---" + context.getMethodName() + "---" + RpcContext.getContext().getUrl().getServiceInterface());
         boolean isConsumerSide = context.isConsumerSide();
         Span span = null;
         Endpoint endpoint = null;

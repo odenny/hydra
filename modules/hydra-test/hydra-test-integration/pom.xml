@@ -37,13 +37,16 @@
         <dependency>
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-example-exp1</artifactId>
-            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--引入场景二进行集成测试-->
+        <dependency>
+            <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-example-exp2</artifactId>
         </dependency>
         <!--顺便做一下基准测试(压力测试)-->
         <dependency>
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-test-benchmark</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>

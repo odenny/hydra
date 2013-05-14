@@ -70,6 +70,7 @@ public class CollectorSerService {
               insertService.durationIndex(s);
           }
         }catch (Exception e){
+            e.printStackTrace();
             log.error(e.getMessage());
         }
     }

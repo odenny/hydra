@@ -21,6 +21,12 @@
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
         default-autowire="byName">
 
+    <!-- 选择存储方式为hbase -->
+    <import resource="classpath*:hydra-hbase.xml" />
+    <!-- 选择存储方式为mysql -->
+    <!--<import resource="classpath*:hydra-mysql.xml" />-->
+
+
     <bean id="collectorSerService" class="com.jd.bdp.hydra.collector.service.CollectorSerService" >
         <property name="topic" value="hydra_test"></property>
     </bean>

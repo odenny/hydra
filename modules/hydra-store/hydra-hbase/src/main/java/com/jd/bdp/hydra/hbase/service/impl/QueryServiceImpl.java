@@ -22,6 +22,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.hbase.service.QueryService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.filter.Filter;

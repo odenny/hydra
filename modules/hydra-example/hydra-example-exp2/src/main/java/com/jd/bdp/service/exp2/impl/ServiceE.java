@@ -26,11 +26,21 @@ import com.jd.bdp.service.exp2.inter.InterfaceE;
  */
 public class ServiceE implements InterfaceE {
 
+    static int mySwitch = 1;
+
     @Override
     public Object functionE(Object... objects) {
         String myVoice = new String("E");
         String returnVoice = myVoice.toString();
         returnVoice = "(" + returnVoice + ")";
+//        if (mySwitch > 0){
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+//        }
+        mySwitch = -mySwitch;
         return returnVoice;
     }
 }

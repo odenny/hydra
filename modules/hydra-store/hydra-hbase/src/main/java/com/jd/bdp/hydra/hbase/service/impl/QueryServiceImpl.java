@@ -60,10 +60,10 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax) {
+    public JSONArray getTracesByDuration(String serviceId, Long startTime, int sum, int durationMin, int durationMax) {
         JSONArray array = new JSONArray();
         Scan scan = new Scan();
-        scan.setStartRow(new String(serviceId + ":" + start).getBytes());
+        scan.setStartRow(new String(serviceId + ":" + startTime).getBytes());
         scan.setStopRow(new String(serviceId + ":" + Long.MAX_VALUE).getBytes());
         Filter filter = new PageFilter(sum);
         scan.setFilter(filter);
@@ -109,7 +109,7 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesByEx(String serviceId, long startTime, int sum) {
+    public JSONArray getTracesByEx(String serviceId, Long startTime, int sum) {
         JSONArray array = new JSONArray();
         Scan scan = new Scan();
         scan.setStartRow(new String(serviceId + ":" + startTime + ":dubbo.exception".getBytes()).getBytes());

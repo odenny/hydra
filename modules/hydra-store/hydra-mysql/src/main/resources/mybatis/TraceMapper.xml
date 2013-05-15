@@ -32,7 +32,7 @@
     </select>
 
     <select id="findTracesEx" parameterType="map" resultMap="TraceResultMap">
-        SELECT t.*, a.value FROM annotation a left join trace t on t.service=#{serviceId} and t.traceId = a.traceId and a.k='dubbo.exception' and <![CDATA[ t.time >= #{startTime}]]> limit #{num}
+        SELECT t.*, a.value FROM annotation a inner join trace t on t.service=#{serviceId} and t.traceId = a.traceId and a.k='dubbo.exception' and <![CDATA[ t.time >= #{startTime}]]> limit #{num}
     </select>
 
     <insert id="addTrace" parameterType="TraceEntity" >

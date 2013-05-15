@@ -17,6 +17,7 @@
         <module>hydra-test-benchmark</module>
         <module>hydra-test-integration</module>
         <module>hydra-test-modules</module>
+        <module>hydra-test-interface</module>
     </modules>
 
     <dependencyManagement>

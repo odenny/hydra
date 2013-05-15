@@ -73,7 +73,7 @@
                             <configuration>
                                 <includes>
                                     <include>**/*.class</include>
-                                    <include>trigger-context.xml</include>
+                                    <include>trigger-context2.xml</include>
                                 </includes>
                                 <classifier>assemble</classifier>
                             </configuration>

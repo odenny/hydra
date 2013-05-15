@@ -53,20 +53,19 @@ public class JMeterGetTracesByEx extends AbstractJavaSamplerClient {
     public SampleResult runTest(JavaSamplerContext javaSamplerContext) {
         SampleResult sr = new SampleResult();
         sr.setSampleLabel("JMeterGetTracesByEx"+serviceId);
-        sr.sampleStart();                                          // 计时开始
+        sr.sampleStart();
         try {
             JSONArray jsonArray = queryService.getTracesByEx(serviceId, startTime, sum);
             sr.setResponseData(jsonArray.toJSONString());
-            sr.setSuccessful(true);                           // 可用于返回是否处理成功
+            sr.setSuccessful(true);
         } catch (Exception e) {
             logger.error(e.getMessage());
             sr.setSuccessful(false);
             sr.setResponseMessage(e.getMessage());
         } finally {
-            sr.sampleEnd();                                            // 计时结束
+            sr.sampleEnd();
             sr.setDataEncoding("UTF-8");
-            // results.setResponseCode(context.getParameter("id"));         // 获取参数
-            sr.setResponseMessage("responseMessage");  // 结果返回2
+            sr.setResponseMessage("responseMessage");
             return sr;
         }
 

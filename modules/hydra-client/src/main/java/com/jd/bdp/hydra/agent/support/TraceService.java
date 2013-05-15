@@ -65,10 +65,10 @@ public class TraceService implements RegisterService, CollectorService {
         try {
             serviceId = leaderService.registerClient(appName, serviceName);
         } catch (Exception e) {
-            logger.warn("client cannot regist service <" + serviceName + "> into the hydra system");
+            logger.warn("[Hydra] client cannot regist service <" + serviceName + "> into the hydra system");
         }
         if (serviceId != null) {
-            logger.info("Registry ["+serviceName+"] option is ok!");
+            logger.info("[Hydra] Registry ["+serviceName+"] option is ok!");
             registerInfo.put(serviceName, serviceId); //更新本地注册信息
             return true;
         } else

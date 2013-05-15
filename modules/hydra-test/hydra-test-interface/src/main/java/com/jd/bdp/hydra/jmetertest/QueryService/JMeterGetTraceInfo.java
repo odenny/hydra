@@ -45,17 +45,17 @@ public class JMeterGetTraceInfo extends AbstractJavaSamplerClient {
     public SampleResult runTest(JavaSamplerContext javaSamplerContext) {
         SampleResult sr = new SampleResult();
         sr.setSampleLabel("JMeterGetTraceInfo"+traceId);
-        sr.sampleStart();                                          // 计时开始
+        sr.sampleStart();
         try {
             JSONObject jsonObject = queryService.getTraceInfo(traceId);
             sr.setResponseData(jsonObject.toJSONString());
-            sr.setSuccessful(true);                           // 可用于返回是否处理成功
+            sr.setSuccessful(true);
         } catch (Exception e) {
             logger.error(e.getMessage());
             sr.setSuccessful(false);
             sr.setResponseMessage(e.getMessage());
         } finally {
-            sr.sampleEnd();                                            // 计时结束
+            sr.sampleEnd();
             sr.setDataEncoding("UTF-8");
             return sr;
         }

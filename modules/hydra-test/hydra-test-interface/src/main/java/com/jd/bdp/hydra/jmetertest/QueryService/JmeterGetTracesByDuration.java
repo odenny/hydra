@@ -60,19 +60,19 @@ public class JMeterGetTracesByDuration extends AbstractJavaSamplerClient {
     public SampleResult runTest(JavaSamplerContext javaSamplerContext) {
         SampleResult sr = new SampleResult();
         sr.setSampleLabel("JMeterGetTracesByDuration"+serviceId);
-        sr.sampleStart();                                          // 计时开始
+        sr.sampleStart();
         try {
             JSONArray jsonArray = queryService.getTracesByDuration(serviceId, startTime, sum, durationMin, durationMax);
             sr.setResponseData(jsonArray.toJSONString());
-            sr.setSuccessful(true);                           // 可用于返回是否处理成功
+            sr.setSuccessful(true);
         } catch (Exception e) {
             logger.error(e.getMessage());
             sr.setSuccessful(false);
             sr.setResponseMessage(e.getMessage());
         } finally {
-            sr.sampleEnd();                                            // 计时结束
+            sr.sampleEnd();
             sr.setDataEncoding("UTF-8");
-            sr.setResponseMessage("responseMessage");  // 结果返回2
+            sr.setResponseMessage("responseMessage");
             return sr;
         }
 

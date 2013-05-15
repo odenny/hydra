@@ -11,3 +11,4 @@ public class StartBenchmark {
         new BenchmarkClient().run(args);
     }
 }
+

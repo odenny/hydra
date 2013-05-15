@@ -148,7 +148,7 @@ public class QueryServiceImpl implements QueryService {
     private JSONObject createJsonAnn(Absannotation annotation) {
         JSONObject obj = new JSONObject();
         obj.put("value", annotation.getKey());
-        obj.put("timestamp", annotation.getValue());
+        obj.put("timestamp", annotation.getTimestamp());
         JSONObject host = new JSONObject();
         host.put("ip", annotation.getIp());
         host.put("port", annotation.getPort());
@@ -157,8 +157,8 @@ public class QueryServiceImpl implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax) {
-        List<Trace> list = traceMapper.findTracesByDuration(serviceId, start, durationMin, durationMax, sum);
+    public JSONArray getTracesByDuration(String serviceId, Long startTime, int sum, int durationMin, int durationMax) {
+        List<Trace> list = traceMapper.findTracesByDuration(serviceId, startTime, durationMin, durationMax, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {
             JSONObject obj = new JSONObject();
@@ -172,7 +172,7 @@ public class QueryServiceImpl implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesByEx(String serviceId, long startTime, int sum) {
+    public JSONArray getTracesByEx(String serviceId, Long startTime, int sum) {
         List<Trace> list = traceMapper.findTracesEx(serviceId, startTime, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {

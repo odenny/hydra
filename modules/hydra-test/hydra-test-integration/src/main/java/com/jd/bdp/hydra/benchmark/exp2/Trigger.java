@@ -68,7 +68,7 @@ public class Trigger implements InitializingBean {
             context.start();
             Trigger trigger=(Trigger)context.getBean("trigger");
             // 每隔3s触发一次调用
-            trigger.startWorkWithSleep(10,500);
+            trigger.startWorkWithSleep(1,500);
         } catch (Exception e) {
             e.printStackTrace();
         }

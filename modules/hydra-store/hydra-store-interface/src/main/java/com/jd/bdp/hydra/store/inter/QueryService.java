@@ -26,9 +26,9 @@ import com.alibaba.fastjson.JSONObject;
  */
 public interface QueryService {
 
-    JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax);
+    JSONArray getTracesByDuration(String serviceId, Long startTime, int sum, int durationMin, int durationMax);
 
-    JSONArray getTracesByEx(String serviceId, long startTime, int sum);
+    JSONArray getTracesByEx(String serviceId, Long startTime, int sum);
 
     JSONObject getTraceInfo(Long traceId);
 }

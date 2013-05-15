@@ -19,7 +19,6 @@ angular.module('hydra.services.sequence', [])
     .factory('sequenceService', function(){
         return {
             getMyTrace :function (trace, myScope) {
-                console.log(trace)
                 var span = trace.rootSpan;
                 var spanIndex = {index: 0}
                 getMySpan(span, spanIndex);

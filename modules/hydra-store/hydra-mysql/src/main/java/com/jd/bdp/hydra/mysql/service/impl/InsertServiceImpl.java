@@ -22,7 +22,9 @@ public class InsertServiceImpl implements InsertService {
     @Override
     public void addSpan(Span span) {
         if (span.getServiceId() != null){
-            spanMapper.addSpan(span);
+            if (!Utils.isRoot(span) || Utils.isRoot(span) && Utils.isTopAnntation(span)){
+                spanMapper.addSpan(span);
+            }
         }
     }
 
@@ -33,7 +35,6 @@ public class InsertServiceImpl implements InsertService {
             Annotation annotation1 = Utils.getCsAnnotation(span.getAnnotations());
             Trace t = new Trace();
             t.setTraceId(span.getTraceId());
-            t.setAnnValue(annotation1.getValue());
             t.setDuration((int) (annotation.getTimestamp() - annotation1.getTimestamp()));
             t.setService(span.getServiceId());
             t.setTime(annotation1.getTimestamp());
@@ -44,12 +45,12 @@ public class InsertServiceImpl implements InsertService {
     @Override
     public void addAnnotation(Span span){
         for(Annotation a : span.getAnnotations()){
-            Absannotation aa = new Absannotation(a);
+            Absannotation aa = new Absannotation(a, span);
             annotationMapper.addAnnotation(aa);
         }
 
         for(BinaryAnnotation b : span.getBinaryAnnotations()){
-            Absannotation bb = new Absannotation(b);
+            Absannotation bb = new Absannotation(b, span);
             annotationMapper.addAnnotation(bb);
         }
     }

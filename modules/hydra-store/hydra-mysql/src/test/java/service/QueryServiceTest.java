@@ -112,76 +112,76 @@ public class QueryServiceTest extends AbstractDependencyInjectionSpringContextTe
 
         Absannotation ann1 = new Absannotation();
         ann1.setKey("cs");
-        ann1.setValue(String.valueOf(1368002575495L));
+        ann1.setTimestamp(1368002575495L);
         ann1.setSpanId(1368002575600L);
         ann1.setTraceId(1368002575495L);
 
         Absannotation ann2 = new Absannotation();
         ann2.setKey("cr");
-        ann2.setValue(String.valueOf(1368002575590L));
+        ann2.setTimestamp(1368002575590L);
         ann2.setSpanId(1368002575600L);
         ann2.setTraceId(1368002575495L);
 
         Absannotation ann3 = new Absannotation();
         ann3.setKey("sr");
-        ann3.setValue(String.valueOf(1368002575510L));
+        ann3.setTimestamp(1368002575510L);
         ann3.setSpanId(1368002575600L);
         ann3.setTraceId(1368002575495L);
 
         Absannotation ann4 = new Absannotation();
         ann4.setKey("ss");
-        ann4.setValue(String.valueOf(1368002575580L));
+        ann4.setTimestamp(1368002575580L);
         ann4.setSpanId(1368002575600L);
         ann4.setTraceId(1368002575495L);
 
 
         Absannotation ann5 = new Absannotation();
         ann5.setKey("cs");
-        ann5.setValue(String.valueOf(1368002575520L));
+        ann5.setTimestamp(1368002575520L);
         ann5.setSpanId(1368002575601L);
         ann5.setTraceId(1368002575495L);
 
 
         Absannotation ann6 = new Absannotation();
         ann6.setKey("cr");
-        ann6.setValue(String.valueOf(1368002575550L));
+        ann6.setTimestamp(1368002575550L);
         ann6.setSpanId(1368002575601L);
         ann6.setTraceId(1368002575495L);
 
 
         Absannotation ann7 = new Absannotation();
         ann7.setKey("sr");
-        ann7.setValue(String.valueOf(1368002575525L));
+        ann7.setTimestamp(1368002575525L);
         ann7.setSpanId(1368002575601L);
         ann7.setTraceId(1368002575495L);
 
         Absannotation ann8 = new Absannotation();
         ann8.setKey("ss");
-        ann8.setValue(String.valueOf(1368002575540L));
+        ann8.setTimestamp(1368002575540L);
         ann8.setSpanId(1368002575601L);
         ann8.setTraceId(1368002575495L);
 
         Absannotation ann9 = new Absannotation();
         ann9.setKey("cs");
-        ann9.setValue(String.valueOf(1368002575555L));
+        ann9.setTimestamp(1368002575555L);
         ann9.setSpanId(1368002575602L);
         ann9.setTraceId(1368002575495L);
 
         Absannotation ann10 = new Absannotation();
         ann10.setKey("cr");
-        ann10.setValue(String.valueOf(1368002575580L));
+        ann10.setTimestamp(1368002575580L);
         ann10.setSpanId(1368002575602L);
         ann10.setTraceId(1368002575495L);
 
         Absannotation ann11 = new Absannotation();
         ann11.setKey("sr");
-        ann11.setValue(String.valueOf(1368002575560L));
+        ann11.setTimestamp(1368002575560L);
         ann11.setSpanId(1368002575602L);
         ann11.setTraceId(1368002575495L);
 
         Absannotation ann12 = new Absannotation();
         ann12.setKey("ss");
-        ann12.setValue(String.valueOf(1368002575575L));
+        ann12.setTimestamp(1368002575575L);
         ann12.setSpanId(1368002575602L);
         ann12.setTraceId(1368002575495L);
 

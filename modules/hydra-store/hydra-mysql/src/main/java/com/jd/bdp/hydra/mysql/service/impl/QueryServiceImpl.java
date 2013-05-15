@@ -26,9 +26,14 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONObject getTraceInfo(Long traceId) {
-        List<Span> spans = spanMapper.findSpanByTraceId(traceId);
-        List<Absannotation> annotations = annotationMapper.getAnnotations(spans);
-        return assembleTrace(spans, annotations);
+        try {
+            List<Span> spans = spanMapper.findSpanByTraceId(traceId);
+            List<Absannotation> annotations = annotationMapper.getAnnotations(spans);
+            return assembleTrace(spans, annotations);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private JSONObject assembleTrace(List<Span> spans, List<Absannotation> annotations) {

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{dd/MM/yy hh:mm:ss:sss z}] %t %5p %c{2}: %m%n"/>
+        </layout>
+    </appender>
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+    <category name="org.springframework">
+        <level value="INFO" />
+        <appender-ref ref="CONSOLE" />
+    </category>
+    <category name="org.apache.ibatis">
+        <level value="ERROR" />
+        <appender-ref ref="CONSOLE" />
+    </category>
+    <category name="com.alibaba.dubbo">
+        <level value="ERROR" />
+        <appender-ref ref="CONSOLE" />
+    </category>
+    <category name="com.taobao.metamorphosis">
+        <level value="ERROR" />
+        <appender-ref ref="CONSOLE" />
+    </category>
+    <category name="org.apache.zookeeper">
+        <level value="ERROR" />
+        <appender-ref ref="CONSOLE" />
+    </category>
+</log4j:configuration>

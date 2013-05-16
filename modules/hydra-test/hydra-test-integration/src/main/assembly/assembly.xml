@@ -7,22 +7,6 @@
         <format>tar.gz</format>
     </formats>
     <includeBaseDirectory>true</includeBaseDirectory>
-    <moduleSets>
-        <moduleSet>
-            <useAllReactorProjects>true</useAllReactorProjects>
-            <includes>
-                <include>com.jd.bdp:hydra-example-exp1</include>
-                <include>com.jd.bdp:hydra-client</include>
-                <include>com.jd.bdp:hydra-manager</include>
-                <include>com.jd.bdp.hydra-collector</include>
-                <include>com.jd.bdp:hydra-collector-service</include>
-            </includes>
-            <binaries>
-                <outputDirectory>lib</outputDirectory>
-                <unpack>false</unpack>
-            </binaries>
-        </moduleSet>
-    </moduleSets>
     <dependencySets>
         <dependencySet>
             <outputDirectory>lib</outputDirectory>

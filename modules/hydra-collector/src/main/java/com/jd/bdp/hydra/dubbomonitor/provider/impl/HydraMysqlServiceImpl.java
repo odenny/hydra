@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 public class HydraMysqlServiceImpl implements HydraService {
 
-    private ArrayBlockingQueue<List<Span>> queue = new ArrayBlockingQueue<List<Span>>(10000);
+    private ArrayBlockingQueue<List<Span>> queue = new ArrayBlockingQueue<List<Span>>(1024);
     private ExecutorService executors = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
 

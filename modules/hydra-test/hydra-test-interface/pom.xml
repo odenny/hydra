@@ -42,15 +42,6 @@
 
 
     <build>
-        <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources</directory>-->
-                <!--<includes>-->
-                    <!--<include>jmeter/*.jmx</include>-->
-                <!--</includes>-->
-               <!--<targetPath>${JMETER_HOME}\bin\hydra</targetPath>-->
-            <!--</resource>-->
-        <!--</resources>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -87,20 +78,6 @@
                     <type>jar</type>
                     <outputDirectory>${Jmeter_lib}\ext\lib</outputDirectory>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.lazerycode.jmeter</groupId>
-                <artifactId>jmeter-maven-plugin</artifactId>
-                <version>1.8.1</version>
-                <executions>
-                    <execution>
-                        <id>jmeter-tests</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>jmeter</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

@@ -14,28 +14,33 @@ Hydra 测试
         <th>备注</th>
     </tr>
     <tr>
+        <td>Manager</td>
+        <td>192.168.228.81</td>
+        <td>管理中心</td>
+    </tr>
+    <tr>
+        <td>Collector</td>
+        <td>192.168.227.48</td>
+        <td>搜集器</td>
+    </tr>
+    <tr>
         <td>A</td>
         <td>192.168.227.83</td>
-        <td></td>
+        <td>A</td>
     </tr>
     <tr>
         <td>B</td>
         <td>192.168.227.86</td>
-        <td></td>
+        <td>B</td>
     </tr>
     <tr>
         <td>C</td>
         <td>192.168.228.85</td>
-        <td></td>
+        <td>C</td>
     </tr>
     <tr>
-        <td>Manager</td>
+        <td>Benchmark/Trigger</td>
         <td>192.168.227.48</td>
-        <td>管理中心</td>
-    </tr>
-    <tr>
-        <td>Benchmark</td>
-        <td>192.168.228.81</td>
         <td>基准测试</td>
     </tr>
 </table>

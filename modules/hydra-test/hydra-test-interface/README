@@ -1,4 +1,4 @@
-基准测试
+接口测试
 ================================================
 
 功能需求
@@ -6,9 +6,3 @@
 ### 结合JMeter等工具，测试接口性能
 
 ### 使用说明
-        1:mvn package -Dmaven.test.skip=true
-        2:cd hydra-example-benchmark*
-        3:cd conf
-           config the benchmark.properties and dubbo.properties
-        4:cd bin
-        5:startABC.sh and startBenchmark.sh

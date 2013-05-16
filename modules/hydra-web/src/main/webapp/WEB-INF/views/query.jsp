@@ -126,6 +126,7 @@
             <thead>
             <tr>
                 <th>服务名</th>
+                <th>跟踪id</th>
                 <th>调用时间</th>
                 <th>异常信息</th>
                 <th>操作</th>

@@ -58,6 +58,7 @@ angular.module('hydra.services.query', [])
             initTableEx:function(setting, myScope){
                 setting.aoColumns = [
                     { "mData": "serviceId" },
+                    { "mData": "traceId" ,"sClass": "center"},
                     { "mData": "timestamp" , "sClass": "center"},
                     { "mData": "exInfo" ,"sClass": "center"},
                     { "mData": "traceId" ,"sClass": "center"}
@@ -67,10 +68,10 @@ angular.module('hydra.services.query', [])
                 setting.bScrollCollapse = true;
                 setting.fnRowCallback = function( nRow, aData, iDisplayIndex ) {
                     $('td:eq(0)', nRow).html(myScope.serviceName);
-                    $('td:eq(1)', nRow).html($filter('date')(aData['timestamp'], "yyyy-MM-dd HH:mm:ss"));
-                    $('td:eq(2)', nRow).html(aData['exInfo'].substring(0, 30) + '...').attr('title', aData['exInfo']);
+                    $('td:eq(2)', nRow).html($filter('date')(aData['timestamp'], "yyyy-MM-dd HH:mm:ss"));
+                    $('td:eq(3)', nRow).html(aData['exInfo'].substring(0, 30) + '...').attr('title', aData['exInfo']);
                     var element = $compile('<button type="button" class="btn btn-info" ng-click="linkToDetail('+aData['traceId']+')">查看详细</button>')(myScope);
-                    $('td:eq(3)', nRow).html(element);
+                    $('td:eq(4)', nRow).html(element);
                 };
                 $('#traceExTable').dataTable(setting);
             },
@@ -91,7 +92,9 @@ angular.module('hydra.services.query', [])
                 });
             },
             initAuto: function(){
-                $('#serviceName').typeahead({});
+                $('#serviceName').typeahead({
+                    items:15
+                });
             },
             loadTableData : function(table, traceList){
                 table.fnClearTable();

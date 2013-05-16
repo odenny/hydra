@@ -31,6 +31,7 @@ public class Absannotation {
         this.ip = binaryAnnotation.getHost().getIp();
         this.value = new String(binaryAnnotation.getValue());
         this.port = binaryAnnotation.getHost().getPort();
+        this.service = span.getServiceId();
     }
 
     public Absannotation(Annotation annotation, Span span){

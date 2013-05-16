@@ -21,18 +21,23 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byName">
-    <!--数据库层-->
-    <!--<bean id="dataSourceStoreMysql" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>-->
-        <!--<property name="url" value="jdbc:mysql://192.168.227.48:3306/hydra-config"></property>-->
-        <!--<property name="username" value="root"></property>-->
-        <!--<property name="password" value="root"></property>-->
-    <!--</bean>-->
+
+    <!--数据库层  自己默认提供一个属性配置-->
+    <bean id="propertyConfigurer-mysql" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1" />
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:mybatis/mysql.properties</value>
+            </list>
+        </property>
+    </bean>
+
     <bean id="dataSourceStoreMysql" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="jdbc:mysql://192.168.227.48:3306/hydra-config" />
-        <property name="username" value="root" />
-        <property name="password" value="root" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
 
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1" />

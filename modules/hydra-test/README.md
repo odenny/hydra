@@ -24,6 +24,11 @@ Hydra 测试
         <td>搜集器</td>
     </tr>
     <tr>
+        <td>Benchmark/Trigger</td>
+        <td>192.168.227.48</td>
+        <td>基准测试/冒烟触发器</td>
+    </tr>
+    <tr>
         <td>A</td>
         <td>192.168.227.83</td>
         <td>A</td>
@@ -38,11 +43,7 @@ Hydra 测试
         <td>192.168.228.85</td>
         <td>C</td>
     </tr>
-    <tr>
-        <td>Benchmark/Trigger</td>
-        <td>192.168.227.48</td>
-        <td>基准测试</td>
-    </tr>
+
 </table>
 ### 性能测试
         benchmark模块提供基准测试框架，集成测试中完成具体性能测试

@@ -51,7 +51,6 @@ public class JMeterGetTraceInfo extends AbstractJavaSamplerClient {
             sr.setResponseData(jsonObject.toJSONString());
             sr.setSuccessful(true);
         } catch (Exception e) {
-            logger.error(e.getMessage());
             sr.setSuccessful(false);
             sr.setResponseMessage(e.getMessage());
         } finally {

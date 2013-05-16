@@ -21,12 +21,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
     <!--数据库层-->
     <bean id="dataSourceManager" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
-        <property name="url" value="jdbc:mysql://192.168.227.48:3306/hydra-config" />
-        <property name="username" value="root" />
-        <property name="password" value="root" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
 
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="1" />
@@ -54,6 +55,18 @@
         <!-- 配置监控统计拦截的filters -->
         <!--<property name="filters" value="stat" />-->
     </bean>
+
+    <!--数据库层  自己默认提供一个属性配置-->
+    <bean id="propertyConfigurer-manager-db" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1" />
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:mybatis/mysql.properties</value>
+            </list>
+        </property>
+    </bean>
+
 
     <bean id="transactionManagerManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSourceManager"/>

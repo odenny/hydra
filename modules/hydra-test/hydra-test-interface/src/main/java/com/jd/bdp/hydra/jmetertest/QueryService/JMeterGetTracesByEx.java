@@ -59,13 +59,11 @@ public class JMeterGetTracesByEx extends AbstractJavaSamplerClient {
             sr.setResponseData(jsonArray.toJSONString());
             sr.setSuccessful(true);
         } catch (Exception e) {
-            logger.error(e.getMessage());
             sr.setSuccessful(false);
             sr.setResponseMessage(e.getMessage());
         } finally {
             sr.sampleEnd();
             sr.setDataEncoding("UTF-8");
-            sr.setResponseMessage("responseMessage");
             return sr;
         }
 

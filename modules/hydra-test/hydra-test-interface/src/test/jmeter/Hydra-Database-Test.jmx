@@ -360,7 +360,7 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="classname">com.jd.bdp.hydra.jmetertest.QueryService.JMeterGetTracesByDuration</stringProp>
+          <stringProp name="classname">com.jd.bdp.hydra.jmetertest.QueryService.JmeterGetTracesByDuration</stringProp>
         </JavaSampler>
         <hashTree>
           <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="聚合报告" enabled="true">

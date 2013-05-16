@@ -17,8 +17,8 @@ import java.util.Date;
  * Date: 13-5-14
  * Time: 下午6:43
  */
-public class JMeterGetTracesByDuration extends AbstractJavaSamplerClient {
-    private static Logger logger = LoggerFactory.getLogger(JMeterGetTracesByDuration.class);
+public class JmeterGetTracesByDuration extends AbstractJavaSamplerClient {
+    private static Logger logger = LoggerFactory.getLogger(JmeterGetTracesByDuration.class);
     private QueryService queryService;
     //arguments
     private String serviceId;
@@ -59,7 +59,7 @@ public class JMeterGetTracesByDuration extends AbstractJavaSamplerClient {
     @Override
     public SampleResult runTest(JavaSamplerContext javaSamplerContext) {
         SampleResult sr = new SampleResult();
-        sr.setSampleLabel("JMeterGetTracesByDuration"+serviceId);
+        sr.setSampleLabel("JmeterGetTracesByDuration"+serviceId);
         sr.sampleStart();
         try {
             JSONArray jsonArray = queryService.getTracesByDuration(serviceId, startTime, sum, durationMin, durationMax);

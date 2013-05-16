@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
-public class Bootstrap {
+public class HydraCollector {
     public static void main(String[] strings) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
                 "classpath*:dubbo-hydra-provider-mysql.xml"

@@ -20,7 +20,7 @@ Hydra 测试
     </tr>
     <tr>
         <td>Collector</td>
-        <td>192.168.227.48</td>
+        <td>192.168.228.81</td>
         <td>搜集器</td>
     </tr>
     <tr>

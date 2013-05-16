@@ -1,7 +1,7 @@
 #!/bin/bash
 #project directory
 
-MAINCLASSNAME="com.jd.bdp.hydra.collector.Bootstrap"
+MAINCLASSNAME="com.jd.bdp.hydra.collector.HydraCollector"
 
 if [ -z "$BASE_DIR" ] ; then
   PRG="$0"

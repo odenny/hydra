@@ -55,4 +55,5 @@ public class HydraMysqlServiceImpl implements HydraService {
         this.insertService = insertService;
     }
 
+
 }

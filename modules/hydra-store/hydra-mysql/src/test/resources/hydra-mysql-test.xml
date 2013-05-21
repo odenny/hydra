@@ -22,7 +22,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byName">
 
-    <context:property-placeholder location="classpath:mysql.properties" ignore-unresolvable="true" />
+    <context:property-placeholder location="classpath:mybatis/mysql.properties" ignore-unresolvable="true" />
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"></property>

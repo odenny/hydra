@@ -35,3 +35,39 @@ CREATE TABLE 'TB_PARA_SERVICE_ID_GEN' (
 --head自增至26之后重置为0（为了配合hbase分区策略，hbase分多少个区，则max_head为多少）
 --max_id自增值9999后后重置为0
 INSERT INTO 'TB_PARA_SERVICE_ID_GEN' VALUES (0, 0, 26, 10000)
+
+--annotation
+CREATE TABLE 'annotation' (
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'k' varchar(128) DEFAULT NULL,
+  'value' varchar(2048) DEFAULT NULL,
+  'ip' varchar(45) DEFAULT NULL,
+  'port' varchar(11) DEFAULT NULL,
+  'timestamp' bigint(20) DEFAULT NULL,
+  'duration' int(11) DEFAULT NULL,
+  'spanId' bigint(128) DEFAULT NULL,
+  'traceId' bigint(128) DEFAULT NULL,
+  'service' varchar(128) DEFAULT NULL,
+  PRIMARY KEY ('id')
+) ENGINE=InnoDB AUTO_INCREMENT=217122 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci'
+
+--span
+CREATE TABLE 'span' (
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'name' varchar(128) DEFAULT NULL,
+  'traceId' bigint(20) DEFAULT NULL,
+  'parentId' bigint(20) DEFAULT NULL,
+  'spanId' bigint(20) DEFAULT NULL,
+  'service' varchar(128) DEFAULT NULL,
+  PRIMARY KEY ('id')
+) ENGINE=InnoDB AUTO_INCREMENT=53365 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci'
+
+--trace
+CREATE TABLE 'trace' (
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'traceId' bigint(128) DEFAULT NULL,
+  'duration' int(11) DEFAULT NULL,
+  'service' varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
+  'time' bigint(20) DEFAULT NULL,
+  PRIMARY KEY ('id')
+) ENGINE=InnoDB AUTO_INCREMENT=16924 DEFAULT CHARSET=utf8 COMMENT='utf8_general_ci'

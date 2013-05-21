@@ -15,7 +15,7 @@ public class StartTrigger {
             });
             context.start();
             Trigger trigger=(Trigger)context.getBean("trigger");
-            trigger.startWorkWithSleep(Integer.MAX_VALUE,100);
+            trigger.startWorkWithSleep(Integer.MAX_VALUE,500);
         } catch (Exception e) {
             e.printStackTrace();
         }

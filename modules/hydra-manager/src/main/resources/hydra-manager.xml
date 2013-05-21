@@ -7,14 +7,17 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-autowire="byName">
+    <import resource="classpath*:hydra-manager-db.xml"/>
     <bean id="hydra-manager-proConfigure" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="2" />
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <!-- 系统-D参数覆盖 -->
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
         <property name="location" value="classpath:hydra-manager.properties"/>
     </bean>
     <!--管理端  默认提供一个属性配置  决定数据源-->
     <bean id="dbPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="order" value="2" />
+        <property name="order" value="3" />
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="locations">
             <list>
@@ -22,7 +25,7 @@
             </list>
         </property>
     </bean>
-    <import resource="classpath*:hydra-manager-db.xml"/>
+
     <dubbo:application name="${dubbo.application.name}" owner="${dubbo.application.owner}"/>
     <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}"/>
     <!-- 用dubbo协议在20880端口暴露服务 -->

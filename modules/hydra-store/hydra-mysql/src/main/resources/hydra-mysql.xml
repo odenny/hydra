@@ -23,7 +23,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" default-autowire="byName">
 
     <!--数据库层  自己默认提供一个属性配置-->
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean id="propertyConfigurer-hydraMysql" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="order" value="1" />
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="locations">

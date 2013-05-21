@@ -18,6 +18,7 @@ public class LeaderServiceImpl implements LeaderService {
 
     @Override
     public Map<String, String> registerClient(String name, List<String> services) {
+        System.out.println("接受请求");
         long startTime=System.currentTimeMillis();
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("seed", seedService.getSeed().toString());
@@ -25,6 +26,7 @@ public class LeaderServiceImpl implements LeaderService {
         for (String serviceName : services) {
             map.put("serviceName", serviceService.getServiceId(serviceName, name).toString());
         }
+        System.out.println("结束请求");
         System.out.println("userTime:"+(System.currentTimeMillis()-startTime));
         return map;
     }

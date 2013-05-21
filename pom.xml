@@ -108,6 +108,7 @@
         <hbase.version>bdp-0.92.1-cdh4.1.1</hbase.version>
         <commons-configuration.version>1.9</commons-configuration.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <druid.version>0.2.17</druid.version>
     </properties>
 
 
@@ -238,11 +239,6 @@
                 <version>${servlet.version}</version>
             </dependency>
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>${servlet.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>javax.servlet.jsp</groupId>
                 <artifactId>jsp-api</artifactId>
                 <version>${jsp-api.version}</version>
@@ -258,11 +254,6 @@
                 <version>${jstl-api.version}</version>
             </dependency>
             <!-- json -->
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
                 <artifactId>jackson-mapper-asl</artifactId>
@@ -392,6 +383,12 @@
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>${commons-lang.version}</version>
+            </dependency>
+            <!-- 连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
             </dependency>
 
         </dependencies>

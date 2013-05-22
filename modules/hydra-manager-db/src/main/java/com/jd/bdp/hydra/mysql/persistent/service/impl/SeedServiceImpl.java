@@ -57,12 +57,16 @@ public class SeedServiceImpl implements SeedService {
         } catch (Exception e) {
             log.error("seed persistent into the database occur error,will use default seed");
             result=0L;
+            throw new RuntimeException("get seed accur error",e.getCause());
+        } finally {
+            if (result != null && result >= MAX_STEP) {
+                log.error("seed has bean used over! please insure the stability of the system~");
+                result = 1L;
+            }
+            return result;
         }
-        if (result != null && result >= MAX_STEP) {
-            log.warn("seed has bean used over! please insure the stability of the system~");
-            result = 1L;
-        }
-        return result;
+
+
     }
 
     private SeedMapper seedMapper;

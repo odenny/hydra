@@ -29,8 +29,8 @@
                 <include>**.**</include>
             </includes>
             <excludes>
+                <exclude>/assembly</exclude>
                 <exclude>/scripts</exclude>
-                <exclude>/trigger-context.xml</exclude>
             </excludes>
         </fileSet>
         <!--windows bat-->
@@ -41,10 +41,6 @@
                 <include>startABC/*.*</include>
                 <include>*.*</include>
             </includes>
-        </fileSet>
-        <fileSet>
-            <directory>/src/main/resources/log</directory>
-            <outputDirectory>/log</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>

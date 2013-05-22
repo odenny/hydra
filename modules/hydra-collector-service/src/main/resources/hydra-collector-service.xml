@@ -17,18 +17,20 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
-        default-autowire="byName">
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byName">
 
     <!-- 选择存储方式为hbase -->
     <import resource="classpath*:hydra-hbase.xml" />
     <!-- 选择存储方式为mysql -->
     <!--<import resource="classpath*:hydra-mysql.xml" />-->
 
+    <context:property-placeholder location="classpath:conf.properties"/>
 
     <bean id="collectorSerService" class="com.jd.bdp.hydra.collector.service.CollectorSerService" >
-        <property name="topic" value="hydra_test"></property>
+        <property name="topic" value="${metaq.topic}"></property>
     </bean>
 
 
@@ -38,7 +40,7 @@
                 <property name="zkConfig">
                     <bean class="com.taobao.metamorphosis.utils.ZkUtils.ZKConfig">
                         <constructor-arg>
-                            <value>192.168.227.83:2181</value>
+                            <value>${metaq.zk.address}</value>
                         </constructor-arg>
                         <constructor-arg>
                             <value>30000</value>
@@ -62,9 +64,9 @@
         <constructor-arg>
             <bean class="com.taobao.metamorphosis.client.consumer.ConsumerConfig">
                 <!--  group name -->
-                <constructor-arg type="java.lang.String" value="meta-example1"/>
+                <constructor-arg type="java.lang.String" value="meta-example"/>
                 <!--  other options -->
-                <property name="maxDelayFetchTimeInMills" value="100"/>
+                <property name="maxDelayFetchTimeInMills" value="${metaq.consumer.maxDelayFetchTimeInMills}"/>
             </bean>
         </constructor-arg>
     </bean>

@@ -43,8 +43,6 @@ public class HydraFilter implements Filter {
 
     private static Logger logger = LoggerFactory.getLogger(HydraFilter.class);
 
-    private String serviceId = null;
-
     private Tracer tracer = null;
 
     public HydraFilter(){
@@ -53,15 +51,15 @@ public class HydraFilter implements Filter {
 
     // 调用过程拦截
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        this.serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
+        String serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
         if (serviceId == null) {
             Tracer.startTraceWork();
             return invoker.invoke(invocation);
         }
-        
+
         long start = System.currentTimeMillis();
         RpcContext context = RpcContext.getContext();
-        System.out.println((context.isConsumerSide()?"C":"S") + "----"+this.serviceId + "---" + context.getMethodName() + "---" + RpcContext.getContext().getUrl().getServiceInterface());
+        System.out.println((context.isConsumerSide()?"C":"S") + "----"+serviceId + "---" + context.getMethodName() + "---" + RpcContext.getContext().getUrl().getServiceInterface());
         boolean isConsumerSide = context.isConsumerSide();
         Span span = null;
         Endpoint endpoint = null;
@@ -73,7 +71,7 @@ public class HydraFilter implements Filter {
             if (context.isConsumerSide()) {
                 Span span1 = tracer.getParentSpan();
                 if (span1 == null) { //为rootSpan
-                    span = tracer.newSpan(context.getMethodName(), endpoint, this.serviceId);
+                    span = tracer.newSpan(context.getMethodName(), endpoint, serviceId);
                 } else {
                     span = tracer.genSpan(span1.getTraceId(), span1.getId(), tracer.genSpanId(), context.getMethodName(), span1.isSample(), null);
                 }
@@ -83,8 +81,8 @@ public class HydraFilter implements Filter {
                 parentId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.PID));
                 spanId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.SID));
                 boolean isSample = (traceId != null);
-                span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample, this.serviceId);
-                System.out.println(this.serviceId + "-----" + context.getMethodName());
+                span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample, serviceId);
+                System.out.println(serviceId + "-----" + context.getMethodName());
             }
             invokerBefore(invocation, span, endpoint, start);
             RpcInvocation invocation1 = (RpcInvocation) invocation;

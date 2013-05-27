@@ -21,11 +21,16 @@ angular.module('hydra.services.sequence', [])
             getMyTrace :function (trace, myScope) {
                 var span = trace.rootSpan;
                 var spanIndex = {index: 0}
-                getMySpan(span, spanIndex);
 
-                function getMySpan(span, spanIndex) {
+                getMySpan(span, spanIndex);
+                trace.spanLength = spanIndex.index + 1;
+
+
+                function getMySpan(span, spanIndex, myParent, index) {
+
                     var ip;
                     var anMap = {};
+                    //我自己的anMap
                     for (var i in span.annotations) {
                         if (span.annotations[i]['value']=='cs') {
                             anMap['cs'] = span.annotations[i]['timestamp'];
@@ -45,6 +50,24 @@ angular.module('hydra.services.sequence', [])
                             continue;
                         }
                     }
+
+                    //以下进行在页面上校准时间的处理
+                    if (myParent){//如果有父span
+                        if (index == 0){//如果是第一个子span
+                            //按照父span的时间处理
+                            anMap['cs'] = myParent.anMap['sr'];
+                        }else {
+                            //按照自己前一个兄弟span的时间处理
+                            var myBrother = myParent.children[index - 1];
+                            anMap['cs'] = myBrother['cr'];
+                        }
+                    }
+                    anMap['cr'] = parseInt(anMap['cs']) + parseInt(span.durationClient)
+                    //sr约等于网络消耗时长的一半
+                    anMap['sr'] = parseInt(anMap['cs']) + (parseInt(span.durationClient) - parseInt(span.durationServer)) / 2;
+
+
+
                     span.used = {
                         spanId: span.id,
                         start: parseInt(anMap['cs']),
@@ -70,14 +93,33 @@ angular.module('hydra.services.sequence', [])
                         viewIndex: spanIndex.index,
                         type: 'wasted'
                     }
+                    span.anMap = anMap;
                     span.serviceName = myScope.serviceMap[span.serviceId];
                     spanIndex.index++;
 
+                    //处理x轴的最大值
+                    if (!trace.minTimestamp){
+                        trace.minTimestamp = span.used.start;
+                    }else {
+                        if (span.used.start < trace.minTimestamp){
+                            trace.minTimestamp = span.used.start;
+                        }
+                    }
+                    var eachMaxTime = parseInt(span.used.start) + parseInt(span.used.duration) + parseInt(span.wasted.duration);
+                    if (!trace.maxTimestamp){
+                        trace.maxTimestamp = eachMaxTime;
+                    }else {
+                        if (eachMaxTime > trace.maxTimestamp){
+                            trace.maxTimestamp = eachMaxTime;
+                        }
+                    }
+
+                    //迭代
                     for (var i in span.children) {
-                        getMySpan(span.children[i], spanIndex);
+                        getMySpan(span.children[i], spanIndex, span, i);
                     }
                 }
-                trace.spanLength = spanIndex.index + 1;
+
             },
             getSpanMap:function(trace){
                 var spanMap = {};

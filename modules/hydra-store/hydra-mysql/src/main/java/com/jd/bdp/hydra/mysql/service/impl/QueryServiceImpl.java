@@ -11,9 +11,8 @@ import com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper;
 import com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper;
 import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
 import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
-import com.jd.bdp.hydra.mysql.service.QueryService;
+import com.jd.bdp.hydra.store.inter.QueryService;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +26,14 @@ public class QueryServiceImpl implements QueryService {
 
     @Override
     public JSONObject getTraceInfo(Long traceId) {
-        List<Span> spans = spanMapper.findSpanByTraceId(traceId);
-        List<Absannotation> annotations = annotationMapper.getAnnotations(spans);
-        return assembleTrace(spans, annotations);
+        try {
+            List<Span> spans = spanMapper.findSpanByTraceId(traceId);
+            List<Absannotation> annotations = annotationMapper.getAnnotations(spans);
+            return assembleTrace(spans, annotations);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private JSONObject assembleTrace(List<Span> spans, List<Absannotation> annotations) {
@@ -149,7 +153,7 @@ public class QueryServiceImpl implements QueryService {
     private JSONObject createJsonAnn(Absannotation annotation) {
         JSONObject obj = new JSONObject();
         obj.put("value", annotation.getKey());
-        obj.put("timestamp", annotation.getValue());
+        obj.put("timestamp", annotation.getTimestamp());
         JSONObject host = new JSONObject();
         host.put("ip", annotation.getIp());
         host.put("port", annotation.getPort());
@@ -158,8 +162,8 @@ public class QueryServiceImpl implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax) {
-        List<Trace> list = traceMapper.findTracesByDuration(serviceId, start, durationMin, durationMax, sum);
+    public JSONArray getTracesByDuration(String serviceId, Long startTime, int sum, int durationMin, int durationMax) {
+        List<Trace> list = traceMapper.findTracesByDuration(serviceId, startTime, durationMin, durationMax, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {
             JSONObject obj = new JSONObject();
@@ -173,7 +177,7 @@ public class QueryServiceImpl implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesByEx(String serviceId, long startTime, int sum) {
+    public JSONArray getTracesByEx(String serviceId, Long startTime, int sum) {
         List<Trace> list = traceMapper.findTracesEx(serviceId, startTime, sum);
         JSONArray array = new JSONArray();
         for (Trace trace : list) {

@@ -19,7 +19,6 @@ angular.module('hydra.services.sequence', [])
     .factory('sequenceService', function(){
         return {
             getMyTrace :function (trace, myScope) {
-                console.log(trace)
                 var span = trace.rootSpan;
                 var spanIndex = {index: 0}
                 getMySpan(span, spanIndex);
@@ -256,20 +255,20 @@ angular.module('hydra.services.sequence', [])
                         $(this).qtip({
                             style:{
                                 classes:'alert alert-success',
-                                width:300,
+                                width:450,
                                 height:'auto'
                             },
                             position:{
-                                viewport: $(window)
+                                viewport: $('#sequenceDiv')
                             },
                             hide:{
                                 delay:200,
                                 fixed:true
                             },
                             content:function(){
-                                var html = '<div><table class="table table-condensed" style="width:150;font-family:Tahoma;">';
+                                var html = '<div><table class="table table-condensed" style="font-family:Tahoma;">';
 
-                                html += '<tr><td>服务名:</td><td style="font-size: small;">'+spanModel.serviceName+'</td></tr>';
+                                html += '<tr><td>服务名:</td><td style="font-size: small;word-break:break-all">'+spanModel.serviceName+'</td></tr>';
                                 html += '<tr><td>方法名:</td><td>'+spanModel.spanName+'</td></tr>';
 
                                 if (isUsed){
@@ -283,7 +282,8 @@ angular.module('hydra.services.sequence', [])
                                 html += '<td>'+(isUsed?spanModel.used.duration:spanModel.wasted.duration)+'ms</td></tr>';
                                 if (isUsed && isEx){
                                     html += '<tr><td style="text-align:center;"><span class="label label-warning">异常情况</span></td>';
-                                    html += '<td>'+spanModel.exception.value+'</td></tr>';
+                                    html += '<td style="word-break:break-all" title="'+spanModel.exception.value+'">';
+                                    html += spanModel.exception.value.length>400?(spanModel.exception.value.substring(0, 400)+'...'):spanModel.exception.value+'</td></tr>';
                                 }
                                 html += '</table></div>';
                                 return html;

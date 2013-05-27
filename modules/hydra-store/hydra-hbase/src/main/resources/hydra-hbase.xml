@@ -19,6 +19,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd" default-autowire="byName">
-     <bean id="queryService" class="com.jd.bdp.hydra.hbase.service.impl.QueryServiceImpl" />
-     <bean id="insertService" class="com.jd.bdp.hydra.hbase.service.impl.InsertServiceImpl" />
+
+    <bean id="hbaseUtils" class="com.jd.bdp.hydra.hbase.service.impl.HbaseUtils">
+        <property name="ann_index" value="annotation_index"/>
+        <property name="duration_index" value="duration_index"/>
+        <property name="TR_T" value="trace"/>
+    </bean>
+
+    <bean id="queryService" class="com.jd.bdp.hydra.hbase.service.impl.QueryServiceImpl" parent="hbaseUtils"/>
+    <bean id="insertService" class="com.jd.bdp.hydra.hbase.service.impl.InsertServiceImpl" parent="hbaseUtils"/>
 </beans>

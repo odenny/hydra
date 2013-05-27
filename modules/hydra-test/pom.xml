@@ -17,6 +17,7 @@
         <module>hydra-test-benchmark</module>
         <module>hydra-test-integration</module>
         <module>hydra-test-modules</module>
+        <module>hydra-test-interface</module>
     </modules>
 
     <dependencyManagement>
@@ -29,6 +30,11 @@
             <dependency>
                 <groupId>com.jd.bdp</groupId>
                 <artifactId>hydra-example-exp2</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jd.bdp</groupId>
+                <artifactId>hydra-test-benchmark</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

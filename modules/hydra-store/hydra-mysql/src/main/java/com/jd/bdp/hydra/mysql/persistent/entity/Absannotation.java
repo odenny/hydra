@@ -2,6 +2,7 @@ package com.jd.bdp.hydra.mysql.persistent.entity;
 
 import com.jd.bdp.hydra.Annotation;
 import com.jd.bdp.hydra.BinaryAnnotation;
+import com.jd.bdp.hydra.Span;
 
 /**
  * Date: 13-5-7
@@ -23,14 +24,19 @@ public class Absannotation {
 
     }
 
-    public Absannotation(BinaryAnnotation binaryAnnotation){
+    public Absannotation(BinaryAnnotation binaryAnnotation, Span span){
+        this.spanId = span.getId();
+        this.traceId = span.getTraceId();
         this.key = binaryAnnotation.getKey();
         this.ip = binaryAnnotation.getHost().getIp();
         this.value = new String(binaryAnnotation.getValue());
         this.port = binaryAnnotation.getHost().getPort();
+        this.service = span.getServiceId();
     }
 
-    public Absannotation(Annotation annotation){
+    public Absannotation(Annotation annotation, Span span){
+        this.spanId = span.getId();
+        this.traceId = span.getTraceId();
         this.key = annotation.getValue();
         this.timestamp = annotation.getTimestamp();
         this.duration = annotation.getDuration();

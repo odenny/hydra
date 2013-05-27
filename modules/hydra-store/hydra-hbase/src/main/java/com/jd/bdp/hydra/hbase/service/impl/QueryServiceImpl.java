@@ -20,12 +20,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jd.bdp.hydra.Annotation;
-import com.jd.bdp.hydra.hbase.service.QueryService;
+import com.jd.bdp.hydra.store.inter.QueryService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.filter.Filter;
 import org.apache.hadoop.hbase.filter.PageFilter;
+import org.apache.hadoop.hbase.util.Bytes;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -60,10 +61,10 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesByDuration(String serviceId, Long start, int sum, int durationMin, int durationMax) {
+    public JSONArray getTracesByDuration(String serviceId, Long startTime, int sum, int durationMin, int durationMax) {
         JSONArray array = new JSONArray();
         Scan scan = new Scan();
-        scan.setStartRow(new String(serviceId + ":" + start).getBytes());
+        scan.setStartRow(new String(serviceId + ":" + startTime).getBytes());
         scan.setStopRow(new String(serviceId + ":" + Long.MAX_VALUE).getBytes());
         Filter filter = new PageFilter(sum);
         scan.setFilter(filter);
@@ -109,7 +110,7 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     }
 
     @Override
-    public JSONArray getTracesByEx(String serviceId, long startTime, int sum) {
+    public JSONArray getTracesByEx(String serviceId, Long startTime, int sum) {
         JSONArray array = new JSONArray();
         Scan scan = new Scan();
         scan.setStartRow(new String(serviceId + ":" + startTime + ":dubbo.exception".getBytes()).getBytes());
@@ -281,24 +282,24 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     }
 
 
-//    public void setOneItem(String tableName, String familyColumnName, String rowkey, String columnName, byte[] valueParm) {
-//        HTableInterface table = POOL.getTable(tableName);
-//        table.setAutoFlush(true);//自动提交
-//        try {
-//            Put put = new Put(Bytes.toBytes(rowkey));
-//            put.add(Bytes.toBytes(familyColumnName), Bytes.toBytes(columnName), valueParm);
-//            table.put(put);
-////            table.flushCommits();//手动提交，最好每次close之前手动提交...
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                table.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    public void setOneItem(String tableName, String familyColumnName, String rowkey, String columnName, byte[] valueParm) {
+        HTableInterface table = POOL.getTable(tableName);
+        table.setAutoFlush(true);//自动提交
+        try {
+            Put put = new Put(Bytes.toBytes(rowkey));
+            put.add(Bytes.toBytes(familyColumnName), Bytes.toBytes(columnName), valueParm);
+            table.put(put);
+//            table.flushCommits();//手动提交，最好每次close之前手动提交...
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                table.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 //    /**
 //     * 删除指定表名的rowKey下某时间戳的数据。
@@ -345,4 +346,7 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
 //        }
 //    }
 
+//    public static void main(String[] args){
+//        QueryServiceImpl queryService =
+//    }
 }

@@ -32,7 +32,7 @@ public class SpanMapperTest extends AbstractDependencyInjectionSpringContextTest
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"classpath:hydra-mysql-test.xml"};
+        String[] location = {"classpath:hydra-mysql.xml"};
         return location;
     }
 

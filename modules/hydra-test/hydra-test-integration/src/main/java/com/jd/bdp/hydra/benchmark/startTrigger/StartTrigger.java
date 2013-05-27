@@ -11,12 +11,11 @@ public class StartTrigger {
     public static void main(String[] args)  {
         try {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
-                    "classpath*:trigger-context.xml"
+                    "classpath*:trigger-context2.xml"
             });
             context.start();
             Trigger trigger=(Trigger)context.getBean("trigger");
-            // 每隔3s触发一次调用
-            trigger.startWorkWithSleep(20,500);
+            trigger.startWorkWithSleep(Integer.MAX_VALUE,500);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -25,7 +25,6 @@ public class LeaderServiceImpl implements LeaderService {
         for (String serviceName : services) {
             map.put("serviceName", serviceService.getServiceId(serviceName, name).toString());
         }
-        System.out.println("userTime:"+(System.currentTimeMillis()-startTime));
         return map;
     }
 

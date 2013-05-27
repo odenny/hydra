@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+       default-autowire="byName">
+    <!-- 使用Spring自带的占位符替换功能 -->
+    <bean id="dubboPropertyConfigureation" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="2"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <!-- 系统-D参数覆盖 -->
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="location" value="classpath:dubbo-collector.properties"/>
+    </bean>
+    <bean id="collector-common" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="3"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="location" value="classpath:collector-common.properties"/>
+    </bean>
+    <bean id="configuration" class="com.jd.bdp.hydra.dubbomonitor.provider.impl.support.Configuration">
+        <property name="queueSize" value="${collector.queueSize}"/>
+        <property name="taskCount" value="${collector.taskCount}"/>
+    </bean>
+    <bean id="hydraService" class="com.jd.bdp.hydra.dubbomonitor.provider.impl.HydraMysqlServiceImpl">
+        <constructor-arg ref="configuration"/>
+    </bean>
+    <dubbo:application name="${dubbo.application.name}" owner="${dubbo.application.owner}"/>
+    <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}"/>
+    <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}"/>
+    <dubbo:service interface="com.jd.bdp.hydra.dubbomonitor.HydraService" ref="hydraService">
+    </dubbo:service>
+    <!-- 选择存储方式为mysql -->
+    <import resource="classpath*:hydra-mysql.xml"/>
+</beans>

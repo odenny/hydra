@@ -36,7 +36,7 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
 
     @Override
     protected String[] getConfigLocations() {
-        String[] location = {"classpath:hydra-mysql-test.xml"};
+        String[] location = {"classpath:hydra-mysql.xml"};
         return location;
     }
 
@@ -145,6 +145,7 @@ public class TraceMapperTest extends AbstractDependencyInjectionSpringContextTes
         annotation.setKey("dubbo.exception");
         annotation.setValue("abc");
         annotation.setTraceId(1368002575495L);
+        annotation.setService("161148");
         annotationMapper.addAnnotation(annotation);
     }
 

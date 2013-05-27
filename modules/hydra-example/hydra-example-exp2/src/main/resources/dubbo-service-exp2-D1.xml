@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <bean id="serviceD1" class="com.jd.bdp.service.exp2.impl.ServiceD1">
+        <property name="serviceC1" ref="referenceC1" />
+    </bean>
+    <!--服务暴露-开机-->
+    <dubbo:protocol name="dubbo" port="21994" />
+    <dubbo:service interface="com.jd.bdp.service.exp2.inter.InterfaceD1" ref="serviceD1" >
+    </dubbo:service>
+    <dubbo:reference id="referenceC1" interface="com.jd.bdp.service.exp2.inter.InterfaceC1" check="false">
+    </dubbo:reference>
+</beans>

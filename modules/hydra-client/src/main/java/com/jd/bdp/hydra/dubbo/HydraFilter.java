@@ -45,10 +45,6 @@ public class HydraFilter implements Filter {
 
     private Tracer tracer = null;
 
-    public HydraFilter(){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    }
-
     // 调用过程拦截
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         String serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
@@ -59,7 +55,10 @@ public class HydraFilter implements Filter {
 
         long start = System.currentTimeMillis();
         RpcContext context = RpcContext.getContext();
+<<<<<<< HEAD
         System.out.println((context.isConsumerSide()?"C":"S") + "----"+serviceId + "---" + context.getMethodName() + "---" + RpcContext.getContext().getUrl().getServiceInterface());
+=======
+>>>>>>> 3af8f968b8202ff690076d78d6fcebd31e1c6a55
         boolean isConsumerSide = context.isConsumerSide();
         Span span = null;
         Endpoint endpoint = null;
@@ -81,24 +80,25 @@ public class HydraFilter implements Filter {
                 parentId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.PID));
                 spanId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.SID));
                 boolean isSample = (traceId != null);
+<<<<<<< HEAD
                 span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample, serviceId);
                 System.out.println(serviceId + "-----" + context.getMethodName());
+=======
+                span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample, this.serviceId);
+>>>>>>> 3af8f968b8202ff690076d78d6fcebd31e1c6a55
             }
             invokerBefore(invocation, span, endpoint, start);
             RpcInvocation invocation1 = (RpcInvocation) invocation;
             setAttachment(span, invocation1);
             Result result = invoker.invoke(invocation);
             if (result.getException() != null){
-                System.out.println("EEE1----" + context.getMethodName());
                 catchException(result.getException(), endpoint);
             }
             return result;
         }catch (RpcException e) {
             if (e.getCause() != null && e.getCause() instanceof TimeoutException){
-                System.out.println("EEE2----" + context.getMethodName());
                 catchTimeoutException(e, endpoint);
             }else {
-                System.out.println("EEE3----" + context.getMethodName());
                 catchException(e, endpoint);
             }
             throw e;

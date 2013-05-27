@@ -32,7 +32,7 @@
     </select>
 
     <select id="findTracesEx" parameterType="map" resultMap="TraceResultMap">
-        SELECT t.*, a.value FROM annotation a left join trace t on t.service=#{serviceId} and t.traceId = a.traceId and a.k='dubbo.exception' and <![CDATA[ t.time >= #{startTime}]]> limit #{num}
+         select a.*, t.time from annotation a left join trace t on a.traceId=t.traceId and <![CDATA[ t.time>= #{startTime}]]> where a.service=#{serviceId} group by spanId limit #{num}
     </select>
 
     <insert id="addTrace" parameterType="TraceEntity" >

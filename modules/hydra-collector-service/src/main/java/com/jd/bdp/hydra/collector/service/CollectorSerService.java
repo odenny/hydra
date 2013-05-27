@@ -1,7 +1,7 @@
 package com.jd.bdp.hydra.collector.service;
 
 import com.jd.bdp.hydra.Span;
-import com.jd.bdp.hydra.hbase.service.InsertService;
+import com.jd.bdp.hydra.store.inter.InsertService;
 import com.jd.dd.glowworm.PB;
 import com.taobao.metamorphosis.Message;
 import com.taobao.metamorphosis.client.consumer.MessageConsumer;
@@ -66,10 +66,11 @@ public class CollectorSerService {
         try{
           for(Span s : spanList){
               insertService.addSpan(s);
-              insertService.annotationIndex(s);
-              insertService.durationIndex(s);
+              insertService.addAnnotation(s);
+              insertService.addTrace(s);
           }
         }catch (Exception e){
+            e.printStackTrace();
             log.error(e.getMessage());
         }
     }

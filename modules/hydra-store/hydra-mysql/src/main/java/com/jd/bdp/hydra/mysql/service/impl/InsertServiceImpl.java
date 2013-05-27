@@ -8,10 +8,9 @@ import com.jd.bdp.hydra.mysql.persistent.dao.SpanMapper;
 import com.jd.bdp.hydra.mysql.persistent.dao.TraceMapper;
 import com.jd.bdp.hydra.mysql.persistent.entity.Absannotation;
 import com.jd.bdp.hydra.mysql.persistent.entity.Trace;
-import com.jd.bdp.hydra.mysql.service.InsertService;
+import com.jd.bdp.hydra.store.inter.InsertService;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
 /**
  * User: biandi
@@ -20,25 +19,23 @@ import java.sql.Timestamp;
  */
 public class InsertServiceImpl implements InsertService {
 
-    private AnnotationMapper annotationMapper;
-    private SpanMapper spanMapper;
-    private TraceMapper traceMapper;
-
     @Override
-    public void addSpan(Span span) throws IOException {
-        spanMapper.addSpan(span);
+    public void addSpan(Span span) {
+        if (span.getServiceId() != null){
+            if (!Utils.isRoot(span) || Utils.isRoot(span) && Utils.isTopAnntation(span)){
+                spanMapper.addSpan(span);
+            }
+        }
     }
 
-
     @Override
-    public void addTrace(Span span) throws IOException {
-        if (Utils.isTopAnntation(span)) {
+    public void addTrace(Span span) {
+        if (Utils.isTopAnntation(span) && Utils.isRoot(span)) {
             Annotation annotation = Utils.getCrAnnotation(span.getAnnotations());
             Annotation annotation1 = Utils.getCsAnnotation(span.getAnnotations());
             Trace t = new Trace();
             t.setTraceId(span.getTraceId());
-            t.setAnnValue(annotation1.getValue());
-            t.setDuration((int) (annotation1.getTimestamp() - annotation.getTimestamp()));
+            t.setDuration((int) (annotation.getTimestamp() - annotation1.getTimestamp()));
             t.setService(span.getServiceId());
             t.setTime(annotation1.getTimestamp());
             traceMapper.addTrace(t);
@@ -46,15 +43,30 @@ public class InsertServiceImpl implements InsertService {
     }
 
     @Override
-    public void addAnnotation(Span span) throws IOException {
+    public void addAnnotation(Span span){
         for(Annotation a : span.getAnnotations()){
-            Absannotation aa = new Absannotation(a);
+            Absannotation aa = new Absannotation(a, span);
             annotationMapper.addAnnotation(aa);
         }
 
         for(BinaryAnnotation b : span.getBinaryAnnotations()){
-            Absannotation bb = new Absannotation(b);
+            Absannotation bb = new Absannotation(b, span);
             annotationMapper.addAnnotation(bb);
         }
+    }
+    private AnnotationMapper annotationMapper;
+    private SpanMapper spanMapper;
+    private TraceMapper traceMapper;
+
+    public void setAnnotationMapper(AnnotationMapper annotationMapper) {
+        this.annotationMapper = annotationMapper;
+    }
+
+    public void setSpanMapper(SpanMapper spanMapper) {
+        this.spanMapper = spanMapper;
+    }
+
+    public void setTraceMapper(TraceMapper traceMapper) {
+        this.traceMapper = traceMapper;
     }
 }

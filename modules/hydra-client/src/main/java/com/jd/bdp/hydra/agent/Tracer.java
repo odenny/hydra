@@ -13,7 +13,9 @@ import com.jd.bdp.hydra.dubbomonitor.LeaderService;
 /**
  * Date: 13-3-19
  * Time: 下午4:14
- */
+ * 系统跟踪类(单例)
+  */
+
 public class Tracer {
 
     private static final Logger logger = LoggerFactory.getLogger(Tracer.class);
@@ -24,6 +26,7 @@ public class Tracer {
 
     private SyncTransfer transfer = null;
 
+    //传递parentSpan
     private ThreadLocal<Span> spanThreadLocal = new ThreadLocal<Span>();
 
     TraceService traceService;
@@ -43,6 +46,7 @@ public class Tracer {
         spanThreadLocal.set(span);
     }
 
+    //构件Span，参数通过上游接口传递过来
     public Span genSpan(Long traceId, Long pid, Long id, String spanname, boolean isSample, String serviceId) {
         Span span = new Span();
         span.setId(id);
@@ -54,6 +58,7 @@ public class Tracer {
         return span;
     }
 
+    //构件rootSpan,是否采样
     public Span newSpan(String spanname, Endpoint endpoint, String serviceId) {
         boolean s = isSample();
         Span span = new Span();
@@ -88,6 +93,7 @@ public class Tracer {
         transfer.start();
     }
 
+    //启动后台消息发送线程
     public static void startTraceWork() {
         try {
             getTracer().start();
@@ -108,6 +114,7 @@ public class Tracer {
         }
     }
 
+    //构件cs annotation
     public void clientSendRecord(Span span, Endpoint endpoint, long start) {
         Annotation annotation = new Annotation();
         annotation.setValue(Annotation.CLIENT_SEND);
@@ -117,6 +124,7 @@ public class Tracer {
     }
 
 
+    //构件cr annotation
     public void clientReceiveRecord(Span span, Endpoint endpoint, long end) {
         Annotation annotation = new Annotation();
         annotation.setValue(Annotation.CLIENT_RECEIVE);
@@ -126,7 +134,7 @@ public class Tracer {
         transfer.syncSend(span);
     }
 
-
+    //构件sr annotation
     public void serverReceiveRecord(Span span, Endpoint endpoint, long start) {
         Annotation annotation = new Annotation();
         annotation.setValue(Annotation.SERVER_RECEIVE);
@@ -136,6 +144,7 @@ public class Tracer {
         spanThreadLocal.set(span);
     }
 
+    //构件 ss annotation
     public void serverSendRecord(Span span, Endpoint endpoint, long end) {
         Annotation annotation = new Annotation();
         annotation.setTimestamp(end);
@@ -144,6 +153,7 @@ public class Tracer {
         span.addAnnotation(annotation);
         transfer.syncSend(span);
     }
+
     public String getServiceId(String name) {
         String id = null;
         if (transfer != null) {

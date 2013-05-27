@@ -7,9 +7,9 @@
     </style>
     <link href="/statics/lib/bootstrap/datetimepicker/css/datetimepicker.css" rel="stylesheet" media="screen">
     <link href="/statics/lib/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
-    <link href="http://img.bdp.jd.com/jquery/plugins/qtip/2.0.1/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="http://img.bdp.jd.com/d3/v3/d3.v3.min.js"></script>
-    <script src="http://img.bdp.jd.com/jquery/plugins/qtip/2.0.1/jquery.qtip.min.js" type="text/javascript"></script>
+    <link href="/statics/lib/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/statics/lib/d3.v3.min.js"></script>
+    <script src="/statics/lib/jquery.qtip.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/plugin.js"></script>
     <script type="text/javascript"

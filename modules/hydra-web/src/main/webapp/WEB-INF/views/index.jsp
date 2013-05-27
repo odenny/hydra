@@ -11,14 +11,14 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="http://img.bdp.jd.com/bootstrap/2.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/statics/lib/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/statics/css/app.css" />
 
 
-<script type="text/javascript" src="http://img.bdp.jd.com/jquery/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/statics/lib/jquery-1.8.0.min.js"></script>
 <script src="/statics/lib/angular/angular.js"></script>
 <script src="/statics/lib/angular/angular-resource.js?"></script>
-<script type="text/javascript" src="http://img.bdp.jd.com/bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/statics/lib/bootstrap.min.js"></script>
 
 <script src="/statics/js/app.js"></script>
 <!-- repo -->

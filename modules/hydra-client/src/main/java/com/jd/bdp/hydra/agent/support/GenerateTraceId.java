@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * User: yfliuyu
  * Date: 13-3-27
  * Time: 下午6:02
  */

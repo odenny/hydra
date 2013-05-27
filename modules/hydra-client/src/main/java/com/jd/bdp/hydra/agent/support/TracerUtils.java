@@ -4,7 +4,6 @@ import com.alibaba.dubbo.common.utils.StringUtils;
 
 /**
 
- * User: yfliuyu
  * Date: 13-3-26
  * Time: 下午7:06
   */

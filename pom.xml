@@ -522,4 +522,20 @@
         </pluginManagement>
     </build>
 
+    <!-- glowworm序列化组建上传到这个maven仓库中 -->
+    <repositories>
+        <repository>
+            <id>sonatype</id>
+            <url>
+                http://oss.sonatype.org/content/repositories/snapshots/
+            </url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
 </project>

@@ -39,7 +39,7 @@ public class CollectorSerService {
         this.topic = topic;
     }
 
-    class HbaseConsumer implements MessageListener{
+    class HbaseConsumer implements MessageListener {
         @Override
         public void recieveMessages(Message message) {
             persistent(message);
@@ -52,24 +52,27 @@ public class CollectorSerService {
     }
 
 
-    public void subscribe()throws Exception{
-        consumer.subscribe(topic,1024*1024,new HbaseConsumer()).completeSubscribe();
+    public void subscribe() throws Exception {
+        consumer.subscribe(topic, 1024 * 1024, new HbaseConsumer()).completeSubscribe();
     }
 
-    public void persistent(Message message){
-        List<Span> spanList = new ArrayList<Span>();
-        try{
-            spanList = (List)PB.parsePBBytes(message.getData());
-        }catch (Exception e){
-           log.error(e.getMessage());
+    public void persistent(Message message) {
+        List<Span> spanList;
+        try {
+            spanList = (List) PB.parsePBBytes(message.getData());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return;
         }
-        try{
-          for(Span s : spanList){
-              insertService.addSpan(s);
-              insertService.addAnnotation(s);
-              insertService.addTrace(s);
-          }
-        }catch (Exception e){
+        try {
+            if (spanList != null) {
+                for (Span s : spanList) {
+                    insertService.addSpan(s);
+                    insertService.addAnnotation(s);
+                    insertService.addTrace(s);
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             log.error(e.getMessage());
         }

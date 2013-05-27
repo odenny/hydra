@@ -29,6 +29,17 @@ import org.mybatis.spring.SqlSessionTemplate;
 public class SeedMapperImpl implements SeedMapper {
     private SqlSessionTemplate sqlSession;
 
+    /**
+     * 验证该种子是否已经派发过
+     * 内部逻辑：
+     * 1：找最大索引Id行，获取种子value值 为V（有记录行）
+     * 2：若没有记录行，则返回false （无记录行）
+     * 2：若value>V,则返回false，否则返回true
+     * @param value 种子值
+     * @return 是否派发过
+     * @throws Exception 持久层异常
+     * @since 2.0
+     */
     @Override
     public boolean hasSeed(Integer value) throws Exception {
         Integer result_count = null;
@@ -41,6 +52,26 @@ public class SeedMapperImpl implements SeedMapper {
         }
         return hasSeed;
     }
+    /**
+     * 找到种子标示值
+     * 内部逻辑：
+     * 1：找最大索引Id行，获取种子value值 为V
+     * 1.1返回记录行（有记录）
+     * 1.2返回null （无记录）
+     * @return 种子标识
+     * @throws Exception 持久层异常
+     * @since 2.0
+     */
+    @Override
+    public SeedData findTheSeed() throws Exception {
+        SeedData seedData = null;
+        try {
+            seedData = (SeedData) sqlSession.selectOne("findTheSeed");
+        } catch (Exception e) {
+            throw e;
+        }
+        return seedData;
+    }
 
     @Override
     public Integer getMaxSeedValue() throws Exception {
@@ -52,8 +83,6 @@ public class SeedMapperImpl implements SeedMapper {
         }
         return max_value;
     }
-
-    //TODO
     @Override
     public void addSeed(SeedData servicePara) throws Exception {
         Integer id=null;
@@ -62,12 +91,12 @@ public class SeedMapperImpl implements SeedMapper {
             flag=sqlSession.insert("addSeed",servicePara)>0?true:false;
             id=servicePara.getId();
         } catch (Exception e) {
-            //e.printStackTrace();
             flag=false;
             throw e;
         }
     }
 
+    @Deprecated
     @Override
     public void deleteSeed(SeedData servicePara) throws Exception {
         boolean flag = false;
@@ -90,6 +119,7 @@ public class SeedMapperImpl implements SeedMapper {
         }
     }
 
+    @Deprecated
     @Override
     public SeedData getOneSeed(Integer id) throws Exception {
         SeedData seedData = null;
@@ -101,16 +131,7 @@ public class SeedMapperImpl implements SeedMapper {
         return seedData;
     }
 
-    @Override
-    public SeedData findTheSeed() throws Exception {
-        SeedData seedData = null;
-        try {
-            seedData = (SeedData) sqlSession.selectOne("findTheSeed");
-        } catch (Exception e) {
-            throw e;
-        }
-        return seedData;
-    }
+
 
     //getter and setter
     public SqlSessionTemplate getSqlSession() {

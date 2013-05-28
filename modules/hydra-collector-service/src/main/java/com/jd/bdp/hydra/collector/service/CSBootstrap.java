@@ -4,7 +4,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * User: yfliuyu
  * Date: 13-4-16
  * Time: 上午11:01
  */

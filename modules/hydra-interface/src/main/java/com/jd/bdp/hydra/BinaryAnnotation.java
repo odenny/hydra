@@ -1,10 +1,8 @@
 package com.jd.bdp.hydra;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 /**
- * User: yfliuyu
  * Date: 13-3-18
  * Time: 下午3:36
  */

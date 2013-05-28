@@ -3,7 +3,6 @@ package com.jd.bdp.hydra;
 import java.io.Serializable;
 
 /**
- * User: yfliuyu
  * Date: 13-3-18
  * Time: 下午3:36
  */

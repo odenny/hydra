@@ -1,12 +1,9 @@
 package com.jd.bdp.hydra.agent.support;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * User: yfliuyu
  * Date: 13-4-3
  * Time: 上午10:05
  */
@@ -14,9 +11,9 @@ public class Configuration {
 
     private String applicationName;
     private List<String> services;
-    private Long delayTime;
-    private Long flushSize;
-    private Integer queueSize;
+    private Long delayTime; //保留字段，延迟多久发送一批到收集端
+    private Long flushSize;//保留字段，一批发送多少条消息到收集端
+    private Integer queueSize;//缓冲队列大小，可以访问量设置。
 
     public String getApplicationName() {
         return applicationName;

@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.concurrent.*;
 
 /**
- * User: yfliuyu
  * Date: 13-3-19
  * Time: 下午6:26
+ * 异步发送实现类
  */
 public class DefaultSyncTransfer implements SyncTransfer {
 
@@ -70,7 +70,7 @@ public class DefaultSyncTransfer implements SyncTransfer {
         public void run() {
             for (; ; ) {
                 try {
-                    if (!isReady()) {
+                    if (!isReady()) {//重试直到注册成功
                         //全局信息网络注册，输入流：应用名 @ 输出流：包含种子的Map对象
                         boolean r = traceService.registerService(appName(), new ArrayList<String>());
                         if (r) {
@@ -167,6 +167,6 @@ public class DefaultSyncTransfer implements SyncTransfer {
     }
     @Override
     public Long getSpanId() {
-        return generateTraceId.getTraceId();//fixme:getSpanId
+        return generateTraceId.getTraceId();
     }
 }

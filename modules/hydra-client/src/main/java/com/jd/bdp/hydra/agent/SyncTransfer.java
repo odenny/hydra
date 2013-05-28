@@ -3,11 +3,9 @@ package com.jd.bdp.hydra.agent;
 import com.jd.bdp.hydra.Span;
 import com.jd.bdp.hydra.agent.support.TraceService;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * Date: 13-3-19
+ * 数据一部分发送接口
  */
 public interface SyncTransfer{
     public Long getTraceId();

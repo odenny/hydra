@@ -77,33 +77,10 @@ public class QueryServiceImpl implements QueryService {
                 }
             }
             setSpanDuration(mySpan);
-            handleTheMinAndMaxTimestamp(trace, mySpan);
             isAvailable = isAvailable && isSpanAvailable(mySpan);
         }
         trace.put("available", isAvailable);
         return trace;
-    }
-
-    private void handleTheMinAndMaxTimestamp(JSONObject trace, JSONObject span) {
-        for (Object obj : span.getJSONArray("annotations")) {
-            long timestamp = Long.parseLong(((JSONObject) obj).get("timestamp").toString());
-            if (trace.containsKey("minTimestamp")) {
-                long min = Long.parseLong(trace.get("minTimestamp").toString());
-                if (min > timestamp) {
-                    trace.put("minTimestamp", timestamp);
-                }
-            } else {
-                trace.put("minTimestamp", timestamp);
-            }
-            if (trace.containsKey("maxTimestamp")) {
-                long max = Long.parseLong(trace.get("maxTimestamp").toString());
-                if (max < timestamp) {
-                    trace.put("maxTimestamp", timestamp);
-                }
-            } else {
-                trace.put("maxTimestamp", timestamp);
-            }
-        }
     }
 
     public void setSpanDuration(JSONObject spanDuration) {
@@ -134,6 +111,7 @@ public class QueryServiceImpl implements QueryService {
         }
     }
 
+    //这里判断如果某个span没有收集全4个annotation，则判定为不可用，页面不展示图
     private boolean isSpanAvailable(JSONObject span) {
         return span.getJSONArray("annotations").size() == 4;
     }

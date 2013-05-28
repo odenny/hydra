@@ -43,18 +43,17 @@ public class HydraFilter implements Filter {
 
     private static Logger logger = LoggerFactory.getLogger(HydraFilter.class);
 
-    private String serviceId = null;
-
     private Tracer tracer = null;
 
     // 调用过程拦截
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        this.serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
+        //异步获取serviceId，没获取到不进行采样
+        String serviceId = tracer.getServiceId(RpcContext.getContext().getUrl().getServiceInterface());
         if (serviceId == null) {
             Tracer.startTraceWork();
             return invoker.invoke(invocation);
         }
-        
+
         long start = System.currentTimeMillis();
         RpcContext context = RpcContext.getContext();
         boolean isConsumerSide = context.isConsumerSide();
@@ -65,10 +64,10 @@ public class HydraFilter implements Filter {
 //            endpoint.setServiceName(serviceId);
             endpoint.setIp(context.getLocalAddressString());
             endpoint.setPort(context.getLocalPort());
-            if (context.isConsumerSide()) {
+            if (context.isConsumerSide()) { //是否是消费者
                 Span span1 = tracer.getParentSpan();
                 if (span1 == null) { //为rootSpan
-                    span = tracer.newSpan(context.getMethodName(), endpoint, this.serviceId);
+                    span = tracer.newSpan(context.getMethodName(), endpoint, serviceId);//生成root Span
                 } else {
                     span = tracer.genSpan(span1.getTraceId(), span1.getId(), tracer.genSpanId(), context.getMethodName(), span1.isSample(), null);
                 }
@@ -78,11 +77,11 @@ public class HydraFilter implements Filter {
                 parentId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.PID));
                 spanId = TracerUtils.getAttachmentLong(invocation.getAttachment(TracerUtils.SID));
                 boolean isSample = (traceId != null);
-                span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample, this.serviceId);
+                span = tracer.genSpan(traceId, parentId, spanId, context.getMethodName(), isSample, serviceId);
             }
-            invokerBefore(invocation, span, endpoint, start);
+            invokerBefore(invocation, span, endpoint, start);//记录annotation
             RpcInvocation invocation1 = (RpcInvocation) invocation;
-            setAttachment(span, invocation1);
+            setAttachment(span, invocation1);//设置需要向下游传递的参数
             Result result = invoker.invoke(invocation);
             if (result.getException() != null){
                 catchException(result.getException(), endpoint);
@@ -98,7 +97,7 @@ public class HydraFilter implements Filter {
         }finally {
             if (span != null) {
                 long end = System.currentTimeMillis();
-                invokerAfter(invocation, endpoint, span, end, isConsumerSide);
+                invokerAfter(invocation, endpoint, span, end, isConsumerSide);//调用后记录annotation
             }
         }
     }

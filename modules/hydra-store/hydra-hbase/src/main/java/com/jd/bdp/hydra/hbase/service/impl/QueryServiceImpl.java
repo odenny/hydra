@@ -171,7 +171,6 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
                         spanAleadyExist.put("durationServer", getDurationServer(content));
                     }
                     ((JSONArray) spanAleadyExist.get("annotations")).addAll((JSONArray) content.get("annotations"));
-                    handleTheMinAndMaxTimestamp(trace, spanAleadyExist);
                 } else {
                     spanAleadyExist = content;
                     if (isClientSpan(kv)) {
@@ -208,28 +207,7 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
         return trace;
     }
 
-    private void handleTheMinAndMaxTimestamp(JSONObject trace, JSONObject span) {
-        for (Object obj : span.getJSONArray("annotations")) {
-            long timestamp = Long.parseLong(((JSONObject) obj).get("timestamp").toString());
-            if (trace.containsKey("minTimestamp")) {
-                long min = Long.parseLong(trace.get("minTimestamp").toString());
-                if (min > timestamp) {
-                    trace.put("minTimestamp", timestamp);
-                }
-            } else {
-                trace.put("minTimestamp", timestamp);
-            }
-            if (trace.containsKey("maxTimestamp")) {
-                long max = Long.parseLong(trace.get("maxTimestamp").toString());
-                if (max < timestamp) {
-                    trace.put("maxTimestamp", timestamp);
-                }
-            } else {
-                trace.put("maxTimestamp", timestamp);
-            }
-        }
-    }
-
+    //这里判断如果某个span没有收集全4个annotation，则判定为不可用，页面不展示图
     private boolean isSpanAvailable(JSONObject span) {
         return span.getJSONArray("annotations").size() == 4;
     }
@@ -282,24 +260,24 @@ public class QueryServiceImpl extends HbaseUtils implements QueryService {
     }
 
 
-    public void setOneItem(String tableName, String familyColumnName, String rowkey, String columnName, byte[] valueParm) {
-        HTableInterface table = POOL.getTable(tableName);
-        table.setAutoFlush(true);//自动提交
-        try {
-            Put put = new Put(Bytes.toBytes(rowkey));
-            put.add(Bytes.toBytes(familyColumnName), Bytes.toBytes(columnName), valueParm);
-            table.put(put);
-//            table.flushCommits();//手动提交，最好每次close之前手动提交...
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                table.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    public void setOneItem(String tableName, String familyColumnName, String rowkey, String columnName, byte[] valueParm) {
+//        HTableInterface table = POOL.getTable(tableName);
+//        table.setAutoFlush(true);//自动提交
+//        try {
+//            Put put = new Put(Bytes.toBytes(rowkey));
+//            put.add(Bytes.toBytes(familyColumnName), Bytes.toBytes(columnName), valueParm);
+//            table.put(put);
+////            table.flushCommits();//手动提交，最好每次close之前手动提交...
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                table.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 //    /**
 //     * 删除指定表名的rowKey下某时间戳的数据。

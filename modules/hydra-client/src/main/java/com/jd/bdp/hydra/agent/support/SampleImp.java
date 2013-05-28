@@ -5,9 +5,10 @@ import com.jd.bdp.hydra.agent.Sampler;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
-  * User: yfliuyu
  * Date: 13-3-28
  * Time: 上午11:33
+ * 采样率实现
+ * 每秒采集100为上线，过了100按百分之10%采集
   */
 public class SampleImp implements Sampler{
     private AtomicLong count = new AtomicLong();
@@ -30,7 +31,7 @@ public class SampleImp implements Sampler{
            }
        }else{
            count.getAndSet(0);
-           lastTime = System.currentTimeMillis();//fixme:safe thread?
+           lastTime = System.currentTimeMillis();//
        }
        return isSample;
     }

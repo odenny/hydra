@@ -16,7 +16,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * User: yfliuyu
  * Date: 13-4-17
  * Time: 下午5:03
  */

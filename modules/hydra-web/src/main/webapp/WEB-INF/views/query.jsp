@@ -1,21 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
-    <style type="text/css">
-
-
-    </style>
-    <link href="/statics/lib/bootstrap/datetimepicker/css/datetimepicker.css" rel="stylesheet" media="screen">
-    <link href="/statics/lib/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
-    <link href="/statics/lib/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="/statics/lib/d3.v3.min.js"></script>
-    <script src="/statics/lib/jquery.qtip.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/plugin.js"></script>
+    <script language="javascript" type="text/javascript">
+        var ctp = "<%=request.getContextPath() %>";
+    </script>
+    <link href="<%=request.getContextPath() %>/statics/lib/bootstrap/datetimepicker/css/datetimepicker.css" rel="stylesheet" media="screen">
+    <link href="<%=request.getContextPath() %>/statics/lib/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=request.getContextPath() %>/statics/lib/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/statics/lib/d3.v3.min.js"></script>
+    <script src="<%=request.getContextPath() %>/statics/lib/jquery.qtip.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/statics/lib/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/statics/lib/DataTables-1.9.4/media/js/plugin.js"></script>
     <script type="text/javascript"
-            src="/statics/lib/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+            src="<%=request.getContextPath() %>/statics/lib/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript"
-            src="/statics/lib/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+            src="<%=request.getContextPath() %>/statics/lib/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 </head>
 <body>
 <div ng-show="showType == 'query'">

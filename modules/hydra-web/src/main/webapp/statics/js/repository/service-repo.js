@@ -16,12 +16,12 @@
 'use strict';
 angular.module('hydra.repository.service', ['ngResource'])
     .factory('ServiceList', function ($resource) {
-        return $resource('/rest/service/:appId', {}, {
+        return $resource(ctp + '/rest/service/:appId', {}, {
             getAll: {method: 'GET', isArray: true}
         });
     })
     .factory('AppList', function ($resource) {
-        return $resource('/rest/service/appList', {}, {
+        return $resource(ctp + '/rest/service/appList', {}, {
             getAll: {method: 'GET', isArray: true}
         });
     });

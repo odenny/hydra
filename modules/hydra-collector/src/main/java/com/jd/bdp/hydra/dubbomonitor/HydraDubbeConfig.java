@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * User: shell0dh
  * Date: 13-3-19
  * Time: 上午9:43
  */

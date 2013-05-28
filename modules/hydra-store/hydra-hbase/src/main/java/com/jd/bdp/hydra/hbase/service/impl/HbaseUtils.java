@@ -26,8 +26,7 @@ import org.apache.hadoop.hbase.client.HTablePool;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: yfliuyu
+
  * Date: 13-4-12
  * Time: 下午4:19
  */

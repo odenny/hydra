@@ -9,6 +9,6 @@ angular.module('myApp',
             'hydra.filters'
         ]).
     config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/query', {templateUrl: '/index/query.html', controller: QueryCtrl});
+        $routeProvider.when('/query', {templateUrl:  ctp + '/index/query.html', controller: QueryCtrl});
     $routeProvider.otherwise({redirectTo: '/query'});
     }]);

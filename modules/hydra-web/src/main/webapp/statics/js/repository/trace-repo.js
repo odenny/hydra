@@ -16,10 +16,10 @@
 'use strict';
 angular.module('hydra.repository.trace', ['ngResource'])
     .factory('Trace', function ($resource) {
-        return $resource('/rest/trace/one/:traceId');
+        return $resource(ctp + '/rest/trace/one/:traceId');
     })
     .factory('TraceList', function ($resource) {
-        return $resource('/rest/trace/list/:serviceId/:startTime/:durationMin/:durationMax/:sum', {}, {
+        return $resource(ctp + '/rest/trace/list/:serviceId/:startTime/:durationMin/:durationMax/:sum', {}, {
             getTraceList:{
                 method:'GET',
                 isArray:true
@@ -27,7 +27,7 @@ angular.module('hydra.repository.trace', ['ngResource'])
         });
     })
     .factory('TraceListEx', function ($resource) {
-        return $resource('/rest/trace/list/ex/:serviceId/:startTime/:sum', {}, {
+        return $resource(ctp + '/rest/trace/list/ex/:serviceId/:startTime/:sum', {}, {
             getTraceList:{
                 method:'GET',
                 isArray:true

@@ -226,6 +226,32 @@
 
         <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">dubbo服务</span></p>
 
+        <p>Hydra默认使用了hydra-exmple中的两个应用场景来做，你可以在hydra-test/hydra-test-integration打包中获得应用场景。</p>
+
+        <p>获得tar.gz包或者zip包后，将服务分布式部署到不同的机器上，以模拟应用场景,一下介绍场景一的部署方法，场景二的部署方法类似。</p>
+
+
+        <p>hydra-test-intergration 分为windows版和linux版(默认)，见如下打包方法。</p>
+
+        <ul>
+            <li>打包：linux: mvn package -Pruntime-env-linux<br>
+                window: mvn package -Pruntime-env-windows</li>
+            <li>部署: scp -r target/*.tar.gz username@ip:dirname</li>
+            <li>配置: cd basedir/conf<br>
+                修改 *exp1.properties</li>
+            <li>启动： cd basedir/bin<br>
+                cd exp1<br>
+                sh startA.sh<br>
+                cd ..<br>
+                sh startTrigger-exp1.sh start</li>
+            <li>停止: cd basedir/bin<br>
+                sh startTrigger-exp1.sh stop<br>
+                All.sh stop</li>
+            <li>输出: cd basedir/log<br>
+                tail -f *.log</li>
+        </ul>
+
+
         <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">Hydra-client</span></p>
 
         <p>hydra-client中包含hydra与dubbo的集成，以及hydra跟踪收集的相关功能。如果需要进行dubbo服务的跟踪，只需要把这个jar包放在dubbo服务的classpath下，就会<span style="color: aqua;">自动开启跟踪功能！</span></p>
@@ -582,9 +608,218 @@
             <th>接Hydra后</th>
             <th>性损率</th>
         </tr>
+        <tr>
+            <td>Avg-TPS</td>
+            <td>803</td>
+            <td>753</td>
+            <td>6.2%</td>
+        </tr>
+        <tr>
+            <td>Avg-RT(ms)</td>
+            <td>1.24</td>
+            <td>1.323</td>
+            <td></td>
+        </tr>
     </table>
 
+        <p>场景二</p>
+        参数：10并发
+        <table>
+            <tr>
+                <th></th>
+                <th>接Hydra前</th>
+                <th>接Hydra后</th>
+                <th>性损率</th>
+            </tr>
+            <tr>
+                <td>Avg-TPS</td>
+                <td>2268</td>
+                <td>2163</td>
+                <td>4.6%</td>
+            </tr>
+            <tr>
+                <td>Avg-RT(ms)</td>
+                <td>4.407</td>
+                <td>4.621</td>
+                <td></td>
+            </tr>
+        </table>
 
+        <p>场景三</p>
+        参数：20并发
+        <table>
+            <tr>
+                <th></th>
+                <th>接Hydra前</th>
+                <th>接Hydra后</th>
+                <th>性损率</th>
+            </tr>
+            <tr>
+                <td>Avg-TPS</td>
+                <td>2991</td>
+                <td>2889</td>
+                <td>3.4%</td>
+            </tr>
+            <tr>
+                <td>Avg-RT(ms)</td>
+                <td>6.682</td>
+                <td>6.911</td>
+                <td></td>
+            </tr>
+        </table>
+
+
+        <p>场景四</p>
+        参数：50并发
+        <table>
+            <tr>
+                <th></th>
+                <th>接Hydra前</th>
+                <th>接Hydra后</th>
+                <th>性损率</th>
+            </tr>
+            <tr>
+                <td>Avg-TPS</td>
+                <td>4077</td>
+                <td>4030</td>
+                <td>2.1%</td>
+            </tr>
+            <tr>
+                <td>Avg-RT(ms)</td>
+                <td>12.238</td>
+                <td>12.401</td>
+                <td></td>
+            </tr>
+        </table>
+
+
+        <p>场景五</p>
+        参数：100并发
+        <table>
+            <tr>
+                <th></th>
+                <th>接Hydra前</th>
+                <th>接Hydra后</th>
+                <th>性损率</th>
+            </tr>
+            <tr>
+                <td>Avg-TPS</td>
+                <td>4832</td>
+                <td>4717</td>
+                <td>2.4%</td>
+            </tr>
+            <tr>
+                <td>Avg-RT(ms)</td>
+                <td>20.699</td>
+                <td>21.154</td>
+                <td></td>
+            </tr>
+        </table>
+
+        <p>说明：</p>
+        <p>以下测试场景是基于Benchmark测试场景2的环境基准上（20并发），对服务A进行埋点分析，得出的VisulalVM分析图。</p>
+        <p>为了使A构成单点压力环境，同时便于VisualVM分析，将Benchmark和A部署在本机，B和C部署在远程机上。</p>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">内存情况</span></p>
+
+        <p><strong>接入跟踪前</strong></p>
+
+        <p>堆栈情况</p>
+        <img src="images/bs1.png" />
+        <img src="images/bs2.png" />
+
+        <p>Sample情况</p>
+        <img src="images/bsa1.png" />
+        <img src="images/bsa2.png" />
+
+        <p>新生代情况</p>
+        <img src="images/bn1.png" />
+        <img src="images/bn2.png" />
+
+
+        <p><strong>接入跟踪后</strong></p>
+        <p>堆栈情况</p>
+        <img src="images/as1.png" />
+        <img src="images/as2.png" />
+
+        <p>Sample情况</p>
+        <img src="images/asa1.png" />
+        <img src="images/asa2.png" />
+
+        <p>新生代情况</p>
+        <img src="images/an1.png" />
+        <img src="images/an2.png" />
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">GC情况</span></p>
+        <p><strong>接入跟踪前</strong></p>
+        <img src="images/bgc.png" />
+        <p><strong>接入跟踪后</strong></p>
+        <img src="images/agc.png" />
+
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">CPU情况</span></p>
+        <p><strong>接入跟踪前</strong></p>
+        <img src="images/bcpu1.png" />
+        <img src="images/bcpu2.png" />
+        <p><strong>接入跟踪后</strong></p>
+        <img src="images/acpu1.png" />
+        <img src="images/acpu2.png" />
+
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">Thread情况</span></p>
+        <p><strong>接入跟踪前</strong></p>
+        <img src="images/bth1.png" />
+        <img src="images/bth2.png" />
+        <p><strong>接入跟踪后</strong></p>
+        <img src="images/ath1.png" />
+        <img src="images/ath2.png" />
+
+        <h3>总结</h3>
+        <p>业务系统在接入Hydra系统前后，对自身的TPS影响程度很低。1-100并发的服务调用情况下，性损率都在10%以内。</p>
+        <p>实际上，本测试依赖于Dubbo服务框架以及构建的业务场景很简单（无大对象的序列化、网络IO消耗和复杂计算），性能较真实情况好，也在一定程度上放大了Hydra的影响程度。也就是说，测试结果的TPS性损率会远比真实情况TPS低得多。</p>
+
+        <p>以下是VisulmVM分析图得出的分析结果：</p>
+    <table>
+        <tr>
+            <th>分析参数</th>
+            <th>新增影响及影响程度</th>
+            <th>备注</th>
+        </tr>
+        <tr>
+            <td>Memory（HP）</td>
+            <td>无明显影响</td>
+            <td>理论上不会存在因Hydra-Client导致的内存溢出问题</td>
+        </tr>
+        <tr>
+            <td>CPU</td>
+            <td>HydraFilter.invole 和DefaultSyncTransfer$ TransferTask.run 方法占用约10%的self-cpu时间。</td>
+            <td>可接受范围</td>
+        </tr>
+        <tr>
+            <td>GC</td>
+            <td>无明显影响</td>
+            <td>无大对象的频繁申请活动</td>
+        </tr>
+        <tr>
+            <td>Thread</td>
+            <td>多出了3个线程，TransferTask-Thread 比较频繁，约10s*1active</td>
+            <td>可接受范围</td>
+        </tr>
+
+    </table>
+
+    <h2>后续版本</h2>
+    <p>1.1版本正在进行紧张的开发中</p>
+    <p>内容包括</p>
+    <ul>
+        <li>系统首页（当天的跟踪统计数据：duration-time，count-time两个维度的曲线图，应用下所有服务的调用拓扑图）</li>
+        <li>访问权限</li>
+        <li>hydra-client API提炼</li>
+        <li>采样率的手动设置</li>
+        <li>。</li>
+        <li>。</li>
+        <li>。</li>
+    </ul>
 
     </section>
 </div>

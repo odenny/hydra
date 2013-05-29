@@ -6,13 +6,13 @@
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-
+    <import resource="dubbo-common-config-exp2.xml"/>
     <!--服务关联关系-->
     <bean id="serviceA" class="com.jd.bdp.service.exp2.impl.ServiceA">
         <property name="downService" ref="referenceB"></property>
     </bean>
     <!--服务暴露-开机-->
-    <dubbo:protocol name="dubbo" port="21990" />
+    <dubbo:protocol name="${All.protocol}" port="${A.port}"/>
     <dubbo:service interface="com.jd.bdp.service.exp2.inter.InterfaceA" ref="serviceA">
     </dubbo:service>
     <!--服务引用-->

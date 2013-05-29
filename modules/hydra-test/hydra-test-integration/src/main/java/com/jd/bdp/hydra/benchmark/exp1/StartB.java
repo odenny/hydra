@@ -1,4 +1,4 @@
-package com.jd.bdp.hydra.benchmark.startABC;
+package com.jd.bdp.hydra.benchmark.exp1;
 
 import com.jd.bdp.service.impl.ServiceB;
 

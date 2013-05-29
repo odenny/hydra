@@ -1,6 +1,6 @@
 #!/bin/bash
-MAINCLASSNAME="com.jd.bdp.hydra.benchmark.startTrigger.StartTrigger"
-LOGNAME=Trigger.log
+MAINCLASSNAME="com.jd.bdp.hydra.benchmark.exp1.StartA"
+LOGNAME=A.log
 
 if [ -z "$BASE_DIR" ] ; then
   PRG="$0"
@@ -14,11 +14,11 @@ if [ -z "$BASE_DIR" ] ; then
       PRG="`dirname "$PRG"`/$link"
     fi
   done
-  BASE_DIR=`dirname "$PRG"`/..
+  BASE_DIR=`dirname "$PRG"`/../..
   BASE_DIR=`cd "$BASE_DIR" && pwd`
 fi
 
-source $BASE_DIR/bin/env.sh
+source $BASE_DIR/bin/exp1/env.sh
 TAIL_FILE="$BASE_DIR/log/$LOGNAME"
 
 java $SERVER_ARGS $MAINCLASSNAME > $TAIL_FILE &

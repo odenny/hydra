@@ -8,17 +8,12 @@
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:dubbo-global.properties"/>
-    <!--application配置-->
-    <dubbo:application name="${dubbo.application.name}" owner="${dubbo.application.owner}"/>
-    <!--registry配置-->
-    <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}"/>
-
+    <import resource="dubbo-common-config.xml"/>
     <bean id="serviceB" class="com.jd.bdp.service.impl.ServiceB">
         <property name="downService" ref="referenceC"></property>
     </bean>
     <dubbo:registry file="b" />
-    <dubbo:protocol name="dubbo" port="20991" />
+    <dubbo:protocol name="${All.protocol}" port="${B.port}" />
     <dubbo:service interface="com.jd.bdp.service.inter.InterfaceB" ref="serviceB" >
     </dubbo:service>
     <dubbo:reference id="referenceC" interface="com.jd.bdp.service.inter.InterfaceC" check="false">

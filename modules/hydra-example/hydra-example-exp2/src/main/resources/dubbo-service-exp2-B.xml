@@ -7,13 +7,12 @@
 	http://code.alibabatech.com/schema/dubbo
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-
+    <import resource="dubbo-common-config-exp2.xml"/>
     <bean id="serviceB" class="com.jd.bdp.service.exp2.impl.ServiceB">
         <property name="serviceC1" ref="referenceC1"></property>
         <property name="serviceC2" ref="referenceC2"></property>
     </bean>
-
-    <dubbo:protocol name="dubbo" port="21991" />
+    <dubbo:protocol name="${All.protocol}" port="${B.port}" />
     <dubbo:service interface="com.jd.bdp.service.exp2.inter.InterfaceB" ref="serviceB" >
     </dubbo:service>
     <dubbo:reference id="referenceC1" interface="com.jd.bdp.service.exp2.inter.InterfaceC1" check="false">

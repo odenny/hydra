@@ -14,17 +14,10 @@
  *    limitations under the License.
  */
 
-package com.jd.bdp.hydra.benchmark.startTrigger.support;
+package com.jd.bdp.hydra.benchmark.exp1.support;
 
 import com.jd.bdp.service.inter.InterfaceA;
-import com.jd.bdp.service.inter.support.Service;
-import org.apache.log4j.lf5.viewer.categoryexplorer.TreeModelAdapter;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * User: xiangkui
@@ -52,7 +45,7 @@ public class Trigger implements InitializingBean {
                 try {
                     Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 }
             }
         }

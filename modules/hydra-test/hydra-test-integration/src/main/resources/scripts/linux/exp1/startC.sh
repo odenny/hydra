@@ -1,6 +1,6 @@
 #!/bin/bash
-MAINCLASSNAME="com.jd.bdp.hydra.benchmark.startABC.StartA"
-LOGNAME=A.log
+MAINCLASSNAME="com.jd.bdp.hydra.benchmark.exp1.StartC"
+LOGNAME=C.log
 
 if [ -z "$BASE_DIR" ] ; then
   PRG="$0"
@@ -18,7 +18,7 @@ if [ -z "$BASE_DIR" ] ; then
   BASE_DIR=`cd "$BASE_DIR" && pwd`
 fi
 
-source $BASE_DIR/bin/startABC/env.sh
+source $BASE_DIR/bin/exp1/env.sh
 TAIL_FILE="$BASE_DIR/log/$LOGNAME"
 
 java $SERVER_ARGS $MAINCLASSNAME > $TAIL_FILE &

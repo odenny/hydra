@@ -29,7 +29,7 @@ Hydra 测试
         <td>基准测试/冒烟触发器</td>
     </tr>
     <tr>
-        <td>A</td>
+        <td>A </td>
         <td>192.168.200.110</td>
         <td>A</td>
     </tr>
@@ -43,6 +43,42 @@ Hydra 测试
         <td>192.168.200.112</td>
         <td>C</td>
     </tr>
+    <tr>
+        <td>A-exp2</td>
+        <td>192.168.200.110</td>
+        <td>A</td>
+    </tr>
+    <tr>
+        <td>B-exp2</td>
+        <td>192.168.200.111</td>
+        <td>B</td>
+    </tr>
+    <tr>
+        <td>C1-exp2</td>
+        <td>192.168.200.112</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>C2-exp2</td>
+        <td>192.168.200.112</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>E-exp2</td>
+        <td>192.168.200.113</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>D1-exp2</td>
+        <td>192.168.200.113</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>D2-exp2</td>
+        <td>192.168.200.113</td>
+        <td>C</td>
+    </tr>
+
 
 </table>
 ### 性能测试
@@ -51,8 +87,3 @@ Hydra 测试
 ### 接口测试
         对跟踪数据存储接口的性能测试，针对hydra-store-interface的测试（Mysql环境下)
         依赖于JMeter工具
-
-
-
-
-

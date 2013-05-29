@@ -56,27 +56,27 @@ Hydra 测试
     <tr>
         <td>C1-exp2</td>
         <td>192.168.200.112</td>
-        <td>C</td>
+        <td>C1</td>
     </tr>
     <tr>
         <td>C2-exp2</td>
         <td>192.168.200.112</td>
-        <td>C</td>
+        <td>C2</td>
     </tr>
     <tr>
         <td>E-exp2</td>
         <td>192.168.200.113</td>
-        <td>C</td>
+        <td>E</td>
     </tr>
     <tr>
         <td>D1-exp2</td>
         <td>192.168.200.113</td>
-        <td>C</td>
+        <td>D1</td>
     </tr>
     <tr>
         <td>D2-exp2</td>
         <td>192.168.200.113</td>
-        <td>C</td>
+        <td>D2</td>
     </tr>
 
 

@@ -33,14 +33,18 @@
                 <exclude>/scripts</exclude>
             </excludes>
         </fileSet>
-        <!--windows bat-->
+        <!--windows/shell scripts-->
         <fileSet>
             <directory>/src/main/resources/scripts/${runtime-env}</directory>
             <outputDirectory>/bin</outputDirectory>
             <includes>
-                <include>startABC/*.*</include>
+                <include>**/*.*</include>
                 <include>*.*</include>
             </includes>
+        </fileSet>
+        <fileSet>
+            <directory>/src/main/resources/log</directory>
+            <outputDirectory>/log</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>

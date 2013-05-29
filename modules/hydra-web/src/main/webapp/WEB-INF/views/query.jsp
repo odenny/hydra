@@ -101,7 +101,7 @@
                         <div class="alert alert-error" id="alertDiv" ng-show="query.invalid">
                             {{query.validateMsg}}
                         </div>
-                        <button class="btn btn-success btn-large" type="submit" style="width: 200px;">查询</button>
+                        <button ng-class="query.queryBtn.myClass" type="submit" style="width: 200px;">{{query.queryBtn.name}}</button>
                     </td>
                 </tr>
                 </tbody>
@@ -149,7 +149,7 @@
     <div class="traceDiv">
         <div ng-show="!trace.available" class="alert alert-block">当前跟踪数据未收集全，无法展示.</div>
         <div id="treeDiv" class="viewDiv" style="width:25%;" ng-show="trace.available"></div>
-        <div id="sequenceDiv" class="viewDiv" style="width:74%;" ng-show="trace.available"></div>
+        <div id="sequenceDiv" class="viewDiv" ng-show="trace.available" ng-style="env.sequenceDivStyle"></div>
     </div>
 </div>
 </body>

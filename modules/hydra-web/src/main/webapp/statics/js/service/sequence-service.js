@@ -183,7 +183,7 @@ angular.module('hydra.services.sequence', [])
                     .text("ms");
                 trace.view = view;
             },
-            createSpanAndDetail:function (trace, spanMap) {
+            createSpanAndDetail:function (trace, spanMap, myScope) {
 
                 var rootSpan = trace.rootSpan;
                 var view = trace.view;
@@ -212,6 +212,7 @@ angular.module('hydra.services.sequence', [])
                     .style('fill', function (time) {
                         return view.color[time.hasEx?'ex':time.type];
                     });
+
 
                 //生成每一个span
                 function bar(rootSpan) {
@@ -270,7 +271,10 @@ angular.module('hydra.services.sequence', [])
                         .attr("class", "y axis")
                         .attr('id', 'yaxis')
                         .append("line")
-                        .attr("y1", (maxIndex+1) * view.y * 1.2);
+                        .attr("y1", function(){
+                            myScope.env.sequenceDivStyle.height = ((maxIndex+1) * view.y * 1.2 + 50) > 500?((maxIndex+1) * view.y * 1.2 + 50):500;
+                            return myScope.env.sequenceDivStyle.height;
+                        });
 
                     createSpanTip(spanMap);//tip
 

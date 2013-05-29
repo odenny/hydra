@@ -173,10 +173,419 @@
             <li>Tomcat:前端web应用容器</li>
         </ul>
 
+        <h3>源码获取</h3>
 
-        <p></p>
-        <p></p>
-        <p></p>
+        <p>直接使用当前1.0的tag，为稳定版</p>
+
+        <h3>测试环境部署</h3>
+
+        <p>我们模拟了两个测试场景，均是基于dubbo服务调用</p>
+
+        <p>场景exp1:</p>
+
+        <pre>
+            A --> B --> C
+        </pre>
+
+        <p>即服务A调用服务B,服务B调用服务C。测试用例在modules/hydra-example/hydra-exmple-exp1/。熟悉dubbo的同学一定不会陌生。</p>
+
+        <p>场景exp2:</p>
+
+        <pre>
+            A --> B --> C1 --> E
+                    --> C2 --> D1 --> C1 --> E
+                           --> D2
+        </pre>
+
+        <p>场景2很复杂，基本涵盖了对同步调用跟踪的大多数可能遇到的场景。测试用例在modules/hydra-example/hydra-exmple-exp2/。</p>
+
+        <h3>项目构建打包</h3>
+
+        <p>maven项目不用多说。mvn clean install。不过不得不说的是，hydra项目中包含一些涉及数据库读写的单元测试(mysql，hbase），配置文件分别在</p>
+
+        <ul>
+            <li>modules/hydra-manager-db/src/test/resources/mysql.properties</li>
+            <li>modules/hydra-store/hydra-mysql/src/test/resources/mysql.properties</li>
+            <li>modules/hydra-store/hydra-hbase/src/test/resources/hbase-site.xml</li>
+            <li>modules/hydra-store/hydra-hbase/src/test/resources/hydra-hbase-test.xml</li>
+        </ul>
+
+        <p>mysql需要创建测试用数据库和测试用表，hbase需要创建测试用表</p>
+
+        <ul>
+            <li>docs/table-hbase/initTable<br>
+                (hbase建表时可以根据hbase集群的具体情况调整域分区，涉及到table-mysql中对TB_PARA_SERVICE_ID_GEN初始化数据的设计)</li>
+            <li>docs/table-mysql</li>
+        </ul>
+
+        <p>当然对于不需要使用hbase的同学也可以自行移除hbase module。</p>
+
+        <p>当然用maven构建跳过测试也是可以的。</p>
+
+        <h3>安装部署</h3>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">dubbo服务</span></p>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">Hydra-client</span></p>
+
+        <p>hydra-client中包含hydra与dubbo的集成，以及hydra跟踪收集的相关功能。如果需要进行dubbo服务的跟踪，只需要把这个jar包放在dubbo服务的classpath下，就会<span style="color: aqua;">自动开启跟踪功能！</span></p>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">Hydra-manager</span></p>
+
+        <ol>
+            <li>部署：scp -r target/*.tar.gz username@ip:dirname</li>
+            <li>配置：cd basedir/conf</li>
+            <li>启动：cd basedir/bin<br>
+                sh manager.sh start</li>
+            <li>停止：cd basedir/bin<br>
+                sh manager.sh stop</li>
+            <li>输入：cd basedir/log<br>
+                tail -f manager.log</li>
+        </ol>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">Hydra-collector</span></p>
+
+        <ol>
+            <li>部署：scp -r target/*.tar.gz username@ip:dirname</li>
+            <li>配置：cd basedir/conf</li>
+            <li>启动：cd basedir/bin<br>
+                sh collector.sh start</li>
+            <li>停止：cd basedir/bin<br>
+                sh collector.sh stop</li>
+            <li>输入：cd basedir/log<br>
+                tail -f collector.log</li>
+        </ol>
+
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">Hydra-web</span></p>
+
+        <ol>
+            <li>部署：scp -r target/*.war username@ip:$TOMCAT_WEBAPPS</li>
+        </ol>
+
+        <h3>部署举例：</h3>
+        <p>以下演示安装样例：</p>
+        <ol>
+            <li>部署zookeeper单点或集群环境，以保证获得最佳SOA，zookeeper的部署请参照官方文档。</li>
+            <li>部署实验场景exp1，只需要部署hydra-test-integration模块打包的tar.gz包，拷贝三份分布式部署。</li>
+            <li>部署一个触发器Trigger，以激活服务的调用。</li>
+            <li>部署一个Manager，以管理各个跟踪点的跟踪上下文。</li>
+            <li>部署一个或者多个Collector消费机集群，以搜集来自Hydra-client推送过来的跟踪数据。</li>
+            <li>部署一个web应用，已提供给前端展现应用系统服务上下文。</li>
+        </ol>
+
+        <p>exp1场景说明：</p>
+        <p>有三个服务应用A、B、C和一个触发RPC调用的应用Trigger，服务调用关系为A-B-C，
+            每隔500s触发一个调用，持续时间为1天。</p>
+
+        <p>部署地址举例：</p>
+        <table>
+            <tr>
+                <th>角色</th>
+                <th>ip</th>
+                <th>port</th>
+            </tr>
+            <tr>
+                <td>ZK</td>
+                <td>192.168.200.110-112</td>
+                <td>2181~</td>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td>192.168.200.110</td>
+                <td>20990</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td>192.168.200.111</td>
+                <td>20991</td>
+            </tr>
+            <tr>
+                <td>C</td>
+                <td>192.168.200.112</td>
+                <td>20992</td>
+            </tr>
+            <tr>
+                <td>Trigger</td>
+                <td>192.168.200.113</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Manager</td>
+                <td>192.168.228.81</td>
+                <td>20890</td>
+            </tr>
+            <tr>
+                <td>Collector</td>
+                <td>192.168.228.81-82</td>
+                <td>20889</td>
+            </tr>
+            <tr>
+                <td>Web</td>
+                <td>192.168.228.81</td>
+                <td>8080</td>
+            </tr>
+            <tr>
+                <td>MySql-DB</td>
+                <td>192.168.228.81</td>
+                <td>3306</td>
+            </tr>
+        </table>
+
+        <h2>测试相关</h2>
+
+        <h3>测试说明</h3>
+
+        <p>本测试针对Hydra-Client模块进行功能测试和压力测试，以便在Hydra开发的过程中及时发现重要bug和帮助优化Hydra系统性能。</p>
+
+        <p>本测试目前只针对Hydra-client的测试，重点关注业务系统接入Hydra和不接入Hydra前后性能影响，以保证Hydra系统接入端的低侵入性和稳定性。</p>
+
+        <p>针对Hydra-Client的测试，在部署上，只用部署应用场景（带Hydra_client）和Benchmark触发点，然后在应用Benchmark和应用场景上埋点分析Hydra性能。</p>
+
+        <h3>部署环境</h3>
+
+        <p>测试采用hydra-client | Queue | Hbase的部署方式。</p>
+
+        <p>实际测试部署，只需要部署应用场景（携带Hydra-client）和基准测试包，让跟踪数据和搜集器（hydra-collector）的网络链路断开，可以有效的分析出Hydra-client端的相关情况。</p>
+
+        <h3>硬件环境</h3>
+
+        <p>基准测试机器（适用于TPS分析参考）：</p>
+
+    <table>
+        <tr>
+            <th>IP</th>
+            <th>192.168.227.48</th>
+        </tr>
+        <tr>
+            <td>OS</td>
+            <td>[root@storm3 opt]# getconf LONG_BIT <br>
+                64<br>
+                [root@storm3 opt]# more /etc/redhat-release<br>
+                CentOS release 5.4 (Final)<br>
+                [root@storm3 opt]# uname  -r<br>
+                2.6.18-164.el5</td>
+        </tr>
+        <tr>
+            <td>CPU</td>
+            <td>[root@storm3 opt]# more /proc/cpuinfo | grep "model name" <br>
+                model name      : Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz  <br>
+                model name      : Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz  <br>
+                model name      : Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz  <br>
+                model name      : Intel(R) Xeon(R) CPU           X5650  @ 2.67GHz</td>
+        </tr>
+        <tr>
+            <td>内存</td>
+            <td>[root@storm3 ~]# grep MemTotal /proc/meminfo   <br>
+                MemTotal:      4044516 kB</td>
+        </tr>
+        <tr>
+            <td>网卡</td>
+            <td>[root@storm3 ~]# mii-tool -v <br>
+                eth0: negotiated 100baseTx-FD, link ok <br>
+                product info: vendor 00:50:43, model 2 rev 3 <br>
+                basic mode:   autonegotiation enabled <br>
+                basic status: autonegotiation complete, link ok <br>
+                capabilities: 100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD <br>
+                advertising:  100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD <br>
+                link partner: 100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD [root@storm3 ~]# ethtool eth0 <br>
+                Settings for eth0: <br>
+                Supported ports: [ TP ] <br>
+                Supported link modes:   10baseT/Half 10baseT/Full <br>
+                100baseT/Half 100baseT/Full<br>
+                1000baseT/Full<br>
+                Supports auto-negotiation: Yes<br>
+                Advertised link modes:  10baseT/Half 10baseT/Full<br>
+                100baseT/Half 100baseT/Full<br>
+                1000baseT/Full<br>
+                Advertised auto-negotiation: Yes<br>
+                Speed: 1000Mb/s<br>
+                Duplex: Full<br>
+                Port: Twisted Pair<br>
+                PHYAD: 0<br>
+                Transceiver: internal<br>
+                Auto-negotiation: on <br>
+                Supports Wake-on: d <br>
+                Wake-on: d <br>
+                Current message level: 0x00000007 (7) <br>
+                Link detected: yes</td>
+        </tr>
+    </table>
+
+    <h3>软件环境</h3>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">Hydra-client</span></p>
+
+    <table>
+        <tr>
+            <th>属性</th>
+            <th>值</th>
+            <th>性质</th>
+        </tr>
+        <tr>
+            <td>delayTime</td>
+            <td>3000</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>flushSize</td>
+            <td>10</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>queueSize</td>
+            <td>1024</td>
+            <td>跟踪数据客户端缓冲池大小</td>
+        </tr>
+    </table>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">应用场景</span></p>
+
+    <p>A-B-C分布式应用，基于Dubbo-2.4.8 RPC框架，使用默认配置。</p>
+    <p>启动参数： -Xms512m -Xmx512m -Xmn128m </p>
+
+    <h3>测试内容</h3>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">功能测试</span></p>
+
+    <table>
+        <tr>
+            <th>分组</th>
+            <th>测试内容</th>
+            <th>测试场景</th>
+        </tr>
+        <tr>
+            <td rowspan="2">客户端</td>
+            <td>业务侵入性</td>
+            <td>业务接入Hydra和不接入Hydra影响差异</td>
+        </tr>
+        <tr>
+            <td>采样率问题</td>
+            <td>参照性能测试</td>
+        </tr>
+        <tr>
+            <td rowspan="2">管理中心</td>
+            <td>全局信息注册</td>
+            <td>业务系统多次启动，管理中心反应情况</td>
+        </tr>
+        <tr>
+            <td>临时信息注册</td>
+            <td>业务系统开启调用后，管理中心反应情况</td>
+        </tr>
+        <tr>
+            <td rowspan="2">数据搜集器</td>
+            <td>内容正确性</td>
+            <td>场景一/二 RPC调用的时候，搜集产生的跟踪数据，验证正确性</td>
+        </tr>
+        <tr>
+            <td>数据量正确性</td>
+            <td>场景一/二 RPC调用n次，搜集产生的跟踪数据，验证数据量正确性</td>
+        </tr>
+    </table>
+
+    <p>具体功能测试点请参照“桩测试”清单:docs/test/Hydra-client功能测试清单.xls</p>
+
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">性能测试</span></p>
+
+    <p>测试场景说明：</p>
+    <ul>
+        <li>测试 业务系统接入Hydra前后TPS影响</li>
+        <li>测试 业务系统接入Hydra前后内存影响程度</li>
+        <li>CPU影响程度，GC情况</li>
+        <li>Thread情况</li>
+    </ul>
+
+
+    <h3>测试代码</h3>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">工程模块</span></p>
+
+    <p>Hydra-test 分为三大模块 </p>
+    <ul>
+        <li>Benchmark<br>
+            提供基准测试包，其他模块依赖基准测试包和自己的业务逻辑代码，获取落地数据，根据落地数据和展现数据来验证Hydra系统的有效性。</li>
+        <li>Integration<br>
+            为整个hydra的集成测试，提供Hydra系统的Quick Start功能和实践验证Hydra系统。所有的安装和启动脚本理论上可以都在该模块完成，以供给后续的持续发布阶段。</li>
+    </ul>
+
+    <p>Trigger代码示例</p>
+
+    <pre><code>
+        public class DemoRunnable extends AbstractClientRunnable {
+
+            public DemoRunnable(String targetIP, int targetPort,
+                int clientNums, int rpcTimeout, CyclicBarrier barrier,
+                CountDownLatch latch, long startTime, long endTime) {
+                super(targetIP, targetPort, clientNums, rpcTimeout, barrier, latch, startTime, endTime);
+            }
+
+            @Override
+            public Object invoke(ServiceFactory serviceFactory) {
+                InterfaceA rootService = (InterfaceA) serviceFactory.get(InterfaceA.class);
+                return rootService.functionA();
+            }
+        }
+    </code></pre>
+
+    <p>benchmark配置文件（demo）：</p>
+
+    <pre><code>
+        classname=com.jd.bdp.hydra.benchmark.demo.DemoRunnable
+        serverip=192.168.227.83
+        serverport=20990
+        concurrents=500
+        connectionnums=1
+        timeout=1000
+        runtime=600
+    </code></pre>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">场景说明</span></p>
+
+    <p>基于Dubbo框架的RPC的应用场景（应用场景一，可参照hydra-example-exp1），所有测试跑一分钟，测试在不同的并发量下，对比分析Hydra对业务系统的影响程度，为量化测试。</p>
+    <p>基于场景一，看JVM的内存影响程度，分析Hydra-Client占用业务系统多少额外内存，CUP活动情况，GC情况等，主要是看VisualVm生成的测试图形，验证Hydra对业务系统的侵入性是否在可控范围内，为泛化测试。</p>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">结果要求</span></p>
+
+    <p>以下为某次接入Hydra后的测试结果</p>
+
+    <pre><code>
+        ----------Benchmark Statistics--------------
+        Concurrents: 100
+        ClientNums: 1
+        Runtime: 60 seconds
+        Benchmark Time: 21
+        Requests: 140867 Success: 100% (140867) Error: 0% (0)
+        Avg TPS: 4717 Max TPS: 5436 Min TPS: 3860
+        Avg RT: 21.154ms
+        RT <= 0: 0% 174/140867
+        RT (0,1]: 0% 467/140867
+        RT (1,5]: 4% 5690/140867
+        RT (5,10]: 22% 31501/140867
+        RT (10,50]: 68% 96389/140867
+        RT (50,100]: 3% 5541/140867
+        RT (100,500]: 0% 1105/140867
+        RT (500,1000]: 0% 0/140867
+        RT > 1000: 0% 0/140867
+    </code></pre>
+
+    <h3>测试结果</h3>
+
+        <p><span style="font-size: larger;font-weight: bolder;font-family: Arial;">TPS性能损耗</span></p>
+
+    <p>场景一</p>
+        参数：1并发
+    <table>
+        <tr>
+            <th></th>
+            <th>接Hydra前</th>
+            <th>接Hydra后</th>
+            <th>性损率</th>
+        </tr>
+    </table>
+
+
+
     </section>
 </div>
 <footer>

@@ -28,7 +28,11 @@ function QueryCtrl($scope, $filter, $location,//内置
             } else {
                 return '55%';
             }
-        }()}};
+        }()},
+        sequenceDivStyle:{
+            width:'74%'
+        }
+    };
     $scope.serviceMap = {};
     $scope.tableType = 'duration';
     var setting = queryService.getTableSetting($scope);
@@ -54,6 +58,18 @@ function QueryCtrl($scope, $filter, $location,//内置
                     delete $scope.query.durationMin;
                     delete $scope.query.durationMax;
                 }
+            }
+        },
+        queryBtn:{
+            name:'查询',
+            myClass: 'btn btn-success btn-large',
+            disable: function(){
+                query.queryBtn.myClass = 'btn btn-success btn-large disabled';
+                query.queryBtn.name = '查询中...';
+            },
+            enable: function(){
+                query.queryBtn.myClass = 'btn btn-success btn-large';
+                query.queryBtn.name = '查询';
             }
         },
         appList: AppList.getAll(),
@@ -92,17 +108,23 @@ function QueryCtrl($scope, $filter, $location,//内置
 
             //查询
             if (isValid) {
+                $scope.query.queryBtn.disable();
+                queryService.loadTableData($('#traceExTable').dataTable(), []);
+                queryService.loadTableData($('#traceTable').dataTable(), []);
                 if ($scope.query.exBtn.type) {//如果查询所有异常trace
                     $scope.tableType = 'ex';
                     $scope.traceListEx = TraceListEx.getTraceList({serviceId: serviceId, startTime: startTime, sum: $scope.query.sum}, function (traceList) {
                         queryService.loadTableData($('#traceExTable').dataTable(), traceList);
+                        $scope.query.queryBtn.enable();
                     });
                 } else {//如果是查duration
                     $scope.tableType = 'duration';
                     $scope.traceList = TraceList.getTraceList({serviceId: serviceId, startTime: startTime, durationMin: durationMin, durationMax: durationMax, sum: $scope.query.sum}, function (traceList) {
                         queryService.loadTableData($('#traceTable').dataTable(), traceList);
+                        $scope.query.queryBtn.enable();
                     });
                 }
+
             }
         },
         appChange: function () {
@@ -132,7 +154,7 @@ function QueryCtrl($scope, $filter, $location,//内置
                 var spanMap = sequenceService.getSpanMap(t);
 
                 sequenceService.createView(t);//生成时序图的svg
-                sequenceService.createSpanAndDetail(t, spanMap);//生成时序图的具体细节
+                sequenceService.createSpanAndDetail(t, spanMap, $scope);//生成时序图的具体细节
 
                 treeService.createTree(t);//生成树的svg
                 treeService.createTreeDetail(t, $scope);//生成树的具体结构

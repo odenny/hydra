@@ -124,6 +124,7 @@ path.link {
     width: 98%;
     margin: 20 20 20 20;
     border: solid 1px #ddd;
+    overflow-x: hidden;
 }
 
 .myNavbar {

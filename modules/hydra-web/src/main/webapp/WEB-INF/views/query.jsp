@@ -1,21 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
-    <style type="text/css">
-
-
-    </style>
-    <link href="/statics/lib/bootstrap/datetimepicker/css/datetimepicker.css" rel="stylesheet" media="screen">
-    <link href="/statics/lib/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
-    <link href="/statics/lib/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="/statics/lib/d3.v3.min.js"></script>
-    <script src="/statics/lib/jquery.qtip.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="/statics/lib/DataTables-1.9.4/media/js/plugin.js"></script>
+    <script language="javascript" type="text/javascript">
+        var ctp = "<%=request.getContextPath() %>";
+    </script>
+    <link href="<%=request.getContextPath() %>/statics/lib/bootstrap/datetimepicker/css/datetimepicker.css" rel="stylesheet" media="screen">
+    <link href="<%=request.getContextPath() %>/statics/lib/DataTables-1.9.4/media/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=request.getContextPath() %>/statics/lib/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/statics/lib/d3.v3.min.js"></script>
+    <script src="<%=request.getContextPath() %>/statics/lib/jquery.qtip.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/statics/lib/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/statics/lib/DataTables-1.9.4/media/js/plugin.js"></script>
     <script type="text/javascript"
-            src="/statics/lib/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+            src="<%=request.getContextPath() %>/statics/lib/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript"
-            src="/statics/lib/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+            src="<%=request.getContextPath() %>/statics/lib/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 </head>
 <body>
 <div ng-show="showType == 'query'">
@@ -102,7 +101,7 @@
                         <div class="alert alert-error" id="alertDiv" ng-show="query.invalid">
                             {{query.validateMsg}}
                         </div>
-                        <button class="btn btn-success btn-large" type="submit" style="width: 200px;">查询</button>
+                        <button ng-class="query.queryBtn.myClass" type="submit" style="width: 200px;">{{query.queryBtn.name}}</button>
                     </td>
                 </tr>
                 </tbody>
@@ -150,7 +149,7 @@
     <div class="traceDiv">
         <div ng-show="!trace.available" class="alert alert-block">当前跟踪数据未收集全，无法展示.</div>
         <div id="treeDiv" class="viewDiv" style="width:25%;" ng-show="trace.available"></div>
-        <div id="sequenceDiv" class="viewDiv" style="width:74%;" ng-show="trace.available"></div>
+        <div id="sequenceDiv" class="viewDiv" ng-show="trace.available" ng-style="env.sequenceDivStyle"></div>
     </div>
 </div>
 </body>

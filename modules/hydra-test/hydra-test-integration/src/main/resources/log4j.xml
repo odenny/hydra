@@ -20,7 +20,7 @@
         <appender-ref ref="CONSOLE" />
     </category>
     <category name="com.alibaba.dubbo">
-        <level value="ERROR" />
+        <level value="INFO" />
         <appender-ref ref="CONSOLE" />
     </category>
     <category name="com.taobao.metamorphosis">
@@ -28,7 +28,7 @@
         <appender-ref ref="CONSOLE" />
     </category>
     <category name="org.apache.zookeeper">
-        <level value="ERROR" />
+        <level value="INFO" />
         <appender-ref ref="CONSOLE" />
     </category>
 </log4j:configuration>

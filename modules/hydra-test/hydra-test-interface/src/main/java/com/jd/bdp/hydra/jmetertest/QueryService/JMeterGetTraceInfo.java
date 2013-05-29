@@ -1,6 +1,8 @@
 package com.jd.bdp.hydra.jmetertest.QueryService;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jd.bdp.hydra.jmetertest.support.AbstractJmeterDBContext;
+import com.jd.bdp.hydra.jmetertest.support.HbaseDBContext;
 import com.jd.bdp.hydra.store.inter.QueryService;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
@@ -16,16 +18,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Time: 下午6:43
  */
 public class JMeterGetTraceInfo extends AbstractJavaSamplerClient {
+    AbstractJmeterDBContext dbContext;
     private static Logger logger = LoggerFactory.getLogger(JMeterGetTraceInfo.class);
     private QueryService queryService;
     //arguments
     private Long traceId;
 
     public void setupTest(JavaSamplerContext arg) {
-        //服务初始化 完成queryService的注入
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{
-                "classpath*:hydra-mysql-interface-test.xml"
-        });
+        dbContext=new HbaseDBContext();
+        String[] configs = dbContext.getConfigLocations();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(configs);
         context.start();
         queryService = context.getBean("queryService", QueryService.class);
         if (null == queryService) {

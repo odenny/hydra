@@ -38,6 +38,11 @@
             <groupId>com.jd.bdp</groupId>
             <artifactId>hydra-mysql</artifactId>
         </dependency>
+        <!--针对hydra-hbase的测试-->
+        <dependency>
+            <groupId>com.jd.bdp</groupId>
+            <artifactId>hydra-hbase</artifactId>
+        </dependency>
     </dependencies>
 
 

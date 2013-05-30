@@ -7,7 +7,7 @@ Hydra可以针对并发量和数据量的大小选择（需要手动配置），
 
 Hydra自身提供跟踪数据展现功能，基于angularJS和D3.js。
 
-想了解更多信息，请猛点：http://jd-bdp.github.io/hydra/
+想了解更多信息，请猛击：http://jd-bdp.github.io/hydra/
 
 提交者：
 
